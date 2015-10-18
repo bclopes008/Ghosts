@@ -1,6 +1,6 @@
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
-import br.senac.tads.pi3.ghosts.locarsys.model.UsuarioDAO;
+import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
 import br.senac.tads.pi3.ghosts.locarsys.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;

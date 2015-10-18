@@ -1,5 +1,6 @@
-package br.senac.tads.pi3.ghosts.locarsys.model;
+package br.senac.tads.pi3.ghosts.locarsys.dao;
 
+import br.senac.tads.pi3.ghosts.locarsys.model.Usuario;
 import br.senac.tads.pi3.ghosts.locarsys.model.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
