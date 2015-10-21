@@ -18,11 +18,18 @@ import java.util.logging.Logger;
 public class Conexoes {
     public static Connection obterConexao() throws ClassNotFoundException {
         Connection conn = null;
-        
+
         try {
-            conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1527/locarsys;IntegratedSecurity=true");
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            
+            conn = DriverManager.getConnection("jdbc:sqlserver://BRUNO-PC:1433;databaseName=LOCARSYS;user=user1;password=1234");
+            
         } catch (SQLException ex) {
-            System.err.println("Erro: "+ex.getMessage());
+            System.out.println("Conexão não realizada pelo motivo: " + ex.getMessage());
+            System.out.println("Conexão não realizada pelo motivo: " + ex.getErrorCode());
+            System.out.println("Conexão não realizada pelo motivo: " + ex.getCause());
+        } catch(Exception e){
+            System.err.println("Erro: "+e.getMessage());
         }
         return conn;
     }
