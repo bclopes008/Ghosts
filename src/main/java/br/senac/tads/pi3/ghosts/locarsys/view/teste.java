@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.tads.pi3.ghosts.locarsys.dao;
+package br.senac.tads.pi3.ghosts.locarsys.view;
 
 /**
  *
- * @author vinicius.vsantos
+ * @author Bruno
  */
-public interface DAO {
+public class teste {
     
 }
