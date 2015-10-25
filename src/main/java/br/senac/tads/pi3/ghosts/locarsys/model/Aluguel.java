@@ -18,6 +18,11 @@ public class Aluguel {
         this.valorTotal = valorTotal;
     }
 
+    public Aluguel() {
+    }
+
+    
+    
     public void setDataFinal(Date dataFinal) {
         this.dataFinal = dataFinal;
     }

@@ -22,8 +22,8 @@ public class Conexoes {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
             
-            conn = DriverManager.getConnection("jdbc:sqlserver://BRUNO-PC:1433;databaseName=LOCARSYS;user=user1;password=1234");
-            
+            //Bruno CS conn = DriverManager.getConnection("jdbc:sqlserver://BRUNO-PC:1433;databaseName=LOCARSYS;user=user1;password=1234");
+            conn = DriverManager.getConnection("jdbc:sqlserver://PRIME-PC:1433;databaseName=LOCARSYS;IntegratedSecurity=true");
         } catch (SQLException ex) {
             System.out.println("Conexão não realizada pelo motivo: " + ex.getMessage());
             System.out.println("Conexão não realizada pelo motivo: " + ex.getErrorCode());
