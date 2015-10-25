@@ -11,6 +11,11 @@ public class Usuario {
     private String senha;
     private char tipoUsuario;
 
+    public Usuario(String login, String senha) {
+        this.login = login;
+        this.senha = senha;
+    }
+
     public Usuario() {
     }
 

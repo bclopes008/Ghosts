@@ -33,9 +33,9 @@ public class UsuarioDAO {
                 senha = rs.getString("SENHA_USUARIO");
                 user.setTipoUsuario(rs.getString("TIPO_USUARIO").charAt(0));
             }
-
+            conn.close();
             return true;
-
+            
         } catch (SQLException ex) {
             System.err.println("Erro: " + ex.getMessage());
             return false;
