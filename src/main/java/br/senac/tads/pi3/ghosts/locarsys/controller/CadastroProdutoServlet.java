@@ -5,8 +5,8 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
-import br.senac.tads.pi3.ghosts.locarsys.dao.*;
-import br.senac.tads.pi3.ghosts.locarsys.model.*;
+import br.senac.tads.pi3.ghosts.locarsys.dao.CarroDAO;
+import br.senac.tads.pi3.ghosts.locarsys.model.Carro;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Prime-PC
+ * @author Bruno
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "CadastroProdutoServlet", urlPatterns = {"/CadastroProdutoServlet"})
+public class CadastroProdutoServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -49,20 +49,36 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher disp;
-        Usuario u = new Usuario(request.getParameter("login"), request.getParameter("senha"));
-        UsuarioDAO dao = new UsuarioDAO();
-        request.setAttribute("usuario", u);
-        if (dao.autenticaUsuario(u)) {
-            disp = request.getRequestDispatcher("home.jspx");
-        } else {
-            disp = request.getRequestDispatcher("index.html");
+        Carro c = new Carro();
+        c.setAno(Integer.parseInt(request.getParameter("ano")));
+        c.setAnoFabricacao(Integer.parseInt(request.getParameter("anoFabricacao")));
+        c.setChassi(request.getParameter("chassi"));
+        c.setCidade(request.getParameter("cidade"));
+        c.setCombustivel(request.getParameter("combustivel").charAt(0));
+        c.setCor(request.getParameter("cor"));
+        c.setEstado(request.getParameter("estado"));
+        c.setGrupo(request.getParameter("grupo").charAt(0));
+        c.setKilometragem(Float.parseFloat(request.getParameter("kilometragem")));
+        c.setMarca(request.getParameter("marca"));
+        c.setModelo(request.getParameter("modelo"));
+        c.setPlaca(request.getParameter("placa"));
+        c.setRenavam(Integer.parseInt(request.getParameter("renavam")));
+        CarroDAO dao = new CarroDAO();
+        if(dao.cadastraCarro(c))
+        {
+            disp = request.getRequestDispatcher("cadastroProduto.jspx");
+            disp.forward(request, response);
         }
-        disp.forward(request, response);
     }
-}
 
-/**
- * Returns a short description of the servlet.
- *
- * @return a String containing servlet description
- */
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

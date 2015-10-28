@@ -4,7 +4,7 @@ package br.senac.tads.pi3.ghosts.locarsys.model;
  *
  * @author Bruno
  */
-public class Carro {
+public class Carro extends Produto{
     
     private String chassi;
     private String placa;
@@ -12,16 +12,22 @@ public class Carro {
     private String cidade;
     private int ano;
     private int renavam;
+    private float kilometragem;
 
-    public Carro(String chassi, String placa, String estado, String cidade, int ano, int renavam) {
+    public Carro() {
+    }
+    
+    public Carro(String chassi, String placa, String estado, String cidade, int ano, int renavam, float kilometragem, String modelo, String marca, char combustivel, int anoFabricacao, String cor, char grupo) {
+        super(modelo, marca, combustivel, anoFabricacao, cor, grupo);
         this.chassi = chassi;
         this.placa = placa;
         this.estado = estado;
         this.cidade = cidade;
         this.ano = ano;
         this.renavam = renavam;
+        this.kilometragem = kilometragem;
     }
-
+    
     public String getChassi() {
         return chassi;
     }
@@ -69,7 +75,13 @@ public class Carro {
     public void setRenavam(int renavam) {
         this.renavam = renavam;
     }
-    
-    
-    
+
+    public float getKilometragem() {
+        return kilometragem;
+    }
+
+    public void setKilometragem(float kilometragem) {
+        this.kilometragem = kilometragem;
+    }
+
 }

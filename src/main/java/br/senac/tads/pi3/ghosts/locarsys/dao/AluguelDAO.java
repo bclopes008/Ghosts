@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class AluguelDAO {
     
-    public ArrayList<Aluguel> consultaAluguel() {
+    public ArrayList<Aluguel> consultaAluguel() throws ClassNotFoundException {
         ArrayList<Aluguel> aluguel = new ArrayList<>();
         Aluguel aluguelObj = new Aluguel();
 
@@ -31,7 +31,7 @@ public class AluguelDAO {
             DateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
             Connection conn = Conexoes.obterConexao();
             Statement stmt = conn.createStatement();
-            String sql = "SELECT * FROM Aluguel";
+            String sql = "SELECT * FROM ALUGUEL";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -39,7 +39,7 @@ public class AluguelDAO {
             }
             conn.close();
             return aluguel;
-        } catch (ClassNotFoundException | SQLException | DateTimeParseException ex) {
+        } catch (SQLException | DateTimeParseException ex) {
             System.err.println("" + ex.getMessage());
         } catch (ParseException ex) {
             Logger.getLogger(AluguelDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,10 +47,10 @@ public class AluguelDAO {
         return null;
     }
     
-    public void cadastrarAluguel(Aluguel aluguel,String classeCarro, String idUsuario, String idCarro, String idCliente){
+    public void cadastrarAluguel(Aluguel aluguel,String classeCarro, String idUsuario, String idCarro, String idCliente) throws ClassNotFoundException{
         try {
             Connection conn = Conexoes.obterConexao();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Aluguel VALUES(NEWID(), ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO ALUGUEL VALUES(NEWID(), ?, ?, ?, ?, ?, ?, ?)");
             
             stmt.setString(1, idUsuario);
             stmt.setString(2, classeCarro);
@@ -62,22 +62,22 @@ public class AluguelDAO {
             
             stmt.execute();
             conn.close();
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             System.err.println("" + ex.getMessage());
         }
     }
     
-    public void deletarAluguel(Aluguel aluguel, String campoBD){
+    public void deletarAluguel(Aluguel aluguel, String campoBD) throws ClassNotFoundException{
         try {
             Connection conn = Conexoes.obterConexao();
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM Aluguel WHERE ? = ?");
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM ALUGUEL WHERE ? = ?");
             
             stmt.setString(1, "Preco_Total");
             stmt.setString(2, ""+aluguel.getValorTotal());
             
             stmt.execute();
             conn.close();
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             System.err.println("" + ex.getMessage());
         }
     }

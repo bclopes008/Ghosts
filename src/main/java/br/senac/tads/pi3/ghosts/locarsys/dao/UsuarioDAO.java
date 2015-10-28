@@ -15,15 +15,12 @@ public class UsuarioDAO {
     public boolean autenticaUsuario(Usuario user) {
         Statement stmt = null;
         Connection conn = null;
-        user = new Usuario();
-
+        System.out.println(user.getLogin());
         String sql = "SELECT * FROM USUARIO WHERE LOGIN_USUARIO = '" + user.getLogin()
                 + "' AND SENHA_USUARIO = '" + user.getSenha() + "'";
 
         try {
-            conn = Conexoes.obterConexao();
-            stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = Conexoes.cmd.executeQuery(sql);
 
             String login = null, senha = null;
 
@@ -35,14 +32,13 @@ public class UsuarioDAO {
             }
             conn.close();
             return true;
-            
+
         } catch (SQLException ex) {
             System.err.println("Erro: " + ex.getMessage());
-            return false;
         } catch (Exception ex) {
             System.err.println("Erro: " + ex.getMessage());
-            return false;
         }
+        return false;
     }
 
     public ArrayList<Usuario> consultaUsuario() {

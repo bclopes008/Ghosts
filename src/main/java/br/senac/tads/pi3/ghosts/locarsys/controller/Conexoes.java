@@ -8,6 +8,7 @@ package br.senac.tads.pi3.ghosts.locarsys.controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,21 +17,18 @@ import java.util.logging.Logger;
  * @author vinicius.vsantos
  */
 public class Conexoes {
-    public static Connection obterConexao() throws ClassNotFoundException {
-        Connection conn = null;
 
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-            
-            //Bruno CS conn = DriverManager.getConnection("jdbc:sqlserver://BRUNO-PC:1433;databaseName=LOCARSYS;user=user1;password=1234");
-            conn = DriverManager.getConnection("jdbc:sqlserver://PRIME-PC:1433;databaseName=LOCARSYS;IntegratedSecurity=true");
-        } catch (SQLException ex) {
-            System.out.println("Conexão não realizada pelo motivo: " + ex.getMessage());
-            System.out.println("Conexão não realizada pelo motivo: " + ex.getErrorCode());
-            System.out.println("Conexão não realizada pelo motivo: " + ex.getCause());
-        } catch(Exception e){
-            System.err.println("Erro: "+e.getMessage());
-        }
+    public static Statement cmd;
+
+    public static Connection obterConexao() throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        // Passo 1: Registrar driver JDBC.
+        Class.forName("org.apache.derby.jdbc.ClientDataSource");
+
+        // Passo 2: Abrir a conexão
+        conn = DriverManager.getConnection("jdbc:derby://localhost:1527/LoCarSys;SecurityMechanism=3",
+                "app", // usuario
+                "app"); // senha
         return conn;
     }
 }

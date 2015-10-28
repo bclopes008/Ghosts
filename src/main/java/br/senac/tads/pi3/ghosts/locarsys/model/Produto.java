@@ -13,6 +13,9 @@ public abstract class Produto {
     private String cor;
     private char grupo;
 
+    public Produto() {
+    }
+    
     public Produto(String modelo, String marca, char combustivel, int anoFabricacao, String cor, char grupo) {
         this.modelo = modelo;
         this.marca = marca;
