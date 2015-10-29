@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : cadastroAlugueis
+    Created on : 28/10/2015, 22:13:33
+    Author     : fabio.ssanto10
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+
+    <!-- any content can be specified here, e.g.: -->
+    <!DOCTYPE html>
+    <html>
+        <head>  
+            <title>Cadastro de Alugueis</title>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <link href="cadastroAlugueisStyle.css" rel="stylesheet" type="text/css"/>
+        </head>
+
+        <body>
+
+            <div id="formulario">
+                <form action="" method="post">
+                    <fieldset>
+                        <legend>Cadastro de Alugueis</legend>
+                        <div id="cad01">
+                            Cod Aluguel
+                            <input type="id" id="codAluguel" name="codAluguel" readonly="readonly"/><br/>
+                            Data Inicial
+                            <input type="date" id="inicial" name="inicial"/>
+                            Data Final
+                            <input type="date" id="final" name="final"/>
+                        </div>
+
+                        <div id="cad02">
+
+                            <input type="reset" name="novo"    value="Novo"/>
+                            <input type="button" name="salvar" value="Salvar" class="salvar"/>
+                            <input type="button" name="sair"   value="Sair"/>
+                        </div>
+
+                        <div id="cad03">
+                            <label for="cpf">CPF&#42;</label>
+                            <input type="text" id="cpf" name="cpf"/>
+
+                            Id Cliente
+                            <input type="id"  id="idCliente" name="idCliente" readonly="readonly"/><br/>
+
+                            <label for="nomeCliente">Nome do Cliente</label>
+                            <input type="text" id="nomeCliente" name="nomeCliente"/>
+
+                            <label for="cnh">CNH</label>
+                            <input type="text" id="cnh" name="cnh"/><br/>
+
+                            Grupo
+                            <select id="grupo" name="grupo">
+                                <option>Grupo A</option>
+                                <option>Grupo B</option>
+                                <option>Grupo C</option>
+                                <option>Grupo D</option>
+                            </select>
+
+                            Modelo
+                            <select id="modelo" name="modelo">
+                                <option>Celta</option>
+                                <option>K</option>
+                                <option>Fox</option>
+                            </select>
+
+                            Valor Total&#58;
+                            <input type="text" id="valorTotal" name="valorTotal" readonly="readonly"/>
+
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+
+        </body>
+
+    </html>
+
+</jsp:root>

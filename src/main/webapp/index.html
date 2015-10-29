@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>LoCarSys</title>
+        	<title>Login</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="loginStyle.css" rel="stylesheet"   type="text/css"/>
     </head>
     <body>
-        <h1>Login</h1>
-        <form action="LoginServlet" method="POST">
-            <p>
-                <label for="txtLogin">Login:</label>
-                <input type="text" name="login" id="txtLogin">
-            </p>
-            <p>
-                <label for="txtSenha">Senha:</label>
-                <input type="password" name="senha" id="txtSenha">
-            </p>
-            <p>
-                <input type="submit" value="Logar"/>
-            </p>
-        </form>
+        <div>
+            <form action="" method="post">
+                <label for="login">Login&#58;</label>
+                <input type="text" id="login" name="login"/></br>
+                <label for="senha">Senha&#58;</label>
+                <input type="password" id="senha" name="senha"/></br>
+
+                <input type="submit"  id="validar" value="Login"/></br>
+
+            </form>
+        </div>	
     </body>
 </html>

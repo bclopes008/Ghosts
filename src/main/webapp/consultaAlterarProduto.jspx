@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : consultaAlterarProduto
+    Created on : 28/10/2015, 22:27:30
+    Author     : fabio.ssanto10
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+
+    <!-- any content can be specified here, e.g.: -->
+    <!DOCTTYPE HTML>
+    <html>
+        <head>
+            <title>Consulta/Alterar Produto</title>
+            <link href="consultaAlterarProdutoStyle.css" rel="stylesheet" type="text/css"/>
+        </head>
+        <body>
+            <div id="divPai">
+                <form action="" method="post">
+                    <fieldset>
+                        <legend>Consulta/Alterar Autom&oacute;veis</legend>
+                        <label for="modelo">Modelo&#42;</label>
+                        <input type="text" id="modelo" name="modelo" />
+                        Grupo&#42;
+                        <select id="grupo" name="grupo">
+                            <option>Grupo A</option>
+                            <option>Grupo B</option>
+                            <option>Grupo C</option>
+                            <option>Grupo D</option>
+                        </select>
+                        <input type="button"  id="pesquisa" name="pesquisa"value="Pesquisar"/>
+                        <input type="button"  id="sair" name="sair" value="Sair"/>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Consulta Autom&oacute;veis</legend>
+                        <table border="1">
+                            <tr><td>Código</td><td>Modelo</td><td>Grupo</td><td>Placa</td></tr>
+                            <tr> <td>&#63;</td>      <td>&#63;</td>   <td>&#63;</td>  <td>&#63;</td> </tr>
+                        </table>
+
+                        <input type="button" id="alterar" value="Consulta/Altera"/>
+
+                    </fieldset>
+
+                </form>
+
+            </div>
+
+        </body>
+    </html>
+
+</jsp:root>

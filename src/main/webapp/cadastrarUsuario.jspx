@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : cadastrarUsuario
+    Created on : 28/10/2015, 22:30:21
+    Author     : fabio.ssanto10
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+
+    <!-- any content can be specified here, e.g.: -->
+    <!DOCTTYPE HTML>
+    <html>
+        <head>
+            <title>Cadastrar Usuário</title>
+            <link href="cadastrarUsuarioStyle.css" rel="stylesheet" type="text/css"/>
+        </head>
+        <body>
+            <div id="divPai">
+                <form action="" method="post">
+                    <fieldset>
+                        <legend>Cadastrar Usuário</legend>
+                        Cod Usuário
+                        <input type="text" id="codUsuario" name="codUsuario" readonly="readonly"/>
+                        <label for="nome">Nome&#42;</label>
+                        <input type="text" id="nome" name="nome"/>
+                        Sexo&#42;
+                        <label for="sexoM">M</label>
+                        <input type="radio" name="sexoM" id="sexoM" value="M"/>
+                        <label for="sexoF">F</label>
+                        <input type="radio" name="sexoF" id="sexoF" value="F"/></br>
+
+                        Data de Nascimento&#42;
+                        <input type="date" id="nascimento" name="nascimento"/> 
+                        <label for="funcao">Função&#42;</label>
+                        <input type="text" id="funcao" name="funcao"/>
+                        Tipo de Usuário&#42;
+                        <select id="tipoUsuario" name="tipoUsuario">
+                            <option>Vendedor</option>
+                            <option>Gerente</option>
+                            <option>Administrador</option>
+                        </select></br>
+
+                        <label for="login">Login&#42;</label>
+                        <input type="text" id="login" name="login"/>
+                        <label for="senha">Senha&#42;</label>
+                        <input type="password" id="senha" name="senha">
+                        <input type="reset" name="novo"    value="Novo" class="novo"/>
+                        <input type="button" name="salvar" value="Salvar" class="salvar"/>
+                        <input type="button" name="sair"   value="Sair" class="sair"/></br>
+
+                    </fieldset>
+
+                </form>
+
+            </div>
+
+        </body>
+    </html>
+
+</jsp:root>

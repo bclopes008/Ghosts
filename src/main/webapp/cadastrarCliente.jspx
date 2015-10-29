@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : cadastrarCliente
+    Created on : 28/10/2015, 22:20:09
+    Author     : fabio.ssanto10
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+
+    <!-- any content can be specified here, e.g.: -->
+    <!DOCTTYPE HTML>
+    <html>
+        <head>
+
+            <title>Cadastrar Cliente</title>
+            <link href="cadastrarClienteStyle.css" rel="stylesheet" type="text/css"/>
+
+        </head>
+        <body>
+            <div id="divPai">
+                <form action="" method="post">
+
+                    <fieldset id="fieldset01">
+                        <legend>Cliente</legend>
+
+                        Cod Cliente
+                        <input type="id" id="codCliente" name="codCliente" readonly="readonly"/>
+                        <label for="nome">Nome&#42;</label>
+                        <input type="text" id="nome" name="nome"/>
+                        <input type="reset" name="novo"    value="Novo" class="novo"/>
+                        <input type="button" name="salvar" value="Salvar" class="salvar"/>
+                        <input type="button" name="sair"   value="Sair" class="sair"/></br>
+
+                        <label for="cpf">CPF&#42;</label>
+                        <input type="text" id="cpf" name="cpf"/>
+                        Data de Nascimento&#42;
+                        <input type="date" id="nascimento" name="nascimento"/> 
+                        <label for="cnh">CNH&#42;</label>   
+                        <input type="text" id="cnh" name="cnh"/></br>
+
+                        Sexo&#42;
+                        <label for="sexoM">M</label>
+                        <input type="radio" name="sexoM" id="sexoM" value="M"/>
+                        <label for="sexoF">F</label>
+                        <input type="radio" name="sexoF" id="sexoF" value="F"/>
+                        <label for="celular">Tel. Celular&#42;</label>
+                        <input type="text" id="celular" name="celular"/>
+                        <label for="email">Email&#42;</label>
+                        <input type="email" id="email" name="email"/>
+
+
+
+
+                    </fieldset>
+
+
+                    <fieldset id="fieldset02">
+                        <legend>Endere&ccedil;o</legend>
+
+                        <label for="cep">CEP&#42;</label>
+                        <input type="text" id="cep" name="cep"/>
+                        <label for="endereco">Endere&ccedil;o&#42;</label>
+                        <input type="text" id="endereco" name="endereco"/>
+                        <label for="numero">N&uacute;mero&#42;</label>
+                        <input type="text" id="numero" name="numero"/></br>
+
+                        <label for="bairro">Bairro&#42;</label>
+                        <input type="text" id="bairro" name="bairro"/>
+                        Estado&#40;DF&#41;&#42;
+                        <select id="estado" name="estado">
+                            <option>Jsp</option>
+                            <option>SP</option>
+                            <option>RJ</option>
+                            <option>MG</option>
+                        </select>
+                        <label for="cidade">Cidade&#42;</label>
+                        <input type="text" id="cidade" name="cidade"/></br>
+                        <label for="complemento">Complemento&#42;</label>
+                        <input type="text" id="complemento" name="complemento"/>
+                        <label for="observacoes">Observa&ccedil;&otilde;es&#42;</label>
+                        <input type="text" id="observacoes" name="observacoes"/>
+
+
+
+                    </fieldset>
+
+                </form>
+            </div>
+
+        </body>
+
+    </html>
+
+</jsp:root>

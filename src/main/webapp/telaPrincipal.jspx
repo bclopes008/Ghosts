@@ -1,0 +1,79 @@
+<!-- 
+    Document   : home
+    Created on : 18/10/2015, 01:31:55
+    Author     : Bruno
+-->
+<jsp:root version="2.0"
+          xmlns:jsp="http://java.sun.com/JSP/Page" 
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+
+    <html>
+        <head>
+            <title>Tela Principal</title>
+            <link href="telaPrincipalStyle.css" rel="stylesheet" type="text/css"/>
+        </head>
+
+        <body>
+            <!-- <c:if test="${usuario.tipoUsuario == 'A' || usuario.tipoUsuario == 'G'}"></c:if> -->
+                <form action="" method="post">
+                    <div id="aluguelPai">
+                        <input type="button" class="aluguel" name="aluguel" value="Aluguel"/>
+
+                        <div id="opcoesAluguel">
+                            <input type="button" class="cadastrarAluguel" name="cadastrarAluguel" value="Cadastrar"/><br/>
+                            <input type="button" class="consultarAluguel" name="consultarAluguel" value="Consultar/Alterar"/><br/>
+                            <input type="button" class="devolucaoAluguel" name="devolucaoAluguel" value="Devolu&ccedil;&atilde;o"/>
+                        </div>
+                    </div>
+
+                    <div id="clientePai">
+                        <input type="button" class="cliente" name="cliente" value="Cliente"/>
+
+                        <div id="opcoesCliente">
+                            <input type="button" class="cadastrarCliente" name="cadastrarCliente" value="Cadastrar"/><br/>
+                            <input type="button" class="consultarCliente" name="consultarCliente" value="Consultar/Alterar"/>
+                        </div>
+                    </div>
+
+                    <div id="ProdutosPai">
+                        <input type="button" class="produtos" name="produtos" value="Produtos"/>
+
+                        <div id="opcoesProdutos">
+                            <input type="button" class="cadastrarProdutos" name="cadastrarProdutos" value="Cadastrar"/>
+                            <input type="button" class="consultarProdutos" name="consultarProdutos" value="Consultar/Alterar"/>
+                        </div>
+                    </div>
+
+                    <div id="relatoriosPai">
+                        <input  type="button" class="relatorios" name="relatorios" value="Relat&oacute;rios"/>
+
+                        <div id="opcoesRelatorios">
+                            <input type="button" class="relatoriosAluguel" name="relatoriosAluguel" value="Aluguel" />
+                            <input type="button" class="relatoriosProdutos" name="relatoriosProdutos" value="Produtos" />
+                        </div>
+                    </div>
+
+                    <div id="usuariosPai">
+                        <input type="button" class="usuarios" name="usuarios" value="Usu&aacute;rios"/>
+
+                        <div id="opcoesUsuarios">
+                            <input type="button" class="cadastrarUsuarios" name="cadastrarUsuarios" value="Cadastrar"/>
+                            <input type="button" class="consultarUsuarios" name="consultarUsuarios" value="Consultar/Alterar"/>
+                        </div>
+                    </div>
+
+                    <div id="sair">
+                        <input type="button" class="sair" name="sair" value="Sair"/>
+
+                    </div>
+                </form>
+
+
+
+            </body>
+        </html>
+
+</jsp:root>
