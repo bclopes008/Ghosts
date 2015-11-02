@@ -8,7 +8,7 @@ public abstract class Produto {
     
     private String modelo;
     private String marca;
-    private char combustivel;
+    private String combustivel;
     private int anoFabricacao;
     private String cor;
     private char grupo;
@@ -16,7 +16,7 @@ public abstract class Produto {
     public Produto() {
     }
     
-    public Produto(String modelo, String marca, char combustivel, int anoFabricacao, String cor, char grupo) {
+    public Produto(String modelo, String marca, String combustivel, int anoFabricacao, String cor, char grupo) {
         this.modelo = modelo;
         this.marca = marca;
         this.combustivel = combustivel;
@@ -41,11 +41,11 @@ public abstract class Produto {
         this.marca = marca;
     }
 
-    public char getCombustivel() {
+    public String getCombustivel() {
         return combustivel;
     }
 
-    public void setCombustivel(char combustivel) {
+    public void setCombustivel(String combustivel) {
         this.combustivel = combustivel;
     }
 

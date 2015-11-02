@@ -20,7 +20,9 @@ public class UsuarioDAO {
                 + "' AND SENHA_USUARIO = '" + user.getSenha() + "'";
 
         try {
-            ResultSet rs = Conexoes.cmd.executeQuery(sql);
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
 
             String login = null, senha = null;
 
@@ -29,10 +31,9 @@ public class UsuarioDAO {
                 login = rs.getString("LOGIN_USUARIO");
                 senha = rs.getString("SENHA_USUARIO");
                 user.setTipoUsuario(rs.getString("TIPO_USUARIO").charAt(0));
+                conn.close();
+                return true;
             }
-            conn.close();
-            return true;
-
         } catch (SQLException ex) {
             System.err.println("Erro: " + ex.getMessage());
         } catch (Exception ex) {

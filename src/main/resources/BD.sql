@@ -1,6 +1,6 @@
 --Criar o Banco de Dados com o nome de LoCarSys
 --Nome do usuário: app
---Senha: app
+--Senha: app 
 
 CREATE TABLE Funcionario(
 id_Funcionario bigint not null generated always 
@@ -35,7 +35,7 @@ CREATE TABLE Combustivel(
 id_Combustivel bigint not null generated always
         as identity (start with 1, increment by 1)
         constraint PK_Combustivel PRIMARY KEY,
-Tipo_Combustivel varchar(1) not null
+Tipo_Combustivel varchar(10) not null
 );
 
 CREATE TABLE Classe(
@@ -152,10 +152,10 @@ SELECT * FROM Fabricante;
 --Inserir Valores na Tabela Combustivel------------------------------------------------------------------------------------------------
 INSERT INTO Combustivel(Tipo_Combustivel)
 values
-('G'),
-('A'),
-('F'),
-('N');
+('Gasolina'),
+('Álcool'),
+('Flex'),
+('GNV');
 
 SELECT * FROM Combustivel;
 

@@ -18,14 +18,15 @@
 
         <body>
             <!-- <c:if test="${usuario.tipoUsuario == 'A' || usuario.tipoUsuario == 'G'}"></c:if> -->
-                <form action="" method="post">
+                
                     <div id="aluguelPai">
                         <input type="button" class="aluguel" name="aluguel" value="Aluguel"/>
 
                         <div id="opcoesAluguel">
                             <input type="button" class="cadastrarAluguel" name="cadastrarAluguel" value="Cadastrar"/><br/>
                             <input type="button" class="consultarAluguel" name="consultarAluguel" value="Consultar/Alterar"/><br/>
-                            <input type="button" class="devolucaoAluguel" name="devolucaoAluguel" value="Devolu&ccedil;&atilde;o"/>
+                            <!--<input type="button" class="devolucaoAluguel" name="devolucaoAluguel" value="Devolu&ccedil;&atilde;o"/>-->
+                            <input type="button" class="devolucaoAluguel" name="devolucaoAluguel" value="Devolucao"/>
                         </div>
                     </div>
 
@@ -42,13 +43,16 @@
                         <input type="button" class="produtos" name="produtos" value="Produtos"/>
 
                         <div id="opcoesProdutos">
-                            <input type="button" class="cadastrarProdutos" name="cadastrarProdutos" value="Cadastrar"/>
+                            <form action="CadastroProdutoServlet" method="GET">
+                                <input type="submit" class="cadastrarProdutos" name="cadastrarProdutos" value="Cadastrar"/>
+                            </form>
                             <input type="button" class="consultarProdutos" name="consultarProdutos" value="Consultar/Alterar"/>
                         </div>
                     </div>
 
                     <div id="relatoriosPai">
-                        <input  type="button" class="relatorios" name="relatorios" value="Relat&oacute;rios"/>
+                        <!--<input  type="button" class="relatorios" name="relatorios" value="Relat&oacute;rios"/>-->
+                        <input  type="button" class="relatorios" name="relatorios" value="Relatorios"/>
 
                         <div id="opcoesRelatorios">
                             <input type="button" class="relatoriosAluguel" name="relatoriosAluguel" value="Aluguel" />
@@ -57,7 +61,8 @@
                     </div>
 
                     <div id="usuariosPai">
-                        <input type="button" class="usuarios" name="usuarios" value="Usu&aacute;rios"/>
+                        <!--<input type="button" class="usuarios" name="usuarios" value="Usu&aacute;rios"/>-->
+                        <input type="button" class="usuarios" name="usuarios" value="Usuarios"/>
 
                         <div id="opcoesUsuarios">
                             <input type="button" class="cadastrarUsuarios" name="cadastrarUsuarios" value="Cadastrar"/>
@@ -69,7 +74,7 @@
                         <input type="button" class="sair" name="sair" value="Sair"/>
 
                     </div>
-                </form>
+                
 
 
 

@@ -4,38 +4,41 @@
     Created on : 28/10/2015, 22:23:52
     Author     : fabio.ssanto10
 -->
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+          xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
 
     <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
 
     <!-- any content can be specified here, e.g.: -->
-    <!DOCTTYPE HTML>
     <html>
         <head>
             <title>Cadastrar Produto</title>
-            <link href="cadastrarProdutoStyle.css" rel="stylesheet" type="text/css">
+            <link href="cadastrarProdutoStyle.css" rel="stylesheet" type="text/css"/>
         </head>
         <body>
             <div id="divPai">
-                <form action="" method="post">
+                <form action="CadastroProdutoServlet" method="post">
                     <fieldset id="fieldset">
-                        <legend>Cadastro de Autom&oacute;veis</legend>
+                        <!--<legend>Cadastro de Autom&oacute;veis</legend>-->
+                        <legend>Cadastro de Automoveis</legend>
                         <div id="div01">
                             Cod do Carro
-                            <input type="text" id="codCarro" name="codCarro" readonly="readonly">
+                            <input type="text" id="codCarro" name="codCarro" readonly="readonly"/>
                             <label for="modelo">Modelo&#42;</label>
                             <input type="text" id="modelo" name="modelo" />
-                            Data Fabrica&ccedil;&atilde;o&#42;
-                            <input type="date" id="anoFabricacao" name="anoFabricacao" /></br>
+                            <!--Data Fabrica&ccedil;&atilde;o&#42;-->
+                            Data Fabricacao:
+                            <!--<input type="date" id="anoFabricacao" name="anoFabricacao" /><br/>-->
+                            <input type="text" id="anoFabricacao" name="anoFabricacao" /><br/>
                             <label for="chassi">Chassi&#42;</label>
                             <input type="text" id="chassi" name="chassi" />
                             <label for="cor">Cor&#42;</label>
                             <input type="text" id="cor" name="cor"/>
                             <label for="placa">Placa&#42;</label>
-                            <input type="text" id="placa" name="placa"/></br>
+                            <input type="text" id="placa" name="placa"/><br/>
                             Estado&#40;DF&#41;&#42;
                             <select id="estado" name="estado">
-                                <option>Jsp</option>
+                                <option selected="selected"></option>
                                 <option>SP</option>
                                 <option>RJ</option>
                                 <option>MG</option>
@@ -48,26 +51,28 @@
                             <input type="text" id="renavam" name="renavam"/>
                             Fabricante&#42;
                             <select id="fabricante" name="fabricante">
-                                <option>Jsp</option>
-                                <option>Honda</option>
+                                <option selected="selected"></option>
+                                <c:forEach items="${fabricantes}" var="fab">
+                                    <option>${fab.nomeFabricante}</option>
+                                </c:forEach>
                             </select>
                             Combustivel&#42;
-                            <select id="combustivel" name="Combustivel">
-                                <option>Jsp</option>
-                                <option>Gasolina</option>
-                                <option>Alcool</option>
+                            <select id="combustivel" name="combustivel">
+                                <option selected="selected"></option>
+                                <c:forEach items="${combustiveis}" var="comb">
+                                    <option>${comb.tipoCombustivel}</option>
+                                </c:forEach>
                             </select>
                             Grupo&#42;
                             <select id="grupo" name="grupo">
-                                <option>Grupo A</option>
-                                <option>Grupo B</option>
-                                <option>Grupo C</option>
-                                <option>Grupo D</option>
-                            </select></br>
+                                <option selected="selected"></option>
+                                <c:forEach items="${classes}" var="classes">
+                                    <option>${classes.tipoClasse}</option>
+                                </c:forEach>
+                            </select><br/>
                             <input type="reset" class="novo" name="novo" value="Novo"/>
-                            <input type="button" class="salvar" name="salvar" value="Salvar"/>
+                            <input type="submit" class="salvar" name="salvar" value="Salvar"/>
                             <input type="button" class="sair" name="sair" value="Sair"/>
-
                         </div>
                     </fieldset>
                 </form>

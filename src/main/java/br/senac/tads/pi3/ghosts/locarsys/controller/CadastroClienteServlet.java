@@ -5,8 +5,7 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
-import br.senac.tads.pi3.ghosts.locarsys.dao.*;
-import br.senac.tads.pi3.ghosts.locarsys.model.*;
+import br.senac.tads.pi3.ghosts.locarsys.model.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -18,10 +17,23 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Prime-PC
+ * @author bruno.lopes
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "CadastroClienteServlet", urlPatterns = {"/CadastroClienteServlet"})
+public class CadastroClienteServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -35,6 +47,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
@@ -48,29 +61,22 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        
         RequestDispatcher disp;
-        Usuario u = new Usuario(request.getParameter("login"), request.getParameter("senha"));
-        UsuarioDAO dao = new UsuarioDAO();      
-        if (dao.autenticaUsuario(u)) {
-            disp = request.getRequestDispatcher("telaPrincipal.jspx");
-            request.setAttribute("usuario", u);
-        } else {
-            disp = request.getRequestDispatcher("index.html");
-            out.println("<script>alert(Usuário ou senha incorretas.);</script>");
-        }
-        
-        if(request.getParameter("login") == null){
-            out.print("<script type='text/javascript'>alert('teste');</script>");
-        }
-        
-        disp.forward(request, response);
+        Cliente c = new Cliente();
+        c.setNome(request.getParameter("nome"));
+        c.setCpf(Integer.parseInt(request.getParameter("cpf")));
+        //c.setDataNascimento(request.getParameter("nascimento"));
+        c.setCnh(Integer.parseInt(request.getParameter("cnh")));
     }
-}
 
-/**
- * Returns a short description of the servlet.
- *
- * @return a String containing servlet description
- */
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

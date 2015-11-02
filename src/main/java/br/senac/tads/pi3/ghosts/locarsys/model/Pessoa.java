@@ -12,6 +12,9 @@ public abstract class Pessoa {
     private char sexo;
     private Date dataNascimento;
 
+    public Pessoa() {
+    }
+
     public Pessoa(String nome, char sexo, Date dataNascimento) {
         this.nome = nome;
         this.sexo = sexo;

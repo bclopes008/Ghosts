@@ -13,6 +13,9 @@ public class Cliente extends Endereco{
     private String celular;
     private String email;
 
+    public Cliente() {
+    }
+
     public Cliente(int cpf, int cnh, String celular, String email, String endereco, int numero, String complemento, int cep, String bairro, String estado, String cidade, String nome, char sexo, Date dataNascimento) {
         super(endereco, numero, complemento, cep, bairro, estado, cidade, nome, sexo, dataNascimento);
         this.cpf = cpf;

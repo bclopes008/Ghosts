@@ -17,6 +17,9 @@ public abstract class Endereco extends Pessoa{
     private String cidade;
     private String obs;
 
+    public Endereco() {
+    }
+
     public Endereco(String endereco, int numero, String complemento, int cep, String bairro, String estado, String cidade, String nome, char sexo, Date dataNascimento) {
         super(nome, sexo, dataNascimento);
         this.endereco = endereco;

@@ -5,10 +5,11 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
-import br.senac.tads.pi3.ghosts.locarsys.dao.CarroDAO;
-import br.senac.tads.pi3.ghosts.locarsys.model.Carro;
+import br.senac.tads.pi3.ghosts.locarsys.dao.*;
+import br.senac.tads.pi3.ghosts.locarsys.model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,6 +36,26 @@ public class CadastroProdutoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ArrayList<Fabricante> fabricantes = new ArrayList<>();
+        
+        FabricanteDAO FbDAO = new FabricanteDAO();
+        fabricantes = FbDAO.listarFabricantes();
+        request.setAttribute("fabricantes", fabricantes);
+        
+        ArrayList<Combustivel> combustiveis = new ArrayList<>();
+        
+        combustiveis = ProdutoDAO.listarCombustiveis();
+        request.setAttribute("combustiveis", combustiveis);
+        
+        
+        ArrayList<ClasseProduto> classes = new ArrayList<>();
+        
+        classes = ProdutoDAO.listarClasses();
+        request.setAttribute("classes", classes);
+        
+        
+        RequestDispatcher disp = request.getRequestDispatcher("cadastrarProduto.jspx");
+        disp.forward(request, response);
     }
 
     /**
@@ -54,21 +75,21 @@ public class CadastroProdutoServlet extends HttpServlet {
         c.setAnoFabricacao(Integer.parseInt(request.getParameter("anoFabricacao")));
         c.setChassi(request.getParameter("chassi"));
         c.setCidade(request.getParameter("cidade"));
-        c.setCombustivel(request.getParameter("combustivel").charAt(0));
+        c.setCombustivel(request.getParameter("combustivel"));
         c.setCor(request.getParameter("cor"));
         c.setEstado(request.getParameter("estado"));
         c.setGrupo(request.getParameter("grupo").charAt(0));
-        c.setKilometragem(Float.parseFloat(request.getParameter("kilometragem")));
-        c.setMarca(request.getParameter("marca"));
+        //c.setKilometragem(Float.parseFloat(request.getParameter("kilometragem")));
+        c.setMarca(request.getParameter("fabricante"));
         c.setModelo(request.getParameter("modelo"));
         c.setPlaca(request.getParameter("placa"));
-        c.setRenavam(Integer.parseInt(request.getParameter("renavam")));
+        c.setRenavam(request.getParameter("renavam"));
         CarroDAO dao = new CarroDAO();
         if(dao.cadastraCarro(c))
-        {
+            disp = request.getRequestDispatcher("telaPrincipal.jspx");
+        else
             disp = request.getRequestDispatcher("cadastroProduto.jspx");
-            disp.forward(request, response);
-        }
+        disp.forward(request, response);
     }
 
     /**

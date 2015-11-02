@@ -11,13 +11,13 @@ public class Carro extends Produto{
     private String estado;
     private String cidade;
     private int ano;
-    private int renavam;
+    private String renavam;
     private float kilometragem;
 
     public Carro() {
     }
     
-    public Carro(String chassi, String placa, String estado, String cidade, int ano, int renavam, float kilometragem, String modelo, String marca, char combustivel, int anoFabricacao, String cor, char grupo) {
+    public Carro(String chassi, String placa, String estado, String cidade, int ano, String renavam, float kilometragem, String modelo, String marca, String combustivel, int anoFabricacao, String cor, char grupo) {
         super(modelo, marca, combustivel, anoFabricacao, cor, grupo);
         this.chassi = chassi;
         this.placa = placa;
@@ -68,11 +68,11 @@ public class Carro extends Produto{
         this.ano = ano;
     }
 
-    public int getRenavam() {
+    public String getRenavam() {
         return renavam;
     }
 
-    public void setRenavam(int renavam) {
+    public void setRenavam(String renavam) {
         this.renavam = renavam;
     }
 
