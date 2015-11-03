@@ -16,13 +16,14 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Prime-PC
  */
 public class AluguelDAO {
-    
+
     public ArrayList<Aluguel> consultaAluguel() throws ClassNotFoundException {
         ArrayList<Aluguel> aluguel = new ArrayList<>();
         Aluguel aluguelObj = new Aluguel();
@@ -39,42 +40,64 @@ public class AluguelDAO {
             }
             conn.close();
             return aluguel;
-        } catch (SQLException | DateTimeParseException ex) {
+        } catch (SQLException | DateTimeParseException | ParseException ex) {
             System.err.println("" + ex.getMessage());
-        } catch (ParseException ex) {
-            Logger.getLogger(AluguelDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
-    public void cadastrarAluguel(Aluguel aluguel,String classeCarro, String idUsuario, String idCarro, String idCliente) throws ClassNotFoundException{
+
+    public void cadastrarAluguel(Aluguel aluguel, String idUsuario, String idCarro, String idCliente) throws ClassNotFoundException {
+        String sql = "INSERT INTO ALUGUEL VALUES(?, ?, ?, ?, ?, ?)";
+        float valorClasse = 0;
         try {
             Connection conn = Conexoes.obterConexao();
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO ALUGUEL VALUES(NEWID(), ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement stmt = null;
+            //SELECT Para pegar o valor e nome do carro
+            sql = "SELECT * FROM CARRO CA INNER JOIN CLASSE CL \n"
+                    + "ON CL.ID_CLASSE = CA.ID_CLASSE WHERE ID_CARRO = ? FETCH FIRST 1 ROW ONLY;";
             
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, idCarro);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                valorClasse = rs.getFloat("TARIFA_CLASSE");
+            }
+
+            //INSERT do Aluguel
+            stmt.clearBatch();
+            sql = "INSERT INTO ALUGUEL VALUES(?, ?, ?, ?, ?, ?);";
+            stmt = conn.prepareStatement(sql);
+
+            aluguel.calcularValorTotal(valorClasse);
+
             stmt.setString(1, idUsuario);
-            stmt.setString(2, classeCarro);
-            stmt.setString(3, idCarro);
-            stmt.setString(4, idCliente);
-            stmt.setString(5, aluguel.getDataInicial().toString());
-            stmt.setString(6, aluguel.getDataFinal().toString());
-            stmt.setString(7, ""+aluguel.getValorTotal());
-            
-            stmt.execute();
+            stmt.setString(2, idCarro);
+            stmt.setString(3, idCliente);
+            stmt.setDate(4, (Date) aluguel.getDataInicial());
+            stmt.setDate(5, (Date) aluguel.getDataFinal());
+            stmt.setFloat(6, aluguel.getValorTotal());
+            System.out.println("Data final: " + (Date) aluguel.getDataFinal());
+            stmt.executeUpdate();
+
+            //UPDATE Disponibilidade
+            stmt.clearBatch();
+
+            stmt.close();
             conn.close();
         } catch (SQLException ex) {
             System.err.println("" + ex.getMessage());
         }
     }
-    
-    public void deletarAluguel(Aluguel aluguel, String campoBD) throws ClassNotFoundException{
+
+    public void deletarAluguel(Aluguel aluguel, String campoBD) throws ClassNotFoundException {
         try {
             Connection conn = Conexoes.obterConexao();
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM ALUGUEL WHERE ? = ?");
-            
+
             stmt.setString(1, "Preco_Total");
-            stmt.setString(2, ""+aluguel.getValorTotal());
-            
+            stmt.setString(2, "" + aluguel.getValorTotal());
+
             stmt.execute();
             conn.close();
         } catch (SQLException ex) {
