@@ -108,7 +108,6 @@ id_Aluguel bigint not null generated always
         as identity (start with 1, increment by 1)
         constraint PK_Aluguel PRIMARY KEY,
 id_Funcionario bigint not null,
-id_Classe bigint not null,
 id_Carro bigint not null,
 id_Cliente bigint not null,                   
 Data_Locacao_Aluguel date not null,
