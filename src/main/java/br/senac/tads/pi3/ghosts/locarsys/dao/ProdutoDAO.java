@@ -18,24 +18,24 @@ import java.util.ArrayList;
  * @author Bruno
  */
 public class ProdutoDAO {
-    
-    public static ArrayList<Combustivel> listarCombustiveis(){
+
+    public static ArrayList<Combustivel> listarCombustiveis() {
         ArrayList<Combustivel> combustiveis = new ArrayList<>();
-        
-                String sql = "SELECT * FROM Combustivel";
-        
+
+        String sql = "SELECT * FROM Combustivel";
+
         try {
             Connection conn = Conexoes.obterConexao();
             Statement stmt = conn.createStatement();
             ResultSet rs = null;
-            
+
             rs = stmt.executeQuery(sql);
-            
-            while(rs.next()){
-                combustiveis.add(new Combustivel(rs.getInt("ID_COMBUSTIVEL"), 
+
+            while (rs.next()) {
+                combustiveis.add(new Combustivel(rs.getInt("ID_COMBUSTIVEL"),
                         rs.getString("TIPO_COMBUSTIVEL")));
             }
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.err.println(ex.getMessage());
         } catch (Exception ex) {
@@ -43,30 +43,57 @@ public class ProdutoDAO {
         }
         return combustiveis;
     }
-    
-        public static ArrayList<ClasseProduto> listarClasses(){
+
+    public static ArrayList<ClasseProduto> listarClasses() {
         ArrayList<ClasseProduto> classes = new ArrayList<>();
-        
-                String sql = "SELECT * FROM Classe";
-        
+
+        String sql = "SELECT * FROM Classe";
+
         try {
             Connection conn = Conexoes.obterConexao();
             Statement stmt = conn.createStatement();
             ResultSet rs = null;
-            
+
             rs = stmt.executeQuery(sql);
-            
-            while(rs.next()){
-                classes.add(new ClasseProduto(rs.getInt("ID_CLASSE"), 
-                        rs.getString("TIPO_CLASSE").charAt(0), 
+
+            while (rs.next()) {
+                classes.add(new ClasseProduto(rs.getInt("ID_CLASSE"),
+                        rs.getString("TIPO_CLASSE").charAt(0),
                         rs.getFloat("TARIFA_CLASSE")));
             }
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.err.println(ex.getMessage());
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
         return classes;
+    }
+
+    public static ArrayList<Filial> listarFiliais() {
+        ArrayList<Filial> filiais = new ArrayList<>();
+
+        String sql = "SELECT * FROM FILIAL";
+
+        try {
+            Connection conn = Conexoes.obterConexao();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = null;
+
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                filiais.add(new Filial(rs.getInt("id_Filial"),
+                        rs.getString("Nome_Filial"),
+                        rs.getString("Estado_Filial"),
+                        rs.getString("Cidade_Filial")));
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println(ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+        return filiais;
     }
 }

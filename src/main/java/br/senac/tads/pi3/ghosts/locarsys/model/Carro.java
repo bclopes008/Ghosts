@@ -16,9 +16,9 @@ public class Carro extends Produto{
 
     public Carro() {
     }
-    
-    public Carro(String chassi, String placa, String estado, String cidade, int ano, String renavam, float kilometragem, String modelo, String marca, String combustivel, int anoFabricacao, String cor, char grupo) {
-        super(modelo, marca, combustivel, anoFabricacao, cor, grupo);
+
+    public Carro(String chassi, String placa, String estado, String cidade, int ano, String renavam, float kilometragem, String modelo, String marca, String combustivel, int anoFabricacao, String cor, char grupo, String filial) {
+        super(modelo, marca, combustivel, anoFabricacao, cor, grupo, filial);
         this.chassi = chassi;
         this.placa = placa;
         this.estado = estado;

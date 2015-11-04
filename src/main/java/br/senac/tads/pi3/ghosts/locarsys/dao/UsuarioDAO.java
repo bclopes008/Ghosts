@@ -15,7 +15,7 @@ public class UsuarioDAO {
     public boolean autenticaUsuario(Usuario user) {
         Statement stmt = null;
         Connection conn = null;
-        System.out.println(user.getLogin());
+        
         String sql = "SELECT * FROM USUARIO WHERE LOGIN_USUARIO = '" + user.getLogin()
                 + "' AND SENHA_USUARIO = '" + user.getSenha() + "'";
 
@@ -23,7 +23,6 @@ public class UsuarioDAO {
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-
             String login = null, senha = null;
 
             while (rs.next()) {
@@ -70,6 +69,56 @@ public class UsuarioDAO {
         }
 
         return users;
+    }
+    
+    public boolean cadastraUsuario(Usuario u)
+    {
+        Statement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+        int filial = 0, funcionario = 0;
+
+        /* Busca o id da filial no banco de dados */
+        String sql = "SELECT ID_FILIAL FROM FILIAL WHERE NOME_FILIAL = '" + u.getFilial() + "'";
+        
+        try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                filial = rs.getInt("ID_FILIAL");
+            }
+            conn.close();
+            
+            sql = ("INSERT INTO FUNCIONARIO (ID_FILIAL, NOME_FUNCIONARIO, DATA_NASC_FUNCIONARIO, CPF_FUNCIONARIO, FUNCAO_FUNCIONARIO, SEXO_FUNCIONARIO) VALUES "
+                    + "(" + filial + ", '" + u.getNome() + "','1985-08-17','" + u.getCpf() + "','" + u.getFuncao() + "','" + u.getSexo() + "')");
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+            conn.close();
+            
+            sql = "SELECT ID_FUNCIONARIO FROM FUNCIONARIO WHERE NOME_FUNCIONARIO = '" + u.getCpf() + "'";
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                funcionario = rs.getInt("ID_FUNCIONARIO");
+            }
+            conn.close();
+            
+            sql = "INSERT INTO USUARIO (ID_FUNCIONARIO,LOGIN_USUARIO,SENHA_USUARIO,TIPO_USUARIO) VALUES "
+                    + "( " + funcionario + ",'" + u.getLogin() + "','" + u.getSenha() + "','" + u.getTipoUsuario() + "')";
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+            conn.close();            
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println("" + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("" + ex.getMessage());
+        }
+        return false;
     }
 
 }

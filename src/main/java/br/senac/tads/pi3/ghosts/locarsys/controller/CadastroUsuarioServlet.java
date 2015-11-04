@@ -5,8 +5,10 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
-import br.senac.tads.pi3.ghosts.locarsys.dao.*;
-import br.senac.tads.pi3.ghosts.locarsys.model.*;
+import br.senac.tads.pi3.ghosts.locarsys.dao.ProdutoDAO;
+import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
+import br.senac.tads.pi3.ghosts.locarsys.model.Filial;
+import br.senac.tads.pi3.ghosts.locarsys.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,10 +21,23 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Bruno
+ * @author bruno.clopes
  */
-@WebServlet(name = "CadastroProdutoServlet", urlPatterns = {"/CadastroProdutoServlet"})
-public class CadastroProdutoServlet extends HttpServlet {
+@WebServlet(name = "CadastroUsuarioServlet", urlPatterns = {"/CadastroUsuarioServlet"})
+public class CadastroUsuarioServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -36,25 +51,11 @@ public class CadastroProdutoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<Fabricante> fabricantes = new ArrayList<>();
-        FabricanteDAO FbDAO = new FabricanteDAO();
-        fabricantes = FbDAO.listarFabricantes();
-        request.setAttribute("fabricantes", fabricantes);
-        
-        ArrayList<Combustivel> combustiveis = new ArrayList<>();
-        combustiveis = ProdutoDAO.listarCombustiveis();
-        request.setAttribute("combustiveis", combustiveis);
-        
-        ArrayList<ClasseProduto> classes = new ArrayList<>();
-        classes = ProdutoDAO.listarClasses();
-        request.setAttribute("classes", classes);
-        
         ArrayList<Filial> filiais = new ArrayList<>();
         filiais = ProdutoDAO.listarFiliais();
         request.setAttribute("filiais", filiais);
         
-        
-        RequestDispatcher disp = request.getRequestDispatcher("/Produto/cadastrarProduto.jspx");
+        RequestDispatcher disp = request.getRequestDispatcher("/Usuario/cadastrarUsuario.jspx");
         disp.forward(request, response);
     }
 
@@ -70,26 +71,20 @@ public class CadastroProdutoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher disp;
-        Carro c = new Carro();
-        c.setAno(Integer.parseInt(request.getParameter("ano")));
-        c.setAnoFabricacao(Integer.parseInt(request.getParameter("anoFabricacao")));
-        c.setChassi(request.getParameter("chassi"));
-        c.setCidade(request.getParameter("cidade"));
-        c.setCombustivel(request.getParameter("combustivel"));
-        c.setCor(request.getParameter("cor"));
-        c.setEstado(request.getParameter("estado"));
-        c.setGrupo(request.getParameter("grupo").charAt(0));
-        //c.setKilometragem(Float.parseFloat(request.getParameter("kilometragem")));
-        c.setMarca(request.getParameter("fabricante"));
-        c.setModelo(request.getParameter("modelo"));
-        c.setPlaca(request.getParameter("placa"));
-        c.setRenavam(request.getParameter("renavam"));
-        c.setFilial(request.getParameter("filial"));
-        CarroDAO dao = new CarroDAO();
-        if(dao.cadastraCarro(c))
+        Usuario u = new Usuario();
+        u.setNome(request.getParameter("nome"));
+        u.setSexo(request.getParameter("sexo").charAt(0));
+        //u.setDataNascimento(request.getParameter("nascimento"));
+        u.setFuncao(request.getParameter("funcao"));
+        u.setTipoUsuario(request.getParameter("tipoUsuario").charAt(0));
+        u.setLogin(request.getParameter("login"));
+        u.setSenha(request.getParameter("senha"));
+        u.setCpf(request.getParameter("cpf"));
+        UsuarioDAO dao = new UsuarioDAO();
+        if(dao.cadastraUsuario(u))
             disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
         else
-            disp = request.getRequestDispatcher("/Produto/cadastroProduto.jspx");
+            disp = request.getRequestDispatcher("/Usuario/cadastrarUsuario.jspx");
         disp.forward(request, response);
     }
 

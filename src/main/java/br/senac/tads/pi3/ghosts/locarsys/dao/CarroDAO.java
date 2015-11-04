@@ -15,8 +15,7 @@ import javax.swing.JOptionPane;
 public class CarroDAO {
 
     public boolean cadastraCarro(Carro c) {
-        PreparedStatement stmt = null;
-        Statement st = null;
+        Statement stmt = null;
         Connection conn = null;
         ResultSet rs = null;
         int fabricante = 0, combustivel = 0, classe = 0;
@@ -27,8 +26,8 @@ public class CarroDAO {
 
         try {
             conn = Conexoes.obterConexao();
-            st = conn.createStatement();
-            rs = st.executeQuery(sql);
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
                 combustivel = rs.getInt("ID_COMBUSTIVEL");
@@ -38,8 +37,8 @@ public class CarroDAO {
             sql = "SELECT ID_FABRICANTE FROM FABRICANTE WHERE NOME_FABRICANTE = '" + c.getMarca() + "'";
 
             conn = Conexoes.obterConexao();
-            st = conn.createStatement();
-            rs = st.executeQuery(sql);
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
                 fabricante = rs.getInt("ID_FABRICANTE");
@@ -49,8 +48,8 @@ public class CarroDAO {
             sql = "SELECT ID_CLASSE FROM CLASSE WHERE TIPO_CLASSE = '" + c.getGrupo() + "'";
 
             conn = Conexoes.obterConexao();
-            st = conn.createStatement();
-            rs = st.executeQuery(sql);
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 classe = rs.getInt("ID_CLASSE");
             }
@@ -82,36 +81,15 @@ public class CarroDAO {
              stmt.setFloat(13, c.getKilometragem());
              stmt.executeUpdate(sql);*/
             conn = Conexoes.obterConexao();
-            st = conn.createStatement();
-            st.executeUpdate(sql);
+            stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
             conn.close();
             return true;
         } catch (SQLException | ClassNotFoundException ex) {
-            System.err.println(""+ex.getMessage());
+            System.err.println("" + ex.getMessage());
         } catch (Exception ex) {
-            System.err.println(""+ex.getMessage());
+            System.err.println("" + ex.getMessage());
         }
         return false;
     }
-
-    /*public List<Marca> marca() {
-        Statement stmt = null;
-        Connection conn = null;
-        ResultSet rs = null;
-
-        String sql = "SELECT * FROM FABRICANTE";
-
-        try {
-            conn = Conexoes.obterConexao();
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(CarroDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CarroDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }*/
-
 }

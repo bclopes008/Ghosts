@@ -9,9 +9,9 @@ import java.util.Date;
 public abstract class Endereco extends Pessoa{
     
     private String endereco;
-    private int numero;
+    private String numero;
     private String complemento;
-    private int cep;
+    private String cep;
     private String bairro;
     private String estado;
     private String cidade;
@@ -20,8 +20,8 @@ public abstract class Endereco extends Pessoa{
     public Endereco() {
     }
 
-    public Endereco(String endereco, int numero, String complemento, int cep, String bairro, String estado, String cidade, String nome, char sexo, Date dataNascimento) {
-        super(nome, sexo, dataNascimento);
+    public Endereco(String endereco, String numero, String complemento, String cep, String bairro, String estado, String cidade, String obs, String nome, char sexo, Date dataNascimento, String cpf) {
+        super(nome, sexo, dataNascimento, cpf);
         this.endereco = endereco;
         this.numero = numero;
         this.complemento = complemento;
@@ -29,6 +29,7 @@ public abstract class Endereco extends Pessoa{
         this.bairro = bairro;
         this.estado = estado;
         this.cidade = cidade;
+        this.obs = obs;
     }
 
     public String getEndereco() {
@@ -39,11 +40,11 @@ public abstract class Endereco extends Pessoa{
         this.endereco = endereco;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -55,11 +56,11 @@ public abstract class Endereco extends Pessoa{
         this.complemento = complemento;
     }
 
-    public int getCep() {
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(int cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 

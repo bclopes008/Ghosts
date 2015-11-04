@@ -1,22 +1,32 @@
 package br.senac.tads.pi3.ghosts.locarsys.model; 
 
+import java.util.Date;
+
 /**
  *
  * @author Bruno
  */
-public class Usuario {
+public class Usuario extends Funcionario{
 
     private String id;
     private String login;
     private String senha;
     private char tipoUsuario;
 
+    public Usuario() {
+    }
+
     public Usuario(String login, String senha) {
         this.login = login;
         this.senha = senha;
     }
 
-    public Usuario() {
+    public Usuario(String id, String login, String senha, char tipoUsuario, String funcao, String filial, String nome, char sexo, Date dataNascimento, String cpf) {
+        super(funcao, filial, nome, sexo, dataNascimento, cpf);
+        this.id = id;
+        this.login = login;
+        this.senha = senha;
+        this.tipoUsuario = tipoUsuario;
     }
 
     public void setId(String id) {

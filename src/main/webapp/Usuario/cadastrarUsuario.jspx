@@ -9,7 +9,6 @@
     <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
 
     <!-- any content can be specified here, e.g.: -->
-    <!DOCTTYPE HTML>
     <html>
         <head>
             <title>Cadastrar Usuário</title>
@@ -26,9 +25,9 @@
                         <input type="text" id="nome" name="nome"/>
                         Sexo&#42;
                         <label for="sexoM">M</label>
-                        <input type="radio" name="sexoM" id="sexoM" value="M"/>
+                        <input type="radio" name="sexo" id="sexoM" value="M"/>
                         <label for="sexoF">F</label>
-                        <input type="radio" name="sexoF" id="sexoF" value="F"/></br>
+                        <input type="radio" name="sexo" id="sexoF" value="F"/><br/>
 
                         Data de Nascimento&#42;
                         <input type="date" id="nascimento" name="nascimento"/> 
@@ -39,15 +38,15 @@
                             <option>Vendedor</option>
                             <option>Gerente</option>
                             <option>Administrador</option>
-                        </select></br>
+                        </select><br/>
 
                         <label for="login">Login&#42;</label>
                         <input type="text" id="login" name="login"/>
                         <label for="senha">Senha&#42;</label>
-                        <input type="password" id="senha" name="senha">
+                        <input type="password" id="senha" name="senha"/>
                         <input type="reset" name="novo"    value="Novo" class="novo"/>
                         <input type="button" name="salvar" value="Salvar" class="salvar"/>
-                        <input type="button" name="sair"   value="Sair" class="sair"/></br>
+                        <input type="button" name="sair"   value="Sair" class="sair"/><br/>
 
                     </fieldset>
 

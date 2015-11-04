@@ -4,7 +4,7 @@ package br.senac.tads.pi3.ghosts.locarsys.model;
  *
  * @author Bruno
  */
-public abstract class Produto {
+public abstract class Produto{
     
     private String modelo;
     private String marca;
@@ -12,17 +12,19 @@ public abstract class Produto {
     private int anoFabricacao;
     private String cor;
     private char grupo;
+    private String filial;
 
     public Produto() {
     }
-    
-    public Produto(String modelo, String marca, String combustivel, int anoFabricacao, String cor, char grupo) {
+
+    public Produto(String modelo, String marca, String combustivel, int anoFabricacao, String cor, char grupo, String filial) {
         this.modelo = modelo;
         this.marca = marca;
         this.combustivel = combustivel;
         this.anoFabricacao = anoFabricacao;
         this.cor = cor;
         this.grupo = grupo;
+        this.filial = filial;
     }
 
     public String getModelo() {
@@ -72,7 +74,14 @@ public abstract class Produto {
     public void setGrupo(char grupo) {
         this.grupo = grupo;
     }
-    
+
+    public String getFilial() {
+        return filial;
+    }
+
+    public void setFilial(String filial) {
+        this.filial = filial;
+    }
     
     
 }

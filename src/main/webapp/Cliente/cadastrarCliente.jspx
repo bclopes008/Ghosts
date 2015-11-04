@@ -18,18 +18,16 @@
         </head>
         <body>
             <div id="divPai">
-                <form action="CadastroClienteServlet" method="POST">
+                <form action="CadastroClienteServlet" method="post">
 
                     <fieldset id="fieldset01">
                         <legend>Cliente</legend>
 
                         Cod Cliente
-                        <!--<input type="id" id="codCliente" name="codCliente" readonly="readonly"/>-->
+                        <input type="id" id="codCliente" name="codCliente" readonly="readonly"/>
                         <label for="nome">Nome&#42;</label>
                         <input type="text" id="nome" name="nome"/>
-                        <input type="reset" name="novo"    value="Novo" class="novo"/>
-                        <input type="button" name="salvar" value="Salvar" class="salvar"/>
-                        <input type="button" name="sair"   value="Sair" class="sair"/><br/>
+
 
                         <label for="cpf">CPF&#42;</label>
                         <input type="text" id="cpf" name="cpf"/>
@@ -40,9 +38,9 @@
 
                         Sexo&#42;
                         <label for="sexoM">M</label>
-                        <input type="radio" name="sexoM" id="sexoM" value="M"/>
+                        <input type="radio" name="sexo" id="sexoM" value="M"/>
                         <label for="sexoF">F</label>
-                        <input type="radio" name="sexoF" id="sexoF" value="F"/>
+                        <input type="radio" name="sexo" id="sexoF" value="F"/>
                         <label for="celular">Tel. Celular&#42;</label>
                         <input type="text" id="celular" name="celular"/>
                         <label for="email">Email&#42;</label>
@@ -71,7 +69,7 @@
                         <input type="text" id="bairro" name="bairro"/>
                         Estado&#40;DF&#41;&#42;
                         <select id="estado" name="estado">
-                            <option>Jsp</option>
+                            <option></option>
                             <option>SP</option>
                             <option>RJ</option>
                             <option>MG</option>
@@ -83,11 +81,10 @@
                         <!--<label for="observacoes">Observa&ccedil;&otilde;es&#42;</label>-->
                         <label for="observacoes">Observacoes&#42;</label>
                         <input type="text" id="observacoes" name="observacoes"/>
-
-
-
                     </fieldset>
-
+                    <input type="reset" name="novo"    value="Novo" class="novo"/>
+                    <input type="submit" name="salvar" value="Salvar" class="salvar"/>
+                    <input type="button" name="sair"   value="Sair" class="sair"/><br/>
                 </form>
             </div>
 

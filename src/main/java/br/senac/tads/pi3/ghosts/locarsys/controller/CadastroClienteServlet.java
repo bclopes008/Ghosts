@@ -5,9 +5,14 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
+import br.senac.tads.pi3.ghosts.locarsys.dao.ClienteDAO;
 import br.senac.tads.pi3.ghosts.locarsys.model.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,7 +52,8 @@ public class CadastroClienteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        RequestDispatcher disp = request.getRequestDispatcher("/Cliente/cadastrarCliente.jspx");
+        disp.forward(request, response);
     }
 
     /**
@@ -64,9 +70,36 @@ public class CadastroClienteServlet extends HttpServlet {
         RequestDispatcher disp;
         Cliente c = new Cliente();
         c.setNome(request.getParameter("nome"));
-        c.setCpf(Integer.parseInt(request.getParameter("cpf")));
-        //c.setDataNascimento(request.getParameter("nascimento"));
-        c.setCnh(Integer.parseInt(request.getParameter("cnh")));
+        c.setCpf(request.getParameter("cpf"));
+        String dtNascimento = request.getParameter("nascimento");
+        DateFormat formatadorData = new SimpleDateFormat("yyyy-mm-dd");
+        Date dataNasc = null;
+        try {
+            dataNasc = formatadorData.parse(dtNascimento);
+        } catch (ParseException ex) {
+            dataNasc = new Date();
+        }
+        System.out.println(""+dtNascimento);
+        c.setDataNascimento(dataNasc);
+        c.setCnh(request.getParameter("cnh"));
+        c.setSexo(request.getParameter("sexo").charAt(0));
+        c.setCelular(request.getParameter("celular"));
+        c.setEmail(request.getParameter("email"));
+        c.setCep(request.getParameter("cep"));
+        c.setEndereco(request.getParameter("endereco"));
+        c.setNumero(request.getParameter("numero"));
+        c.setBairro(request.getParameter("bairro"));
+        c.setEstado(request.getParameter("estado"));
+        c.setCidade(request.getParameter("cidade"));
+        c.setComplemento(request.getParameter("complemento"));
+        c.setObs(request.getParameter("observacoes"));
+        ClienteDAO dao = new ClienteDAO();
+        if(dao.cadastroCliente(c))
+            disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
+        else
+            disp = request.getRequestDispatcher("/Cliente/cadastrarCliente.jspx");
+        disp.forward(request, response);
+        
     }
 
     /**

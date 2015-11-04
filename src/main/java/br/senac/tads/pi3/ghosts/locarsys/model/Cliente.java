@@ -8,35 +8,25 @@ import java.util.Date;
  */
 public class Cliente extends Endereco{
 
-    private int cpf;
-    private int cnh;
+    private String cnh;
     private String celular;
     private String email;
 
     public Cliente() {
     }
 
-    public Cliente(int cpf, int cnh, String celular, String email, String endereco, int numero, String complemento, int cep, String bairro, String estado, String cidade, String nome, char sexo, Date dataNascimento) {
-        super(endereco, numero, complemento, cep, bairro, estado, cidade, nome, sexo, dataNascimento);
-        this.cpf = cpf;
+    public Cliente(String cnh, String celular, String email, String endereco, String numero, String complemento, String cep, String bairro, String estado, String cidade, String obs, String nome, char sexo, Date dataNascimento, String cpf) {
+        super(endereco, numero, complemento, cep, bairro, estado, cidade, obs, nome, sexo, dataNascimento, cpf);
         this.cnh = cnh;
         this.celular = celular;
         this.email = email;
     }
 
-    public int getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(int cpf) {
-        this.cpf = cpf;
-    }
-
-    public int getCnh() {
+    public String getCnh() {
         return cnh;
     }
 
-    public void setCnh(int cnh) {
+    public void setCnh(String cnh) {
         this.cnh = cnh;
     }
 
@@ -54,8 +44,6 @@ public class Cliente extends Endereco{
 
     public void setEmail(String email) {
         this.email = email;
-    }
-    
-    
+    }    
     
 }

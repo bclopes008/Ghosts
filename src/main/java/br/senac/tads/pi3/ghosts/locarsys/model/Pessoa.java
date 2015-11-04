@@ -11,14 +11,16 @@ public abstract class Pessoa {
     private String nome;
     private char sexo;
     private Date dataNascimento;
+    private String cpf;
 
     public Pessoa() {
     }
 
-    public Pessoa(String nome, char sexo, Date dataNascimento) {
+    public Pessoa(String nome, char sexo, Date dataNascimento, String cpf) {
         this.nome = nome;
         this.sexo = sexo;
         this.dataNascimento = dataNascimento;
+        this.cpf = cpf;
     }
 
     public String getNome() {
@@ -44,4 +46,14 @@ public abstract class Pessoa {
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    
+    
 }
