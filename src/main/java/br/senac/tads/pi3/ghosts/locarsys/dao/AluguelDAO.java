@@ -29,14 +29,15 @@ public class AluguelDAO {
         Aluguel aluguelObj = new Aluguel();
 
         try {
-            DateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat formatadorData = new SimpleDateFormat("dd-MM-yyyy");
             Connection conn = Conexoes.obterConexao();
             Statement stmt = conn.createStatement();
-            String sql = "SELECT * FROM ALUGUEL";
+            String sql = "SELECT * FROM ALUGUEL AL "
+                    + "INNER JOIN CARRO CA ON CA.ID_CARRO = AL.ID_CARRO;";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                aluguel.add(new Aluguel(formatadorData.parse(rs.getString("")), formatadorData.parse(rs.getString("")), Float.valueOf(rs.getString(""))));
+                aluguel.add(new Aluguel(formatadorData.parse(rs.getString("DATA_LOCACAO_ALUGUEL")), formatadorData.parse(rs.getString("DATA_DEVOLUCAO_ALUGUEL")), Float.valueOf(rs.getString("PRECO_TOTAL"))));
             }
             conn.close();
             return aluguel;
@@ -46,18 +47,18 @@ public class AluguelDAO {
         return null;
     }
 
-    public void cadastrarAluguel(Aluguel aluguel, String idUsuario, String idCarro, String idCliente) throws ClassNotFoundException {
-        String sql = "INSERT INTO ALUGUEL VALUES(?, ?, ?, ?, ?, ?)";
+    public void cadastrarAluguel(Aluguel aluguel, String idUsuario, String modeloCarro, String idCliente) throws ClassNotFoundException {
+        String sql = "";
         float valorClasse = 0;
         try {
             Connection conn = Conexoes.obterConexao();
             PreparedStatement stmt = null;
             //SELECT Para pegar o valor e nome do carro
-            sql = "SELECT * FROM CARRO CA INNER JOIN CLASSE CL \n"
+            sql = "SELECT * FROM CARRO CA INNER JOIN CLASSE CL "
                     + "ON CL.ID_CLASSE = CA.ID_CLASSE WHERE ID_CARRO = ? FETCH FIRST 1 ROW ONLY;";
-            
+
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, idCarro);
+            stmt.setString(1, idCarro); //ADICIONEI O ATRIBUTO PRODUTO NO ALUGUEL, PRECISA AJUSTAR
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -82,7 +83,14 @@ public class AluguelDAO {
 
             //UPDATE Disponibilidade
             stmt.clearBatch();
+            sql = "UPDATE CARRO SET DISPONIBILIDADE_CARRO = '0' "
+                    + "WHERE ID_CARRO = (SELECT ID_CARRO FROM Carro WHERE DISPONIBILIDADE_CARRO = '1' "
+                    + "AND MODELO_CARRO = ? FETCH FIRST 1 ROW ONLY);";
+            stmt = conn.prepareStatement(sql);
 
+            stmt.setString(1, modeloCarro);
+
+            stmt.executeUpdate();
             stmt.close();
             conn.close();
         } catch (SQLException ex) {
