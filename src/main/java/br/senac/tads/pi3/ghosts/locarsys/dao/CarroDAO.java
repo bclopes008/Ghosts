@@ -18,13 +18,22 @@ public class CarroDAO {
         Statement stmt = null;
         Connection conn = null;
         ResultSet rs = null;
-        int fabricante = 0, combustivel = 0, classe = 0;
-        //String fabricante = null, combustivel = null, classe = null;
+        int fabricante = 0, combustivel = 0, classe = 0, filial = 0;
 
-        /* Busca o id do combustivel no banco de dados */
-        String sql = "SELECT ID_COMBUSTIVEL FROM COMBUSTIVEL WHERE TIPO_COMBUSTIVEL = '" + c.getCombustivel() + "'";
+        /* Busca o id da filial no banco de dados */
+        String sql = "SELECT ID_FILIAL FROM FILIAL WHERE NOME_FILIAL = '" + c.getFilial() + "'";
+        System.out.println("Nome Filial: " + c.getFilial());
 
         try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                filial = rs.getInt("ID_FILIAL");
+            }
+            /* Busca o id do combustivel no banco de dados */
+            sql = "SELECT ID_COMBUSTIVEL FROM COMBUSTIVEL WHERE TIPO_COMBUSTIVEL = '" + c.getCombustivel() + "'";
+            
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
@@ -55,9 +64,9 @@ public class CarroDAO {
             }
             conn.close();
 
-            sql = "INSERT INTO CARRO (id_Classe, id_Fabricante, id_Combustivel, Ano_Fabricacao_Carro, Chassi_Carro, Cor_Carro, "
+            sql = "INSERT INTO CARRO (id_filial, id_Classe, id_Fabricante, id_Combustivel, Ano_Fabricacao_Carro, Chassi_Carro, Cor_Carro, "
                     + "Modelo_Carro, Placa_Carro, Estado_Carro, Cidade_Carro, Ano_Carro, Renavam_Carro, Kilometragem_Carro, Disponibilidade_Carro)"
-                    + " VALUES ( " + classe + ", " + fabricante + ", " + combustivel + ", '" + c.getAnoFabricacao() + "', '"
+                    + " VALUES ( " + filial + ", " + classe + ", " + fabricante + ", " + combustivel + ", '" + c.getAnoFabricacao() + "', '"
                     + c.getChassi() + "', '" + c.getCor() + "', '" + c.getModelo() + "', '" + c.getPlaca() + "', '" + c.getEstado() + "', '"
                     + c.getCidade() + "', '" + c.getAno() + "', '" + c.getRenavam() + "', " + c.getKilometragem() + ", '1' )";
             /*sql = "INSERT INTO CARRO (id_Classe, id_Fabricante, id_Combustivel, Ano_Fabricacao_Carro, Chassi_Carro, Cor_Carro, "

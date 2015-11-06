@@ -24,6 +24,29 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "CadastroProdutoServlet", urlPatterns = {"/CadastroProdutoServlet"})
 public class CadastroProdutoServlet extends HttpServlet {
 
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        ArrayList<Fabricante> fabricantes = new ArrayList<>();
+        FabricanteDAO FbDAO = new FabricanteDAO();
+        fabricantes = FbDAO.listarFabricantes();
+        request.setAttribute("fabricantes", fabricantes);
+
+        ArrayList<Combustivel> combustiveis = new ArrayList<>();
+        combustiveis = ProdutoDAO.listarCombustiveis();
+        request.setAttribute("combustiveis", combustiveis);
+
+        ArrayList<ClasseProduto> classes = new ArrayList<>();
+        classes = ProdutoDAO.listarClasses();
+        request.setAttribute("classes", classes);
+
+        ArrayList<Filial> filiais = new ArrayList<>();
+        filiais = ProdutoDAO.listarFiliais();
+        request.setAttribute("filiais", filiais);
+
+        RequestDispatcher disp = request.getRequestDispatcher("/Produto/cadastrarProduto.jspx");
+        disp.forward(request, response);
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -36,26 +59,7 @@ public class CadastroProdutoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<Fabricante> fabricantes = new ArrayList<>();
-        FabricanteDAO FbDAO = new FabricanteDAO();
-        fabricantes = FbDAO.listarFabricantes();
-        request.setAttribute("fabricantes", fabricantes);
-        
-        ArrayList<Combustivel> combustiveis = new ArrayList<>();
-        combustiveis = ProdutoDAO.listarCombustiveis();
-        request.setAttribute("combustiveis", combustiveis);
-        
-        ArrayList<ClasseProduto> classes = new ArrayList<>();
-        classes = ProdutoDAO.listarClasses();
-        request.setAttribute("classes", classes);
-        
-        ArrayList<Filial> filiais = new ArrayList<>();
-        filiais = ProdutoDAO.listarFiliais();
-        request.setAttribute("filiais", filiais);
-        
-        
-        RequestDispatcher disp = request.getRequestDispatcher("/Produto/cadastrarProduto.jspx");
-        disp.forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -86,10 +90,11 @@ public class CadastroProdutoServlet extends HttpServlet {
         c.setRenavam(request.getParameter("renavam"));
         c.setFilial(request.getParameter("filial"));
         CarroDAO dao = new CarroDAO();
-        if(dao.cadastraCarro(c))
+        if (dao.cadastraCarro(c)) {
             disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
-        else
+        } else {
             disp = request.getRequestDispatcher("/Produto/cadastroProduto.jspx");
+        }
         disp.forward(request, response);
     }
 

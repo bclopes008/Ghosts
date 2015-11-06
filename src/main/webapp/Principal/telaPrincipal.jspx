@@ -13,51 +13,54 @@
     <html>
         <head>
             <title>Menu</title>
+            <link href="StyleCSSLoCarSys/telaPrincipalStyle.css" rel="stylesheet" type="text/css" />
             <link href="../StyleCSSLoCarSys/telaPrincipalStyle.css" rel="stylesheet" type="text/css" />
         </head>
 
         <body>
             <!-- <c:if test="${usuario.tipoUsuario == 'A' || usuario.tipoUsuario == 'G'}"></c:if> -->
-            <div id="menu">
-                <ul class="menuPrincipal clearfix">
+                <div id="menu">
+                    <ul class="menuPrincipal clearfix">
+                    <c:if test="${usuario.tipoUsuario == 'V' || usuario.tipoUsuario == 'G'}">
+                        <li><a href="#">Aluguel</a>
+                            <ul class="menuAluguel clearfix">
+                                <li><a href="../03- Cadastro de Alugueis/cadastroAlugueis.html">Cadastrar</a></li>
+                                <li><a href="../04- ConsultaAltera Alugueis/consultaAlteraAlugueis.html">Consultar/Alterar</a></li>
+                                <li><a href="#">Devolução</a></li>
+                            </ul><!-- submenu -->
+                        </li>
+                        <li><a href="#">Cliente</a>
+                            <ul class="menuCliente clearfix">
+                                <li><a href="CadastroClienteServlet">Cadastrar</a></li>
+                                <li><a href="#">Consultar/Alterar</a></li>
+                            </ul><!-- submenu -->
+                        </li>
 
-                    <li><a href="#">Aluguel</a>
-                        <ul class="menuAluguel clearfix">
-                            <li><a href="../03- Cadastro de Alugueis/cadastroAlugueis.html">Cadastrar</a></li>
-                            <li><a href="../04- ConsultaAltera Alugueis/consultaAlteraAlugueis.html">Consultar/Alterar</a></li>
-                            <li><a href="#">Devolução</a></li>
-                        </ul><!-- submenu -->
-                    </li>
+                        <li><a href="#">Produtos</a>
+                            <ul class="menuProdutos">
+                                <li><a href="CadastroProdutoServlet">Cadastrar</a></li>
+                                <li><a href="#">Consultar/Alterar</a></li>
+                            </ul><!-- submenu -->
+                        </li>
+                    </c:if>
+                    <c:if test="${usuario.tipoUsuario == 'G'}">
+                        <li><a href="#">Relatórios</a>
+                            <ul class="menuRelatorios">
+                                <li><a href="#">Aluguel</a></li>
+                                <li><a href="#">Produtos</a></li>
+                            </ul><!-- submenu -->
+                        </li>
+                    </c:if>
+                    <c:if test="${usuario.tipoUsuario == 'T'}">
+                        <li><a href="CadastroUsuarioServlet">Usuários</a>
+                            <ul class="menuUsuarios">
+                                <li><a href="CadastroUsuarioServlet">Cadastrar</a></li>
+                                <li><a href="#">Consultar/Alterar</a></li>
+                            </ul><!-- submenu -->
+                        </li>
+                    </c:if>
 
-                    <li><a href="#">Cliente</a>
-                        <ul class="menuCliente clearfix">
-                            <li><a href="../06- Cadastrar Cliente/cadastrarCliente.html">Cadastrar</a></li>
-                            <li><a href="#">Consultar/Alterar</a></li>
-                        </ul><!-- submenu -->
-                    </li>
-
-                    <li><a href="#">Produtos</a>
-                        <ul class="menuProdutos">
-                            <li><a href="../08- Cadastrar Produto/cadastrarProduto.html">Cadastrar</a></li>
-                            <li><a href="#">Consultar/Alterar</a></li>
-                        </ul><!-- submenu -->
-                    </li>
-
-                    <li><a href="#">Relatórios</a>
-                        <ul class="menuRelatorios">
-                            <li><a href="#">Aluguel</a></li>
-                            <li><a href="#">Produtos</a></li>
-                        </ul><!-- submenu -->
-                    </li>
-
-                    <li><a href="#">Usuários</a>
-                        <ul class="menuUsuarios">
-                            <li><a href="#">Cadastrar</a></li>
-                            <li><a href="#">Consultar/Alterar</a></li>
-                        </ul><!-- submenu -->
-                    </li>
-
-                    <li><a href="../login.jspx">Sair</a></li>
+                    <li><a href="login.jspx">Sair</a></li>
                 </ul><br/>
                 <!--<img src="../ImagensLoCarSys/Starmega.png">-->
 

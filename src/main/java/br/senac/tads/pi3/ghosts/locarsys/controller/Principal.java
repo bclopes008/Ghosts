@@ -5,13 +5,9 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
-import br.senac.tads.pi3.ghosts.locarsys.dao.ProdutoDAO;
-import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
-import br.senac.tads.pi3.ghosts.locarsys.model.Filial;
 import br.senac.tads.pi3.ghosts.locarsys.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,10 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author bruno.clopes
+ * @author bruno.lopes
  */
-@WebServlet(name = "CadastroUsuarioServlet", urlPatterns = {"/CadastroUsuarioServlet"})
-public class CadastroUsuarioServlet extends HttpServlet {
+@WebServlet(name = "Principal", urlPatterns = {"/Principal"})
+public class Principal extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,11 +33,11 @@ public class CadastroUsuarioServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<Filial> filiais = new ArrayList<>();
-        filiais = ProdutoDAO.listarFiliais();
-        request.setAttribute("filiais", filiais);
-
-        RequestDispatcher disp = request.getRequestDispatcher("/Usuario/cadastrarUsuario.jspx");
+        //TODO
+        Usuario u = new Usuario();
+        u.setTipoUsuario('G');
+        request.setAttribute("usuario", u);
+        RequestDispatcher disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
         disp.forward(request, response);
     }
 
@@ -71,23 +67,7 @@ public class CadastroUsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher disp;
-        Usuario u = new Usuario();
-        u.setNome(request.getParameter("nome"));
-        u.setSexo(request.getParameter("sexo").charAt(0));
-        //u.setDataNascimento(request.getParameter("nascimento"));
-        u.setFuncao(request.getParameter("funcao"));
-        u.setTipoUsuario(request.getParameter("tipoUsuario").charAt(0));
-        u.setLogin(request.getParameter("login"));
-        u.setSenha(request.getParameter("senha"));
-        u.setCpf(request.getParameter("cpf"));
-        UsuarioDAO dao = new UsuarioDAO();
-        if (dao.cadastraUsuario(u)) {
-            disp = request.getRequestDispatcher("Principal");
-        } else {
-            disp = request.getRequestDispatcher("/Usuario/cadastrarUsuario.jspx");
-        }
-        disp.forward(request, response);
+        processRequest(request, response);
     }
 
     /**

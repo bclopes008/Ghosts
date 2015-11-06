@@ -39,19 +39,19 @@ fieldset{
 
 }
 .novo{
-    background-image:url("../ImagensLoCarSys/novo.png");
+    background-image:url("../ImagensLoCarSys/Novo.png");
     width:35px;
     height:35px;
     margin-right:10px;
 }
 .salvar{
-    background-image:url("../ImagensLoCarSys/salvar.png");
+    background-image:url("../ImagensLoCarSys/Salvar.png");
     width:35px;
     height:35px;
     margin-right:10px;
 }
 .sair{
-    background-image:url("../ImagensLoCarSys/sair.png");
+    background-image:url("../ImagensLoCarSys/Sair.png");
     width:35px;
     height:35px;
 }

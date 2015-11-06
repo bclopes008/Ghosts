@@ -13,7 +13,7 @@
     <html>
         <head>
             <title>Cadastrar Produto</title>
-            <link href="../StyleCSSLoCarSys/cadastrarProdutoStyle.css" rel="stylesheet" type="text/css"/>
+            <link href="StyleCSSLoCarSys/cadastrarProdutoStyle.css" rel="stylesheet" type="text/css"/>
         </head>
         <body>
             <div>
@@ -26,9 +26,9 @@
                         <label for="modelo">Modelo&#42;</label>
                         <input type="text" id="modelo" name="modelo" required="required" title="Modelo do Carro"/>
 
-                        <input type="reset" class="novo" name="novo" value="" title="Limpar"/>
-                        <input type="button" class="salvar" name="salvar" value="" title="Salvar"/>
-                        <a href="../Principal/telaPrincipal.jspx"><button  type="button" class="sair" name="sair" title="Sair"></button></a><br/>
+                        <button  type="reset" class="novo" name="novo" title="Limpar"></button>
+                        <button  type="submit" class="salvar" name="salvar" value="" title="Salvar"></button>
+                        <a href="Principal"><button  type="button" class="sair" name="sair" title="Sair"><!--<img src="../ImagensLoCarSys/sair.png"/>--></button></a><br/>
 
                         <label for="chassi">Chassi&#42;</label>
                         <input type="text" id="chassi" name="chassi" maxlength="22" required="required" title="Chassi"/>
@@ -51,7 +51,7 @@
                         <label for="ano">Ano&#42;</label>
                         <input type="text" id="ano" name="ano" maxlength="4" required="required" title="Ano"/>
                         Ano Fabricação&#42;
-                        <input type="text" id="anoFabricacao" name="anoFabricacao" maxlength="4" required="required" title="Ano de Fabricação"/><br/>
+                        <input type="text" id="anoFabricacao" name="anoFabricacao" maxlength="4" required="required" title="Data de Fabricação"/><br/>
 
                         Fabricante&#42;
                         <select id="fabricante" name="fabricante" required="required" title="Fabricante">
@@ -61,7 +61,7 @@
                             </c:forEach>
                         </select>
                         Combustivel&#42;
-                        <select id="combustivel" name="combustivel" required="required" title="Combustível">
+                        <select id="combustivel" name="combustivel" required="required" title="Combustivel">
                             <option selected="selected"></option>
                             <c:forEach items="${combustiveis}" var="comb">
                                 <option>${comb.tipoCombustivel}</option>
@@ -77,9 +77,9 @@
                         Filial&#42;
                         <select id="filial" name="filial" required="required" title="Filial">
                             <option selected="selected"></option>
-                            <option>São Paulo</option>
-                            <option>Rio de Janeiro</option>
-                            <option>Minas Gerais</option>
+                            <c:forEach items="${filiais}" var="fil">
+                                <option>${fil.nome}</option>
+                            </c:forEach>
                         </select>
 
 

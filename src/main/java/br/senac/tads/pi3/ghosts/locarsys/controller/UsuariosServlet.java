@@ -5,7 +5,9 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
+import br.senac.tads.pi3.ghosts.locarsys.dao.ProdutoDAO;
 import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
+import br.senac.tads.pi3.ghosts.locarsys.model.Filial;
 import br.senac.tads.pi3.ghosts.locarsys.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,6 +35,16 @@ public class UsuariosServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        ArrayList<Filial> filiais = new ArrayList<>();
+        filiais = ProdutoDAO.listarFiliais();
+        request.setAttribute("filiais", filiais);
+
+        RequestDispatcher disp = request.getRequestDispatcher("/Usuario/cadastrarUsuario.jspx");
+        disp.forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -16,7 +16,7 @@
         <head>  
             <title>Cadastro de Alugueis</title>
             <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
-            <link href="../StyleCSSLoCarSys/cadastroAlugueisStyle.css" rel="stylesheet" type="text/css"/>
+            <link href="StyleCSSLoCarSys/cadastroAlugueisStyle.css" rel="stylesheet" type="text/css"/>
         </head>
 
         <body>
@@ -33,7 +33,7 @@
 
                         <input type="reset" class="novo" name="novo" value="" title="Linpar"/>
                         <input type="button" class="salvar" name="salvar" value="" title="Salvar"/>
-                        <a href="../02- Tela Principal/telaPrincipal.html"><button  type="button" class="sair" name="sair" title="Sair"></button></a><br/>
+                        <a href="../02- Tela Principal/telaPrincipal.html"><button  type="button" class="sair" name="sair" title="Sair"><!--<img src="ImagensLoCarSys/sair.png"/>--></button></a><br/>
 
                         Data Inicial
                         <input type="date" id="inicial" name="inicial" required="required" title="Data Inicial"/>
