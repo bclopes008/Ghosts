@@ -23,10 +23,8 @@ public class ClienteDAO {
         Connection conn = null;
         ResultSet rs = null;
         int idCliente = 0;
-        String dataNasc = "" + c.getDataNascimento();
-        System.out.println("Passou aqui: " + c.getEstado());  //TODO
         String sql = "INSERT INTO CLIENTE (NOME_CLIENTE, CPF_CLIENTE, CNH_CLIENTE, DATA_NASC_CLIENTE, SEXO_CLIENTE, CELULAR_CLIENTE, EMAIL_CLIENTE) VALUES ('" + c.getNome() + "', '"
-                + c.getCpf() + "', '" + c.getCnh() + "', '" + dataNasc + "', '" + c.getSexo() + "', '" + c.getCelular() + "', '" + c.getEmail() + "')";
+                + c.getCpf() + "', '" + c.getCnh() + "', '" + c.getDataNascimento() + "', '" + c.getSexo() + "', '" + c.getCelular() + "', '" + c.getEmail() + "')";
         try {
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();

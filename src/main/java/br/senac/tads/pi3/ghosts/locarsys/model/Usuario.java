@@ -21,7 +21,7 @@ public class Usuario extends Funcionario{
         this.senha = senha;
     }
 
-    public Usuario(String id, String login, String senha, char tipoUsuario, String funcao, String filial, String nome, char sexo, Date dataNascimento, String cpf) {
+    public Usuario(String id, String login, String senha, char tipoUsuario, String funcao, String filial, String nome, char sexo, String dataNascimento, String cpf) {
         super(funcao, filial, nome, sexo, dataNascimento, cpf);
         this.id = id;
         this.login = login;

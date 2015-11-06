@@ -75,15 +75,17 @@ public class CadastroUsuarioServlet extends HttpServlet {
         Usuario u = new Usuario();
         u.setNome(request.getParameter("nome"));
         u.setSexo(request.getParameter("sexo").charAt(0));
-        //u.setDataNascimento(request.getParameter("nascimento"));
+        u.setDataNascimento(request.getParameter("nascimento"));
         u.setFuncao(request.getParameter("funcao"));
         u.setTipoUsuario(request.getParameter("tipoUsuario").charAt(0));
         u.setLogin(request.getParameter("login"));
         u.setSenha(request.getParameter("senha"));
         u.setCpf(request.getParameter("cpf"));
+        u.setFilial(request.getParameter("filial"));
         UsuarioDAO dao = new UsuarioDAO();
         if (dao.cadastraUsuario(u)) {
             disp = request.getRequestDispatcher("Principal");
+            request.setAttribute("mensagem","Usuário cadastrado com sucesso!");
         } else {
             disp = request.getRequestDispatcher("/Usuario/cadastrarUsuario.jspx");
         }

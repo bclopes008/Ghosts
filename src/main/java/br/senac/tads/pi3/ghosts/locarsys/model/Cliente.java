@@ -15,7 +15,7 @@ public class Cliente extends Endereco{
     public Cliente() {
     }
 
-    public Cliente(String cnh, String celular, String email, String endereco, String numero, String complemento, String cep, String bairro, String estado, String cidade, String obs, String nome, char sexo, Date dataNascimento, String cpf) {
+    public Cliente(String cnh, String celular, String email, String endereco, String numero, String complemento, String cep, String bairro, String estado, String cidade, String obs, String nome, char sexo, String dataNascimento, String cpf) {
         super(endereco, numero, complemento, cep, bairro, estado, cidade, obs, nome, sexo, dataNascimento, cpf);
         this.cnh = cnh;
         this.celular = celular;

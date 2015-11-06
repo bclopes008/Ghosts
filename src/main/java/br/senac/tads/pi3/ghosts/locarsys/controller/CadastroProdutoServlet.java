@@ -91,7 +91,8 @@ public class CadastroProdutoServlet extends HttpServlet {
         c.setFilial(request.getParameter("filial"));
         CarroDAO dao = new CarroDAO();
         if (dao.cadastraCarro(c)) {
-            disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
+            disp = request.getRequestDispatcher("Principal");
+            request.setAttribute("mensagem","Produto cadastrado com sucesso!");
         } else {
             disp = request.getRequestDispatcher("/Produto/cadastroProduto.jspx");
         }

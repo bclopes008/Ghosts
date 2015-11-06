@@ -24,7 +24,7 @@
                         <legend>Dados do Cliente</legend>
 
                         Cod. Cliente
-                        <input type="id" id="codCliente" name="codCliente" readonly="readonly" title="Código do Cliente "/>
+                        <input type="number" id="codCliente" name="codCliente" readonly="readonly" title="Código do Cliente "/>
                         <label for="nome">Nome&#42;</label>
                         <input type="text" id="nome" name="nome" required="required" title="Nome do Cliente " />
 

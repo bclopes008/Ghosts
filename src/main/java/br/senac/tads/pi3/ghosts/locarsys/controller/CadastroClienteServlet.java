@@ -71,16 +71,7 @@ public class CadastroClienteServlet extends HttpServlet {
         Cliente c = new Cliente();
         c.setNome(request.getParameter("nome"));
         c.setCpf(request.getParameter("cpf"));
-        String dtNascimento = request.getParameter("nascimento");
-        DateFormat formatadorData = new SimpleDateFormat("yyyy-mm-dd");
-        Date dataNasc = null;
-        try {
-            dataNasc = formatadorData.parse(dtNascimento);
-        } catch (ParseException ex) {
-            dataNasc = new Date();
-        }
-        System.out.println(""+dtNascimento);
-        c.setDataNascimento(dataNasc);
+        c.setDataNascimento(request.getParameter("nascimento"));
         c.setCnh(request.getParameter("cnh"));
         c.setSexo(request.getParameter("sexo").charAt(0));
         c.setCelular(request.getParameter("celular"));
@@ -95,7 +86,10 @@ public class CadastroClienteServlet extends HttpServlet {
         c.setObs(request.getParameter("observacoes"));
         ClienteDAO dao = new ClienteDAO();
         if(dao.cadastroCliente(c))
-            disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
+        {
+            disp = request.getRequestDispatcher("Principal");
+            request.setAttribute("mensagem","Cliente cadastrado com sucesso!");
+        }
         else
             disp = request.getRequestDispatcher("/Cliente/cadastrarCliente.jspx");
         disp.forward(request, response);

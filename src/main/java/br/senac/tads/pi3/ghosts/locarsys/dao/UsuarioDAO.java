@@ -80,6 +80,7 @@ public class UsuarioDAO {
 
         /* Busca o id da filial no banco de dados */
         String sql = "SELECT ID_FILIAL FROM FILIAL WHERE NOME_FILIAL = '" + u.getFilial() + "'";
+        System.out.println("Filial: " + u.getFilial());
         
         try {
             conn = Conexoes.obterConexao();
@@ -91,13 +92,13 @@ public class UsuarioDAO {
             conn.close();
             
             sql = ("INSERT INTO FUNCIONARIO (ID_FILIAL, NOME_FUNCIONARIO, DATA_NASC_FUNCIONARIO, CPF_FUNCIONARIO, FUNCAO_FUNCIONARIO, SEXO_FUNCIONARIO) VALUES "
-                    + "(" + filial + ", '" + u.getNome() + "','1985-08-17','" + u.getCpf() + "','" + u.getFuncao() + "','" + u.getSexo() + "')");
+                    + "(" + filial + ", '" + u.getNome() + "','" + u.getDataNascimento() + "','" + u.getCpf() + "','" + u.getFuncao() + "','" + u.getSexo() + "')");
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
             stmt.executeUpdate(sql);
             conn.close();
             
-            sql = "SELECT ID_FUNCIONARIO FROM FUNCIONARIO WHERE NOME_FUNCIONARIO = '" + u.getCpf() + "'";
+            sql = "SELECT ID_FUNCIONARIO FROM FUNCIONARIO WHERE NOME_FUNCIONARIO = '" + u.getNome()+ "'";
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);

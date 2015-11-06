@@ -17,7 +17,7 @@
         </head>
         <body>
             <div id="divPai">
-                <form action="" method="post">
+                <form action="CadastroUsuarioServlet" method="post">
                     <fieldset>
                         <legend>Cadastrar Usuário</legend>
                         Cod Usuário
@@ -53,8 +53,8 @@
                         <label for="senha">Senha&#42;</label>
                         <input type="password" id="senha" name="senha"/>
                         <input type="reset" name="novo"    value="Novo" class="novo"/>
-                        <input type="button" name="salvar" value="Salvar" class="salvar"/>
-                        <input type="button" name="sair"   value="Sair" class="sair"/><br/>
+                        <input type="submit" name="salvar" value="Salvar" class="salvar"/>
+                        <a href="Principal"><button  type="button" class="sair" name="sair" title="Sair"></button></a>Sair<br/>
 
                     </fieldset>
 

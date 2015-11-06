@@ -73,7 +73,7 @@
                             <c:forEach items="${classes}" var="classes">
                                 <option>${classes.tipoClasse}</option>
                             </c:forEach>
-                        </select><br/>
+                        </select>
                         Filial&#42;
                         <select id="filial" name="filial" required="required" title="Filial">
                             <option selected="selected"></option>
