@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  * @author Prime-PC
  */
 public class AluguelDAO {
-
+/*
     public ArrayList<Aluguel> consultaAluguel() throws ClassNotFoundException {
         ArrayList<Aluguel> aluguel = new ArrayList<>();
         Aluguel aluguelObj = new Aluguel();
@@ -97,7 +97,7 @@ public class AluguelDAO {
             System.err.println("" + ex.getMessage());
         }
     }
-
+*/
     public void deletarAluguel(Aluguel aluguel, String campoBD) throws ClassNotFoundException {
         try {
             Connection conn = Conexoes.obterConexao();

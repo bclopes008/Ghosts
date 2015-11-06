@@ -1,21 +1,23 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
+
     <head>
-        	<title>Login</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="loginStyle.css" rel="stylesheet"   type="text/css"/>
+        <title>Login</title>
+        <link href="StyleCSSLoCarSys/loginStyle.css" rel="stylesheet"   type="text/css"/>
     </head>
     <body>
         <div>
             <form action="LoginServlet" method="post">
                 <label for="login">Login&#58;</label>
-                <input type="text" id="login" name="login"/></br>
+                <input type="text" id="login" name="login" title="Login"/></br>
                 <label for="senha">Senha&#58;</label>
-                <input type="password" id="senha" name="senha"/></br>
+                <input type="password" id="senha" name="senha" title="Senha"/></br>
 
-                <input type="submit"  id="validar" value="Login"/></br>
+                <input type="submit"  id="validar" name="validar" value="Login" title="Validar"/></br>
 
             </form>
         </div>	
     </body>
+
+
 </html>

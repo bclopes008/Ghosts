@@ -13,67 +13,77 @@
     <html>
         <head>
             <title>Cadastrar Produto</title>
-            <link href="cadastrarProdutoStyle.css" rel="stylesheet" type="text/css"/>
+            <link href="../StyleCSSLoCarSys/cadastrarProdutoStyle.css" rel="stylesheet" type="text/css"/>
         </head>
         <body>
-            <div id="divPai">
+            <div>
                 <form action="CadastroProdutoServlet" method="post">
-                    <fieldset id="fieldset">
-                        <!--<legend>Cadastro de Autom&oacute;veis</legend>-->
-                        <legend>Cadastro de Automoveis</legend>
-                        <div id="div01">
-                            Cod do Carro
-                            <input type="text" id="codCarro" name="codCarro" readonly="readonly"/>
-                            <label for="modelo">Modelo&#42;</label>
-                            <input type="text" id="modelo" name="modelo" />
-                            <!--Data Fabrica&ccedil;&atilde;o&#42;-->
-                            Data Fabricacao:
-                            <!--<input type="date" id="anoFabricacao" name="anoFabricacao" /><br/>-->
-                            <input type="text" id="anoFabricacao" name="anoFabricacao" /><br/>
-                            <label for="chassi">Chassi&#42;</label>
-                            <input type="text" id="chassi" name="chassi" />
-                            <label for="cor">Cor&#42;</label>
-                            <input type="text" id="cor" name="cor"/>
-                            <label for="placa">Placa&#42;</label>
-                            <input type="text" id="placa" name="placa"/><br/>
-                            Estado&#40;DF&#41;&#42;
-                            <select id="estado" name="estado">
-                                <option selected="selected"></option>
-                                <option>SP</option>
-                                <option>RJ</option>
-                                <option>MG</option>
-                            </select>
-                            <label for="cidade">Cidade&#42;</label>
-                            <input type="text" id="cidade" name="cidade"/>
-                            <label for="ano">Ano&#42;</label>
-                            <input type="text" id="ano" name="ano" />
-                            <label for="renavam">Renavam&#42;</label>
-                            <input type="text" id="renavam" name="renavam"/>
-                            Fabricante&#42;
-                            <select id="fabricante" name="fabricante">
-                                <option selected="selected"></option>
-                                <c:forEach items="${fabricantes}" var="fab">
-                                    <option>${fab.nomeFabricante}</option>
-                                </c:forEach>
-                            </select>
-                            Combustivel&#42;
-                            <select id="combustivel" name="combustivel">
-                                <option selected="selected"></option>
-                                <c:forEach items="${combustiveis}" var="comb">
-                                    <option>${comb.tipoCombustivel}</option>
-                                </c:forEach>
-                            </select>
-                            Grupo&#42;
-                            <select id="grupo" name="grupo">
-                                <option selected="selected"></option>
-                                <c:forEach items="${classes}" var="classes">
-                                    <option>${classes.tipoClasse}</option>
-                                </c:forEach>
-                            </select><br/>
-                            <input type="reset" class="novo" name="novo" value="Novo"/>
-                            <input type="submit" class="salvar" name="salvar" value="Salvar"/>
-                            <input type="button" class="sair" name="sair" value="Sair"/>
-                        </div>
+                    <fieldset>
+                        <legend>Cadastro de Automóveis</legend>
+
+                        Cod. Carro
+                        <input type="text" id="codCarro" name="codCarro" readonly="readonly" title="Código do Carro"/>
+                        <label for="modelo">Modelo&#42;</label>
+                        <input type="text" id="modelo" name="modelo" required="required" title="Modelo do Carro"/>
+
+                        <input type="reset" class="novo" name="novo" value="" title="Limpar"/>
+                        <input type="button" class="salvar" name="salvar" value="" title="Salvar"/>
+                        <a href="../Principal/telaPrincipal.jspx"><button  type="button" class="sair" name="sair" title="Sair"></button></a><br/>
+
+                        <label for="chassi">Chassi&#42;</label>
+                        <input type="text" id="chassi" name="chassi" maxlength="22" required="required" title="Chassi"/>
+                        <label for="cor">Cor&#42;</label>
+                        <input type="text" id="cor" name="cor" required="required" title="Cor do Carro"/>
+                        <label for="placa">Placa&#42;</label>
+                        <input type="text" id="placa" name="placa" maxlength="8" required="required" title="Placa do Carro"/>
+                        <label for="renavam">Renavam&#42;</label>
+                        <input type="text" id="renavam" name="renavam" maxlength="11" required="required" title="Renavam"/><br/>
+
+                        Estado&#40;DF&#41;&#42;
+                        <select id="estado" name="estado" required="required" title="Estado">
+                            <option selected="selected"></option>
+                            <option>SP</option>
+                            <option>RJ</option>
+                            <option>MG</option>
+                        </select>
+                        <label for="cidade">Cidade&#42;</label>
+                        <input type="text" id="cidade" name="cidade" required="required" title="Cidade"/>
+                        <label for="ano">Ano&#42;</label>
+                        <input type="text" id="ano" name="ano" maxlength="4" required="required" title="Ano"/>
+                        Ano Fabricação&#42;
+                        <input type="text" id="anoFabricacao" name="anoFabricacao" maxlength="4" required="required" title="Ano de Fabricação"/><br/>
+
+                        Fabricante&#42;
+                        <select id="fabricante" name="fabricante" required="required" title="Fabricante">
+                            <option selected="selected"></option>
+                            <c:forEach items="${fabricantes}" var="fab">
+                                <option>${fab.nomeFabricante}</option>
+                            </c:forEach>
+                        </select>
+                        Combustivel&#42;
+                        <select id="combustivel" name="combustivel" required="required" title="Combustível">
+                            <option selected="selected"></option>
+                            <c:forEach items="${combustiveis}" var="comb">
+                                <option>${comb.tipoCombustivel}</option>
+                            </c:forEach>
+                        </select>
+                        Grupo&#42;
+                        <select id="grupo" name="grupo" required="required" title="Grupo">
+                            <option selected="selected"></option>
+                            <c:forEach items="${classes}" var="classes">
+                                <option>${classes.tipoClasse}</option>
+                            </c:forEach>
+                        </select><br/>
+                        Filial&#42;
+                        <select id="filial" name="filial" required="required" title="Filial">
+                            <option selected="selected"></option>
+                            <option>São Paulo</option>
+                            <option>Rio de Janeiro</option>
+                            <option>Minas Gerais</option>
+                        </select>
+
+
+
                     </fieldset>
                 </form>
             </div>

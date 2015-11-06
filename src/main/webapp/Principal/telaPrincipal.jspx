@@ -12,77 +12,58 @@
 
     <html>
         <head>
-            <title>Tela Principal</title>
-            <link href="telaPrincipalStyle.css" rel="stylesheet" type="text/css"/>
+            <title>Menu</title>
+            <link href="../StyleCSSLoCarSys/telaPrincipalStyle.css" rel="stylesheet" type="text/css" />
         </head>
 
         <body>
             <!-- <c:if test="${usuario.tipoUsuario == 'A' || usuario.tipoUsuario == 'G'}"></c:if> -->
+            <div id="menu">
+                <ul class="menuPrincipal clearfix">
 
-                <div id="aluguelPai">
-                    <input type="button" class="aluguel" name="aluguel" value="Aluguel"/>
+                    <li><a href="#">Aluguel</a>
+                        <ul class="menuAluguel clearfix">
+                            <li><a href="../03- Cadastro de Alugueis/cadastroAlugueis.html">Cadastrar</a></li>
+                            <li><a href="../04- ConsultaAltera Alugueis/consultaAlteraAlugueis.html">Consultar/Alterar</a></li>
+                            <li><a href="#">Devolução</a></li>
+                        </ul><!-- submenu -->
+                    </li>
 
-                    <div id="opcoesAluguel">
-                        <input type="button" class="cadastrarAluguel" name="cadastrarAluguel" value="Cadastrar"/><br/>
-                        <input type="button" class="consultarAluguel" name="consultarAluguel" value="Consultar/Alterar"/><br/>
-                        <!--<input type="button" class="devolucaoAluguel" name="devolucaoAluguel" value="Devolu&ccedil;&atilde;o"/>-->
-                        <input type="button" class="devolucaoAluguel" name="devolucaoAluguel" value="Devolucao"/>
-                    </div>
-                </div>
+                    <li><a href="#">Cliente</a>
+                        <ul class="menuCliente clearfix">
+                            <li><a href="../06- Cadastrar Cliente/cadastrarCliente.html">Cadastrar</a></li>
+                            <li><a href="#">Consultar/Alterar</a></li>
+                        </ul><!-- submenu -->
+                    </li>
 
-                <div id="clientePai">
-                    <input type="button" class="cliente" name="cliente" value="Cliente"/>
+                    <li><a href="#">Produtos</a>
+                        <ul class="menuProdutos">
+                            <li><a href="../08- Cadastrar Produto/cadastrarProduto.html">Cadastrar</a></li>
+                            <li><a href="#">Consultar/Alterar</a></li>
+                        </ul><!-- submenu -->
+                    </li>
 
-                    <div id="opcoesCliente">
-                        <form action="CadastroClienteServlet" method="GET">
-                            <input type="submit" class="cadastrarCliente" name="cadastrarCliente" value="Cadastrar"/><br/>
-                        </form>
-                        <input type="button" class="consultarCliente" name="consultarCliente" value="Consultar/Alterar"/>
-                    </div>
-                </div>
+                    <li><a href="#">Relatórios</a>
+                        <ul class="menuRelatorios">
+                            <li><a href="#">Aluguel</a></li>
+                            <li><a href="#">Produtos</a></li>
+                        </ul><!-- submenu -->
+                    </li>
 
-                <div id="ProdutosPai">
-                    <input type="button" class="produtos" name="produtos" value="Produtos"/>
+                    <li><a href="#">Usuários</a>
+                        <ul class="menuUsuarios">
+                            <li><a href="#">Cadastrar</a></li>
+                            <li><a href="#">Consultar/Alterar</a></li>
+                        </ul><!-- submenu -->
+                    </li>
 
-                    <div id="opcoesProdutos">
-                        <form action="CadastroProdutoServlet" method="GET">
-                            <input type="submit" class="cadastrarProdutos" name="cadastrarProdutos" value="Cadastrar"/>
-                        </form>
-                        <input type="button" class="consultarProdutos" name="consultarProdutos" value="Consultar/Alterar"/>
-                    </div>
-                </div>
+                    <li><a href="../login.jspx">Sair</a></li>
+                </ul><br/>
+                <!--<img src="../ImagensLoCarSys/Starmega.png">-->
 
-                <div id="relatoriosPai">
-                    <!--<input  type="button" class="relatorios" name="relatorios" value="Relat&oacute;rios"/>-->
-                    <input  type="button" class="relatorios" name="relatorios" value="Relatorios"/>
+            </div>
 
-                    <div id="opcoesRelatorios">
-                        <input type="button" class="relatoriosAluguel" name="relatoriosAluguel" value="Aluguel" />
-                        <input type="button" class="relatoriosProdutos" name="relatoriosProdutos" value="Produtos" />
-                    </div>
-                </div>
-
-                <div id="usuariosPai">
-                    <!--<input type="button" class="usuarios" name="usuarios" value="Usu&aacute;rios"/>-->
-                    <input type="button" class="usuarios" name="usuarios" value="Usuarios"/>
-
-                    <div id="opcoesUsuarios">
-                        <form action="CadastroUsuarioServlet" method="GET">
-                            <input type="submit" class="cadastrarUsuarios" name="cadastrarUsuarios" value="Cadastrar"/>
-                        </form>
-                        <input type="button" class="consultarUsuarios" name="consultarUsuarios" value="Consultar/Alterar"/>
-                    </div>
-                </div>
-
-                <div id="sair">
-                    <input type="button" class="sair" name="sair" value="Sair"/>
-
-                </div>
-
-
-
-
-            </body>
-        </html>
+        </body>
+    </html>
 
 </jsp:root>

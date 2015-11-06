@@ -13,78 +13,78 @@
         <head>
 
             <title>Cadastrar Cliente</title>
-            <link href="cadastrarClienteStyle.css" rel="stylesheet" type="text/css"/>
+            <link href="../StyleCSSLoCarSys/cadastrarClienteStyle.css" rel="stylesheet" type="text/css"/>
 
         </head>
         <body>
-            <div id="divPai">
-                <form action="CadastroClienteServlet" method="post">
+            <div>
+                <form action="" method="post">
 
-                    <fieldset id="fieldset01">
-                        <legend>Cliente</legend>
+                    <fieldset>
+                        <legend>Dados do Cliente</legend>
 
-                        Cod Cliente
-                        <input type="id" id="codCliente" name="codCliente" readonly="readonly"/>
+                        Cod. Cliente
+                        <input type="number" id="codCliente" name="codCliente" readonly="readonly" title="Código do Cliente "/>
                         <label for="nome">Nome&#42;</label>
-                        <input type="text" id="nome" name="nome"/>
+                        <input type="text" id="nome" name="nome" required="required" title="Nome do Cliente "/>
 
+                        <input type="reset" name="novo"    value="" class="novo" title="Limpar"/>
+                        <input type="button" name="salvar" value="" class="salvar" title="Salvar"/>
+                        <a href="../Principal/telaPrincipal.jspx"><button  type="button" class="sair" name="sair" title="Sair"></button></a><br/>
 
                         <label for="cpf">CPF&#42;</label>
-                        <input type="text" id="cpf" name="cpf"/>
-                        Data de Nascimento&#42;
-                        <input type="date" id="nascimento" name="nascimento"/> 
+                        <input type="text" id="cpf" name="cpf" maxlength="14" required="required" title="CPF do Cliente"/>
+                        Data Nascimento&#42;
+                        <input type="date" id="nascimento" name="nascimento" required="required" title="Data de Nascimento"/> 
                         <label for="cnh">CNH&#42;</label>   
-                        <input type="text" id="cnh" name="cnh"/><br/>
+                        <input type="text" id="cnh" name="cnh" maxlength="11" required="required" title="CNH do Cliente"/><br/>
 
                         Sexo&#42;
                         <label for="sexoM">M</label>
-                        <input type="radio" name="sexo" id="sexoM" value="M"/>
+                        <input type="radio" name="sexo" id="sexoM" value="M" required="required" title="Masculino"/>
                         <label for="sexoF">F</label>
-                        <input type="radio" name="sexo" id="sexoF" value="F"/>
+                        <input type="radio" name="sexo" id="sexoF" value="F" required="required" title="Feminino"/>
                         <label for="celular">Tel. Celular&#42;</label>
-                        <input type="text" id="celular" name="celular"/>
+                        <input type="text" id="celular" name="celular" maxlength="14" required="required" title="Celular do Cliente"/>
                         <label for="email">Email&#42;</label>
-                        <input type="email" id="email" name="email"/>
+                        <input type="email" id="email" name="email" required="required" title="E-mail"/>
 
 
 
 
-                    </fieldset>
+                    </fieldset><br/>
 
 
-                    <fieldset id="fieldset02">
-                        <!--<legend>Endere&ccedil;o</legend>-->
-                        <legend>Endereco</legend>
+                    <fieldset>
+                        <legend>Dados do Endereço</legend>
 
                         <label for="cep">CEP&#42;</label>
-                        <input type="text" id="cep" name="cep"/>
-                        <!--<label for="endereco">Endere&ccedil;o&#42;</label>-->
-                        <label for="endereco">Endereco&#42;</label>
-                        <input type="text" id="endereco" name="endereco"/>
-                        <!--<label for="numero">N&uacute;mero&#42;</label>-->
-                        <label for="numero">Numero&#42;</label>
-                        <input type="text" id="numero" name="numero"/><br/>
+                        <input type="text" id="cep" name="cep" maxlength="9" required="required" title="CEP"/>
+                        <label for="endereco">Endereço&#42;</label>
+                        <input type="text" id="endereco" name="endereco" required="required" title="Logradouro"/>
+                        <label for="numero">Número&#42;</label>
+                        <input type="text" id="numero" name="numero" required="required" title="Número"/><br/>
 
                         <label for="bairro">Bairro&#42;</label>
-                        <input type="text" id="bairro" name="bairro"/>
+                        <input type="text" id="bairro" name="bairro" required="required" title="Bairro"/>
                         Estado&#40;DF&#41;&#42;
-                        <select id="estado" name="estado">
-                            <option></option>
+                        <select id="estado" name="estado" required="required" title="Estado">
+                            <option selected="selected"></option>
                             <option>SP</option>
                             <option>RJ</option>
                             <option>MG</option>
                         </select>
                         <label for="cidade">Cidade&#42;</label>
-                        <input type="text" id="cidade" name="cidade"/><br/>
+                        <input type="text" id="cidade" name="cidade" required="required" title="Cidade"/><br/>
                         <label for="complemento">Complemento&#42;</label>
-                        <input type="text" id="complemento" name="complemento"/>
-                        <!--<label for="observacoes">Observa&ccedil;&otilde;es&#42;</label>-->
-                        <label for="observacoes">Observacoes&#42;</label>
-                        <input type="text" id="observacoes" name="observacoes"/>
+                        <input type="text" id="complemento" name="complemento" title="Complemento do Endereço"/>
+                        <label for="observacoes">Observações&#42;</label>
+                        <input type="text" id="observacoes" name="observacoes" title="Observacoes"/>
+
+
+
                     </fieldset>
-                    <input type="reset" name="novo"    value="Novo" class="novo"/>
-                    <input type="submit" name="salvar" value="Salvar" class="salvar"/>
-                    <input type="button" name="sair"   value="Sair" class="sair"/><br/>
+
                 </form>
             </div>
 

@@ -7,29 +7,36 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
           xmlns:c="http://java.sun.com/jsp/jstl/core"
           version="2.0">
-    
+
 
     <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
 
     <!-- any content can be specified here, e.g.: -->
     <html>
+
         <head>
             <title>Login</title>
-            <link href="loginStyle.css" rel="stylesheet"   type="text/css"/>
+            <link href="StyleCSSLoCarSys/loginStyle.css" rel="stylesheet"   type="text/css"/>
         </head>
-        <body>
+        <body data-erro="${mensagem}">
             <div>
                 <form action="LoginServlet" method="post">
                     <label for="login">Login&#58;</label>
-                    <input type="text" id="login" name="login"/><br/>
+                    <input type="text" id="login" name="login" title="Login"/><br/>
                     <label for="senha">Senha&#58;</label>
-                    <input type="password" id="senha" name="senha"/><br/>
-                    <p><c:out value="${mensagem}"/> </p>
-                    <input type="submit"  id="validar" value="Login"/><br/>
+                    <input type="password" id="senha" name="senha" title="Senha"/><br/>
 
+                    <input type="submit"  id="validar" name="validar" value="Login" title="Validar"/><br/>
                 </form>
-            </div>	
+            </div>
+            <script>
+                if (document.body.getAttribute("data-erro")) {
+                    alert(document.body.getAttribute("data-erro"));
+                }
+            </script>
         </body>
+
+
     </html>
 
 

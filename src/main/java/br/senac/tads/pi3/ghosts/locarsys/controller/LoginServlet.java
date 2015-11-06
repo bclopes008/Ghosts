@@ -57,22 +57,8 @@ public class LoginServlet extends HttpServlet {
             disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
             request.setAttribute("usuario", u);
         } else {
-            //disp = request.getRequestDispatcher("index.html");
             disp = request.getRequestDispatcher("login.jspx");
-            //out.println("<script>alert(Usuário ou senha incorretas.);</script>");
-            out.println("<script>");  
-            out.println("alert('Senha ou Usuário inválidos!');");    
-            out.println("document.location=('login.jspx');");    
-            out.println("</script>");
             request.setAttribute("mensagem","Usuário ou Senha Inválidos!");
-        }
-        
-        if(request.getParameter("login") == null){
-            out.print("<script type='text/javascript'>alert('teste');</script>");
-            out.println("<script>");  
-            out.println("alert('Senha ou Usuário inválidos!');");    
-            out.println("document.location=('index.html');");    
-            out.println("</script>");
         }
         
         disp.forward(request, response);

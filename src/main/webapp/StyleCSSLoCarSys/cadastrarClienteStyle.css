@@ -1,0 +1,126 @@
+body{
+    background-color:#EDEDED;
+    font-family: "arial","verdana","sans-serif";
+    font-size:14px;
+    font-weight:bold;
+}
+legend{
+    font-size:18px;
+}
+body input{
+    border-radius:5px;
+}
+body select{
+    border-radius:5px;
+}
+
+div{
+    margin:80px; 
+}
+
+fieldset{
+    background-color:Gainsboro;
+    width:850px;
+    height:165px;
+    border-radius:5px;
+}
+
+#codCliente{
+    width:110px;
+    margin-left:10px;
+    margin-right:40px;
+}
+#nome{
+    width:250px;
+    margin-left:10px;
+    margin-right:110px;
+
+}
+.novo{
+    background-image:url("../ImagensLoCarSys/novo.png");
+    width:35px;
+    height:35px;
+    margin-right:10px;
+}
+.salvar{
+    background-image:url("../ImagensLoCarSys/salvar.png");
+    width:35px;
+    height:35px;
+    margin-right:10px;
+}
+.sair{
+    background-image:url("../ImagensLoCarSys/sair.png");
+    width:35px;
+    height:35px;
+}
+
+#cpf{
+    margin-left:10px;
+    margin-right:85px; 
+    width:110px;
+
+}
+#nascimento{
+    margin-left:10px;
+    margin-right:60px; 
+}
+#cnh{
+    margin-left:10px;
+    margin-top:30px;
+    margin-bottom:30px;
+    width:110px;
+}
+
+#sexoM{
+
+}
+#sexoF{
+    margin-right:100px;
+}
+#celular{
+    margin-left:10px;
+    margin-right:100px;
+    width:110px;
+}
+#email{
+    margin-left:10px;
+    width:200px;
+}
+
+/*Fim do primeiro fieldset*/
+
+#cep{
+    margin-left:10px;
+    margin-right:40px;
+    width:100px;
+}
+#endereco{
+    margin-left:10px;
+    margin-right:50px;
+    width:300px;
+}
+#numero{
+    margin-left:10px;
+    width:80px;
+}
+#bairro{
+    margin-left:10px;
+    margin-right:80px;
+    width:130px;
+}
+#estado{
+    margin-right:80px;
+}
+#cidade{
+    margin-left:10px;
+    margin-top:30px;
+    margin-bottom:30px;
+}
+#complemento{
+    margin-left:10px;
+    margin-right:40px;
+}
+#observacoes{
+    margin-left:10px;
+    width:305px;
+}
