@@ -1,13 +1,22 @@
 --Criar o Banco de Dados com o nome de LoCarSys
 --Nome do usuário: app
 --Senha: app 
+CREATE TABLE ESTADO (
+id_Estado bigint not null generated always
+        as identity (start with 1, increment by 1)
+        constraint PK_Estado PRIMARY KEY,
+  Nome_Estado varchar(45) NOT NULL,
+  Sigla_Estado char(2) NOT NULL
+);
+
 CREATE TABLE Filial(
 id_Filial bigint not null generated always
         as identity (start with 1, increment by 1)
         constraint PK_Filial PRIMARY KEY,
+id_Estado bigint not null,
 Nome_Filial varchar(50) not null,
-Estado_Filial varchar(2) not null,
-Cidade_Filial varchar(40) not null
+Cidade_Filial varchar(40) not null,
+constraint fk_id_Estado foreign key (id_Estado) references Estado
 );
 
 CREATE TABLE Funcionario(
@@ -74,13 +83,15 @@ id_Endereco bigint not null generated always
         as identity (start with 1, increment by 1)
         constraint PK_Endereco PRIMARY KEY,
 id_Cliente bigint not null,
+id_Estado bigint not null,
 Logradouro_Endereco varchar(50) not null,
 Numero_Endereco varchar(5) not null,
 Bairro_Endereco varchar(30) not null,
 Complemento_Endereco varchar(30),
 Cep_Endereco varchar(9) not null,
 Obs_Endereco varchar(50),
-constraint fk_id_Cliente foreign key (id_Cliente) references Cliente
+constraint fk_id_Cliente foreign key (id_Cliente) references Cliente,
+constraint fk_id_Estado_Endereco foreign key (id_Estado) references Estado
 );
 
 CREATE TABLE Carro(
@@ -91,12 +102,12 @@ id_Filial bigint not null,
 id_Classe bigint not null,
 id_Fabricante bigint not null,
 id_Combustivel bigint not null,
+id_Estado bigint not null,
 Ano_Fabricacao_Carro char(4) not null,             
 Chassi_Carro char(22) not null,
 Cor_Carro varchar(30) not null,
 Modelo_Carro varchar(30) not null,
 Placa_Carro varchar(8) not null,
-Estado_Carro varchar(2) not null,
 Cidade_Carro varchar(40) not null,
 Disponibilidade_Carro char(1) not null,
 Ano_Carro char(4) not null,
@@ -105,16 +116,8 @@ Kilometragem_Carro float not null,
 constraint fk_id_Nome_Filial foreign key (id_Filial) references Filial,
 constraint fk_id_Classe foreign key (id_Classe) references Classe,
 constraint fk_id_Fabricante foreign key (id_Fabricante) references Fabricante,
-constraint fk_id_Combustivel foreign key (id_Combustivel) references Combustivel
-);
-
-CREATE TABLE Estoque(
-id_Estoque bigint not null generated always
-        as identity (start with 1, increment by 1)
-        constraint PK_Estoque PRIMARY KEY,
-id_Classe bigint not null,                 
-Quantidade_Estoque varchar(3) not null,
-constraint fk_id_Classe_Estoque foreign key (id_Classe) references Classe
+constraint fk_id_Combustivel foreign key (id_Combustivel) references Combustivel,
+constraint fk_id_Estado_Carro foreign key (id_Estado) references Estado
 );
 
 CREATE TABLE Aluguel(
@@ -132,13 +135,45 @@ constraint fk_id_Carro foreign key (id_Carro) references Carro,
 constraint fk_id_Cliente_Aluguel foreign key (id_Cliente) references Cliente
 );
 
+--Inserir Valores na Tabela Estado
+INSERT INTO ESTADO (Nome_Estado, Sigla_Estado) VALUES
+('Acre', 'AC'),
+('Alagoas', 'AL'),
+('Amazonas', 'AM'),
+('Amapá', 'AP'),
+('Bahia', 'BA'),
+('Ceará', 'CE'),
+('Distrito Federal', 'DF'),
+('Espírito Santo', 'ES'),
+('Goiás', 'GO'),
+('Maranhão', 'MA'),
+('Minas Gerais', 'MG'),
+('Mato Grosso do Sul', 'MS'),
+('Mato Grosso', 'MT'),
+('Pará', 'PA'),
+('Paraíba', 'PB'),
+('Pernambuco', 'PE'),
+('Piauí', 'PI'),
+('Paraná', 'PR'),
+('Rio de Janeiro', 'RJ'),
+('Rio Grande do Norte', 'RN'),
+('Rondônia', 'RO'),
+('Roraima', 'RR'),
+('Rio Grande do Sul', 'RS'),
+('Santa Catarina', 'SC'),
+('Sergipe', 'SE'),
+('São Paulo', 'SP'),
+('Tocantins', 'TO');
+
+SELECT * FROM ESTADO;
+
 --Inserir Valores na Tabela Filial
-INSERT INTO Filial (Nome_Filial, Estado_Filial, Cidade_Filial)
+INSERT INTO Filial (id_Estado, Nome_Filial, Cidade_Filial)
 values 
-('Nações Unidas','SP','São Paulo'),
-('Copacabana','RJ','Rio de Janeiro'),
-('Belvedere','MG','Belo Horizonte'),
-('Baixada Santista','SP','São Paulo');
+(26,'Nações Unidas','São Paulo'),
+(19,'Copacabana','Rio de Janeiro'),
+(11,'Belvedere','Belo Horizonte'),
+(26,'Baixada Santista','São Paulo');
 
 SELECT * FROM Filial;
 
@@ -205,30 +240,22 @@ SELECT * FROM Cliente;
 
 --Inserir Valores na Tabela Endereco, declarando o @id_Cliente como chave estrangeira------------------------------------------------------
 INSERT INTO Endereco
-(id_Cliente,Logradouro_Endereco,Numero_Endereco,Bairro_Endereco,Complemento_Endereco,Cep_Endereco)
+(id_Cliente,id_Estado,Logradouro_Endereco,Numero_Endereco,Bairro_Endereco,Complemento_Endereco,Cep_Endereco)
 VALUES
-(1,'Rua Sai-Guacu','309','PQ.São Jose','Casa 1','04843-309'),
-(2,'Av. Senador Teotonio Vilela','10','PQ.Grajaú','Bloco A Ap 12 ','04833-901'),
-(3,'Av. Senador Teotonio Vilela','11','PQ.Grajaú','Bloco B Ap 13','04833-901');
+(1,26,'Rua Sai-Guacu','309','PQ.São Jose','Casa 1','04843-309'),
+(2,19,'Av. Senador Teotonio Vilela','10','PQ.Grajaú','Bloco A Ap 12 ','04833-901'),
+(3,11,'Av. Senador Teotonio Vilela','11','PQ.Grajaú','Bloco B Ap 13','04833-901');
 
 SELECT * FROM Endereco;
 
 --Inserir Valores na Tabela Carro, declarando os @id_Classe,@id_Fabricante e @id_Combustivel como chaves estrangeiras------------------------
 INSERT INTO Carro
-(id_Filial,id_Classe,id_Fabricante,id_Combustivel,Ano_Fabricacao_Carro,Chassi_Carro,Cor_Carro,Modelo_Carro,Placa_Carro,Estado_Carro, Cidade_Carro,
+(id_Filial,id_Classe,id_Fabricante,id_Combustivel,id_Estado,Ano_Fabricacao_Carro,Chassi_Carro,Cor_Carro,Modelo_Carro,Placa_Carro,Cidade_Carro,
 Disponibilidade_Carro,Ano_Carro,Renavam_Carro,Kilometragem_Carro)
 values
-(1,1,1,1,'2000','22.33.55555.1.1.666666','Prata','Celta','FAB-7894','SP','São Paulo','1','2013','1234567890-9',1000);
+(1,1,1,1,26,'2000','22.33.55555.1.1.666666','Prata','Celta','FAB-7894','SP','1','2013','1234567890-9',1000);
 
 SELECT * FROM Carro;
-
---Inserir Valores na Tabela Estoque, declarando o @id_Classe como chave estrangeira-------------------------------------------------------------------------
-INSERT INTO Estoque(id_Classe,Quantidade_Estoque)
-values
-(1,'20');
-
-
-SELECT * FROM Estoque;
 
 --Inserir Valores na Tabela Aluguel, declarando os @id_Funcionario, @id_Classe, @id_Carro e @id_Cliente como chaves estrangeiras----------------------------
 INSERT INTO Aluguel(id_Funcionario,id_Carro,id_Cliente,Data_Locacao_Aluguel,Data_Devolucao_Aluguel, Preco_Total)
@@ -241,35 +268,35 @@ SELECT * FROM Aluguel;
                                           -- CLASSE B --1
 --Inserir Valores na Tabela Carro, declarando os @id_Classe,@id_Fabricante e @id_Combustivel como chaves estrangeiras------------------------
 INSERT INTO Carro
-(id_Filial,id_Classe,id_Fabricante,id_Combustivel,Ano_Fabricacao_Carro,Chassi_Carro,Cor_Carro,Modelo_Carro,Placa_Carro,Estado_Carro,
-Cidade_Carro,Disponibilidade_Carro,Ano_Carro,Renavam_Carro,Kilometragem_Carro) values
-(1,2,2,3,'2008','47.45.46556.4.9.462947','Prata','Ford Ka','FOR-8894','RJ','Angra dos Reis','1','2014','4564695918-2',2000),
+(id_Filial,id_Classe,id_Fabricante,id_Combustivel,id_Estado,Ano_Fabricacao_Carro,Chassi_Carro,Cor_Carro,Modelo_Carro,Placa_Carro,Cidade_Carro,
+Disponibilidade_Carro,Ano_Carro,Renavam_Carro,Kilometragem_Carro) values
+(1,2,2,3,19,'2008','47.45.46556.4.9.462947','Prata','Ford Ka','FOR-8894','Angra dos Reis','1','2014','4564695918-2',2000),
                                           -- CLASSE B --2
 --Inserir Valores na Tabela Carro, declarando os @id_Classe,@id_Fabricante e @id_Combustivel como chaves estrangeiras------------------------
-(2,2,4,4,'2007','45.65.56465.6.5.413566','Prata','Renault Sandero','RSR-9994','SP','São Paulo','1','2009','5182862534-5',2500),
+(2,2,4,4,26,'2007','45.65.56465.6.5.413566','Prata','Renault Sandero','RSR-9994','São Paulo','1','2009','5182862534-5',2500),
                                           -- CLASSE B --3
 --Inserir Valores na Tabela Carro, declarando os @id_Classe,@id_Fabricante e @id_Combustivel como chaves estrangeiras------------------------
-(3,2,5,3,'1980','64.59.62659.4.5.616529','Branco','Volkswagen Gol','VSG-2394','SP','São Paulo','1','2015','3234567890-8',3500),
+(3,2,5,3,26,'1980','64.59.62659.4.5.616529','Branco','Volkswagen Gol','VSG-2394','São Paulo','1','2015','3234567890-8',3500),
                                           -- CLASSE C --1
 --Inserir Valores na Tabela Carro, declarando os @id_Classe,@id_Fabricante e @id_Combustivel como chaves estrangeiras------------------------
-(4,3,5,1,'2008','28.55.44655.8.9.465820','Branco','Voyage II','VAR-6884','SP','São Paulo','1','2013','4650359847-5',3000),
+(4,3,5,1,26,'2008','28.55.44655.8.9.465820','Branco','Voyage II','VAR-6884','São Paulo','1','2013','4650359847-5',3000),
                                           -- CLASSE C --2
 --Inserir Valores na Tabela Carro, declarando os @id_Classe,@id_Fabricante e @id_Combustivel como chaves estrangeiras------------------------
-(1,3,2,4,'1998','56.63.65465.3.1.846582','Azul Escuro','Ford Focus','FFR-7881','PR','Curitiba','1','2014','6454588465-7',3800),
+(1,3,2,4,18,'1998','56.63.65465.3.1.846582','Azul Escuro','Ford Focus','FFR-7881','Curitiba','1','2014','6454588465-7',3800),
                                           -- CLASSE C --3
 --Inserir Valores na Tabela Carro, declarando os @id_Classe,@id_Fabricante e @id_Combustivel como chaves estrangeiras------------------------
-(2,3,4,3,'2007','47.53.46558.8.3.456896','Preto','Renault Sandero','RAS-2684','RJ','Teresópolis','1','2013','6547984646-0',3890),
+(2,3,4,3,19,'2007','47.53.46558.8.3.456896','Preto','Renault Sandero','RAS-2684','Teresópolis','1','2013','6547984646-0',3890),
                                           -- CLASSE D --1
 --Inserir Valores na Tabela Carro, declarando os @id_Classe,@id_Fabricante e @id_Combustivel como chaves estrangeiras------------------------
-(3,4,3,3,'2005','42.83.98725.4.4.654674','Cinza Chumbo','Fiat Idea','FIR-5883','SP','São Paulo','1','2015','6486847980-6',4000),
+(3,4,3,3,26,'2005','42.83.98725.4.4.654674','Cinza Chumbo','Fiat Idea','FIR-5883','São Paulo','1','2015','6486847980-6',4000),
                                           -- CLASSE D --2
 --Inserir Valores na Tabela Carro, declarando os @id_Classe,@id_Fabricante e @id_Combustivel como chaves estrangeiras------------------------
-(4,4,4,1,'2010','63.23.84686.4.6.846866','Cinza Chumbo','Duster Dynamique ','DIY-5882','RJ','Rio de Janeiro','1','2015','4844768464-1',4200),
+(4,4,4,1,19,'2010','63.23.84686.4.6.846866','Cinza Chumbo','Duster Dynamique ','DIY-5882','Rio de Janeiro','1','2015','4844768464-1',4200),
                                           -- CLASSE E --1
 --Inserir Valores na Tabela Carro, declarando os @id_Classe,@id_Fabricante e @id_Combustivel como chaves estrangeiras------------------------
-(1,5,4,3,'2009','45.05.41065.1.4.684658','Branco','Renault Fluence Dynamique','RFD-7239','MG','Belo Horizonte','1','2015','4798478947-5',5000),
+(1,5,4,3,11,'2009','45.05.41065.1.4.684658','Branco','Renault Fluence Dynamique','RFD-7239','Belo Horizonte','1','2015','4798478947-5',5000),
                                           -- CLASSE E --2
 --Inserir Valores na Tabela Carro, declarando os @id_Classe,@id_Fabricante e @id_Combustivel como chaves estrangeiras------------------------
-(2,5,2,3,'2005','87.84.05460.9.7.845689','Branco','Ford Fusion','RFD-6139','SP','São Paulo','1','2015','9784654088-7',2300);
+(2,5,2,3,26,'2005','87.84.05460.9.7.845689','Branco','Ford Fusion','RFD-6139','São Paulo','1','2015','9784654088-7',2300);
 
 SELECT * FROM CARRO;

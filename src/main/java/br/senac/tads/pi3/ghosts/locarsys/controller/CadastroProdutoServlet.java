@@ -42,6 +42,10 @@ public class CadastroProdutoServlet extends HttpServlet {
         ArrayList<Filial> filiais = new ArrayList<>();
         filiais = ProdutoDAO.listarFiliais();
         request.setAttribute("filiais", filiais);
+        
+        ArrayList<Estado> estados = new ArrayList<>();
+        estados = EstadoDAO.listarEstados();
+        request.setAttribute("estados", estados);
 
         RequestDispatcher disp = request.getRequestDispatcher("/Produto/cadastrarProduto.jspx");
         disp.forward(request, response);
@@ -91,12 +95,12 @@ public class CadastroProdutoServlet extends HttpServlet {
         c.setFilial(request.getParameter("filial"));
         CarroDAO dao = new CarroDAO();
         if (dao.cadastraCarro(c)) {
-            disp = request.getRequestDispatcher("Principal");
+            request.setAttribute("carro", c);
             request.setAttribute("mensagem","Produto cadastrado com sucesso!");
         } else {
-            disp = request.getRequestDispatcher("/Produto/cadastroProduto.jspx");
+            request.setAttribute("mensagem","Erro ao cadastradar o Produto!");
         }
-        disp.forward(request, response);
+        processRequest(request, response);
     }
 
     /**

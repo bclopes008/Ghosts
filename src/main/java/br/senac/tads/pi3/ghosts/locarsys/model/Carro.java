@@ -5,7 +5,8 @@ package br.senac.tads.pi3.ghosts.locarsys.model;
  * @author Bruno
  */
 public class Carro extends Produto{
-    
+
+    private int id;
     private String chassi;
     private String placa;
     private String estado;
@@ -82,6 +83,14 @@ public class Carro extends Produto{
 
     public void setKilometragem(float kilometragem) {
         this.kilometragem = kilometragem;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

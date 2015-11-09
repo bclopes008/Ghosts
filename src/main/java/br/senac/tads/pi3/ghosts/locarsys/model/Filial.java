@@ -13,13 +13,13 @@ public class Filial {
     
     private int id;
     private String nome;
-    private String estado;
+    private int estado;
     private String cidade;
 
     public Filial() {
     }
 
-    public Filial(int id, String nome, String estado, String cidade) {
+    public Filial(int id, String nome, int estado, String cidade) {
         this.id = id;
         this.nome = nome;
         this.estado = estado;
@@ -42,11 +42,11 @@ public class Filial {
         this.nome = nome;
     }
 
-    public String getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

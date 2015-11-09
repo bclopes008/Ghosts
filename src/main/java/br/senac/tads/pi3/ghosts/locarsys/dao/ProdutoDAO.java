@@ -85,7 +85,7 @@ public class ProdutoDAO {
             while (rs.next()) {
                 filiais.add(new Filial(rs.getInt("id_Filial"),
                         rs.getString("Nome_Filial"),
-                        rs.getString("Estado_Filial"),
+                        rs.getInt("Id_Estado"),
                         rs.getString("Cidade_Filial")));
             }
 
