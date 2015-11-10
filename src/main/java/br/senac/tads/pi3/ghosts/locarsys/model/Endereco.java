@@ -6,7 +6,7 @@ import java.util.Date;
  *
  * @author Bruno
  */
-public abstract class Endereco extends Pessoa{
+public class Endereco{
     
     private String endereco;
     private String numero;
@@ -20,8 +20,7 @@ public abstract class Endereco extends Pessoa{
     public Endereco() {
     }
 
-    public Endereco(String endereco, String numero, String complemento, String cep, String bairro, String estado, String cidade, String obs, String nome, char sexo, String dataNascimento, String cpf) {
-        super(nome, sexo, dataNascimento, cpf);
+    public Endereco(String endereco, String numero, String complemento, String cep, String bairro, String estado, String cidade, String obs) {
         this.endereco = endereco;
         this.numero = numero;
         this.complemento = complemento;

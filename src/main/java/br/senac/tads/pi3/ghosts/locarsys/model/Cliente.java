@@ -6,20 +6,23 @@ import java.util.Date;
  *
  * @author Bruno
  */
-public class Cliente extends Endereco{
+public class Cliente extends Pessoa{
 
+    private int id;
     private String cnh;
     private String celular;
     private String email;
+    private Endereco endereco;
 
     public Cliente() {
     }
 
-    public Cliente(String cnh, String celular, String email, String endereco, String numero, String complemento, String cep, String bairro, String estado, String cidade, String obs, String nome, char sexo, String dataNascimento, String cpf) {
-        super(endereco, numero, complemento, cep, bairro, estado, cidade, obs, nome, sexo, dataNascimento, cpf);
+    public Cliente(String cnh, String celular, String email, Endereco endereco, String nome, char sexo, String dataNascimento, String cpf) {
+        super(nome, sexo, dataNascimento, cpf);
         this.cnh = cnh;
         this.celular = celular;
         this.email = email;
+        this.endereco = endereco;
     }
 
     public String getCnh() {
@@ -44,6 +47,21 @@ public class Cliente extends Endereco{
 
     public void setEmail(String email) {
         this.email = email;
-    }    
-    
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

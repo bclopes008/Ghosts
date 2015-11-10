@@ -17,7 +17,7 @@
             <link href="../StyleCSSLoCarSys/telaPrincipalStyle.css" rel="stylesheet" type="text/css" />
         </head>
 
-        <body data-erro="${mensagem}">
+        <body>
             <!-- <c:if test="${usuario.tipoUsuario == 'A' || usuario.tipoUsuario == 'G'}"></c:if> -->
                 <div id="menu">
                     <ul class="menuPrincipal clearfix">
@@ -65,11 +65,6 @@
                 <!--<img src="../ImagensLoCarSys/Starmega.png">-->
 
             </div>
-            <script>
-                if (document.body.getAttribute("data-erro")) {
-                    alert(document.body.getAttribute("data-erro"));
-                }
-            </script>
         </body>
     </html>
 

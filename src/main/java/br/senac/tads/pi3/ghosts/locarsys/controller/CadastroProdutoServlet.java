@@ -77,7 +77,6 @@ public class CadastroProdutoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher disp;
         Carro c = new Carro();
         c.setAno(Integer.parseInt(request.getParameter("ano")));
         c.setAnoFabricacao(Integer.parseInt(request.getParameter("anoFabricacao")));
