@@ -11,58 +11,63 @@ import java.util.GregorianCalendar;
  * @author Bruno
  */
 public class Aluguel {
-    private Produto carro;
-    private Date dataInicial;
-    private Date dataFinal;
-    private float valorTotal;
 
-    public Aluguel(Date dataInicial, Date dataFinal, float valorTotal, Produto carro) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private Carro carro;
+    private String dataInicial;
+    private String dataFinal;
+    private float valorTotal;
+    private Cliente cliente;
+    private Funcionario funcionario;
+
+    public Carro getCarro() {
+        return carro;
+    }
+
+    public void setDataInicial(String dataInicial) {
         this.dataInicial = dataInicial;
-        this.dataFinal = dataFinal;
-        sdf.format(this.dataInicial);
-        sdf.format(this.dataFinal);
+    }
+
+    public void setValorTotal(float valorTotal) {
         this.valorTotal = valorTotal;
-        this.carro = carro;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cpf, String cnh, String nome) {
+        this.cliente.setCpf(cpf);
+        this.cliente.setCnh(cnh);
+        this.cliente.setNome(nome);
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
     public Aluguel() {
     }
 
-    public Produto getCarro() {
-        return carro;
+    public void setCarro(char grupo, String modelo) {
+        this.carro.setGrupo(grupo);
+        this.carro.setModelo(modelo);
     }
 
-    public void setCarro(Produto carro) {
-        this.carro = carro;
-    }
 
-    public void calcularValorTotal(float precoClasse) {
-        Calendar dataAtual = new GregorianCalendar();
-        Calendar dataFinal = new GregorianCalendar();
-        Calendar dataInicial = new GregorianCalendar();
-        
-        dataInicial.setTime(this.dataInicial);
-        dataFinal.setTime(this.dataFinal);
-        dataAtual.get(Calendar.DATE);
-        
-        if(dataFinal.get(Calendar.DATE) <= dataAtual.get(Calendar.DATE)){
-            this.valorTotal = (dataFinal.get(Calendar.DATE) - dataInicial.get(Calendar.DATE)) * precoClasse;
-        }else{
-            this.valorTotal = ((dataFinal.get(Calendar.DATE) - dataInicial.get(Calendar.DATE)) * precoClasse) * 1.15f;
-        }
-        
-    }
 
-    public void setDataFinal(Date dataFinal) {
+    public void setDataFinal(String dataFinal) {
         this.dataFinal = dataFinal;
     }
 
-    public Date getDataInicial() {
+    public String getDataInicial() {
         return dataInicial;
     }
 
-    public Date getDataFinal() {
+    public String getDataFinal() {
         return dataFinal;
     }
 

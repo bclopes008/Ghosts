@@ -63,7 +63,7 @@ public class CarroDAO {
                 classe = rs.getInt("ID_CLASSE");
             }
             conn.close();
-            
+
             /* Buscar id do Estado, para o INSERT do Carro */
             sql = "SELECT ID_ESTADO FROM ESTADO WHERE SIGLA_ESTADO = '" + c.getEstado() + "'";
 
@@ -74,13 +74,13 @@ public class CarroDAO {
                 estado = rs.getInt("ID_ESTADO");
             }
             conn.close();
-            
+
             /*Insere os valores no banco de dados*/
             sql = "INSERT INTO CARRO (id_filial, id_Classe, id_Fabricante, id_Combustivel, id_Estado, Ano_Fabricacao_Carro, Chassi_Carro, Cor_Carro, "
                     + "Modelo_Carro, Placa_Carro, Cidade_Carro, Ano_Carro, Renavam_Carro, Kilometragem_Carro, Disponibilidade_Carro)"
                     + " VALUES ( " + filial + ", " + classe + ", " + fabricante + ", " + combustivel + ", " + estado + ", '" + c.getAnoFabricacao() + "', '"
-                    + c.getChassi() + "', '" + c.getCor() + "', '" + c.getModelo() + "', '" + c.getPlaca() + "', '" + c.getCidade() + "', '" + c.getAno() + 
-                    "', '" + c.getRenavam() + "', " + c.getKilometragem() + ", '1' )";
+                    + c.getChassi() + "', '" + c.getCor() + "', '" + c.getModelo() + "', '" + c.getPlaca() + "', '" + c.getCidade() + "', '" + c.getAno()
+                    + "', '" + c.getRenavam() + "', " + c.getKilometragem() + ", '1' )";
             /*sql = "INSERT INTO CARRO (id_Classe, id_Fabricante, id_Combustivel, Ano_Fabricacao_Carro, Chassi_Carro, Cor_Carro, "
              + "Modelo_Carro, Placa_Carro, Estado_Carro, Cidade_Carro ,Disponibilidade_Carro, Ano_Carro, Renavam_Carro, "
              + "Kilometragem_Carro) VALUES (? , ? , ? , '?' , '?' , '?' , '?' , '?' , '?' , '?' , '?' , '?' , ? , '1')";
@@ -105,7 +105,7 @@ public class CarroDAO {
             stmt = conn.createStatement();
             stmt.executeUpdate(sql);
             conn.close();
-            
+
             sql = "SELECT ID_CARRO FROM CARRO WHERE PLACA_CARRO = '" + c.getPlaca() + "'";
 
             conn = Conexoes.obterConexao();
@@ -115,7 +115,7 @@ public class CarroDAO {
                 c.setId(rs.getInt("ID_CARRO"));
             }
             conn.close();
-            
+
             return true;
         } catch (SQLException | ClassNotFoundException ex) {
             System.err.println("" + ex.getMessage());
@@ -123,5 +123,29 @@ public class CarroDAO {
             System.err.println("" + ex.getMessage());
         }
         return false;
+    }
+
+    public static Carro consultarCarroDisponiveis() {
+        Carro c = new Carro();
+        
+        Statement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+
+        /* Busca o id da filial no banco de dados */
+        String sql = "SELECT * FROM CARRO WHERE DISPONIBILIDADE_CARRO = '1';";
+
+        try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                
+            }
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CarroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return c;
     }
 }

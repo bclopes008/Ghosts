@@ -60,9 +60,8 @@
                         Modelo&#42;
                         <select id="modelo" name="modelo" required="required" title="Modelo">
                             <option selected="selected"></option>
+                            
                             <option>Celta</option>
-                            <option>K</option>
-                            <option>Fox</option>
                         </select>
 
                         Valor Total&#58;
