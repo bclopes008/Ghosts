@@ -27,16 +27,20 @@
                         <input type="submit"  id="pesquisa" name="pesquisa" value="Pesquisar"/>
                         <input type="button"  id="sair" name="sair" value="Sair"/>
                     </fieldset>
-
                     <fieldset id="fieldset02">
                         <legend>Consulta de Cliente</legend>
                         <table border="1">
                             <tr> <td>Código</td><td>Nome</td><td>CPF</td> </tr>
                             <c:forEach items="${clientes}" var="cli" varStatus="stat">
-                                <tr> <td>${cli.id}</td>      <td>${cli.nome}</td>   <td>${cli.cpf}</td>  </tr>
+                                <tr> 
+                                    <td>${cli.id}</td>
+                                    <td>${cli.nome}</td>  
+                                    <td>${cli.cpf}</td> 
+                                    <td><a href="EditarClienteServlet?id=${cli.id}">Editar</a></td> 
+                                </tr>
+
                             </c:forEach>
                         </table>
-
                         <input type="button" id="alterar" value="Consulta/Altera"/>
 
                     </fieldset>

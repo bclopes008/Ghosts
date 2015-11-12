@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class UsuarioDAO {
 
-    public boolean autenticaUsuario(Usuario user) {
+    public static boolean autenticaUsuario(Usuario user) {
         Statement stmt = null;
         Connection conn = null;
         
@@ -41,7 +41,7 @@ public class UsuarioDAO {
         return false;
     }
 
-    public ArrayList<Usuario> consultaUsuario() {
+    public static ArrayList<Usuario> consultaUsuario() {
         ArrayList<Usuario> users = new ArrayList<>();
 
         Statement stmt = null;

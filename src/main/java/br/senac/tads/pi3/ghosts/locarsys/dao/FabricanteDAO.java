@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class FabricanteDAO {
 
-    public ArrayList<Fabricante> listarFabricantes() {
+    public static ArrayList<Fabricante> listarFabricantes() {
         ArrayList<Fabricante> fabricantes = new ArrayList<>();
 
         String sql = "SELECT * FROM Fabricante";

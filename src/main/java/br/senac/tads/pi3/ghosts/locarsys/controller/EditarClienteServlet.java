@@ -5,8 +5,14 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
+import br.senac.tads.pi3.ghosts.locarsys.dao.ClienteDAO;
+import br.senac.tads.pi3.ghosts.locarsys.dao.EstadoDAO;
+import br.senac.tads.pi3.ghosts.locarsys.model.Cliente;
+import br.senac.tads.pi3.ghosts.locarsys.model.Estado;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,10 +21,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author bruno.clopes
+ * @author bruno.lopes
  */
-@WebServlet(name = "ConsultaClienteServlet", urlPatterns = {"/ConsultaClienteServlet"})
-public class ConsultaClienteServlet extends HttpServlet {
+@WebServlet(name = "EditarClienteServlet", urlPatterns = {"/EditarClienteServlet"})
+public class EditarClienteServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,9 +37,15 @@ public class ConsultaClienteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ArrayList<Estado> estados = new ArrayList<>();
+        estados = EstadoDAO.listarEstados();
+        request.setAttribute("estados", estados);
+
+        RequestDispatcher disp = request.getRequestDispatcher("/Cliente/cadastrarCliente.jspx");
+        disp.forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -45,6 +57,12 @@ public class ConsultaClienteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        System.out.println("id = " + id);
+        Cliente cliente = ClienteDAO.verCliente(id);
+        request.setAttribute("cliente", cliente);
+        //Envia o tipo para saber se é para cadastrar ou alterar
+        request.setAttribute("tipo", "EditarClienteServlet");
         processRequest(request, response);
     }
 
@@ -59,6 +77,14 @@ public class ConsultaClienteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //Pega os valores da tela para fazer a alteração do Cliente
+        Cliente c = CadastroClienteServlet.adicionar(request);
+        c.setId(Integer.parseInt(request.getParameter("codCliente")));
+        if(ClienteDAO.alterarCliente(c))
+            request.setAttribute("mensagem", "Cliente alterado com sucesso!");
+        else
+            request.setAttribute("mensagem","Erro ao alterar o Cliente!");
+        request.setAttribute("cliente", c);
         processRequest(request, response);
     }
 

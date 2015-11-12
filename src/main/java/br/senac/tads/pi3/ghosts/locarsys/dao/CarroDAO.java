@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 public class CarroDAO {
 
-    public boolean cadastraCarro(Carro c) {
+    public static boolean cadastraCarro(Carro c) {
         Statement stmt = null;
         Connection conn = null;
         ResultSet rs = null;

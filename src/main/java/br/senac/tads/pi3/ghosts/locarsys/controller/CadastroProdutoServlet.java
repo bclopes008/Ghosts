@@ -27,8 +27,7 @@ public class CadastroProdutoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ArrayList<Fabricante> fabricantes = new ArrayList<>();
-        FabricanteDAO FbDAO = new FabricanteDAO();
-        fabricantes = FbDAO.listarFabricantes();
+        fabricantes = FabricanteDAO.listarFabricantes();
         request.setAttribute("fabricantes", fabricantes);
 
         ArrayList<Combustivel> combustiveis = new ArrayList<>();
@@ -92,8 +91,7 @@ public class CadastroProdutoServlet extends HttpServlet {
         c.setPlaca(request.getParameter("placa"));
         c.setRenavam(request.getParameter("renavam"));
         c.setFilial(request.getParameter("filial"));
-        CarroDAO dao = new CarroDAO();
-        if (dao.cadastraCarro(c)) {
+        if (CarroDAO.cadastraCarro(c)) {
             request.setAttribute("carro", c);
             request.setAttribute("mensagem","Produto cadastrado com sucesso!");
         } else {

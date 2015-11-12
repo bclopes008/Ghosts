@@ -10,6 +10,7 @@ import br.senac.tads.pi3.ghosts.locarsys.model.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -65,12 +66,13 @@ public class ConsultaClientesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<Cliente>clientes = new ArrayList<>();
+        //Pega os valores para realizar a consulta do cliente
         String nome = request.getParameter("nome");
-        ClienteDAO dao = new ClienteDAO();
-        System.out.println("Nome" + nome);
-        clientes = dao.pesquisarCliente(nome);
-        request.setAttribute("clientes", clientes);
+        String cpf = request.getParameter("cpf");
+        List<Cliente> listarClientes = ClienteDAO.pesquisarCliente(nome);
+        request.setAttribute("clientes", listarClientes);
+        request.setAttribute("nome", nome);
+        request.setAttribute("cpf", cpf);
         processRequest(request, response);
     }
 

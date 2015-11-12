@@ -52,8 +52,7 @@ public class LoginServlet extends HttpServlet {
         
         RequestDispatcher disp;
         Usuario u = new Usuario(request.getParameter("login"), request.getParameter("senha"));
-        UsuarioDAO dao = new UsuarioDAO();      
-        if (dao.autenticaUsuario(u)) {
+        if (UsuarioDAO.autenticaUsuario(u)) {
             disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
             request.setAttribute("usuario", u);
         } else {

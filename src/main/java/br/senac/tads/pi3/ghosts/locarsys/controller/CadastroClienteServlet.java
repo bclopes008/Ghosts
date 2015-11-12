@@ -50,7 +50,8 @@ public class CadastroClienteServlet extends HttpServlet {
         ArrayList<Estado> estados = new ArrayList<>();
         estados = EstadoDAO.listarEstados();
         request.setAttribute("estados", estados);
-        
+        //Envia o tipo para saber se é para cadastrar ou alterar
+        request.setAttribute("tipo", "CadastroClienteServlet");
         RequestDispatcher disp = request.getRequestDispatcher("/Cliente/cadastrarCliente.jspx");
         disp.forward(request, response);
 
@@ -84,17 +85,16 @@ public class CadastroClienteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Cliente c = adicionar(request);
-        ClienteDAO dao = new ClienteDAO();
-        if (dao.cadastroCliente(c)) {
-            request.setAttribute("cliente", c);
+        if (ClienteDAO.cadastroCliente(c)) {
             request.setAttribute("mensagem", "Cliente cadastrado com sucesso!");
         } else {
             request.setAttribute("mensagem","Erro ao cadastradar o Cliente!");
         }
+        request.setAttribute("cliente", c);
         processRequest(request, response);
     }
     
-    private static Cliente adicionar(HttpServletRequest request)
+    public static Cliente adicionar(HttpServletRequest request)
     {
         Cliente c = new Cliente();
         c.setNome(request.getParameter("nome"));
