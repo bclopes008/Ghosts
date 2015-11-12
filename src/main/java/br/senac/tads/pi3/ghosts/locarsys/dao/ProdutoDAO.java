@@ -19,6 +19,35 @@ import java.util.ArrayList;
  */
 public class ProdutoDAO {
 
+    public static ArrayList<Carro> listarCarrosDisponiveis() {
+        ArrayList<Carro> carros = new ArrayList<>();
+
+        String sql = "SELECT CL.TIPO_CLASSE, CA.MODELO_CARRO FROM Carro CA "
+                + "INNER JOIN CLASSE CL ON CA.ID_CLASSE = CL.ID_CLASSE "
+                + "WHERE DISPONIBILIDADE_CARRO = '1'";
+
+        try {
+            Connection conn = Conexoes.obterConexao();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = null;
+
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                Carro cars = new Carro();
+                cars.setModelo(rs.getString("MODELO_CARRO"));
+                cars.setGrupo(rs.getString("TIPO_CLASSE").charAt(0));
+                carros.add(cars);
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println(ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+        return carros;
+    }
+
     public static ArrayList<Combustivel> listarCombustiveis() {
         ArrayList<Combustivel> combustiveis = new ArrayList<>();
 

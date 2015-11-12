@@ -24,7 +24,7 @@
                     <!--<c:if test="${usuario.tipoUsuario == 'V' || usuario.tipoUsuario == 'G'}">-->
                         <li><a href="#">Aluguel</a>
                             <ul class="menuAluguel clearfix">
-                                <li><a href="../03- Cadastro de Alugueis/cadastroAlugueis.html">Cadastrar</a></li>
+                                <li><a href="CadastroAluguelServlet">Cadastrar</a></li>
                                 <li><a href="../04- ConsultaAltera Alugueis/consultaAlteraAlugueis.html">Consultar/Alterar</a></li>
                                 <li><a href="#">Devolução</a></li>
                             </ul><!-- submenu -->

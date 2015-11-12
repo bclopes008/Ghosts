@@ -16,7 +16,7 @@ public abstract class Produto{
 
     public Produto() {
     }
-
+    
     public Produto(String modelo, String marca, String combustivel, int anoFabricacao, String cor, char grupo, String filial) {
         this.modelo = modelo;
         this.marca = marca;

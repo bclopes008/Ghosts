@@ -41,7 +41,7 @@ public class AluguelDAO {
                     + "INNER JOIN FILIAL FL ON FL.ID_FILIAL = CA.ID_FILIAL "
                     + "INNER JOIN FABRICANTE FA ON FA.ID_FABRICANTE = CA.ID_FABRICANTE "
                     + "INNER JOIN COMBUSTIVEL CO ON CO.ID_COMBUSTIVEL = CA.ID_COMBUSTIVEL "
-                    + "INNER JOIN CLASSE CLA ON CLA.ID_CLASSE = CA.ID_CLASSE;";
+                    + "INNER JOIN CLASSE CLA ON CLA.ID_CLASSE = CA.ID_CLASSE";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -120,7 +120,7 @@ public class AluguelDAO {
             Connection conn = Conexoes.obterConexao();
             Statement stmt = conn.createStatement();
             String sql = "SELECT TARIFA_CLASSE FROM CARRO CA INNER JOIN CLASSE CL "
-                    + "ON CL.ID_CLASSE = CA.ID_CLASSE WHERE ID_CARRO = " + aluguel.getCarro().getChassi() + " FETCH FIRST 1 ROW ONLY;";
+                    + "ON CL.ID_CLASSE = CA.ID_CLASSE WHERE ID_CARRO = " + aluguel.getCarro().getChassi() + " FETCH FIRST 1 ROW ONLY";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -151,7 +151,7 @@ public class AluguelDAO {
                     + "(ID_FUNCIONARIO, ID_CARRO, ID_CLIENTE, DATA_LOCACAO_ALUGUEL, DATA_DEVOLUCAO_ALUGUEL, PRECO_TOTAL) "
                     + "VALUES (1,(SELECT ID_CARRO FROM CARRO CA INNER JOIN CLASSE CL ON CA.ID_CLASSE = CL.ID_CLASSE "
                     + "WHERE MODELO_CARRO = ? AND CL.TIPO_CLASSE = ? FETCH FIRST 1 ROW ONLY), "
-                    + "(SELECT ID_CLIENTE FROM CLIENTE WHERE CNH_CLIENTE = ? FETCH FIRST 1 ROW ONLY), ?, ?, ?);";
+                    + "(SELECT ID_CLIENTE FROM CLIENTE WHERE CNH_CLIENTE = ? FETCH FIRST 1 ROW ONLY), ?, ?, ?)";
             stmt = conn.prepareStatement(sql);
 
             AluguelDAO.calcularValorTotal(aluguel);
@@ -171,7 +171,7 @@ public class AluguelDAO {
             stmt.clearBatch();
             sql = "UPDATE CARRO SET DISPONIBILIDADE_CARRO = '0' "
                     + "WHERE ID_CARRO = (SELECT ID_CARRO FROM Carro WHERE DISPONIBILIDADE_CARRO = '1' "
-                    + "AND MODELO_CARRO = ? AND CL.TIPO_CLASSE = ? FETCH FIRST 1 ROW ONLY);";
+                    + "AND MODELO_CARRO = ? AND CL.TIPO_CLASSE = ? FETCH FIRST 1 ROW ONLY)";
             stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, aluguel.getCarro().getModelo());

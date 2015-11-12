@@ -21,12 +21,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import br.senac.tads.pi3.ghosts.locarsys.dao.*;
+import br.senac.tads.pi3.ghosts.locarsys.model.Carro;
+import br.senac.tads.pi3.ghosts.locarsys.model.ClasseProduto;
+import java.util.ArrayList;
 /**
  *
  * @author Prime-PC
  */
-@WebServlet(name = "CadastroAlugueisServlet", urlPatterns = {"/CadastroAlugueisServlet"})
+@WebServlet(name = "CadastroAluguelServlet", urlPatterns = {"/CadastroAluguelServlet"})
 public class CadastroAluguelServlet extends HttpServlet {
 
     /**
@@ -40,7 +43,19 @@ public class CadastroAluguelServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        
+        ArrayList<ClasseProduto> classes = ProdutoDAO.listarClasses();
+        request.setAttribute("classes", classes);
+        
+        ArrayList<Carro> carros = ProdutoDAO.listarCarrosDisponiveis();
+        request.setAttribute("carros", carros);
+        
+        for (Carro carro : carros) {
+            System.out.println("" + carro.getModelo());
+        }
+        
+        RequestDispatcher disp = request.getRequestDispatcher("/Aluguel/cadastroAlugueis.jspx");
+        disp.forward(request, response);
 
     }
 
@@ -56,9 +71,7 @@ public class CadastroAluguelServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        RequestDispatcher disp = request.getRequestDispatcher("/Aluguel/cadastroAlugueis.jspx");
-        disp.forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -84,14 +97,14 @@ public class CadastroAluguelServlet extends HttpServlet {
         
         RequestDispatcher disp = null;
         try {
-            if(AluguelDAO.cadastrarAluguel(aluguel)){
-                disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
+            if(!AluguelDAO.cadastrarAluguel(aluguel)){
+                disp = request.getRequestDispatcher("/Aluguel/cadastroAlugueis.jspx");
             }
         } catch (ClassNotFoundException ex) {
             System.err.println(ex.getMessage());
         }
         
-        disp = request.getRequestDispatcher("/Aluguel/cadastroAlugueis.jspx");
+        disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
         disp.forward(request, response);
 
     }

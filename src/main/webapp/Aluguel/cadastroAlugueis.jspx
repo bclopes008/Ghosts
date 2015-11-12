@@ -33,7 +33,7 @@
 
                         <input type="reset" class="novo" name="novo" value="" title="Linpar"/>
                         <input type="button" class="salvar" name="salvar" value="" title="Salvar"/>
-                        <a href="../02- Tela Principal/telaPrincipal.html"><button  type="button" class="sair" name="sair" title="Sair"><!--<img src="ImagensLoCarSys/sair.png"/>--></button></a><br/>
+                        <a href="Principal"><button  type="button" class="sair" name="sair" title="Sair"><!--<img src="ImagensLoCarSys/sair.png"/>--></button></a><br/>
 
                         Data Inicial
                         <input type="date" id="inicial" name="inicial" required="required" title="Data Inicial"/>
@@ -61,7 +61,9 @@
                         <select id="modelo" name="modelo" required="required" title="Modelo">
                             <option selected="selected"></option>
                             
-                            <option>Celta</option>
+                            <c:forEach items="${carros}" var="carros">
+                                <option>${carros.modelo}</option>
+                            </c:forEach>
                         </select>
 
                         Valor Total&#58;
