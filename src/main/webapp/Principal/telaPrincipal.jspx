@@ -32,7 +32,7 @@
                         <li><a href="#">Cliente</a>
                             <ul class="menuCliente clearfix">
                                 <li><a href="CadastroClienteServlet">Cadastrar</a></li>
-                                <li><a href="#">Consultar/Alterar</a></li>
+                                <li><a href="ConsultaClientesServlet">Consultar/Alterar</a></li>
                             </ul><!-- submenu -->
                         </li>
 

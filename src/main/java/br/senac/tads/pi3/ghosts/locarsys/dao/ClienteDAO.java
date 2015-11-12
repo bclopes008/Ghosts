@@ -80,10 +80,10 @@ public class ClienteDAO {
         Statement stmt = null;
         Connection conn = null;
         ResultSet rs = null;
-        int idCliente = 0, estado = 0;
 
+        System.out.println("Nome2" + nome);
         /* Pesquisa Cliente */
-        String sql = "SELECT * FROM CLIENTE WHERE NOME_CLIENTE LIKE '% " + nome + "an%'";
+        String sql = "SELECT * FROM CLIENTE WHERE NOME_CLIENTE LIKE '%" + nome + "%'";
         try {
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
@@ -96,6 +96,7 @@ public class ClienteDAO {
                 c.setCelular(rs.getString("CELULAR_CLIENTE"));
                 c.setEmail(rs.getString("EMAIL_CLIENTE"));
                 clientes.add(c);
+                System.out.println("Nome3: " + c.getNome());
             }
             conn.close();
         } catch (SQLException | ClassNotFoundException ex) {

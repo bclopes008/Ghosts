@@ -19,7 +19,7 @@
         </head>
         <body data-erro="${mensagem}">
             <div>
-                <form action="" method="post">
+                <form action="CadastroClienteServlet" accept-charset="ISO-8859-1,UTF-8" method="post">
 
                     <fieldset>
                         <legend>Dados do Cliente</legend>
@@ -42,9 +42,21 @@
 
                         Sexo&#42;
                         <label for="sexoM">M</label>
-                        <input type="radio" name="sexo" id="sexoM" value="M" required="required" title="Masculino"/>
-                        <label for="sexoF">F</label>
-                        <input type="radio" name="sexo" id="sexoF" value="F" required="required" title="Feminino"/>
+                        <c:if test="${cliente.sexo == 'M'}">
+                            <input type="radio" checked="checked" name="sexo" id="sexoM" value="M" required="required" title="Masculino"/>
+                            <label for="sexoF">F</label>
+                            <input type="radio" name="sexo" id="sexoF" value="F" required="required" title="Feminino"/>
+                        </c:if>
+                        <c:if test="${cliente.sexo == 'F'}">
+                            <input type="radio" name="sexo" id="sexoM" value="M" required="required" title="Masculino"/>
+                            <label for="sexoF">F</label>
+                            <input type="radio" checked="checked" name="sexo" id="sexoF" value="F" required="required" title="Feminino"/>
+                        </c:if>
+                        <c:if test="${cliente.sexo != 'M' and cliente.sexo != 'F'}">
+                            <input type="radio" name="sexo" id="sexoM" value="M" required="required" title="Masculino"/>
+                            <label for="sexoF">F</label>
+                            <input type="radio" name="sexo" id="sexoF" value="F" required="required" title="Feminino"/>
+                        </c:if>
                         <label for="celular">Tel. Celular&#42;</label>
                         <input type="text" id="celular" name="celular" maxlength="14" required="required" title="Celular do Cliente" value="${cliente.celular}"/>
                         <label for="email">Email&#42;</label>
@@ -61,12 +73,6 @@
 
                         <label for="cep">CEP&#42;</label>
                         <input type="text" id="cep" name="cep" maxlength="9" required="required" title="CEP" value="${cliente.endereco.cep}"/>
-                        <!--<input type="button" onClick="redireciona('CadastroProdutoServlet');" value="Buscar CEP"/> 
-                        <script>
-                            function redireciona(param) {
-                                location.href = param;
-                            }
-                        </script>-->
                         <label for="endereco">Endereço&#42;</label>
                         <input type="text" id="endereco" name="endereco" required="required" title="Logradouro" value="${cliente.endereco.endereco}"/>
                         <label for="numero">Número&#42;</label>
