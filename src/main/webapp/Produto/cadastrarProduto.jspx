@@ -52,7 +52,7 @@
                             </c:forEach>
                         </select>
                         <label for="cidade">Cidade&#42;</label>
-                        <input type="text" id="cidade" name="cidade" required="required" title="Cidade" value="${carro.cidade}"/>
+                        <input type="text" id="cidade" name="cidade" maxlength="15" required="required" title="Cidade" value="${carro.cidade}"/>
                         <label for="ano">Ano&#42;</label>
                         <input type="text" id="ano" name="ano" maxlength="4" required="required" title="Ano" value="${carro.ano}"/>
                         Ano Fabricação&#42;

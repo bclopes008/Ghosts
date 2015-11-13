@@ -22,7 +22,7 @@
                         <legend>Consulta</legend>
 
                         <label for="nome">Nome Cliente</label>
-                        <input type="text" id="nome" name="nome" tabindex="1" title="Nome do Cliente " />
+                        <input type="text" id="nome" name="nome" tabindex="1" title="Nome do Cliente " value="${nome}" />
 
                         <label for="cpf">CPF</label>
                         <input type="text" id="cpf" name="cpf" maxlength="14" placeholder="___.___.___-__" tabindex="2" title="CPF do Cliente" />
