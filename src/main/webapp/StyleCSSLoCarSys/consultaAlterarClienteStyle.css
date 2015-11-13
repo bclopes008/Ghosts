@@ -1,0 +1,82 @@
+body{
+    background-color:#EDEDED; 
+    font-family: "arial","verdana","sans-serif";
+    font-size:14px;
+    font-weight:bold;
+}
+legend{
+    font-size:18px;
+}
+body input{
+    border-radius:5px;
+}
+
+div{
+    width: 1000px;
+    height: 500px;
+    margin:80px;
+}
+fieldset{
+    background-color:Gainsboro;
+    width: 900px;
+    height: 150px;
+    border-radius:5px;
+}
+#nome{
+    margin-left:10px;
+    margin-right:40px;
+    width:400px;
+}
+#cpf{
+    margin-left:10px;
+    margin-right:70px;
+    width:110px;
+}
+button{
+    background-color:Gainsboro;
+}
+.pesquisa{
+    width:35px;
+    height:35px;
+    margin-right:10px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    border:transparent;
+
+}
+.sair{
+    width:35px;
+    height:35px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    border:transparent;
+
+}
+td{
+    font-family: "arial","verdana","sans-serif";
+    font-size:14px;
+    font-weight:bold;
+
+    border-spacing:0;
+    padding:5px;
+    text-align:center;
+    border:1px solid;
+}
+#tdCodigo{
+    width:90px;
+}
+#tdNome{
+    width:300px;
+}
+#tdCPF{
+    width:130px;
+}
+.alterar{
+    width:30px;
+    height:30px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    border:transparent;
+}
+
+

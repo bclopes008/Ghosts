@@ -41,6 +41,7 @@ fieldset{
     width:35px;
     height:35px;
     margin-right:10px;
+    border: transparent;
 }
 .salvar{
     background-image:url("../ImagensLoCarSys/Salvar.png");

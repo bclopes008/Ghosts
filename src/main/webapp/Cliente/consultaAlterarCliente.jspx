@@ -13,35 +13,38 @@
     <html>
         <head>
             <title>Consulta/Alterar Cliente</title>
-            <link href="consultaAlterarClienteStyle.css" rel="stylesheet" type="text/css"/>
+            <link href="StyleCSSLoCarSys/consultaAlterarClienteStyle.css" rel="stylesheet" type="text/css"/>
         </head>
         <body>
-            <div id="divPai">
-                <form action="ConsultaClientesServlet" method="post" accept-charset="ISO-8859-1,UTF-8">
-                    <fieldset id="fieldset01">
-                        <legend>Consulta/Alterar Cliente</legend>
+            <div>
+                <form action="" accept-charset="ISO-8859-1,UTF-8" method="post">
+                    <fieldset>
+                        <legend>Consulta</legend>
+
                         <label for="nome">Nome Cliente</label>
-                        <input type="text" id="nome" name="nome" value="${nome}"/>
-                        <label for="cpf">CPF Cliente</label>
-                        <input type="text" id="cpf" name="cpf" value="${cpf}"/>
-                        <input type="submit"  id="pesquisa" name="pesquisa" value="Pesquisar"/>
-                        <input type="button"  id="sair" name="sair" value="Sair"/>
-                    </fieldset>
-                    <fieldset id="fieldset02">
-                        <legend>Consulta de Cliente</legend>
-                        <table border="1">
-                            <tr> <td>Código</td><td>Nome</td><td>CPF</td> </tr>
+                        <input type="text" id="nome" name="nome" tabindex="1" title="Nome do Cliente " />
+
+                        <label for="cpf">CPF</label>
+                        <input type="text" id="cpf" name="cpf" maxlength="14" placeholder="___.___.___-__" tabindex="2" title="CPF do Cliente" />
+
+                        <button  type="submit" class="pesquisa" name="pesquisa" value="" tabindex="3" title="Pesquisar" ><img src="ImagensLoCarSys/Pesquisar.png"/></button>
+
+                        <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="5" title="Sair"><img src="ImagensLoCarSys/Sair.png"/></button></a><br/>
+                    </fieldset><br/>
+
+                    <fieldset>
+                        <legend>Consulta/Alterar Cliente</legend>
+                        <table name= "tabela">
+                            <tr><td id="tdCodigo">Código</td><td id="tdNome">Nome</td><td id="tdCPF">CPF</td></tr>
                             <c:forEach items="${clientes}" var="cli" varStatus="stat">
                                 <tr> 
                                     <td>${cli.id}</td>
                                     <td>${cli.nome}</td>  
                                     <td>${cli.cpf}</td> 
-                                    <td><a href="EditarClienteServlet?id=${cli.id}">Editar</a></td> 
+                                    <td><a href="EditarClienteServlet?id=${cli.id}"><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="ImagensLoCarSys/Consultar.png"/></button></a></td>
                                 </tr>
-
                             </c:forEach>
                         </table>
-                        <input type="button" id="alterar" value="Consulta/Altera"/>
 
                     </fieldset>
                 </form>

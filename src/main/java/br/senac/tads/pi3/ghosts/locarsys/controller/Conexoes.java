@@ -26,7 +26,7 @@ public class Conexoes {
         Class.forName("org.apache.derby.jdbc.ClientDataSource");
 
         // Passo 2: Abrir a conexão
-        conn = DriverManager.getConnection("jdbc:derby://localhost:1527/LoCarSys3;SecurityMechanism=3",
+        conn = DriverManager.getConnection("jdbc:derby://localhost:1527/LoCarSys;SecurityMechanism=3",
                 "app", // usuario
                 "app"); // senha
         return conn;

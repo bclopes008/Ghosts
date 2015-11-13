@@ -19,16 +19,21 @@
             <link href="StyleCSSLoCarSys/loginStyle.css" rel="stylesheet"   type="text/css"/>
         </head>
         <body data-erro="${mensagem}">
-            <div>
-                <form action="LoginServlet" method="post">
-                    <label for="login">Login&#58;</label>
-                    <input type="text" id="login" name="login" title="Login"/><br/>
-                    <label for="senha">Senha&#58;</label>
-                    <input type="password" id="senha" name="senha" title="Senha"/><br/>
-
-                    <input type="submit"  id="validar" name="validar" value="Login" title="Validar"/><br/>
-                </form>
+            <div id="logoSistema">
+                <img src="ImagensLoCarSys/LoCarSys.png"/>
             </div>
+            <div>
+
+                <form action="LoginServlet" accept-charset="ISO-8859-1,UTF-8" method="post">
+                    <label for="login">Login&#58;</label>
+                    <input type="text" id="login" name="login" required="required" title="Login"/><br/>
+                    <label for="senha">Senha&#58;</label>
+                    <input type="password" id="senha" name="senha" required="required" maxlength="8" title="Senha"/><br/>
+
+                    <input type="submit"  id="validar" name="validar" value="Entrar" title="Validar"/><br/>
+
+                </form>
+            </div>	
             <script>
                 if (document.body.getAttribute("data-erro")) {
                     alert(document.body.getAttribute("data-erro"));

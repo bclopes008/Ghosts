@@ -4,11 +4,15 @@ body{
     font-size:22px;
     font-weight:bold;
 }
+
 #menu,
 .menuPrincipal,
 .menuAluguel {
     padding:0px;
     margin:0px;
+}
+.menuPrincipal{
+    padding-left:180px;
 }
 .clearfix:after{
     content:'.';
@@ -32,7 +36,6 @@ body{
     display: block; 
 
     /* visual do link */  
-    //background-color:#EDEDED;
     background-color:Gainsboro;
     color: #333;
     text-decoration: none;
@@ -60,4 +63,27 @@ body{
 li:hover>ul{
     display:block;
     padding:0;
+}
+img{
+    --background-color:yellow;
+    width:600px;
+    height:350px;
+    margin-left:100px;
+
+}
+#logoEmpresa{
+    --background-color:red;
+    width:800px;
+    height:400px;
+    margin-left:250px;
+    margin-top:o;
+
+}
+#sessãoUsuario{
+    --background-color:blue;
+    font-size:16px;
+    width:400px;
+    height:100px;
+    margin-left:900px;
+    margin-top:50px;
 }

@@ -14,7 +14,6 @@
         <head>
             <title>Menu</title>
             <link href="StyleCSSLoCarSys/telaPrincipalStyle.css" rel="stylesheet" type="text/css" />
-            <link href="../StyleCSSLoCarSys/telaPrincipalStyle.css" rel="stylesheet" type="text/css" />
         </head>
 
         <body>
@@ -25,7 +24,7 @@
                         <li><a href="#">Aluguel</a>
                             <ul class="menuAluguel clearfix">
                                 <li><a href="CadastroAluguelServlet">Cadastrar</a></li>
-                                <li><a href="../04- ConsultaAltera Alugueis/consultaAlteraAlugueis.html">Consultar/Alterar</a></li>
+                                <li><a href="#">Consultar/Alterar</a></li>
                                 <li><a href="#">Devolução</a></li>
                             </ul><!-- submenu -->
                         </li>
@@ -43,7 +42,7 @@
                             </ul><!-- submenu -->
                         </li>
                     </c:if>
-                    <c:if test="${usuario    == 'G'}">
+                    <c:if test="${usuario == 'G'}">
                         <li><a href="#">Relatórios</a>
                             <ul class="menuRelatorios">
                                 <li><a href="#">Aluguel</a></li>
@@ -62,7 +61,15 @@
 
                     <li><a href="login.jspx">Sair</a></li>
                 </ul><br/>
-                <!--<img src="../ImagensLoCarSys/Starmega.png">-->
+
+                <div id="logoEmpresa">
+                    <img src="ImagensLoCarSys/Starmega.png" title="Starmega Ltda"/>
+                </div>
+
+                <div id="sessãoUsuario">
+                    <p>Usuário: ----------</p>
+                    <p>Filial: --------------</p>
+                </div>
 
             </div>
         </body>
