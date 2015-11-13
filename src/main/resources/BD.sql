@@ -84,6 +84,7 @@ id_Endereco bigint not null generated always
         constraint PK_Endereco PRIMARY KEY,
 id_Cliente bigint not null,
 id_Estado bigint not null,
+Cidade_estado varchar(30) not null,
 Logradouro_Endereco varchar(50) not null,
 Numero_Endereco varchar(5) not null,
 Bairro_Endereco varchar(30) not null,
@@ -240,11 +241,11 @@ SELECT * FROM Cliente;
 
 --Inserir Valores na Tabela Endereco, declarando o @id_Cliente como chave estrangeira------------------------------------------------------
 INSERT INTO Endereco
-(id_Cliente,id_Estado,Logradouro_Endereco,Numero_Endereco,Bairro_Endereco,Complemento_Endereco,Cep_Endereco)
+(id_Cliente,id_Estado,Cidade_estado, Logradouro_Endereco,Numero_Endereco,Bairro_Endereco,Complemento_Endereco,Cep_Endereco)
 VALUES
-(1,26,'Rua Sai-Guacu','309','PQ.São Jose','Casa 1','04843-309'),
-(2,19,'Av. Senador Teotonio Vilela','10','PQ.Grajaú','Bloco A Ap 12 ','04833-901'),
-(3,11,'Av. Senador Teotonio Vilela','11','PQ.Grajaú','Bloco B Ap 13','04833-901');
+(1,26,'São Paulo','Rua Sai-Guacu','309','PQ.São Jose','Casa 1','04843-309'),
+(2,19,'São Paulo','Av. Senador Teotonio Vilela','10','PQ.Grajaú','Bloco A Ap 12 ','04833-901'),
+(3,11,'São Paulo','Av. Senador Teotonio Vilela','11','PQ.Grajaú','Bloco B Ap 13','04833-901');
 
 SELECT * FROM Endereco;
 

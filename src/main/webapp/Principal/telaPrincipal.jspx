@@ -18,10 +18,10 @@
         </head>
 
         <body>
-            <!-- <c:if test="${usuario.tipoUsuario == 'A' || usuario.tipoUsuario == 'G'}"></c:if> -->
+            <!--<c:if test="${usuario == 'A' || usuario == 'G'}"></c:if>-->
                 <div id="menu">
                     <ul class="menuPrincipal clearfix">
-                    <!--<c:if test="${usuario.tipoUsuario == 'V' || usuario.tipoUsuario == 'G'}">-->
+                    <c:if test="${usuario == 'V' || usuario == 'G'}">
                         <li><a href="#">Aluguel</a>
                             <ul class="menuAluguel clearfix">
                                 <li><a href="CadastroAluguelServlet">Cadastrar</a></li>
@@ -42,23 +42,23 @@
                                 <li><a href="#">Consultar/Alterar</a></li>
                             </ul><!-- submenu -->
                         </li>
-                    <!--</c:if>-->
-                    <!--<c:if test="${usuario.tipoUsuario == 'G'}">-->
+                    </c:if>
+                    <c:if test="${usuario    == 'G'}">
                         <li><a href="#">Relatórios</a>
                             <ul class="menuRelatorios">
                                 <li><a href="#">Aluguel</a></li>
                                 <li><a href="#">Produtos</a></li>
                             </ul><!-- submenu -->
                         </li>
-                    <!--</c:if>-->
-                    <!--<c:if test="${usuario.tipoUsuario == 'T'}">-->
+                    </c:if>
+                    <c:if test="${usuario == 'T'}">
                         <li><a href="CadastroUsuarioServlet">Usuários</a>
                             <ul class="menuUsuarios">
                                 <li><a href="CadastroUsuarioServlet">Cadastrar</a></li>
                                 <li><a href="#">Consultar/Alterar</a></li>
                             </ul><!-- submenu -->
                         </li>
-                    <!--</c:if>-->
+                    </c:if>
 
                     <li><a href="login.jspx">Sair</a></li>
                 </ul><br/>

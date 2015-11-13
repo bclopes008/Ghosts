@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UsuarioDAO {
+    
+    public static char tipoUsuario;
 
     public static boolean autenticaUsuario(Usuario user) {
         Statement stmt = null;
@@ -31,6 +33,7 @@ public class UsuarioDAO {
                 senha = rs.getString("SENHA_USUARIO");
                 user.setTipoUsuario(rs.getString("TIPO_USUARIO").charAt(0));
                 conn.close();
+                tipoUsuario = user.getTipoUsuario();
                 return true;
             }
         } catch (SQLException ex) {

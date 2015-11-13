@@ -5,6 +5,7 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
+import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
 import br.senac.tads.pi3.ghosts.locarsys.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,9 +35,10 @@ public class Principal extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //TODO
-        Usuario u = new Usuario();
-        u.setTipoUsuario('G');
-        request.setAttribute("usuario", u);
+        //Usuario u = new Usuario();
+        //u.setTipoUsuario('G');
+        char usuario = UsuarioDAO.tipoUsuario;
+        request.setAttribute("usuario", usuario);
         RequestDispatcher disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
         disp.forward(request, response);
     }

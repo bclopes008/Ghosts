@@ -79,7 +79,14 @@ public class ConsultaClientesServlet extends HttpServlet {
     /**
      * Returns a short description of the servlet.
      *
-     * @return a String containing servlet description
+     * @return a Strin//Pega os valores para realizar a consulta do cliente
+        String nome = request.getParameter("nome");
+        String cpf = request.getParameter("cpf");
+        List<Cliente> listarClientes = ClienteDAO.pesquisarCliente(nome);
+        request.setAttribute("clientes", listarClientes);
+        request.setAttribute("nome", nome);
+        request.setAttribute("cpf", cpf);
+        processRequest(request, response);g containing servlet description
      */
     @Override
     public String getServletInfo() {

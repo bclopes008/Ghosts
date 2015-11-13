@@ -60,8 +60,8 @@ public class ClienteDAO {
             }
             conn.close();
 
-            sql = "INSERT INTO Endereco(ID_CLIENTE, ID_ESTADO, LOGRADOURO_ENDERECO, NUMERO_ENDERECO, BAIRRO_ENDERECO, COMPLEMENTO_ENDERECO, CEP_ENDERECO, OBS_ENDERECO) VALUES("
-                    + c.getId() + ", " + estado + ", '" + e.getEndereco() + "', '" + e.getNumero() + "', '" + e.getBairro() + "', '" + e.getComplemento() + "', '" + e.getCep() + "', '"
+            sql = "INSERT INTO Endereco(ID_CLIENTE, ID_ESTADO, CIDADE_ESTADO, LOGRADOURO_ENDERECO, NUMERO_ENDERECO, BAIRRO_ENDERECO, COMPLEMENTO_ENDERECO, CEP_ENDERECO, OBS_ENDERECO) VALUES("
+                    + c.getId() + ", " + estado + ", '" + e.getCidade() + "', '"+ e.getEndereco() + "', '" + e.getNumero() + "', '" + e.getBairro() + "', '" + e.getComplemento() + "', '" + e.getCep() + "', '"
                     + e.getObs() + "')";
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
@@ -144,6 +144,7 @@ public class ClienteDAO {
             Endereco e = new Endereco();
             while (rs.next()) {
                 estado = rs.getInt("ID_ESTADO");
+                e.setCidade(rs.getString("CIDADE_ESTADO"));
                 e.setEndereco(rs.getString("LOGRADOURO_ENDERECO"));
                 e.setNumero(rs.getString("NUMERO_ENDERECO"));
                 e.setBairro(rs.getString("BAIRRO_ENDERECO"));

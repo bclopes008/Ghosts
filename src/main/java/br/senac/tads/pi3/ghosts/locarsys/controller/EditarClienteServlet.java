@@ -40,7 +40,7 @@ public class EditarClienteServlet extends HttpServlet {
         ArrayList<Estado> estados = new ArrayList<>();
         estados = EstadoDAO.listarEstados();
         request.setAttribute("estados", estados);
-
+        request.setAttribute("tipo", "EditarClienteServlet");
         RequestDispatcher disp = request.getRequestDispatcher("/Cliente/cadastrarCliente.jspx");
         disp.forward(request, response);
     }

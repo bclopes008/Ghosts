@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -53,7 +53,8 @@ public class LoginServlet extends HttpServlet {
         RequestDispatcher disp;
         Usuario u = new Usuario(request.getParameter("login"), request.getParameter("senha"));
         if (UsuarioDAO.autenticaUsuario(u)) {
-            disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
+            //disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
+            disp = request.getRequestDispatcher("Principal");
             request.setAttribute("usuario", u);
         } else {
             disp = request.getRequestDispatcher("login.jspx");
