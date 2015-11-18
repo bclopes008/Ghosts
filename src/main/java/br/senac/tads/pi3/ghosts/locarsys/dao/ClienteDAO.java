@@ -27,7 +27,7 @@ public class ClienteDAO {
         ResultSet rs = null;
         int estado = 0;
         Endereco e = c.getEndereco();
-        
+
         /* INSERT do Cliente */
         String sql = "INSERT INTO CLIENTE (NOME_CLIENTE, CPF_CLIENTE, CNH_CLIENTE, DATA_NASC_CLIENTE, SEXO_CLIENTE, CELULAR_CLIENTE, EMAIL_CLIENTE) VALUES ('" + c.getNome() + "', '"
                 + c.getCpf() + "', '" + c.getCnh() + "', '" + c.getDataNascimento() + "', '" + c.getSexo() + "', '" + c.getCelular() + "', '" + c.getEmail() + "')";
@@ -61,7 +61,7 @@ public class ClienteDAO {
             conn.close();
 
             sql = "INSERT INTO Endereco(ID_CLIENTE, ID_ESTADO, CIDADE_ESTADO, LOGRADOURO_ENDERECO, NUMERO_ENDERECO, BAIRRO_ENDERECO, COMPLEMENTO_ENDERECO, CEP_ENDERECO, OBS_ENDERECO) VALUES("
-                    + c.getId() + ", " + estado + ", '" + e.getCidade() + "', '"+ e.getEndereco() + "', '" + e.getNumero() + "', '" + e.getBairro() + "', '" + e.getComplemento() + "', '" + e.getCep() + "', '"
+                    + c.getId() + ", " + estado + ", '" + e.getCidade() + "', '" + e.getEndereco() + "', '" + e.getNumero() + "', '" + e.getBairro() + "', '" + e.getComplemento() + "', '" + e.getCep() + "', '"
                     + e.getObs() + "')";
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
@@ -77,13 +77,17 @@ public class ClienteDAO {
         return false;
     }
 
-    public static List<Cliente> pesquisarCliente(String nome) {
+    public static List<Cliente> pesquisarCliente(String nome, String cpf) {
         Statement stmt = null;
         Connection conn = null;
         ResultSet rs = null;
 
         /* Pesquisa Cliente */
-        String sql = "SELECT * FROM CLIENTE WHERE NOME_CLIENTE LIKE '%" + nome + "%' ORDER BY NOME_CLIENTE";
+        //String sql = "SELECT * FROM CLIENTE WHERE NOME_CLIENTE LIKE '%" + nome + "%' ORDER BY NOME_CLIENTE";
+        String sql = "SELECT * FROM CLIENTE "
+                + "WHERE NOME_CLIENTE LIKE '%" + nome + "%' "
+                + "AND CPF_CLIENTE LIKE '%" + cpf + "%' "
+                + "ORDER BY NOME_CLIENTE";
         try {
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();

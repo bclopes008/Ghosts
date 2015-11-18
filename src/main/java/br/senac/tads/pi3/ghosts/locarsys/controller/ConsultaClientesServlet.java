@@ -69,7 +69,7 @@ public class ConsultaClientesServlet extends HttpServlet {
         //Pega os valores para realizar a consulta do cliente
         String nome = request.getParameter("nome");
         String cpf = request.getParameter("cpf");
-        List<Cliente> listarClientes = ClienteDAO.pesquisarCliente(nome);
+        List<Cliente> listarClientes = ClienteDAO.pesquisarCliente(nome, cpf);
         request.setAttribute("clientes", listarClientes);
         request.setAttribute("nome", nome);
         request.setAttribute("cpf", cpf);

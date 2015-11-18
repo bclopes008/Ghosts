@@ -11,15 +11,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UsuarioDAO {
-    
-    public static char tipoUsuario;
+
+    public static Usuario u;
 
     public static boolean autenticaUsuario(Usuario user) {
         Statement stmt = null;
         Connection conn = null;
-        
+
         String sql = "SELECT * FROM USUARIO WHERE LOGIN_USUARIO = '" + user.getLogin()
                 + "' AND SENHA_USUARIO = '" + user.getSenha() + "'";
+        /*SELECT * FROM USUARIO US 
+         INNER JOIN FUNCIONARIO FU ON US.ID_FUNCIONARIO = FU.ID_FUNCIONARIO
+         INNER JOIN FILIAL FL ON FL.ID_FILIAL = FU.ID_FILIAL 
+         WHERE LOGIN_USUARIO = 'Bruno008'
+         AND SENHA_USUARIO = '4321'*/
 
         try {
             conn = Conexoes.obterConexao();
@@ -28,12 +33,10 @@ public class UsuarioDAO {
             String login = null, senha = null;
 
             while (rs.next()) {
-                user.setId(rs.getString("ID_USUARIO"));
-                login = rs.getString("LOGIN_USUARIO");
-                senha = rs.getString("SENHA_USUARIO");
-                user.setTipoUsuario(rs.getString("TIPO_USUARIO").charAt(0));
+                user.setId(rs.getInt("ID_USUARIO"));
+                u.setLogin(rs.getString("LOGIN_USUARIO"));
+                u.setTipoUsuario(rs.getString("TIPO_USUARIO").charAt(0));
                 conn.close();
-                tipoUsuario = user.getTipoUsuario();
                 return true;
             }
         } catch (SQLException ex) {
@@ -58,7 +61,7 @@ public class UsuarioDAO {
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                u.setId(rs.getString("ID_USUARIO"));
+                u.setId(rs.getInt("ID_USUARIO"));
                 u.setLogin(rs.getString("LOGIN_USUARIO"));
                 u.setSenha(rs.getString("SENHA_USUARIO"));
                 u.setTipoUsuario(rs.getString("TIPO_USUARIO").charAt(0));
@@ -73,9 +76,8 @@ public class UsuarioDAO {
 
         return users;
     }
-    
-    public boolean cadastraUsuario(Usuario u)
-    {
+
+    public boolean cadastraUsuario(Usuario u) {
         Statement stmt = null;
         Connection conn = null;
         ResultSet rs = null;
@@ -84,7 +86,7 @@ public class UsuarioDAO {
         /* Busca o id da filial no banco de dados */
         String sql = "SELECT ID_FILIAL FROM FILIAL WHERE NOME_FILIAL = '" + u.getFilial() + "'";
         System.out.println("Filial: " + u.getFilial());
-        
+
         try {
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
@@ -93,15 +95,15 @@ public class UsuarioDAO {
                 filial = rs.getInt("ID_FILIAL");
             }
             conn.close();
-            
+
             sql = ("INSERT INTO FUNCIONARIO (ID_FILIAL, NOME_FUNCIONARIO, DATA_NASC_FUNCIONARIO, CPF_FUNCIONARIO, FUNCAO_FUNCIONARIO, SEXO_FUNCIONARIO) VALUES "
                     + "(" + filial + ", '" + u.getNome() + "','" + u.getDataNascimento() + "','" + u.getCpf() + "','" + u.getFuncao() + "','" + u.getSexo() + "')");
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
             stmt.executeUpdate(sql);
             conn.close();
-            
-            sql = "SELECT ID_FUNCIONARIO FROM FUNCIONARIO WHERE NOME_FUNCIONARIO = '" + u.getNome()+ "'";
+
+            sql = "SELECT ID_FUNCIONARIO FROM FUNCIONARIO WHERE NOME_FUNCIONARIO = '" + u.getNome() + "'";
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
@@ -109,13 +111,13 @@ public class UsuarioDAO {
                 funcionario = rs.getInt("ID_FUNCIONARIO");
             }
             conn.close();
-            
+
             sql = "INSERT INTO USUARIO (ID_FUNCIONARIO,LOGIN_USUARIO,SENHA_USUARIO,TIPO_USUARIO) VALUES "
                     + "( " + funcionario + ",'" + u.getLogin() + "','" + u.getSenha() + "','" + u.getTipoUsuario() + "')";
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
             stmt.executeUpdate(sql);
-            conn.close();            
+            conn.close();
             return true;
         } catch (SQLException | ClassNotFoundException ex) {
             System.err.println("" + ex.getMessage());

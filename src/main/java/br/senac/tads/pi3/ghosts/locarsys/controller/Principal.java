@@ -37,8 +37,10 @@ public class Principal extends HttpServlet {
         //TODO
         //Usuario u = new Usuario();
         //u.setTipoUsuario('G');
-        char usuario = UsuarioDAO.tipoUsuario;
-        request.setAttribute("usuario", usuario);
+        String login = UsuarioDAO.u.getLogin();
+        String filial = UsuarioDAO.u.getFilial();
+        request.setAttribute("login", login);
+        request.setAttribute("filial", filial);
         RequestDispatcher disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
         disp.forward(request, response);
     }
