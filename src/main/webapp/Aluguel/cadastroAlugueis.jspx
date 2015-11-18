@@ -22,7 +22,7 @@
         <body>
 
             <div>
-                <form action="" method="post">
+                <form action="CadastroAluguelServlet" method="post">
                     <fieldset>
                         <legend>Cadastro de Alugueis</legend>
 
@@ -32,7 +32,7 @@
                         <input type="number"  id="idCliente" name="idCliente" readonly="readonly" title="Codigo do Cliente"/>
 
                         <input type="reset" class="novo" name="novo" value="" title="Linpar"/>
-                        <input type="button" class="salvar" name="salvar" value="" title="Salvar"/>
+                        <input type="submit" class="salvar" name="salvar" value="" title="Salvar"/>
                         <a href="Principal"><button  type="button" class="sair" name="sair" title="Sair"><!--<img src="ImagensLoCarSys/sair.png"/>--></button></a><br/>
 
                         Data Inicial
@@ -67,7 +67,7 @@
                         </select>
 
                         Valor Total&#58;
-                        <input type="text" id="valorTotal" name="valorTotal" readonly="readonly" title="Valor Total"/>
+                        <input type="text" id="valorTotal" name="valorTotal" title="Valor Total"/>
 
                     </fieldset>
                 </form>
