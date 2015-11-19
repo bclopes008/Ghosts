@@ -1,66 +1,83 @@
-#menu{
-    background-color:#EDEDED;
-    font-family: "Times New Roman","Segoe UI","arial","verdana","sans-serif";
-    font-size:22px;
-    font-weight:bold;
+ body{
+	background-color:#EDEDED;
+	font-family: "Times New Roman","Segoe UI","arial","verdana","sans-serif";
+	font-size:22px;
+	font-weight:bold;
 }
-
-#menu,
+ #menu,
 .menuPrincipal,
 .menuAluguel {
-    padding:0px;
-    margin:0px;
+	padding:0;
+	margin:0;
 }
 .menuPrincipal{
-    padding-left:180px;
+	padding-left:120px;
 }
 .clearfix:after{
-    content:'.';
-    display:block;
-    clear:both;
-    height:0px;
-    line-height:0px;
-    font-size:0px;
-    visibility:hidden;
-    overflow:hidden;
+	content:'.';
+	display:block;
+	clear:both;
+	height:0px;
+	line-height:0px;
+	visibility:hidden;
+	overflow:hidden;
 }
 .menuPrincipal,.menuAluguel,.menuCliente,.menuProdutos,.menuRelatorios,.menuUsuarios{
-    list-style:none;
-    background-color:Gainsboro;
+	list-style:none;
+	background-color:Gainsboro;
 }
 .menuAluguel{
     background-color:#444;
 }
 .menuPrincipal a {
-    padding: 10px 40px;
-    display: block; 
-
-    /* visual do link */  
-    background-color:Gainsboro;
-    color: #333;
-    text-decoration: none;
-    border-bottom:2px solid Gainsboro;
+	padding: 10px 40px;
+	display: block; 
+ 
+	/* visual do link */  
+	background-color:Gainsboro;
+	color: #333;
+	text-decoration: none;
+	border-bottom:2px solid Gainsboro;
 }
 .menuPrincipal li {
-    position:relative;
-
+	position:relative;
+ 
 }
 .menuPrincipal > li {
-    float:left;
+	float:left;
 }
 
 .menuPrincipal > li :hover {
-    background-color:#C0C0C0;
-    color: #B80000;
-    border-bottom:2px solid #EA0000;
+	background-color:#C0C0C0;
+	color: #B80000;
+	border-bottom:2px solid #EA0000;
 }
 .menuAluguel,.menuCliente,.menuProdutos,.menuRelatorios,.menuUsuarios{
-    position:absolute;
-    display:none;
-    min-width:100px;
+	position:absolute;
+	display:none;
+	min-width:100px;
 }
 
 li:hover>ul{
-    display:block;
-    padding:0;
+	display:block;
+	padding:0;
+}
+img{
+    width:500px;
+	margin-left:50px;
+}
+#logoEmpresa{
+	width:600px;
+	height:560px;
+	margin-left:350px;
+    margin-top:o;
+	
+}
+#sessaoUsuario{
+	font-size:16px;
+	width:400px;
+	height:100px;
+	margin-left:980px;
+	margin-top:-115px;
+	
 }

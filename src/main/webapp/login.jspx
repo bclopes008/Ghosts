@@ -17,13 +17,15 @@
         <head>
             <title>Login</title>
             <link href="StyleCSSLoCarSys/loginStyle.css" rel="stylesheet"   type="text/css"/>
+            <script src="../MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>
         </head>
         <body data-erro="${mensagem}">
-            <div id="logoSistema">
-                <img src="ImagensLoCarSys/LoCarSys.png"/>
-            </div>
-            <div>
 
+            <div id="logoSistema">
+                <img src="../ImagensLoCarSys/LoCarSys.png"/>
+            </div>
+
+            <div>
                 <form action="LoginServlet" accept-charset="ISO-8859-1,UTF-8" method="post">
                     <label for="login">Login&#58;</label>
                     <input type="text" id="login" name="login" required="required" title="Login"/><br/>

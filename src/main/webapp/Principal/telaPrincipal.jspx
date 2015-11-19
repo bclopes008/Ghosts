@@ -23,7 +23,7 @@
                     <img src="ImagensLoCarSys/Starmega.png" title="Starmega Ltda"/>
                 </div>
 
-                <div id="sessãoUsuario">
+                <div id="sessaoUsuario">
                     <p>Usuário: ${login}</p>
                     <p>Filial: ${filial}</p>
                 </div>

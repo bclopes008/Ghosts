@@ -1,0 +1,117 @@
+body{
+    background-color:#EDEDED;
+    font-family: "arial","verdana","sans-serif";
+    font-size:14px;
+    font-weight:bold;
+}
+
+legend,p{
+    font-size:18px;
+}
+body input{
+    border-radius:5px;
+}
+
+div{
+    width: 1000px;
+    height: 500px;
+    margin:80px;
+}
+
+fieldset{
+    background-color:Gainsboro;
+    width: 900px;
+    height: 150px;
+    border-radius:5px;
+
+
+}
+#divTabela{
+    --background-color:red;
+    width: 900px;
+    height: 150px;
+    border-radius:5px;
+    margin-top:0;
+    margin-left:0;
+}
+
+#numeroAluguel{
+    margin-left:10px;
+    margin-right:50px;
+    width:110px;		
+}
+#modelo{
+    margin-left:10px;
+    margin-right:250px;
+}
+.pesquisa{
+    width:35px;
+    height:35px;
+    margin-right:30px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    border:transparent;
+}
+.sair{
+    width:35px;
+    height:35px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    border:transparent;
+}
+#cpf{
+    margin-left:10px;
+    margin-right:45px;
+    width:110px;	
+}
+#nome{
+    margin-left:10px;
+    margin-top:30px;
+    width:400px;
+
+}
+
+td{
+    border-spacing:0;
+    padding:5px;
+    text-align:center;
+    border:1px solid;
+    position:relative;
+    background-color:Gainsboro;
+
+}
+#tdAluguel{
+    width:90px;
+}
+#tdNome{
+    width:300px;
+}
+#tdCPF{
+    width:130px;
+}
+.alterar{
+    width:35px;
+    height:35px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    border:transparent;
+}
+b{
+    color:red;
+    font-size:15px;
+}
+
+span{
+
+    margin-left:770px;
+}
+div>span{
+    font-size:18px;
+    margin-left:15px;
+}
+button{
+
+    font-family: "arial","verdana","sans-serif";
+    font-size:12px;
+    font-weight:bold;
+}
