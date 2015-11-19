@@ -13,8 +13,8 @@
     <html>
         <head>
             <title>Consulta/Alterar Cliente</title>
-            <link href="../StyleCSSLoCarSys/consultaAlterarClienteStyle.css" rel="stylesheet" type="text/css"/>
-            <script src="../MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>
+            <link href="StyleCSSLoCarSys/consultaAlterarClienteStyle.css" rel="stylesheet" type="text/css"/>
+            <!--<script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
         </head>
         <body>
             <div>
@@ -23,24 +23,31 @@
                         <legend>Consulta</legend>
 
                         <label for="nome">Nome Cliente</label>
-                        <input type="text" id="nome" name="nome" tabindex="1" title="Nome do Cliente " />
+                        <input type="text" id="nome" name="nome" tabindex="1" title="Nome do Cliente " value="${nome}"/>
 
                         <label for="cpf">CPF</label>
-                        <input type="text" id="cpf" name="cpf" maxlength="14" onkeypress="formatar('###.###.###-##', this)" placeholder="___.___.___-__" tabindex="2" title="CPF do Cliente" />
+                        <input type="text" id="cpf" name="cpf" maxlength="14" onkeypress="formatar('###.###.###-##', this)" placeholder="___.___.___-__" tabindex="2" title="CPF do Cliente" value="${cpf}"/>
 
-                        <button  type="submit" class="pesquisa" name="pesquisa" value="" tabindex="3" title="Pesquisar" ><img src="../ImagensLoCarSys/pesquisar.png"/>Pesquisar</button>
+                        <button  type="submit" class="pesquisa" name="pesquisa" value="" tabindex="3" title="Pesquisar" ><img src="ImagensLoCarSys/Pesquisar.png"/>Pesquisar</button>
 
-                        <a href="../02- Tela Principal/telaPrincipal.html"><button  type="button" class="sair" name="sair" tabindex="5" title="Sair"><img src="../ImagensLoCarSys/sair.png"/>Sair</button></a><br/>
+                        <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="5" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
                     </fieldset><br/>
 
                     <div id="divTabela">
                         <span>Consulta/Alterar Cliente</span>
                         <table name= "tabela">
                             <tr><td id="tdCodigo">Código</td><td id="tdNome">Nome</td><td id="tdCPF">CPF</td></tr>
-                            <tr> <td>&#63;</td>      <td>&#63;</td>   <td>&#63;</td>  <td><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="../ImagensLoCarSys/Consultar.png"/></button></td> </tr>
+                            <c:forEach items="${clientes}" var="cli" varStatus="stat">
+                                <tr> 
+                                    <td>${cli.id}</td>
+                                    <td>${cli.nome}</td>  
+                                    <td>${cli.cpf}</td> 
+                                    <td><a href="EditarClienteServlet?id=${cli.id}"><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="ImagensLoCarSys/Consultar.png"/></button></a></td>
+                                </tr>
+                            </c:forEach>
                         </table>
 
-                       
+
 
                     </div>
                 </form>

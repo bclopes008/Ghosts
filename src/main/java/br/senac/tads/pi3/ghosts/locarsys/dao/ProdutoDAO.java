@@ -19,12 +19,12 @@ import java.util.ArrayList;
  */
 public class ProdutoDAO {
 
-    public static ArrayList<Carro> listarCarrosDisponiveis() {
+    public static ArrayList<Carro> listarCarrosDisponiveis(char grupo) {
         ArrayList<Carro> carros = new ArrayList<>();
 
         String sql = "SELECT CL.TIPO_CLASSE, CA.MODELO_CARRO FROM Carro CA "
                 + "INNER JOIN CLASSE CL ON CA.ID_CLASSE = CL.ID_CLASSE "
-                + "WHERE DISPONIBILIDADE_CARRO = '1'";
+                + "WHERE DISPONIBILIDADE_CARRO = '1' AND CL.TIPO_CLASSE = '"+grupo+"'";
 
         try {
             Connection conn = Conexoes.obterConexao();

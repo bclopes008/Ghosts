@@ -17,7 +17,7 @@
             <title>Cadastro de Alugueis</title>
             <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
             <link href="StyleCSSLoCarSys/cadastroAlugueisStyle.css" rel="stylesheet" type="text/css"/>
-            <script src="../MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>
+            <!--<script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
         </head>
 
         <body>
@@ -34,7 +34,7 @@
 
                         <button  type="reset" class="novo" name="novo" tabindex="9" title="Limpar"><img src="../ImagensLoCarSys/novo.png"/>Limpar</button>
                         <button  type="submit" class="salvar" name="salvar"  value="" tabindex="8" title="Salvar"><img src="../ImagensLoCarSys/salvar.png"/>Salvar</button>
-                        <a href="../02- Tela Principal/telaPrincipal.html"><button  type="button" class="sair" name="sair" tabindex="10" title="Sair"><img src="../ImagensLoCarSys/sair.png"/>Sair</button></a><br/>
+                        <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="10" title="Sair"><img src="../ImagensLoCarSys/sair.png"/>Sair</button></a><br/>
 
                         Data Inicial<b>&#42;</b>
                         <input type="date" id="inicial" name="inicial" tabindex="1" required="required" title="Data Inicial"/>
@@ -51,20 +51,19 @@
                         <input type="text" id="nomeCliente" name="nomeCliente" tabindex="5" required="required" title="Nome do Cliente"/>
 
                         Grupo<b>&#42;</b>
-                        <select id="grupo" name="grupo" tabindex="6" required="required" title="Grupo">
+                        <select id="grupo" name="grupo" tabindex="6" required="required" title="Grupo" onchange="redireciona('ConsultarModelosPorGrupo')">
                             <option selected="selected"></option>
-                            <option>A</option>
-                            <option>B</option>
-                            <option>C</option>
-                            <option>D</option>
+                            <c:forEach items="${classes}" var="classes">
+                                <option>${classes.tipoClasse}</option>
+                            </c:forEach>
                         </select>
 
                         Modelo<b>&#42;</b>
                         <select id="modelo" name="modelo" tabindex="7" required="required" title="Modelo">
                             <option selected="selected"></option>
-                            <option>Celta</option>
-                            <option>K</option>
-                            <option>Fox</option>
+                            <c:forEach items="${carros}" var="carros">
+                                <option>${carros.modelo}</option>
+                            </c:forEach>
                         </select>
 
                         Valor Total&#58;
@@ -74,7 +73,13 @@
                     <span><b>&#42;</b> Campos Obrigatorios</span>
                 </form>
             </div>
-
+            <script>
+                function redireciona(param) {
+                    var grp = document.getElementById("grupo");
+                    var optGrupo = grp.options[grp.selectedIndex].text;
+                    location.href = param + "?" + "grupo" + "=" + optGrupo;
+                }
+            </script>
         </body>
 
 

@@ -47,7 +47,10 @@ public class CadastroAluguelServlet extends HttpServlet {
         ArrayList<ClasseProduto> classes = ProdutoDAO.listarClasses();
         request.setAttribute("classes", classes);
         
-        ArrayList<Carro> carros = ProdutoDAO.listarCarrosDisponiveis();
+        //Vinicius arrumar essa parte
+        char grp = 'A';
+        
+        ArrayList<Carro> carros = ProdutoDAO.listarCarrosDisponiveis(grp);
         request.setAttribute("carros", carros);
         
         for (Carro carro : carros) {

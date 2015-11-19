@@ -6,7 +6,6 @@
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
 import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
-import br.senac.tads.pi3.ghosts.locarsys.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -18,10 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author bruno.lopes
+ * @author bruno.clopes
  */
-@WebServlet(name = "Principal", urlPatterns = {"/Principal"})
-public class Principal extends HttpServlet {
+@WebServlet(name = "LogoutServlet", urlPatterns = {"/LogoutServlet"})
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,14 +33,7 @@ public class Principal extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //TODO
-        //Usuario u = new Usuario();
-        //u.setTipoUsuario('G');
-        String login = UsuarioDAO.usuario.getLogin();
-        String filial = UsuarioDAO.usuario.getFilial();
-        request.setAttribute("login", login);
-        request.setAttribute("filial", filial);
-        RequestDispatcher disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
+        RequestDispatcher disp = request.getRequestDispatcher("login.jspx");
         disp.forward(request, response);
     }
 
@@ -57,6 +49,7 @@ public class Principal extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        UsuarioDAO.usuario = null;
         processRequest(request, response);
     }
 

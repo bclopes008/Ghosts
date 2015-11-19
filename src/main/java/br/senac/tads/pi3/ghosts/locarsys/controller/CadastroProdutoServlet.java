@@ -85,6 +85,7 @@ public class CadastroProdutoServlet extends HttpServlet {
         c.setCor(request.getParameter("cor"));
         c.setEstado(request.getParameter("estado"));
         c.setGrupo(request.getParameter("grupo").charAt(0));
+        //TODO
         //c.setKilometragem(Float.parseFloat(request.getParameter("kilometragem")));
         c.setMarca(request.getParameter("fabricante"));
         c.setModelo(request.getParameter("modelo"));

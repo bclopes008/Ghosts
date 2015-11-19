@@ -13,12 +13,12 @@
     <html>
         <head>
             <title>Cadastrar Usuário</title>
-            <link href="../StyleCSSLoCarSys/cadastrarUsuarioStyle.css" rel="stylesheet" type="text/css"/>
-            <script src="../MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>
+            <link href="StyleCSSLoCarSys/cadastrarUsuarioStyle.css" rel="stylesheet" type="text/css"/>
+            <!--<script src="../MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
         </head>
-        <body>
+        <body data-erro="${mensagem}">
             <div>
-                <form action="" accept-charset="ISO-8859-1,UTF-8" method="post">
+                <form action="CadastroUsuarioServlet" accept-charset="ISO-8859-1,UTF-8" method="post">
                     <fieldset>
                         <legend>Cadastrar Usuário</legend>
                         Cod. Usuário
@@ -26,9 +26,9 @@
                         <label for="nome">Nome<b>&#42;</b></label>
                         <input type="text" id="nome" name="nome" required="required" tabindex="1" title="Nome do Usuário " />
 
-                        <button  type="reset" class="novo" name="novo" tabindex="9" title="Limpar"><img src="../ImagensLoCarSys/novo.png"/>Limpar</button>
-                        <button  type="submit" class="salvar" name="salvar"  value="" tabindex="8" title="Salvar"><img src="../ImagensLoCarSys/salvar.png"/>Salvar</button>
-                        <a href="../02- Tela Principal/telaPrincipal.html"><button  type="button" class="sair" name="sair" tabindex="10" title="Sair"><img src="../ImagensLoCarSys/sair.png"/>Sair</button></a><br/>
+                        <button  type="reset" class="novo" name="novo" tabindex="9" title="Limpar"><img src="ImagensLoCarSys/Novo.png"/>Limpar</button>
+                        <button  type="submit" class="salvar" name="salvar"  value="" tabindex="8" title="Salvar"><img src="ImagensLoCarSys/Salvar.png"/>Salvar</button>
+                        <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="10" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
 
                         Sexo<b>&#42;</b>
                         <label for="sexoM">M</label>
@@ -56,9 +56,9 @@
                         Filial<b>&#42;</b>
                         <select id="filial" name="filial" required="required" tabindex="8" title="Filial">
                             <option selected="selected"></option>
-                            <option>São Paulo</option>
-                            <option>Rio de Janeiro</option>
-                            <option>Minas Gerais</option>
+                            <c:forEach items="${filiais}" var="fil">
+                                <option>${fil.nome}</option>
+                            </c:forEach>
                         </select>
 
                         <label for="login">Login<b>&#42;</b></label>

@@ -17,12 +17,12 @@
         <head>
             <title>Login</title>
             <link href="StyleCSSLoCarSys/loginStyle.css" rel="stylesheet"   type="text/css"/>
-            <script src="../MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>
+            <!--<script src="../MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
         </head>
         <body data-erro="${mensagem}">
 
             <div id="logoSistema">
-                <img src="../ImagensLoCarSys/LoCarSys.png"/>
+                <img src="ImagensLoCarSys/LoCarSys.png"/>
             </div>
 
             <div>

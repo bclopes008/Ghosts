@@ -12,36 +12,36 @@ import java.util.logging.Logger;
 
 public class UsuarioDAO {
 
-    public static Usuario u;
+    public static Usuario usuario;
+    //public static char tipoUsuario;
 
     public static boolean autenticaUsuario(Usuario user) {
         Statement stmt = null;
         Connection conn = null;
 
-        String sql = "SELECT * FROM USUARIO WHERE LOGIN_USUARIO = '" + user.getLogin()
-                + "' AND SENHA_USUARIO = '" + user.getSenha() + "'";
-        /*SELECT * FROM USUARIO US 
-         INNER JOIN FUNCIONARIO FU ON US.ID_FUNCIONARIO = FU.ID_FUNCIONARIO
-         INNER JOIN FILIAL FL ON FL.ID_FILIAL = FU.ID_FILIAL 
-         WHERE LOGIN_USUARIO = 'Bruno008'
-         AND SENHA_USUARIO = '4321'*/
-
+        /*String sql = "SELECT * FROM USUARIO WHERE LOGIN_USUARIO = '" + user.getLogin()
+         + "' AND SENHA_USUARIO = '" + user.getSenha() + "'";*/
+        String sql = "SELECT * FROM USUARIO US "
+                + "INNER JOIN FUNCIONARIO FU ON US.ID_FUNCIONARIO = FU.ID_FUNCIONARIO "
+                + "INNER JOIN FILIAL FL ON FL.ID_FILIAL = FU.ID_FILIAL "
+                + "WHERE LOGIN_USUARIO = '" + user.getLogin() + "' AND SENHA_USUARIO = '" + user.getSenha() + "'";
         try {
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-            String login = null, senha = null;
 
             while (rs.next()) {
-                user.setId(rs.getInt("ID_USUARIO"));
-                u.setLogin(rs.getString("LOGIN_USUARIO"));
-                u.setTipoUsuario(rs.getString("TIPO_USUARIO").charAt(0));
+                user.setId(rs.getString("ID_USUARIO"));
+                user.setTipoUsuario(rs.getString("TIPO_USUARIO").charAt(0));
+                user.setFilial(rs.getString("NOME_FILIAL"));
                 conn.close();
+                usuario = user;
                 return true;
             }
+
         } catch (SQLException ex) {
             System.err.println("Erro: " + ex.getMessage());
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException ex) {
             System.err.println("Erro: " + ex.getMessage());
         }
         return false;
@@ -61,7 +61,7 @@ public class UsuarioDAO {
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                u.setId(rs.getInt("ID_USUARIO"));
+                u.setId(rs.getString("ID_USUARIO"));
                 u.setLogin(rs.getString("LOGIN_USUARIO"));
                 u.setSenha(rs.getString("SENHA_USUARIO"));
                 u.setTipoUsuario(rs.getString("TIPO_USUARIO").charAt(0));
