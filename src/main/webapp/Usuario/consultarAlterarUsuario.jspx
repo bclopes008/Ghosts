@@ -9,43 +9,43 @@
     <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
 
     <!-- any content can be specified here, e.g.: -->
-    <!DOCTTYPE HTML>
+
     <html>
         <head>
             <title>Consultar/Alterar Usuário</title>
-            <link href="consultarAlterarUsuarioStyle.css" rel="stylesheet" type="text/css"/>
+            <link href="../StyleCSSLoCarSys/consultarAlterarUsuarioStyle.css" rel="stylesheet" type="text/css"/>
 
         </head>
 
         <body>
-            <div id="divPai">
-                <form action="" method="post">
-                    <fieldset id="fieldset01">
-                        <legend>Consulta/Alterar Usuário</legend>
-                        <label for="login">Login Usuário</label>
-                        <input type="text" id="login" name="login"/>
-                        <input type="button"  id="pesquisa" name="pesquisa" value="Pesquisar"/>
-                        <input type="button"  id="sair" name="sair" value="Sair"/>
-                    </fieldset>
+            <div>
+                <form action="" accept-charset="ISO-8859-1,UTF-8" method="post">
+                    <fieldset>
+                        <legend>Consulta</legend>
 
-                    <fieldset id="fieldset02">
-                        <legend>Consulta de Usuário</legend>
-                        <table border="1">
-                            <tr> <td>Código</td><td>Nome</td><td>Login</td> </tr>
-                            <tr> <td>&#63;</td>      <td>&#63;</td>   <td>&#63;</td>  </tr> 
+                        <label for="nome">Nome Usuário</label>
+                        <input type="text" id="nome" name="nome"  tabindex="1" title="Nome do Usuário"/>
+
+                        <label for="login">Login</label>
+                        <input type="text" id="login" name="login" tabindex="2" title="Login do Usuário"/>
+
+                        <button  type="submit" class="pesquisa" name="pesquisa" value="" tabindex="3" title="Pesquisar"><img src="../ImagensLoCarSys/pesquisar.png"/>Pesquisar</button>
+                        <a href="../02- Tela Principal/telaPrincipal.html"><button  type="button" class="sair" name="sair" tabindex="5" title="Sair"><img src="../ImagensLoCarSys/sair.png"/>Sair</button></a>
+
+                    </fieldset><br/>
+
+                    <div id="divTabela">
+                        <span>Consultar/Alterar Usuário</span>
+                        <table name= "tabela">
+                            <tr> <td id="tdCodigo">Código</td>  <td id="tdNome">Nome</td>  <td id="tdLogin">Login</td></tr>
+                            <tr> <td>&#63;</td>      <td>&#63;</td>   <td>&#63;</td>   <td><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="../ImagensLoCarSys/Consultar.png"/></button></td> </tr> 
                         </table>
 
-                        <input type="button" id="alterar" value="Consulta/Altera"/>
-
-                    </fieldset>
+                    </div>
                 </form>
 
             </div>
-            <table>            
-                <c:forEach items="${listaUsuarios}" var="pes">
-                    <tr><td>${pes.login}<td></tr>
-                </c:forEach>
-            </table>
+
         </body>
     </html>
 

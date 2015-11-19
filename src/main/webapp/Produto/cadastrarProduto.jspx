@@ -13,100 +13,82 @@
     <html>
         <head>
             <title>Cadastrar Produto</title>
-            <link href="StyleCSSLoCarSys/cadastrarProdutoStyle.css" rel="stylesheet" type="text/css"/>
+            <link href="../StyleCSSLoCarSys/cadastrarProdutoStyle.css" rel="stylesheet" type="text/css"/>
+            <script src="cadastroProdutos,js" type="text/javascript"></script>
         </head>
-        <body data-erro="${mensagem}">
+        <body>
             <div>
-                <form action="CadastroProdutoServlet" accept-charset="ISO-8859-1,UTF-8" method="post">
+                <form action="" accept-charset="ISO-8859-1,UTF-8" method="post">
                     <fieldset>
                         <legend>Cadastro de Automóveis</legend>
 
                         Cod. Carro
-                        <input type="text" id="codCarro" name="codCarro" readonly="readonly" title="Código do Carro" value="${carro.id}"/>
-                        <label for="modelo">Modelo&#42;</label>
-                        <input type="text" id="modelo" name="modelo" required="required" title="Modelo do Carro" value="${carro.modelo}"/>
+                        <input type="text" id="codCarro" name="codCarro" readonly="readonly" title="Código do Carro"/>
+                        <label for="modelo">Modelo<b>&#42;</b></label>
+                        <input type="text" id="modelo" name="modelo" required="required" tabindex="1" title="Modelo do Carro"/>
 
-                        <button  type="reset" class="novo" name="novo" title="Limpar"></button>
-                        <button  type="submit" class="salvar" name="salvar" value="" title="Salvar"></button>
-                        <a href="Principal"><button  type="button" class="sair" name="sair" title="Sair"><!--<img src="../ImagensLoCarSys/sair.png"/>--></button></a><br/>
+                        <button  type="reset" class="novo" name="novo" tabindex="9" title="Limpar"><img src="../ImagensLoCarSys/novo.png"/>Limpar</button>
+                        <button  type="submit" class="salvar" name="salvar"  value="" tabindex="8" title="Salvar"><img src="../ImagensLoCarSys/salvar.png"/>Salvar</button>
+                        <a href="../02- Tela Principal/telaPrincipal.html"><button  type="button" class="sair" name="sair" tabindex="10" title="Sair"><img src="../ImagensLoCarSys/sair.png"/>Sair</button></a><br/>
 
-                        <label for="chassi">Chassi&#42;</label>
-                        <input type="text" id="chassi" name="chassi" maxlength="22" required="required" title="Chassi" value="${carro.chassi}"/>
-                        <label for="cor">Cor&#42;</label>
-                        <input type="text" id="cor" name="cor" required="required" title="Cor do Carro" value="${carro.cor}"/>
-                        <label for="placa">Placa&#42;</label>
-                        <input type="text" id="placa" name="placa" maxlength="8" required="required" title="Placa do Carro" value="${carro.placa}"/>
-                        <label for="renavam">Renavam&#42;</label>
-                        <input type="text" id="renavam" name="renavam" maxlength="11" required="required" title="Renavam" value="${carro.renavam}"/><br/>
+                        <label for="chassi">Chassi<b>&#42;</b></label>
+                        <input type="text" id="chassi" name="chassi" maxlength="22" required="required" tabindex="2" title="Chassi"/>
+                        <label for="cor">Cor<b>&#42;</b></label>
+                        <input type="text" id="cor" name="cor" required="required" tabindex="3" title="Cor do Carro"/>
+                        <label for="placa">Placa<b>&#42;</b></label>
+                        <input type="text" id="placa" name="placa" maxlength="8" required="required" onkeypress="formatar('###-####', this)" placeholder="ABC-1234" tabindex="4" title="Placa do Carro"/>
 
-                        Estado&#40;DF&#41;&#42;
-                        <select id="estado" name="estado" required="required" title="Estado">
-                            <option selected="selected"></option>
-                            <c:forEach items="${estados}" var="est">
-                                <c:if test="${carro.estado == est.sigla}">
-                                    <option selected="selected">${est.sigla}</option>
-                                </c:if>
-                                <c:if test="${carro.estado != est.sigla}">
-                                    <option>${est.sigla}</option>
-                                </c:if>
-                            </c:forEach>
-                        </select>
-                        <label for="cidade">Cidade&#42;</label>
-                        <input type="text" id="cidade" name="cidade" maxlength="15" required="required" title="Cidade" value="${carro.cidade}"/>
-                        <label for="ano">Ano&#42;</label>
-                        <input type="text" id="ano" name="ano" maxlength="4" required="required" title="Ano" value="${carro.ano}"/>
-                        Ano Fabricação&#42;
-                        <input type="text" id="anoFabricacao" name="anoFabricacao" maxlength="4" required="required" title="Data de Fabricação" value="${carro.anoFabricacao}"/><br/>
+                        <label for="renavam">Renavam<b>&#42;</b></label>
+                        <input type="text" id="renavam" name="renavam" maxlength="11" required="required" tabindex="5" title="Renavam"/><br/>
 
-                        Fabricante&#42;
-                        <select id="fabricante" name="fabricante" required="required" title="Fabricante">
+                        Estado&#40;DF&#41;<b>&#42;</b>
+                        <select id="estado" name="estado" required="required" tabindex="6" title="Estado">
                             <option selected="selected"></option>
-                            <c:forEach items="${fabricantes}" var="fab">
-                                <c:if test="${carro.marca == fab.nomeFabricante}">
-                                    <option selected="selected">${fab.nomeFabricante}</option>
-                                </c:if>
-                                <c:if test="${carro.marca != fab.nomeFabricante}">
-                                    <option>${fab.nomeFabricante}</option>
-                                </c:if>
-                            </c:forEach>
+                            <option>SP</option>
+                            <option>RJ</option>
+                            <option>MG</option>
                         </select>
-                        Combustivel&#42;
-                        <select id="combustivel" name="combustivel" required="required" title="Combustivel">
+                        <label for="cidade">Cidade<b>&#42;</b></label>
+                        <input type="text" id="cidade" name="cidade" required="required" tabindex="7" title="Cidade"/>
+                        <label for="ano">Ano<b>&#42;</b></label>
+                        <input type="text" id="ano" name="ano" maxlength="4" required="required"  tabindex="8" title="Ano"/>
+                        Data Fabricação<b>&#42;</b>
+                        <input type="text" id="anoFabricacao" name="anoFabricacao" maxlength="4" required="required" tabindex="9" title="Data de Fabricação"/><br/>
+
+                        Fabricante<b>&#42;</b>
+                        <select id="fabricante" name="fabricante" required="required" tabindex="10" title="Fabricante">
                             <option selected="selected"></option>
-                            <c:forEach items="${combustiveis}" var="comb">
-                                <c:if test="${carro.combustivel == comb.tipoCombustivel}">
-                                    <option selected="selected">${comb.tipoCombustivel}</option>
-                                </c:if>
-                                <c:if test="${carro.combustivel != comb.tipoCombustivel}">
-                                    <option>${comb.tipoCombustivel}</option>
-                                </c:if>
-                            </c:forEach>
+                            <option>Honda</option>
                         </select>
-                        Grupo&#42;
-                        <select id="grupo" name="grupo" required="required" title="Grupo">
+                        Combustivel<b>&#42;</b>
+                        <select id="combustivel" name="combustivel" required="required" tabindex="11" title="Combustivel">
                             <option selected="selected"></option>
-                            <c:forEach items="${classes}" var="classes">
-                                <c:if test="${carro.grupo == classes.tipoClasse}">
-                                    <option selected="selected">${classes.tipoClasse}</option>
-                                </c:if>
-                                <c:if test="${carro.grupo != classes.tipoClasse}">
-                                    <option>${classes.tipoClasse}</option>
-                                </c:if>
-                            </c:forEach>
+                            <option>Gasolina</option>
+                            <option>Jsp</option>
+                            <option>Alcool</option>
                         </select>
-                        Filial&#42;
-                        <select id="filial" name="filial" required="required" title="Filial">
+                        Grupo<b>&#42;</b>
+                        <select id="grupo" name="grupo" required="required" tabindex="12" title="Grupo">
                             <option selected="selected"></option>
-                            <c:forEach items="${filiais}" var="fil">
-                                <c:if test="${carro.filial == fil.nome}">
-                                    <option selected="selected">${fil.nome}</option>
-                                </c:if>
-                                <c:if test="${carro.filial != fil.nome}">
-                                    <option>${fil.nome}</option>
-                                </c:if>
-                            </c:forEach>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
                         </select>
-                    </fieldset>
+
+                        <label for="km">KM<b>&#42;</b></label>
+                        <input type="text" id="km" name="km" required="required" tabindex="13" title="Kilometragem" />
+
+                        Filial<b>&#42;</b>
+                        <select id="filial" name="filial" required="required" tabindex="14" title="Filial">
+                            <option selected="selected"></option>
+                            <option>São Paulo</option>
+                            <option>Rio de Janeiro</option>
+                            <option>Minas Gerais</option>
+                        </select>
+
+                    </fieldset> <br/>
+                    <span><b>&#42;</b> Campos Obrigatorios</span>
                 </form>
             </div>
             <script>

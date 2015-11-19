@@ -1,5 +1,5 @@
 body{
-    background-color:#EDEDED; 
+    background-color:#EDEDED;
     font-family: "arial","verdana","sans-serif";
     font-size:14px;
     font-weight:bold;
@@ -7,7 +7,10 @@ body{
 legend{
     font-size:18px;
 }
-body input{
+form input{
+    border-radius:5px;
+}
+body select{
     border-radius:5px;
 }
 
@@ -15,6 +18,7 @@ div{
     width: 1000px;
     height: 500px;
     margin:80px;
+
 }
 fieldset{
     background-color:Gainsboro;
@@ -23,22 +27,20 @@ fieldset{
     border-radius:5px;
 }
 #divTabela{
-   
     width: 900px;
     height: 150px;
     border-radius:5px;
     margin-top:0;
     margin-left:0;
 }
-#nome{
+#modelo{
     margin-left:10px;
-    margin-right:40px;
-    width:400px;
+    margin-right:80px;
+    margin-top:20px;
 }
-#cpf{
-    margin-left:10px;
-    margin-right:40px;
-    width:110px;
+#grupo{
+    margin-right:320px;
+
 }
 
 .pesquisa{
@@ -58,24 +60,29 @@ fieldset{
     border:transparent;
 
 }
+
 td{
     font-family: "arial","verdana","sans-serif";
     font-size:14px;
     font-weight:bold;
 
-    border-spacing:0;
+    border-spacing:0px;
     padding:5px;
     text-align:center;
     border:1px solid;
     background-color:Gainsboro;
 }
+
 #tdCodigo{
     width:90px;
 }
-#tdNome{
-    width:300px;
+#tdModelo{
+    width:200px;
 }
-#tdCPF{
+#tdGrupo{
+    width:130px;
+}
+#tdPlaca{
     width:130px;
 }
 .alterar{
@@ -95,5 +102,4 @@ button{
     font-size:12px;
     font-weight:bold;
 }
-
 

@@ -1,147 +1,147 @@
-body{
-    background-color:#EDEDED;
-    font-family: "arial","verdana","sans-serif";
-    font-size:14px;
-    font-weight:bold;
+ body{
+	 background-color:#EDEDED;
+	 font-family: "arial","verdana","sans-serif";
+	 font-size:14px;
+	 font-weight:bold;
 }
 legend{
-    font-size:18px;
+	font-size:18px;
 }
-body input{
-    border-radius:5px;
-}
-body select{
-    border-radius:5px;
-}
-
+ body input{
+	 border-radius:5px;
+ }
+ body select{
+	 border-radius:5px;
+ }
+ 
 div{
-    margin:80px; 
-}
-
-fieldset{
+	margin:80px; 
+ }
+ 
+ fieldset{
     background-color:Gainsboro;
-    width:850px;
-    height:165px;
-    border-radius:5px;
-}
-
-#codCliente{
-    width:110px;
-    margin-left:10px;
-    margin-right:40px;
-}
-#nome{
-    width:250px;
-    margin-left:10px;
-    margin-right:110px;
-
-}
-.novo{
-    width:40px;
-    height:35px;
-    margin-right:10px;
-    background-repeat:no-repeat;
-    background-position:center center;
-    border-radius:50px;
-    border:transparent;
+	width:850px;
+	height:165px;
+	border-radius:5px;
+ }
+ 
+ #codCliente{
+	width:110px;
+	margin-left:10px;
+	margin-right:40px;
+ }
+ #nome{
+	width:250px;
+	margin-left:10px;
+	margin-right:110px;
+	 
+ }
+ .novo{
+	width:40px;
+	height:35px;
+	margin-right:10px;
+	background-repeat:no-repeat;
+	background-position:center center;
+	border-radius:50px;
+	border:transparent;
 }
 .salvar{
-    width:35px;
-    height:35px;
-    margin-right:10px;
-    background-repeat:no-repeat;
-    background-position:center center;
-    border:transparent;
+	width:35px;
+	height:35px;
+	margin-right:10px;
+	background-repeat:no-repeat;
+	background-position:center center;
+	border:transparent;
 }
 .sair{
-    width:35px;
-    height:35px;
-    background-repeat:no-repeat;
-    background-position:center center;
-    border:transparent;
+	width:35px;
+	height:35px;
+	background-repeat:no-repeat;
+	background-position:center center;
+	border:transparent;
 }
-
-#cpf{
-    margin-left:10px;
-    margin-right:85px; 
-    width:110px;
-
-}
-#nascimento{
-    margin-left:10px;
-    margin-right:60px; 
-}
-#cnh{
-    margin-left:10px;
+ 
+ #cpf{
+	margin-left:10px;
+	margin-right:85px; 
+	width:110px;
+	
+ }
+ #nascimento{
+	margin-left:10px;
+	margin-right:60px; 
+ }
+ #cnh{
+	margin-left:10px;
     margin-top:30px;
-    margin-bottom:30px;
-    width:110px;
-}
+	margin-bottom:30px;
+	width:110px;
+ }
+ 
+ #sexoM{
 
-#sexoM{
-
-}
-#sexoF{
+ }
+ #sexoF{
+	margin-right:100px;
+ }
+ #celular{
+	margin-left:10px;
     margin-right:100px;
-}
-#celular{
-    margin-left:10px;
-    margin-right:100px;
-    width:110px;
-}
-#email{
-    margin-left:10px;
+	width:110px;
+ }
+ #email{
+	margin-left:10px;
     width:200px;
-}
-
-/*Fim do primeiro fieldset*/
-
-#cep{
-    margin-left:10px;
-    margin-right:60px;
-    width:70px;
-}
-#endereco{
-    margin-left:10px;
-    margin-right:50px;
-    width:300px;
-}
-#numero{
-    margin-left:10px;
-    width:80px;
-}
-#bairro{
-    margin-left:10px;
-    margin-right:100px;
-    width:130px;
-}
-#estado{
-    margin-right:100px;
-}
-#cidade{
-    margin-left:10px;
-    margin-top:30px;
-    margin-bottom:30px;
-}
-#complemento{
-    margin-left:10px;
-    margin-right:80px;
-}
-#observacoes{
-    margin-left:10px;
-    width:305px;
-}
-b{
-    color:red;
-    font-size:15px;
+ }
+ 
+ /*Fim do primeiro fieldset*/
+ 
+ #cep{
+	 margin-left:10px;
+	 margin-right:60px;
+   	 width:70px;
+ }
+ #endereco{
+	 margin-left:10px;
+	 margin-right:50px;
+	 width:300px;
+ }
+ #numero{
+	 margin-left:10px;
+   	 width:80px;
+ }
+ #bairro{
+	 margin-left:10px;
+	 margin-right:100px;
+	 width:130px;
+ }
+ #estado{
+	 margin-right:100px;
+ }
+ #cidade{
+	 margin-left:10px;
+	 margin-top:30px;
+	 margin-bottom:30px;
+ }
+ #complemento{
+	  margin-left:10px;
+	  margin-right:80px;
+ }
+ #observacoes{
+	 margin-left:10px;
+	 width:305px;
+ }
+ b{
+	color:red;
+	font-size:15px;
 }
 span{
-
-    margin-left:720px;
+	
+	margin-left:720px;
 }
 button{
-
-    font-family: "arial","verdana","sans-serif";
-    font-size:12px;
-    font-weight:bold;
+	 
+	 font-family: "arial","verdana","sans-serif";
+	 font-size:12px;
+	 font-weight:bold;
 }

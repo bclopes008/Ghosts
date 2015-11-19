@@ -14,29 +14,29 @@ body select{
     border-radius:5px;
 }
 div{
-    width: 1000px;
-    height: 400px;
-    position:relative;
+
+    width:1000px;
+    height:300px;	
     margin:80px;
 
-} 
+}
 fieldset{
     background-color:Gainsboro;
-    width: 930px;
-    height: 240px;
+    width:930px;
+    height:200px;
     border-radius:5px;
 }
 
-#codCarro{
+#codUsuario{
     margin-left:10px;
-    margin-right:80px;
+    margin-right:40px;
     width:110px;
 
 }
-#modelo{
+#nome{
     margin-left:10px;
-    margin-right:220px;
-
+    width:250px;
+    margin-right:180px;
 }
 .novo{
     width:40px;
@@ -63,69 +63,55 @@ fieldset{
     border:transparent;
 }
 
-#chassi{
-    margin-left:10px;
-    margin-right:40px;
-    margin-top:30px;
-    width:160px;
+#sexoM{
+
 }
-#cor{
+#sexoF{
+    margin-right:30px;
+}
+#nascimento{
     margin-left:10px;
     margin-right:30px;
-    width:110px;
-}
-#placa{
+}	
+#funcao{
     margin-left:10px;
-    width:110px;
-    margin-right:40px;
-}
-#renavam{
-    margin-left:10px;
-    width:110px;
-}
-
-#anoFabricacao{
-    margin-left:10px;
-    width:80px;
-}
-#estado{
     margin-top:30px;
-    margin-right:60px;
-}
-#cidade{
+    margin-bottom:30px;
+    margin-right:55px;
+    width:110px;
+} 
+#cpf{
     margin-left:10px;
-    margin-right:40px;
     width:110px;
 }
-#ano{
-    margin-left:10px;
-    margin-right:75px;
-    width:80px;
-}
-
-#fabricante{
-    margin-top:30px;
-    margin-right:50px;
-}
-#combustivel{
-    margin-right:45px;
-}
-#grupo{
-    margin-right:40px;
-}
-#km{
+#tipoUsuario{
     margin-left:10px;
     margin-right:30px;
-    width:80px;
+}
+
+#filial{
+    margin-left:10px;
+    margin-right:30px;
+}
+#login{
+    margin-left:10px;
+    margin-right:40px;
+    width:190px;
+}
+#senha{
+    margin-left:10px;
+    width:60px;
 }
 b{
     color:red;
     font-size:15px;
 }
 span{
+
     margin-left:800px;
 }
 button{
+
     font-family: "arial","verdana","sans-serif";
     font-size:12px;
     font-weight:bold;
