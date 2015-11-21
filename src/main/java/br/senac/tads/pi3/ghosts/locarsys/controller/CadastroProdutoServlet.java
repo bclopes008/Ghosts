@@ -93,11 +93,11 @@ public class CadastroProdutoServlet extends HttpServlet {
         c.setRenavam(request.getParameter("renavam"));
         c.setFilial(request.getParameter("filial"));
         if (CarroDAO.cadastraCarro(c)) {
-            request.setAttribute("carro", c);
             request.setAttribute("mensagem","Produto cadastrado com sucesso!");
         } else {
             request.setAttribute("mensagem","Erro ao cadastradar o Produto!");
         }
+        request.setAttribute("carro", c);
         processRequest(request, response);
     }
 

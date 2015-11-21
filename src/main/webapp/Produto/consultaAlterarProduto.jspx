@@ -4,7 +4,8 @@
     Created on : 28/10/2015, 22:27:30
     Author     : fabio.ssanto10
 -->
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
 
     <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
 
@@ -13,33 +14,49 @@
     <html>
         <head>
             <title>Consulta/Alterar Produto</title>
-            <link href="../StyleCSSLoCarSys/consultaAlterarProdutoStyle.css" rel="stylesheet" type="text/css"/>
+            <link href="StyleCSSLoCarSys/consultaAlterarProdutoStyle.css" rel="stylesheet" type="text/css"/>
         </head>
         <body>
             <div>
-                <form action="" accept-charset="ISO-8859-1,UTF-8" method="post">
+                <form action="ConsultaProdutosServlet" accept-charset="ISO-8859-1,UTF-8" method="post">
                     <fieldset>
                         <legend>Consulta</legend>
                         <label for="modelo">Modelo</label>
-                        <input type="text" id="modelo" name="modelo" tabindex="1" title="Modelo" />
+                        <input type="text" id="modelo" name="modelo" tabindex="1" title="Modelo" value="${modelo}"/>
                         Grupo
                         <select id="grupo" name="grupo" tabindex="2" title="Grupo">
                             <option selected="selected"></option>
-                            <option>A</option>
-                            <option>B</option>
-                            <option>C</option>
-                            <option>D</option>
+                            <c:forEach items="${classes}" var="classes">
+                                <c:if test="${grupo == classes.tipoClasse}">
+                                    <option selected="selected">${classes.tipoClasse}</option>
+                                </c:if>
+                                <c:if test="${grupo != classes.tipoClasse}">
+                                    <option>${classes.tipoClasse}</option>
+                                </c:if>
+                            </c:forEach>
                         </select>
 
-                        <button  type="submit" class="pesquisa" name="pesquisa" value="" tabindex="3" title="Pesquisar"><img src="ImagensLoCarSys/pesquisar.png "/>Pesquisar</button>
-                        <a href="../02- Tela Principal/telaPrincipal.html"><button  type="button" class="sair" name="sair" tabindex="5" title="Sair"><img src="../ImagensLoCarSys/sair.png"/>Sair</button></a><br/>
+                        <button  type="submit" class="pesquisa" name="pesquisa" value="" tabindex="3" title="Pesquisar"><img src="ImagensLoCarSys/Pesquisar.png"/>Pesquisar</button>
+                        <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="5" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
                     </fieldset><br/>
 
                     <div id="divTabela">
                         <span>Consulta/Alterar Automóveis</span>
                         <table name= "tabela">
-                            <tr> <td id="tdCodigo">Código</td> <td id="tdModelo">Modelo</td> <td id="tdGrupo">Grupo</td> <td id="tdPlaca">Placa</td></tr>
-                            <tr> <td>&#63;</td>      <td>&#63;</td>   <td>&#63;</td> <td>&#63;</td>  <td><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="../ImagensLoCarSys/Consultar.png"/></button></td> </tr>
+                            <tr>
+                                <td id="tdCodigo">Código</td>
+                                <td id="tdModelo">Modelo</td> <td id="tdGrupo">Grupo</td>
+                                <td id="tdPlaca">Placa</td>
+                            </tr>
+                            <c:forEach items="${carros}" var="car" varStatus="stat">
+                            <tr>
+                                <td>${car.id}</td>
+                                <td>${car.modelo}</td>
+                                <td>${car.grupo}</td>
+                                <td>${car.placa}</td>
+                                <td><a href="EditarProdutoServlet?id=${car.id}"><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="ImagensLoCarSys/Consultar.png"/></button></a></td>
+                            </tr>
+                            </c:forEach>
                         </table>
 
                     </div>

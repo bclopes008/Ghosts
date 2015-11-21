@@ -23,8 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruno
  */
-@WebServlet(name = "UsuariosServlet", urlPatterns = {"/UsuariosServlet"})
-public class UsuariosServlet extends HttpServlet {
+@WebServlet(name = "EditarUsuarioServlet", urlPatterns = {"/EditarUsuarioServlet"})
+public class EditarUsuarioServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,13 +35,12 @@ public class UsuariosServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ArrayList<Filial> filiais = new ArrayList<>();
         filiais = ProdutoDAO.listarFiliais();
         request.setAttribute("filiais", filiais);
-
+        request.setAttribute("tipo", "EditarUsuarioServlet");
         RequestDispatcher disp = request.getRequestDispatcher("/Usuario/cadastrarUsuario.jspx");
         disp.forward(request, response);
     }
@@ -58,14 +57,12 @@ public class UsuariosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UsuarioDAO users = new UsuarioDAO();
-        
-        ArrayList<Usuario> listaUsuarios = users.consultaUsuario();
-        
-        request.setAttribute("listaUsuarios", listaUsuarios);
-        
-        RequestDispatcher disp = request.getRequestDispatcher("UsuariosServlet");
-        disp.forward(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        System.out.println("id = " + id);
+        Usuario usuario = UsuarioDAO.verUsuario(id);
+        request.setAttribute("usuario", usuario);
+        //Envia o tipo para saber se é para cadastrar ou alterar
+        processRequest(request, response);
     }
 
     /**
@@ -79,7 +76,14 @@ public class UsuariosServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        Usuario u = CadastroUsuarioServlet.adiciocar(request);
+        u.setId(Integer.parseInt(request.getParameter("codUsuario")));
+        if(UsuarioDAO.alteraUsuario(u))
+            request.setAttribute("mensagem", "Usuário alterado com sucesso!");
+        else
+            request.setAttribute("mensagem","Erro ao alterar o Usuário!");
+        request.setAttribute("usuario", u);
+        processRequest(request, response);
     }
 
     /**

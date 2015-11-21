@@ -40,7 +40,8 @@ public class CadastroUsuarioServlet extends HttpServlet {
         ArrayList<Filial> filiais = new ArrayList<>();
         filiais = ProdutoDAO.listarFiliais();
         request.setAttribute("filiais", filiais);
-
+        request.setAttribute("tipo", "CadastroUsuarioServlet");
+        request.setAttribute("user", UsuarioDAO.usuario.getTipoUsuario());        
         RequestDispatcher disp = request.getRequestDispatcher("/Usuario/cadastrarUsuario.jspx");
         disp.forward(request, response);
     }
@@ -71,7 +72,17 @@ public class CadastroUsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher disp;
+        Usuario u = adiciocar(request);
+        if (UsuarioDAO.cadastraUsuario(u)) {
+            request.setAttribute("mensagem", "Usuário cadastrado com sucesso!");
+        } else {
+            request.setAttribute("mensagem", "Erro ao cadastradar o Usuário!");
+        }
+        request.setAttribute("usuario", u);
+        processRequest(request, response);
+    }
+
+    public static Usuario adiciocar(HttpServletRequest request) {
         Usuario u = new Usuario();
         u.setNome(request.getParameter("nome"));
         u.setSexo(request.getParameter("sexo").charAt(0));
@@ -82,14 +93,7 @@ public class CadastroUsuarioServlet extends HttpServlet {
         u.setSenha(request.getParameter("senha"));
         u.setCpf(request.getParameter("cpf"));
         u.setFilial(request.getParameter("filial"));
-        UsuarioDAO dao = new UsuarioDAO();
-        if (dao.cadastraUsuario(u)) {
-            disp = request.getRequestDispatcher("Principal");
-            request.setAttribute("mensagem","Usuário cadastrado com sucesso!");
-        } else {
-            disp = request.getRequestDispatcher("/Usuario/cadastrarUsuario.jspx");
-        }
-        disp.forward(request, response);
+        return u;
     }
 
     /**

@@ -5,10 +5,14 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
-import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
-import br.senac.tads.pi3.ghosts.locarsys.model.Usuario;
+import br.senac.tads.pi3.ghosts.locarsys.dao.CarroDAO;
+import br.senac.tads.pi3.ghosts.locarsys.dao.ProdutoDAO;
+import br.senac.tads.pi3.ghosts.locarsys.model.Carro;
+import br.senac.tads.pi3.ghosts.locarsys.model.ClasseProduto;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,10 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author bruno.lopes
+ * @author Bruno
  */
-@WebServlet(name = "Principal", urlPatterns = {"/Principal"})
-public class Principal extends HttpServlet {
+@WebServlet(name = "ConsultaProdutosServlet", urlPatterns = {"/ConsultaProdutosServlet"})
+public class ConsultaProdutosServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,17 +38,12 @@ public class Principal extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //TODO
-        //Usuario u = new Usuario();
-        //u.setTipoUsuario('G');
-        String login = UsuarioDAO.usuario.getLogin();
-        String filial = UsuarioDAO.usuario.getFilial();
-        char tipoUsuario = UsuarioDAO.usuario.getTipoUsuario();
-        request.setAttribute("login", login);
-        request.setAttribute("filial", filial);
-        request.setAttribute("tipoUsuario", tipoUsuario);
-        RequestDispatcher disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
+        ArrayList<ClasseProduto> classes = new ArrayList<>();
+        classes = ProdutoDAO.listarClasses();
+        request.setAttribute("classes", classes);
+        RequestDispatcher disp = request.getRequestDispatcher("/Produto/consultaAlterarProduto.jspx");
         disp.forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -73,6 +72,12 @@ public class Principal extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String modelo = request.getParameter("modelo");
+        String grupo = request.getParameter("grupo");
+        List<Carro> listarCarros = CarroDAO.pesquisarCarro(modelo, grupo);
+        request.setAttribute("carros", listarCarros);
+        request.setAttribute("modelo", modelo);
+        request.setAttribute("grupo", grupo);
         processRequest(request, response);
     }
 

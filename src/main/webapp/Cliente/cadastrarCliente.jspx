@@ -29,14 +29,14 @@
                         <input type="text" id="nome" name="nome" required="required" tabindex="1" title="Nome do Cliente " value="${cliente.nome}"/>
 
                         <c:if test="${tipo == 'CadastroClienteServlet'}">
-                            <button  type="reset" class="novo" name="novo" tabindex="9" title="Limpar"><img src="ImagensLoCarSys/Novo.png"/>Limpar</button>
+                            <button  type="reset" class="novo" name="novo" tabindex="18" title="Limpar"><img src="ImagensLoCarSys/Novo.png"/>Limpar</button>
                             </c:if>
-                        <button  type="submit" class="salvar" name="salvar"  value="" tabindex="8" title="Salvar"><img src="ImagensLoCarSys/Salvar.png"/>Salvar</button>
+                        <button  type="submit" class="salvar" name="salvar"  value="" tabindex="17" title="Salvar"><img src="ImagensLoCarSys/Salvar.png"/>Salvar</button>
                             <c:if test="${tipo == 'CadastroClienteServlet'}">
-                            <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="10" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
+                            <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="19" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
                                 </c:if>
                                 <c:if test="${tipo == 'EditarClienteServlet'}">
-                            <a href="ConsultaClientesServlet"><button  type="button" class="sair" name="sair" tabindex="10" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
+                            <a href="ConsultaClientesServlet"><button  type="button" class="sair" name="sair" tabindex="19" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
                                 </c:if>
                         <label for="cpf">CPF<b>&#42;</b></label>
                         <input type="text" id="cpf" name="cpf" maxlength="14" required="required" onkeypress="formatar('###.###.###-##', this)" placeholder="___.___.___-__" tabindex="2" title="CPF do Cliente" value="${cliente.cpf}"/>

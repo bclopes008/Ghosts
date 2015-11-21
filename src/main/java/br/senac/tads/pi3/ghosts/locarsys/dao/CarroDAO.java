@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -127,7 +128,7 @@ public class CarroDAO {
 
     public static Carro consultarCarroDisponiveis() {
         Carro c = new Carro();
-        
+
         Statement stmt = null;
         Connection conn = null;
         ResultSet rs = null;
@@ -140,12 +141,45 @@ public class CarroDAO {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                
+
             }
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CarroDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return c;
+    }
+
+    public static List<Carro> pesquisarCarro(String modelo, String grupo) {
+        Statement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+
+        /* Pesquisa Usuário */
+        String sql = "SELECT * FROM CARRO CA "
+                + "INNER JOIN CLASSE CL ON CA.ID_CLASSE = CL.ID_CLASSE "
+                + "WHERE CA.MODELO_CARRO LIKE '%" + modelo + "%' AND CL.TIPO_CLASSE LIKE '%" + grupo + "%' "
+                + "ORDER BY MODELO_CARRO";
+        try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            ArrayList<Carro> carros = new ArrayList<>();
+            while (rs.next()) {
+                Carro c = new Carro();
+                c.setId(rs.getInt("ID_CARRO"));
+                c.setModelo(rs.getString("MODELO_CARRO"));
+                c.setGrupo(rs.getString("TIPO_CLASSE").charAt(0));
+                c.setPlaca(rs.getString("PLACA_CARRO"));
+                carros.add(c);
+            }
+            conn.close();
+            return carros;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        }
+        return null;
     }
 }

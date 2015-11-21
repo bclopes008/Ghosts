@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Usuario extends Funcionario{
 
-    private String id;
+    private int id;
     private String login;
     private String senha;
     private char tipoUsuario;
@@ -21,7 +21,7 @@ public class Usuario extends Funcionario{
         this.senha = senha;
     }
 
-    public Usuario(String id, String login, String senha, char tipoUsuario, String funcao, String filial, String nome, char sexo, String dataNascimento, String cpf) {
+    public Usuario(int id, String login, String senha, char tipoUsuario, String funcao, String filial, String nome, char sexo, String dataNascimento, String cpf) {
         super(funcao, filial, nome, sexo, dataNascimento, cpf);
         this.id = id;
         this.login = login;
@@ -29,7 +29,7 @@ public class Usuario extends Funcionario{
         this.tipoUsuario = tipoUsuario;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -45,7 +45,7 @@ public class Usuario extends Funcionario{
         this.tipoUsuario = tipoUsuario;
     }
     
-    public String getId() {
+    public int getId() {
         return id;
     }
 

@@ -18,7 +18,7 @@
         </head>
         <body>
             <div>
-                <form action="" accept-charset="ISO-8859-1,UTF-8" method="post">
+                <form action="ConsultaClientesServlet" accept-charset="ISO-8859-1,UTF-8" method="post">
                     <fieldset>
                         <legend>Consulta</legend>
 
@@ -36,7 +36,11 @@
                     <div id="divTabela">
                         <span>Consulta/Alterar Cliente</span>
                         <table name= "tabela">
-                            <tr><td id="tdCodigo">Código</td><td id="tdNome">Nome</td><td id="tdCPF">CPF</td></tr>
+                            <tr>
+                                <td id="tdCodigo">Código</td>
+                                <td id="tdNome">Nome</td>
+                                <td id="tdCPF">CPF</td>
+                            </tr>
                             <c:forEach items="${clientes}" var="cli" varStatus="stat">
                                 <tr> 
                                     <td>${cli.id}</td>

@@ -40,6 +40,7 @@ public class EditarClienteServlet extends HttpServlet {
         ArrayList<Estado> estados = new ArrayList<>();
         estados = EstadoDAO.listarEstados();
         request.setAttribute("estados", estados);
+        //Envia o tipo para saber se é para cadastrar ou alterar
         request.setAttribute("tipo", "EditarClienteServlet");
         RequestDispatcher disp = request.getRequestDispatcher("/Cliente/cadastrarCliente.jspx");
         disp.forward(request, response);
@@ -61,8 +62,6 @@ public class EditarClienteServlet extends HttpServlet {
         System.out.println("id = " + id);
         Cliente cliente = ClienteDAO.verCliente(id);
         request.setAttribute("cliente", cliente);
-        //Envia o tipo para saber se é para cadastrar ou alterar
-        request.setAttribute("tipo", "EditarClienteServlet");
         processRequest(request, response);
     }
 

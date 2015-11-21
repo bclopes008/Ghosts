@@ -83,7 +83,6 @@ public class ClienteDAO {
         ResultSet rs = null;
 
         /* Pesquisa Cliente */
-        //String sql = "SELECT * FROM CLIENTE WHERE NOME_CLIENTE LIKE '%" + nome + "%' ORDER BY NOME_CLIENTE";
         String sql = "SELECT * FROM CLIENTE "
                 + "WHERE NOME_CLIENTE LIKE '%" + nome + "%' "
                 + "AND CPF_CLIENTE LIKE '%" + cpf + "%' "
@@ -92,27 +91,20 @@ public class ClienteDAO {
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
-            List<Cliente> clientes = new ArrayList<>();
+            ArrayList<Cliente> clientes = new ArrayList<>();
             while (rs.next()) {
                 Cliente c = new Cliente();
                 c.setId(rs.getInt("ID_CLIENTE"));
                 c.setNome(rs.getString("NOME_CLIENTE"));
                 c.setCpf(rs.getString("CPF_CLIENTE"));
-                c.setDataNascimento(rs.getString("DATA_NASC_CLIENTE"));
-                c.setCelular(rs.getString("CELULAR_CLIENTE"));
-                c.setEmail(rs.getString("EMAIL_CLIENTE"));
                 clientes.add(c);
-                System.out.println("Nome3: " + c.getNome());
             }
             conn.close();
-            for (Cliente cliente : clientes) {
-                System.out.println("Nomes: " + cliente.getNome());
-            }
             return clientes;
         } catch (SQLException | ClassNotFoundException ex) {
-            System.err.println("" + ex.getMessage());
+            System.err.println("Erro: " + ex.getMessage());
         } catch (Exception ex) {
-            System.err.println("" + ex.getMessage());
+            System.err.println("Erro: " + ex.getMessage());
         }
         return null;
     }
@@ -122,15 +114,18 @@ public class ClienteDAO {
         Statement stmt = null;
         Connection conn = null;
         ResultSet rs = null;
-        int estado = 0;
 
-        /* Pesquisa Cliente */
-        String sql = "SELECT * FROM CLIENTE WHERE ID_CLIENTE = " + id + "";
+        /* Pesquisa Cliente com o id para ir na tela de alteração*/
+        String sql = "SELECT * FROM CLIENTE CL "
+                + "INNER JOIN ENDERECO EN ON CL.ID_CLIENTE = EN.ID_ENDERECO "
+                + "INNER JOIN ESTADO ES ON EN.ID_ESTADO = ES.ID_ESTADO "
+                + "WHERE CL.ID_CLIENTE = " + id + "";
         try {
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
             Cliente c = new Cliente();
+            Endereco e = new Endereco();
             while (rs.next()) {
                 c.setId(rs.getInt("ID_CLIENTE"));
                 c.setNome(rs.getString("NOME_CLIENTE"));
@@ -140,14 +135,6 @@ public class ClienteDAO {
                 c.setSexo(rs.getString("SEXO_CLIENTE").charAt(0));
                 c.setCelular(rs.getString("CELULAR_CLIENTE"));
                 c.setEmail(rs.getString("EMAIL_CLIENTE"));
-            }
-            sql = "SELECT * FROM ENDERECO WHERE ID_CLIENTE = " + id + "";
-            conn = Conexoes.obterConexao();
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql);
-            Endereco e = new Endereco();
-            while (rs.next()) {
-                estado = rs.getInt("ID_ESTADO");
                 e.setCidade(rs.getString("CIDADE_ESTADO"));
                 e.setEndereco(rs.getString("LOGRADOURO_ENDERECO"));
                 e.setNumero(rs.getString("NUMERO_ENDERECO"));
@@ -155,14 +142,6 @@ public class ClienteDAO {
                 e.setComplemento(rs.getString("COMPLEMENTO_ENDERECO"));
                 e.setCep(rs.getString("CEP_ENDERECO"));
                 e.setObs(rs.getString("OBS_ENDERECO"));
-            }
-            conn.close();
-            sql = "SELECT SIGLA_ESTADO FROM ESTADO WHERE ID_ESTADO = " + estado + "";
-
-            conn = Conexoes.obterConexao();
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql);
-            while (rs.next()) {
                 e.setEstado(rs.getString("SIGLA_ESTADO"));
             }
             c.setEndereco(e);
