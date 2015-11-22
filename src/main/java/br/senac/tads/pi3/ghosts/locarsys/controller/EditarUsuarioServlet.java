@@ -10,7 +10,6 @@ import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
 import br.senac.tads.pi3.ghosts.locarsys.model.Filial;
 import br.senac.tads.pi3.ghosts.locarsys.model.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,7 +39,11 @@ public class EditarUsuarioServlet extends HttpServlet {
         ArrayList<Filial> filiais = new ArrayList<>();
         filiais = ProdutoDAO.listarFiliais();
         request.setAttribute("filiais", filiais);
+        //Envia o tipo para saber se é para cadastrar ou alterar
         request.setAttribute("tipo", "EditarUsuarioServlet");
+        //Para Verifica se o usuário possui acesso a essa página
+        if(UsuarioDAO.usuario != null)
+            request.setAttribute("usuario", UsuarioDAO.usuario);
         RequestDispatcher disp = request.getRequestDispatcher("/Usuario/cadastrarUsuario.jspx");
         disp.forward(request, response);
     }
@@ -61,7 +64,6 @@ public class EditarUsuarioServlet extends HttpServlet {
         System.out.println("id = " + id);
         Usuario usuario = UsuarioDAO.verUsuario(id);
         request.setAttribute("usuario", usuario);
-        //Envia o tipo para saber se é para cadastrar ou alterar
         processRequest(request, response);
     }
 

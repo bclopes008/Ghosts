@@ -8,63 +8,75 @@
           xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
 
     <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+    <c:choose>
+        <c:when test="${usuario.tipoUsuario == 'V' || usuario.tipoUsuario == 'G'}">
+            <!-- any content can be specified here, e.g.: -->
 
-    <!-- any content can be specified here, e.g.: -->
+            <html>
+                <head>
+                    <title>Consulta/Alterar Produto</title>
+                    <link href="StyleCSSLoCarSys/consultaAlterarProdutoStyle.css" rel="stylesheet" type="text/css"/>
+                </head>
+                <body>
+                    <jsp:include page="../Principal/menu.jspx" flush="false">  
+                        <jsp:param value="../Principal/menu.jspx" name="menu"/>  
+                    </jsp:include>
+                    <div>
+                        <form action="ConsultaProdutosServlet" accept-charset="ISO-8859-1,UTF-8" method="post">
+                            <fieldset>
+                                <legend>Consulta</legend>
+                                <label for="modelo">Modelo</label>
+                                <input type="text" id="modelo" name="modelo" tabindex="1" title="Modelo" value="${modelo}"/>
+                                Grupo
+                                <select id="grupo" name="grupo" tabindex="2" title="Grupo">
+                                    <option selected="selected"></option>
+                                    <c:forEach items="${classes}" var="classes">
+                                        <c:if test="${grupo == classes.tipoClasse}">
+                                            <option selected="selected">${classes.tipoClasse}</option>
+                                        </c:if>
+                                        <c:if test="${grupo != classes.tipoClasse}">
+                                            <option>${classes.tipoClasse}</option>
+                                        </c:if>
+                                    </c:forEach>
+                                </select>
 
-    <html>
-        <head>
-            <title>Consulta/Alterar Produto</title>
-            <link href="StyleCSSLoCarSys/consultaAlterarProdutoStyle.css" rel="stylesheet" type="text/css"/>
-        </head>
-        <body>
-            <div>
-                <form action="ConsultaProdutosServlet" accept-charset="ISO-8859-1,UTF-8" method="post">
-                    <fieldset>
-                        <legend>Consulta</legend>
-                        <label for="modelo">Modelo</label>
-                        <input type="text" id="modelo" name="modelo" tabindex="1" title="Modelo" value="${modelo}"/>
-                        Grupo
-                        <select id="grupo" name="grupo" tabindex="2" title="Grupo">
-                            <option selected="selected"></option>
-                            <c:forEach items="${classes}" var="classes">
-                                <c:if test="${grupo == classes.tipoClasse}">
-                                    <option selected="selected">${classes.tipoClasse}</option>
-                                </c:if>
-                                <c:if test="${grupo != classes.tipoClasse}">
-                                    <option>${classes.tipoClasse}</option>
-                                </c:if>
-                            </c:forEach>
-                        </select>
+                                <button  type="submit" class="pesquisa" name="pesquisa" value="" tabindex="3" title="Pesquisar"><img src="ImagensLoCarSys/Pesquisar.png"/>Pesquisar</button>
+                                <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="5" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
+                            </fieldset><br/>
 
-                        <button  type="submit" class="pesquisa" name="pesquisa" value="" tabindex="3" title="Pesquisar"><img src="ImagensLoCarSys/Pesquisar.png"/>Pesquisar</button>
-                        <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="5" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
-                    </fieldset><br/>
+                            <div id="divTabela">
+                                <span>Consulta/Alterar Automóveis</span>
+                                <table name= "tabela">
+                                    <tr>
+                                        <td id="tdCodigo">Código</td>
+                                        <td id="tdModelo">Modelo</td> <td id="tdGrupo">Grupo</td>
+                                        <td id="tdPlaca">Placa</td>
+                                    </tr>
+                                    <c:forEach items="${carros}" var="car" varStatus="stat">
+                                        <tr>
+                                            <td>${car.id}</td>
+                                            <td>${car.modelo}</td>
+                                            <td>${car.grupo}</td>
+                                            <td>${car.placa}</td>
+                                            <td><a href="EditarProdutoServlet?id=${car.id}"><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="ImagensLoCarSys/Consultar.png"/></button></a></td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
 
-                    <div id="divTabela">
-                        <span>Consulta/Alterar Automóveis</span>
-                        <table name= "tabela">
-                            <tr>
-                                <td id="tdCodigo">Código</td>
-                                <td id="tdModelo">Modelo</td> <td id="tdGrupo">Grupo</td>
-                                <td id="tdPlaca">Placa</td>
-                            </tr>
-                            <c:forEach items="${carros}" var="car" varStatus="stat">
-                            <tr>
-                                <td>${car.id}</td>
-                                <td>${car.modelo}</td>
-                                <td>${car.grupo}</td>
-                                <td>${car.placa}</td>
-                                <td><a href="EditarProdutoServlet?id=${car.id}"><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="ImagensLoCarSys/Consultar.png"/></button></a></td>
-                            </tr>
-                            </c:forEach>
-                        </table>
+                            </div>
+
+                        </form>
 
                     </div>
 
-                </form>
-
-            </div>
-
-        </body>
-    </html>
+                </body>
+            </html>
+        </c:when>
+        <c:otherwise>
+            <jsp:include page="../erro.jspx" flush="false">  
+                <jsp:param value="../erro.jspx" name="erro"/>  
+            </jsp:include>
+            <meta http-equiv="refresh" content="7; url=LogoutServlet"/>
+        </c:otherwise>
+    </c:choose>
 </jsp:root>

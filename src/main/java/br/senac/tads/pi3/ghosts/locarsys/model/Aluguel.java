@@ -12,6 +12,7 @@ import java.util.GregorianCalendar;
  */
 public class Aluguel {
 
+    private int id;
     private Carro carro;
     private String dataInicial;
     private String dataFinal;
@@ -39,6 +40,10 @@ public class Aluguel {
         this.cliente.setCpf(cpf);
         this.cliente.setCnh(cnh);
         this.cliente.setNome(nome);
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public Funcionario getFuncionario() {
@@ -69,6 +74,14 @@ public class Aluguel {
 
     public String getDataFinal() {
         return dataFinal;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public float getValorTotal() {

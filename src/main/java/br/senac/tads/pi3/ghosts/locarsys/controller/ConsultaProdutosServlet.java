@@ -7,6 +7,7 @@ package br.senac.tads.pi3.ghosts.locarsys.controller;
 
 import br.senac.tads.pi3.ghosts.locarsys.dao.CarroDAO;
 import br.senac.tads.pi3.ghosts.locarsys.dao.ProdutoDAO;
+import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
 import br.senac.tads.pi3.ghosts.locarsys.model.Carro;
 import br.senac.tads.pi3.ghosts.locarsys.model.ClasseProduto;
 import java.io.IOException;
@@ -41,6 +42,9 @@ public class ConsultaProdutosServlet extends HttpServlet {
         ArrayList<ClasseProduto> classes = new ArrayList<>();
         classes = ProdutoDAO.listarClasses();
         request.setAttribute("classes", classes);
+        //Para Verifica se o usuário possui acesso a essa página
+        if(UsuarioDAO.usuario != null)
+            request.setAttribute("usuario", UsuarioDAO.usuario);
         RequestDispatcher disp = request.getRequestDispatcher("/Produto/consultaAlterarProduto.jspx");
         disp.forward(request, response);
 

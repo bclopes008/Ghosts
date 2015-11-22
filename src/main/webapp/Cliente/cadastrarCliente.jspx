@@ -8,121 +8,134 @@
           xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
 
     <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
-    <!-- any content can be specified here, e.g.: -->
-    <html>
-        <head>
-            <title>Cadastrar Cliente</title>
-            <link href="StyleCSSLoCarSys/cadastrarClienteStyle.css" rel="stylesheet" type="text/css"/>
-            <!--<script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
-        </head>
+    <c:choose>
+        <c:when test="${usuario.tipoUsuario == 'V' || usuario.tipoUsuario == 'G'}">
+            <!-- any content can be specified here, e.g.: -->
+            <html>
+                <head>
+                    <title>Cadastrar Cliente</title>
+                    <link href="StyleCSSLoCarSys/cadastrarClienteStyle.css" rel="stylesheet" type="text/css"/>
+                    <!--<script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
+                </head>
 
-        <body  data-erro="${mensagem}">
-            <div>
-                <form action="${tipo}" accept-charset="ISO-8859-1,UTF-8" method="post">
+                <body  data-erro="${mensagem}">
+                    <jsp:include page="../Principal/menu.jspx" flush="false">  
+                        <jsp:param value="../Principal/menu.jspx" name="menu"/>  
+                    </jsp:include>
+                    <div>
+                        <form action="${tipo}" accept-charset="ISO-8859-1,UTF-8" method="post">
 
-                    <fieldset>
-                        <legend>Dados do Cliente</legend>
+                            <fieldset>
+                                <legend>Dados do Cliente</legend>
 
-                        Cod. Cliente
-                        <input type="id" id="codCliente" name="codCliente" readonly="readonly"  title="Código do Cliente " value="${cliente.id}"/>
-                        <label for="nome">Nome<b>&#42;</b></label>
-                        <input type="text" id="nome" name="nome" required="required" tabindex="1" title="Nome do Cliente " value="${cliente.nome}"/>
+                                Cod. Cliente
+                                <input type="id" id="codCliente" name="codCliente" readonly="readonly"  title="Código do Cliente " value="${cliente.id}"/>
+                                <label for="nome">Nome<b>&#42;</b></label>
+                                <input type="text" id="nome" name="nome" required="required" tabindex="1" title="Nome do Cliente " value="${cliente.nome}"/>
 
-                        <c:if test="${tipo == 'CadastroClienteServlet'}">
-                            <button  type="reset" class="novo" name="novo" tabindex="18" title="Limpar"><img src="ImagensLoCarSys/Novo.png"/>Limpar</button>
-                            </c:if>
-                        <button  type="submit" class="salvar" name="salvar"  value="" tabindex="17" title="Salvar"><img src="ImagensLoCarSys/Salvar.png"/>Salvar</button>
-                            <c:if test="${tipo == 'CadastroClienteServlet'}">
-                            <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="19" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
+                                <c:if test="${tipo == 'CadastroClienteServlet'}">
+                                    <button  type="reset" class="novo" name="novo" tabindex="18" title="Limpar"><img src="ImagensLoCarSys/Novo.png"/>Limpar</button>
+                                    </c:if>
+                                <button  type="submit" class="salvar" name="salvar"  value="" tabindex="17" title="Salvar"><img src="ImagensLoCarSys/Salvar.png"/>Salvar</button>
+                                    <c:if test="${tipo == 'CadastroClienteServlet'}">
+                                    <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="19" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
+                                        </c:if>
+                                        <c:if test="${tipo == 'EditarClienteServlet'}">
+                                    <a href="ConsultaClientesServlet"><button  type="button" class="sair" name="sair" tabindex="19" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
+                                        </c:if>
+                                <label for="cpf">CPF<b>&#42;</b></label>
+                                <input type="text" id="cpf" name="cpf" maxlength="14" required="required" onkeypress="formatar('###.###.###-##', this)" placeholder="___.___.___-__" tabindex="2" title="CPF do Cliente" value="${cliente.cpf}"/>
+
+                                Data Nascimento<b>&#42;</b>
+                                <input type="date" id="nascimento" name="nascimento" required="required" tabindex="3" title="Data de Nascimento" value="${cliente.dataNascimento}"/> 
+
+                                <label for="cnh">CNH<b>&#42;</b></label>   
+                                <input type="text" id="cnh" name="cnh" maxlength="11" required="required" tabindex="4" title="CNH do Cliente" value="${cliente.cnh}"/><br/>
+
+                                Sexo<b>&#42;</b>
+                                <label for="sexoM">M</label>
+                                <c:if test="${cliente.sexo == 'M'}">
+                                    <input type="radio" checked="checked" name="sexo" id="sexoM" value="M" required="required" tabindex="5" title="Masculino"/>
+                                    <label for="sexoF">F</label>
+                                    <input type="radio" name="sexo" id="sexoF" value="F" required="required" tabindex="6" title="Feminino"/>
                                 </c:if>
-                                <c:if test="${tipo == 'EditarClienteServlet'}">
-                            <a href="ConsultaClientesServlet"><button  type="button" class="sair" name="sair" tabindex="19" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
+                                <c:if test="${cliente.sexo == 'F'}">
+                                    <input type="radio" name="sexo" id="sexoM" value="M" required="required" tabindex="5" title="Masculino"/>
+                                    <label for="sexoF">F</label>
+                                    <input type="radio" checked="checked" name="sexo" id="sexoF" value="F" required="required" tabindex="6" title="Feminino"/>
                                 </c:if>
-                        <label for="cpf">CPF<b>&#42;</b></label>
-                        <input type="text" id="cpf" name="cpf" maxlength="14" required="required" onkeypress="formatar('###.###.###-##', this)" placeholder="___.___.___-__" tabindex="2" title="CPF do Cliente" value="${cliente.cpf}"/>
-
-                        Data Nascimento<b>&#42;</b>
-                        <input type="date" id="nascimento" name="nascimento" required="required" tabindex="3" title="Data de Nascimento" value="${cliente.dataNascimento}"/> 
-
-                        <label for="cnh">CNH<b>&#42;</b></label>   
-                        <input type="text" id="cnh" name="cnh" maxlength="11" required="required" tabindex="4" title="CNH do Cliente" value="${cliente.cnh}"/><br/>
-
-                        Sexo<b>&#42;</b>
-                        <label for="sexoM">M</label>
-                        <c:if test="${cliente.sexo == 'M'}">
-                            <input type="radio" checked="checked" name="sexo" id="sexoM" value="M" required="required" tabindex="5" title="Masculino"/>
-                            <label for="sexoF">F</label>
-                            <input type="radio" name="sexo" id="sexoF" value="F" required="required" tabindex="6" title="Feminino"/>
-                        </c:if>
-                        <c:if test="${cliente.sexo == 'F'}">
-                            <input type="radio" name="sexo" id="sexoM" value="M" required="required" tabindex="5" title="Masculino"/>
-                            <label for="sexoF">F</label>
-                            <input type="radio" checked="checked" name="sexo" id="sexoF" value="F" required="required" tabindex="6" title="Feminino"/>
-                        </c:if>
-                        <c:if test="${cliente.sexo != 'M' and cliente.sexo != 'F'}">
-                            <input type="radio" name="sexo" id="sexoM" value="M" required="required" tabindex="5" title="Masculino"/>
-                            <label for="sexoF">F</label>
-                            <input type="radio" name="sexo" id="sexoF" value="F" required="required" tabindex="6" title="Feminino"/>
-                        </c:if>
-
-                        <label for="celular">Tel. Celular<b>&#42;</b></label>
-                        <input type="text" id="celular" name="celular" maxlength="13" required="required" onkeypress="formatar('##-#####-###', this)" placeholder="(__)_____-___" tabindex="7" title="Celular do Cliente" value="${cliente.celular}"/>
-
-                        <label for="email">Email<b>&#42;</b></label>
-                        <input type="email" id="email" name="email" required="required" tabindex="8" title="E-mail" value="${cliente.email}"/>
-
-
-
-
-                    </fieldset><br/>
-
-
-                    <fieldset>
-                        <legend>Dados do Endereço</legend>
-
-                        <label for="cep">CEP<b>&#42;</b></label>
-                        <input type="text" id="cep" name="cep" maxlength="9" required="required" onkeypress="formatar('#####-###', this)" placeholder="_____-___" tabindex="9" title="CEP" value="${cliente.endereco.cep}"/>
-
-                        <label for="endereco">Endereço<b>&#42;</b></label>
-                        <input type="text" id="endereco" name="endereco" required="required" tabindex="10" title="Logradouro" value="${cliente.endereco.endereco}"/>
-                        <label for="numero">Número<b>&#42;</b></label>
-                        <input type="text" id="numero" name="numero" required="required" tabindex="11" title="Número" value="${cliente.endereco.numero}"/><br/>
-
-                        <label for="bairro">Bairro<b>&#42;</b></label>
-                        <input type="text" id="bairro" name="bairro" required="required" tabindex="12" title="Bairro" value="${cliente.endereco.bairro}"/>
-                        Estado&#40;DF&#41;<b>&#42;</b>
-                        <select id="estado" name="estado" required="required" tabindex="13" title="Estado">
-                            <option selected="selected"></option>
-                            <c:forEach items="${estados}" var="est">
-                                <c:if test="${cliente.endereco.estado == est.sigla}">
-                                    <option selected="selected">${est.sigla}</option>
+                                <c:if test="${cliente.sexo != 'M' and cliente.sexo != 'F'}">
+                                    <input type="radio" name="sexo" id="sexoM" value="M" required="required" tabindex="5" title="Masculino"/>
+                                    <label for="sexoF">F</label>
+                                    <input type="radio" name="sexo" id="sexoF" value="F" required="required" tabindex="6" title="Feminino"/>
                                 </c:if>
-                                <c:if test="${cliente.endereco.estado != est.sigla}">
-                                    <option>${est.sigla}</option>
-                                </c:if>
-                            </c:forEach>
-                        </select>
-                        <label for="cidade">Cidade<b>&#42;</b></label>
-                        <input type="text" id="cidade" name="cidade" required="required" tabindex="14" title="Cidade" value="${cliente.endereco.cidade}"/><br/>
-                        <label for="complemento">Complemento</label>
-                        <input type="text" id="complemento" name="complemento" tabindex="15" title="Complemento do Endereço" value="${cliente.endereco.complemento}"/>
-                        <label for="observacoes">Observações</label>
-                        <input type="text" id="observacoes" name="observacoes" tabindex="16" title="Observacoes" value="${cliente.endereco.obs}"/>
+
+                                <label for="celular">Tel. Celular<b>&#42;</b></label>
+                                <input type="text" id="celular" name="celular" maxlength="13" required="required" onkeypress="formatar('##-#####-###', this)" placeholder="(__)_____-___" tabindex="7" title="Celular do Cliente" value="${cliente.celular}"/>
+
+                                <label for="email">Email<b>&#42;</b></label>
+                                <input type="email" id="email" name="email" required="required" tabindex="8" title="E-mail" value="${cliente.email}"/>
 
 
 
-                    </fieldset><br/>
-                    <span><b>&#42;</b> Campos Obrigatorios</span>
 
-                </form>
-            </div>
+                            </fieldset><br/>
 
-            <script>
-                if (document.body.getAttribute("data-erro")) {
-                    alert(document.body.getAttribute("data-erro"));
-                }
-            </script>
-        </body>
 
-    </html>
+                            <fieldset>
+                                <legend>Dados do Endereço</legend>
+
+                                <label for="cep">CEP<b>&#42;</b></label>
+                                <input type="text" id="cep" name="cep" maxlength="9" required="required" onkeypress="formatar('#####-###', this)" placeholder="_____-___" tabindex="9" title="CEP" value="${cliente.endereco.cep}"/>
+
+                                <label for="endereco">Endereço<b>&#42;</b></label>
+                                <input type="text" id="endereco" name="endereco" required="required" tabindex="10" title="Logradouro" value="${cliente.endereco.endereco}"/>
+                                <label for="numero">Número<b>&#42;</b></label>
+                                <input type="text" id="numero" name="numero" required="required" tabindex="11" title="Número" value="${cliente.endereco.numero}"/><br/>
+
+                                <label for="bairro">Bairro<b>&#42;</b></label>
+                                <input type="text" id="bairro" name="bairro" required="required" tabindex="12" title="Bairro" value="${cliente.endereco.bairro}"/>
+                                Estado&#40;DF&#41;<b>&#42;</b>
+                                <select id="estado" name="estado" required="required" tabindex="13" title="Estado">
+                                    <option selected="selected"></option>
+                                    <c:forEach items="${estados}" var="est">
+                                        <c:if test="${cliente.endereco.estado == est.sigla}">
+                                            <option selected="selected">${est.sigla}</option>
+                                        </c:if>
+                                        <c:if test="${cliente.endereco.estado != est.sigla}">
+                                            <option>${est.sigla}</option>
+                                        </c:if>
+                                    </c:forEach>
+                                </select>
+                                <label for="cidade">Cidade<b>&#42;</b></label>
+                                <input type="text" id="cidade" name="cidade" required="required" tabindex="14" title="Cidade" value="${cliente.endereco.cidade}"/><br/>
+                                <label for="complemento">Complemento</label>
+                                <input type="text" id="complemento" name="complemento" tabindex="15" title="Complemento do Endereço" value="${cliente.endereco.complemento}"/>
+                                <label for="observacoes">Observações</label>
+                                <input type="text" id="observacoes" name="observacoes" tabindex="16" title="Observacoes" value="${cliente.endereco.obs}"/>
+
+
+
+                            </fieldset><br/>
+                            <span><b>&#42;</b> Campos Obrigatorios</span>
+
+                        </form>
+                    </div>
+
+                    <script>
+                        if (document.body.getAttribute("data-erro")) {
+                            alert(document.body.getAttribute("data-erro"));
+                        }
+                    </script>
+                </body>
+
+            </html>
+        </c:when>
+        <c:otherwise>
+            <jsp:include page="../erro.jspx" flush="false">  
+                <jsp:param value="../erro.jspx" name="erro"/>  
+            </jsp:include>
+            <meta http-equiv="refresh" content="7; url=LogoutServlet"/>
+        </c:otherwise>
+    </c:choose>
 </jsp:root>

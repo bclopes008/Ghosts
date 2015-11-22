@@ -182,4 +182,119 @@ public class CarroDAO {
         }
         return null;
     }
+
+    public static Carro verCarro(int id) {
+        Statement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+
+        /* Pesquisa Usuario com o id para ir na tela de alteração*/
+        String sql = "SELECT * FROM CARRO CA "
+                + "INNER JOIN FILIAL FI ON CA.ID_FILIAL = FI.ID_FILIAL "
+                + "INNER JOIN CLASSE CL ON CA.ID_CLASSE = CL.ID_CLASSE "
+                + "INNER JOIN FABRICANTE FA ON CA.ID_FABRICANTE = FA.ID_FABRICANTE "
+                + "INNER JOIN COMBUSTIVEL CO ON CA.ID_COMBUSTIVEL = CO.ID_COMBUSTIVEL "
+                + "INNER JOIN ESTADO ES ON CA.ID_ESTADO = ES.ID_ESTADO "
+                + "WHERE CA.ID_CARRO = " + id + "";
+        try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            Carro c = new Carro();
+            while (rs.next()) {
+                c.setId(rs.getInt("ID_CARRO"));
+                c.setAnoFabricacao(rs.getInt("ANO_FABRICACAO_CARRO"));
+                c.setChassi(rs.getString("CHASSI_CARRO"));
+                c.setCor(rs.getString("COR_CARRO"));
+                c.setModelo(rs.getString("MODELO_CARRO"));
+                c.setPlaca(rs.getString("PLACA_CARRO"));
+                c.setCidade(rs.getString("CIDADE_CARRO"));
+                c.setAno(rs.getInt("ANO_CARRO"));
+                c.setRenavam(rs.getString("RENAVAM_CARRO"));
+                c.setKilometragem(rs.getFloat("KILOMETRAGEM_CARRO"));
+                c.setFilial(rs.getString("NOME_FILIAL"));
+                c.setGrupo(rs.getString("TIPO_CLASSE").charAt(0));
+                c.setMarca(rs.getString("NOME_FABRICANTE"));
+                c.setCombustivel(rs.getString("TIPO_COMBUSTIVEL"));
+                c.setEstado(rs.getString("SIGLA_ESTADO"));
+            }
+            conn.close();
+            return c;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        }
+        return null;
+    }
+
+    public static boolean alteraCarro(Carro c) {
+        Statement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+        int filial = 0, classe = 0, fabricante = 0, combustivel = 0, estado = 0;
+
+        String sql = "SELECT ID_FILIAL FROM FILIAL WHERE NOME_FILIAL = '" + c.getFilial() + "'";
+        try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                filial = rs.getInt("ID_FILIAL");
+            }
+            conn.close();
+
+            sql = "SELECT ID_CLASSE FROM CLASSE WHERE TIPO_CLASSE = '" + c.getGrupo() + "'";
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                classe = rs.getInt("ID_CLASSE");
+            }
+            conn.close();
+
+            sql = "SELECT ID_FABRICANTE FROM FABRICANTE WHERE NOME_FABRICANTE = '" + c.getMarca() + "'";
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                fabricante = rs.getInt("ID_FABRICANTE");
+            }
+            conn.close();
+
+            sql = "SELECT ID_COMBUSTIVEL FROM COMBUSTIVEL WHERE TIPO_COMBUSTIVEL = '" + c.getCombustivel() + "'";
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                combustivel = rs.getInt("ID_COMBUSTIVEL");
+            }
+            conn.close();
+
+            sql = "SELECT ID_ESTADO FROM ESTADO WHERE SIGLA_ESTADO = '" + c.getEstado() + "'";
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                estado = rs.getInt("ID_ESTADO");
+            }
+            conn.close();
+
+            sql = "UPDATE CARRO SET ID_FILIAL = " + filial + ", ID_CLASSE = " + classe + ", ID_FABRICANTE = " + fabricante + ", "
+                    + "ID_COMBUSTIVEL = " + combustivel + ", ID_ESTADO = " + estado + ", ANO_FABRICACAO_CARRO = '" + c.getAnoFabricacao() + "', CHASSI_CARRO = '" + c.getChassi() + "', "
+                    + "COR_CARRO = '" + c.getCor() + "', MODELO_CARRO = '" + c.getModelo() + "', PLACA_CARRO = '" + c.getPlaca() + "', CIDADE_CARRO = '" + c.getCidade() + "', "
+                    + "ANO_CARRO = '" + c.getAno() + "', RENAVAM_CARRO = '" + c.getRenavam() + "', KILOMETRAGEM_CARRO = " + c.getKilometragem() + " "
+                    + "WHERE ID_CARRO = " + c.getId() + "";
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+            conn.close();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println("" + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("" + ex.getMessage());
+        }
+        return false;
+    }
 }

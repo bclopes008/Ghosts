@@ -8,81 +8,93 @@
           xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
 
     <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
-
-    <!-- any content can be specified here, e.g.: -->
-    <html>
-
-
-        <head>  
-            <title>Cadastro de Alugueis</title>
-            <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
-            <link href="StyleCSSLoCarSys/cadastroAlugueisStyle.css" rel="stylesheet" type="text/css"/>
-            <!--<script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
-        </head>
-
-        <body>
-
-            <div>
-                <form action="" accept-charset="ISO-8859-1,UTF-8" method="post">
-                    <fieldset>
-                        <legend>Cadastro de Alugueis</legend>
-
-                        Cod. Aluguel
-                        <input type="id" id="codAluguel" name="codAluguel" readonly="readonly" title="Codigo do Aluguel"/>
-                        Cod. Cliente
-                        <input type="id"  id="idCliente" name="idCliente" readonly="readonly" title="Codigo do Cliente"/>
-
-                        <button  type="reset" class="novo" name="novo" tabindex="9" title="Limpar"><img src="../ImagensLoCarSys/novo.png"/>Limpar</button>
-                        <button  type="submit" class="salvar" name="salvar"  value="" tabindex="8" title="Salvar"><img src="../ImagensLoCarSys/salvar.png"/>Salvar</button>
-                        <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="10" title="Sair"><img src="../ImagensLoCarSys/sair.png"/>Sair</button></a><br/>
-
-                        Data Inicial<b>&#42;</b>
-                        <input type="date" id="inicial" name="inicial" tabindex="1" required="required" title="Data Inicial"/>
-                        Data Final<b>&#42;</b>
-                        <input type="date" id="final" name="final" tabindex="2" required="required" title="Data Final"/>
-
-                        <label for="cpf">CPF<b>&#42;</b></label>
-                        <input type="text" id="cpf" name="cpf" tabindex="3" maxlength="14" required="required" onkeypress="formatar('###.###.###-##', this)" placeholder="___.___.___-__" title="CPF do Cliente"/>
-
-                        <label for="cnh">CNH<b>&#42;</b></label>
-                        <input type="text" id="cnh" name="cnh" tabindex="4" maxlength="11" required="required" title="CNH do Cliente"/><br/>
-
-                        <label for="nomeCliente">Nome Cliente<b>&#42;</b></label>
-                        <input type="text" id="nomeCliente" name="nomeCliente" tabindex="5" required="required" title="Nome do Cliente"/>
-
-                        Grupo<b>&#42;</b>
-                        <select id="grupo" name="grupo" tabindex="6" required="required" title="Grupo" onchange="redireciona('ConsultarModelosPorGrupo')">
-                            <option selected="selected"></option>
-                            <c:forEach items="${classes}" var="classes">
-                                <option>${classes.tipoClasse}</option>
-                            </c:forEach>
-                        </select>
-
-                        Modelo<b>&#42;</b>
-                        <select id="modelo" name="modelo" tabindex="7" required="required" title="Modelo">
-                            <option selected="selected"></option>
-                            <c:forEach items="${carros}" var="carros">
-                                <option>${carros.modelo}</option>
-                            </c:forEach>
-                        </select>
-
-                        Valor Total&#58;
-                        <input type="text" id="valorTotal" name="valorTotal" readonly="readonly" title="Valor Total"/>
-
-                    </fieldset><br/>
-                    <span><b>&#42;</b> Campos Obrigatorios</span>
-                </form>
-            </div>
-            <script>
-                function redireciona(param) {
-                    var grp = document.getElementById("grupo");
-                    var optGrupo = grp.options[grp.selectedIndex].text;
-                    location.href = param + "?" + "grupo" + "=" + optGrupo;
-                }
-            </script>
-        </body>
+    <c:choose>
+        <c:when test="${usuario.tipoUsuario == 'V' || usuario.tipoUsuario == 'G'}">
+            <!-- any content can be specified here, e.g.: -->
+            <html>
 
 
+                <head>  
+                    <title>Cadastro de Alugueis</title>
+                    <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+                    <link href="StyleCSSLoCarSys/cadastroAlugueisStyle.css" rel="stylesheet" type="text/css"/>
+                    <link href="StyleCSSLoCarSys/menuStyle.css" rel="stylesheet" type="text/css" />
+                    <!--<script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
+                </head>
 
-    </html>
+                <body>
+                    <jsp:include page="../Principal/menu.jspx" flush="false">  
+                        <jsp:param value="../Principal/menu.jspx" name="menu"/>  
+                    </jsp:include>
+                    <div>
+                        <form action="" accept-charset="ISO-8859-1,UTF-8" method="post">
+                            <fieldset>
+                                <legend>Cadastro de Alugueis</legend>
+
+                                Cod. Aluguel
+                                <input type="id" id="codAluguel" name="codAluguel" readonly="readonly" title="Codigo do Aluguel"/>
+                                Cod. Cliente
+                                <input type="id"  id="idCliente" name="idCliente" readonly="readonly" title="Codigo do Cliente"/>
+
+                                <button  type="reset" class="novo" name="novo" tabindex="9" title="Limpar"><img src="ImagensLoCarSys/Novo.png"/>Limpar</button>
+                                <button  type="submit" class="salvar" name="salvar"  value="" tabindex="8" title="Salvar"><img src="ImagensLoCarSys/Salvar.png"/>Salvar</button>
+                                <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="10" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
+
+                                Data Inicial<b>&#42;</b>
+                                <input type="date" id="inicial" name="inicial" tabindex="1" required="required" title="Data Inicial"/>
+                                Data Final<b>&#42;</b>
+                                <input type="date" id="final" name="final" tabindex="2" required="required" title="Data Final"/>
+
+                                <label for="cpf">CPF<b>&#42;</b></label>
+                                <input type="text" id="cpf" name="cpf" tabindex="3" maxlength="14" required="required" onkeypress="formatar('###.###.###-##', this)" placeholder="___.___.___-__" title="CPF do Cliente"/>
+
+                                <label for="cnh">CNH<b>&#42;</b></label>
+                                <input type="text" id="cnh" name="cnh" tabindex="4" maxlength="11" required="required" title="CNH do Cliente"/><br/>
+
+                                <label for="nomeCliente">Nome Cliente<b>&#42;</b></label>
+                                <input type="text" id="nomeCliente" name="nomeCliente" tabindex="5" required="required" title="Nome do Cliente"/>
+
+                                Grupo<b>&#42;</b>
+                                <select id="grupo" name="grupo" tabindex="6" required="required" title="Grupo" onchange="redireciona('ConsultarModelosPorGrupo')">
+                                    <option selected="selected"></option>
+                                    <c:forEach items="${classes}" var="classes">
+                                        <option>${classes.tipoClasse}</option>
+                                    </c:forEach>
+                                </select>
+
+                                Modelo<b>&#42;</b>
+                                <select id="modelo" name="modelo" tabindex="7" required="required" title="Modelo">
+                                    <option selected="selected"></option>
+                                    <c:forEach items="${carros}" var="carros">
+                                        <option>${carros.modelo}</option>
+                                    </c:forEach>
+                                </select>
+
+                                Valor Total&#58;
+                                <input type="text" id="valorTotal" name="valorTotal" readonly="readonly" title="Valor Total"/>
+
+                            </fieldset><br/>
+                            <span><b>&#42;</b> Campos Obrigatorios</span>
+                        </form>
+                    </div>
+                    <script>
+                        function redireciona(param) {
+                            var grp = document.getElementById("grupo");
+                            var optGrupo = grp.options[grp.selectedIndex].text;
+                            location.href = param + "?" + "grupo" + "=" + optGrupo;
+                        }
+                    </script>
+                </body>
+
+
+
+            </html>
+        </c:when>
+        <c:otherwise>
+            <jsp:include page="../erro.jspx" flush="false">  
+                <jsp:param value="../erro.jspx" name="erro"/>  
+            </jsp:include>
+            <meta http-equiv="refresh" content="7; url=LogoutServlet"/>
+        </c:otherwise>
+    </c:choose>
 </jsp:root>

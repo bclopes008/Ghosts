@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -156,8 +157,8 @@ public class AluguelDAO {
 
             AluguelDAO.calcularValorTotal(aluguel);
 
-            System.out.println("Valor total: "+aluguel.getValorTotal());
-            String grupo = ""+aluguel.getCarro().getGrupo();
+            System.out.println("Valor total: " + aluguel.getValorTotal());
+            String grupo = "" + aluguel.getCarro().getGrupo();
             //Falta implementar o funcionário atualmente está como '1'
             stmt.setString(1, aluguel.getCarro().getModelo());
             stmt.setString(2, grupo);
@@ -176,7 +177,7 @@ public class AluguelDAO {
 
             stmt.setString(1, aluguel.getCarro().getModelo());
             stmt.setString(2, grupo);
-            System.out.println("Grupo: "+aluguel.getCarro().getGrupo());
+            System.out.println("Grupo: " + aluguel.getCarro().getGrupo());
             stmt.executeUpdate();
             stmt.close();
             conn.close();
@@ -200,5 +201,42 @@ public class AluguelDAO {
         } catch (SQLException ex) {
             System.err.println("" + ex.getMessage());
         }
+    }
+
+    public static List<Aluguel> perquisarAluguel(String modelo, String cpf, String nome) {
+        Statement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+        
+        /*Pesquisa Aluguel*/
+        String sql = "SELECT * FROM ALUGUEL AL "
+                + "INNER JOIN FUNCIONARIO FU ON AL.ID_FUNCIONARIO = FU.ID_FUNCIONARIO "
+                + "INNER JOIN CARRO CA ON AL.ID_CARRO = CA.ID_CARRO "
+                + "INNER JOIN CLIENTE CL ON AL.ID_CLIENTE = CL.ID_CLIENTE "
+                + "WHERE CA.MODELO_CARRO LIKE '%" + modelo + "%' AND CL.CPF_CLIENTE LIKE '%" + cpf + "%' "
+                + "AND CL.NOME_CLIENTE LIKE '%" + nome + "%'";
+        try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            ArrayList<Aluguel> alugueis = new ArrayList<>();
+            while (rs.next()) {
+                Aluguel a = new Aluguel();
+                Cliente c = new Cliente();
+                a.setId(rs.getInt("ID_ALUGUEL"));
+                c.setCpf(rs.getString("CPF_CLIENTE"));
+                c.setCnh(rs.getString("CNH_CLIENTE"));
+                c.setNome(rs.getString("NOME_CLIENTE"));
+                a.setCliente(c);
+                alugueis.add(a);
+            }
+            conn.close();
+            return alugueis;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        }
+        return null;
     }
 }

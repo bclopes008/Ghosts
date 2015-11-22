@@ -6,6 +6,7 @@
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
 import br.senac.tads.pi3.ghosts.locarsys.dao.ClienteDAO;
+import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
 import br.senac.tads.pi3.ghosts.locarsys.model.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,6 +37,9 @@ public class ConsultaClientesServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //Para Verifica se o usuário possui acesso a essa página
+        if(UsuarioDAO.usuario != null)
+            request.setAttribute("usuario", UsuarioDAO.usuario);
         RequestDispatcher disp = request.getRequestDispatcher("/Cliente/consultaAlterarCliente.jspx");
         disp.forward(request, response);
     }

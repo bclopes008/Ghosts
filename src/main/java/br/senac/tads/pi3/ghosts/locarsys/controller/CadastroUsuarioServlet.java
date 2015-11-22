@@ -41,7 +41,10 @@ public class CadastroUsuarioServlet extends HttpServlet {
         filiais = ProdutoDAO.listarFiliais();
         request.setAttribute("filiais", filiais);
         request.setAttribute("tipo", "CadastroUsuarioServlet");
-        request.setAttribute("user", UsuarioDAO.usuario.getTipoUsuario());        
+        
+        //Para Verifica se o usuário possui acesso a essa página
+        if(UsuarioDAO.usuario != null)
+            request.setAttribute("usuario", UsuarioDAO.usuario);
         RequestDispatcher disp = request.getRequestDispatcher("/Usuario/cadastrarUsuario.jspx");
         disp.forward(request, response);
     }
@@ -78,7 +81,7 @@ public class CadastroUsuarioServlet extends HttpServlet {
         } else {
             request.setAttribute("mensagem", "Erro ao cadastradar o Usuário!");
         }
-        request.setAttribute("usuario", u);
+        request.setAttribute("usu", u);
         processRequest(request, response);
     }
 

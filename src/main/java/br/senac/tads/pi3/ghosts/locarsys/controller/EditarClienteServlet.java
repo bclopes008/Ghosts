@@ -7,6 +7,7 @@ package br.senac.tads.pi3.ghosts.locarsys.controller;
 
 import br.senac.tads.pi3.ghosts.locarsys.dao.ClienteDAO;
 import br.senac.tads.pi3.ghosts.locarsys.dao.EstadoDAO;
+import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
 import br.senac.tads.pi3.ghosts.locarsys.model.Cliente;
 import br.senac.tads.pi3.ghosts.locarsys.model.Estado;
 import java.io.IOException;
@@ -42,6 +43,9 @@ public class EditarClienteServlet extends HttpServlet {
         request.setAttribute("estados", estados);
         //Envia o tipo para saber se é para cadastrar ou alterar
         request.setAttribute("tipo", "EditarClienteServlet");
+        //Para Verifica se o usuário possui acesso a essa página
+        if(UsuarioDAO.usuario != null)
+            request.setAttribute("usuario", UsuarioDAO.usuario);
         RequestDispatcher disp = request.getRequestDispatcher("/Cliente/cadastrarCliente.jspx");
         disp.forward(request, response);
     }

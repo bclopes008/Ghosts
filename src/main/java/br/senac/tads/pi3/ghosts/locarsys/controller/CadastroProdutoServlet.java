@@ -41,11 +41,16 @@ public class CadastroProdutoServlet extends HttpServlet {
         ArrayList<Filial> filiais = new ArrayList<>();
         filiais = ProdutoDAO.listarFiliais();
         request.setAttribute("filiais", filiais);
-        
+
         ArrayList<Estado> estados = new ArrayList<>();
         estados = EstadoDAO.listarEstados();
         request.setAttribute("estados", estados);
 
+        //Envia o tipo para saber se é para cadastrar ou alterar
+        request.setAttribute("tipo", "CadastroProdutoServlet");
+        //Para Verifica se o usuário possui acesso a essa página
+        if(UsuarioDAO.usuario != null)
+            request.setAttribute("usuario", UsuarioDAO.usuario);
         RequestDispatcher disp = request.getRequestDispatcher("/Produto/cadastrarProduto.jspx");
         disp.forward(request, response);
     }
@@ -76,6 +81,17 @@ public class CadastroProdutoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Carro c = adiciocar(request);
+        if (CarroDAO.cadastraCarro(c)) {
+            request.setAttribute("mensagem", "Produto cadastrado com sucesso!");
+        } else {
+            request.setAttribute("mensagem", "Erro ao cadastradar o Produto!");
+        }
+        request.setAttribute("carro", c);
+        processRequest(request, response);
+    }
+
+    public static Carro adiciocar(HttpServletRequest request) {
         Carro c = new Carro();
         c.setAno(Integer.parseInt(request.getParameter("ano")));
         c.setAnoFabricacao(Integer.parseInt(request.getParameter("anoFabricacao")));
@@ -85,20 +101,13 @@ public class CadastroProdutoServlet extends HttpServlet {
         c.setCor(request.getParameter("cor"));
         c.setEstado(request.getParameter("estado"));
         c.setGrupo(request.getParameter("grupo").charAt(0));
-        //TODO
-        //c.setKilometragem(Float.parseFloat(request.getParameter("kilometragem")));
+        c.setKilometragem(Float.parseFloat(request.getParameter("km")));
         c.setMarca(request.getParameter("fabricante"));
         c.setModelo(request.getParameter("modelo"));
         c.setPlaca(request.getParameter("placa"));
         c.setRenavam(request.getParameter("renavam"));
         c.setFilial(request.getParameter("filial"));
-        if (CarroDAO.cadastraCarro(c)) {
-            request.setAttribute("mensagem","Produto cadastrado com sucesso!");
-        } else {
-            request.setAttribute("mensagem","Erro ao cadastradar o Produto!");
-        }
-        request.setAttribute("carro", c);
-        processRequest(request, response);
+        return c;
     }
 
     /**

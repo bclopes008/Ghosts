@@ -9,7 +9,7 @@
 
     <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
     <c:choose>
-        <c:when test="${user == 'T'}">
+        <c:when test="${usuario.tipoUsuario == 'T'}">
             <!-- any content can be specified here, e.g.: -->
             <html>
                 <head>
@@ -18,15 +18,17 @@
                     <!--<script src="../MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
                 </head>
                 <body data-erro="${mensagem}">
+                    <jsp:include page="../Principal/menu.jspx" flush="false">  
+                        <jsp:param value="../Principal/menu.jspx" name="menu"/>  
+                    </jsp:include>
                     <div>
-                        <!--<form action="CadastroUsuarioServlet" accept-charset="ISO-8859-1,UTF-8" method="post">-->
                         <form action="${tipo}" accept-charset="ISO-8859-1,UTF-8" method="post">
                             <fieldset>
                                 <legend>Cadastrar Usuário</legend>
                                 Cod. Usuário
-                                <input type="text" id="codUsuario" name="codUsuario" readonly="readonly" title="Codigo do Usuário" value="${usuario.id}"/>
+                                <input type="text" id="codUsuario" name="codUsuario" readonly="readonly" title="Codigo do Usuário" value="${usu.id}"/>
                                 <label for="nome">Nome<b>&#42;</b></label>
-                                <input type="text" id="nome" name="nome" required="required" tabindex="1" title="Nome do Usuário " value="${usuario.nome}"/>
+                                <input type="text" id="nome" name="nome" required="required" tabindex="1" title="Nome do Usuário " value="${usu.nome}"/>
 
                                 <c:if test="${tipo == 'CadastroUsuarioServlet'}">
                                     <button  type="reset" class="novo" name="novo" tabindex="9" title="Limpar"><img src="ImagensLoCarSys/Novo.png"/>Limpar</button>
@@ -41,50 +43,50 @@
 
                                 Sexo<b>&#42;</b>
                                 <label for="sexoM">M</label>
-                                <c:if test="${usuario.sexo == 'M'}">
+                                <c:if test="${usu.sexo == 'M'}">
                                     <input type="radio" checked="checked" name="sexo" id="sexoM" value="M" required="required" tabindex="2" title="Masculino"/>
                                     <label for="sexoF">F</label>
                                     <input type="radio" name="sexo" id="sexoF" value="F" required="required" tabindex="3" title="Feminino"/>
                                 </c:if>
-                                <c:if test="${usuario.sexo == 'F'}">
+                                <c:if test="${usu.sexo == 'F'}">
                                     <input type="radio" name="sexo" id="sexoM" value="M" required="required" tabindex="2" title="Masculino"/>
                                     <label for="sexoF">F</label>
                                     <input type="radio" checked="checked" name="sexo" id="sexoF" value="F" required="required" tabindex="3" title="Feminino"/>
                                 </c:if>
-                                <c:if test="${usuario.sexo != 'M' and usuario.sexo != 'F'}">
+                                <c:if test="${usu.sexo != 'M' and usu.sexo != 'F'}">
                                     <input type="radio" name="sexo" id="sexoM" value="M" required="required" tabindex="2" title="Masculino"/>
                                     <label for="sexoF">F</label>
                                     <input type="radio" name="sexo" id="sexoF" value="F" required="required" tabindex="3" title="Feminino"/>
                                 </c:if>
 
                                 Data Nascimento<b>&#42;</b>
-                                <input type="date" id="nascimento" name="nascimento" required="required" tabindex="4" title="Data de Nascimento" value="${usuario.dataNascimento}"/> 
+                                <input type="date" id="nascimento" name="nascimento" required="required" tabindex="4" title="Data de Nascimento" value="${usu.dataNascimento}"/> 
 
                                 <label for="funcao">Função<b>&#42;</b></label>
-                                <input type="text" id="funcao" name="funcao" required="required" tabindex="5" title="Função do Usuário" value="${usuario.funcao}"/>
+                                <input type="text" id="funcao" name="funcao" required="required" tabindex="5" title="Função do Usuário" value="${usu.funcao}"/>
 
                                 <label for="cpf">CPF<b>&#42;</b></label>
-                                <input type="text" id="cpf" name="cpf" maxlength="14" required="required" onkeypress="formatar('###.###.###-##', this)" placeholder="___.___.___-__" tabindex="6" title="CPF do Cliente" value="${usuario.cpf}"/><br/>
+                                <input type="text" id="cpf" name="cpf" maxlength="14" required="required" onkeypress="formatar('###.###.###-##', this)" placeholder="___.___.___-__" tabindex="6" title="CPF do Cliente" value="${usu.cpf}"/><br/>
 
                                 Tipo Usuário<b>&#42;</b>
                                 <select id="tipoUsuario" name="tipoUsuario" required="required" tabindex="7" title="Tipo de Usuário">
                                     <option selected="selected"></option>
-                                    <c:if test="${usuario.tipoUsuario == 'V'}">
+                                    <c:if test="${usu.tipoUsuario == 'V'}">
                                         <option selected="selected">Vendedor</option>
                                         <option>Gerente</option>
                                         <option>Administrador</option>
                                     </c:if>
-                                    <c:if test="${usuario.tipoUsuario == 'G'}">
+                                    <c:if test="${usu.tipoUsuario == 'G'}">
                                         <option>Vendedor</option>
                                         <option selected="selected">Gerente</option>
                                         <option>Administrador</option>
                                     </c:if>
-                                    <c:if test="${usuario.tipoUsuario == 'A'}">
+                                    <c:if test="${usu.tipoUsuario == 'A'}">
                                         <option>Vendedor</option>
                                         <option>Gerente</option>
                                         <option selected="selected">Administrador</option>
                                     </c:if>
-                                    <c:if test="${usuario.tipoUsuario != 'V' and usuario.tipoUsuario != 'G' and usuario.tipoUsuario != 'A'}">
+                                    <c:if test="${usu.tipoUsuario != 'V' and usu.tipoUsuario != 'G' and usu.tipoUsuario != 'A'}">
                                         <option>Vendedor</option>
                                         <option>Gerente</option>
                                         <option>Administrador</option>
@@ -95,17 +97,17 @@
                                 <select id="filial" name="filial" required="required" tabindex="8" title="Filial">
                                     <option selected="selected"></option>
                                     <c:forEach items="${filiais}" var="fil">
-                                        <c:if test="${usuario.filial == fil.nome}">
+                                        <c:if test="${usu.filial == fil.nome}">
                                             <option selected="selected">${fil.nome}</option>
                                         </c:if>
-                                        <c:if test="${usuario.filial != fil.nome}">
+                                        <c:if test="${usu.filial != fil.nome}">
                                             <option>${fil.nome}</option>
                                         </c:if>
                                     </c:forEach>
                                 </select>
 
                                 <label for="login">Login<b>&#42;</b></label>
-                                <input type="text" id="login" name="login" required="required" tabindex="9" title="Login" value="${usuario.login}"/>
+                                <input type="text" id="login" name="login" required="required" tabindex="9" title="Login" value="${usu.login}"/>
                                 <label for="senha">Senha<b>&#42;</b></label>
                                 <input type="password" id="senha" name="senha" maxlength="8" required="required" tabindex="10" title="Senha"/>
 
@@ -128,7 +130,7 @@
             <jsp:include page="../erro.jspx" flush="false">  
                 <jsp:param value="../erro.jspx" name="erro"/>  
             </jsp:include>
-            <meta http-equiv="refresh" content="10; url=LogoutServlet"/>
+            <meta http-equiv="refresh" content="7; url=LogoutServlet"/>
         </c:otherwise>
     </c:choose>
 </jsp:root>

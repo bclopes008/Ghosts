@@ -158,9 +158,9 @@ public class UsuarioDAO {
             conn.close();
             return u;
         } catch (SQLException | ClassNotFoundException ex) {
-            System.err.println("" + ex.getMessage());
+            System.err.println("Erro: " + ex.getMessage());
         } catch (Exception ex) {
-            System.err.println("" + ex.getMessage());
+            System.err.println("Erro: " + ex.getMessage());
         }
         return null;
     }
@@ -176,7 +176,6 @@ public class UsuarioDAO {
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
-
             while (rs.next()) {
                 filial = rs.getInt("ID_FILIAL");
             }

@@ -5,9 +5,13 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
+import br.senac.tads.pi3.ghosts.locarsys.dao.AluguelDAO;
 import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
+import br.senac.tads.pi3.ghosts.locarsys.model.Aluguel;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,10 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author vinicius.vsantos
+ * @author Bruno
  */
-@WebServlet(name = "ExibirRelatóriosServlet", urlPatterns = {"/ExibirRelat_riosServlet"})
-public class ExibirRelatóriosServlet extends HttpServlet {
+@WebServlet(name = "ConsultaAlugueisServlet", urlPatterns = {"/ConsultaAlugueisServlet"})
+public class ConsultaAlugueisServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,6 +39,8 @@ public class ExibirRelatóriosServlet extends HttpServlet {
         //Para Verifica se o usuário possui acesso a essa página
         if(UsuarioDAO.usuario != null)
             request.setAttribute("usuario", UsuarioDAO.usuario);
+        RequestDispatcher disp = request.getRequestDispatcher("/Aluguel/consultaAlteraAlugueis.jspx");
+        disp.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -49,7 +55,7 @@ public class ExibirRelatóriosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**
@@ -63,6 +69,16 @@ public class ExibirRelatóriosServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //int id = Integer.parseInt(request.getParameter("numeroAluguel"));
+        String modelo = request.getParameter("modelo");
+        String cpf = request.getParameter("cpf");
+        String nome = request.getParameter("nome");
+        List<Aluguel> listarAlugueis = AluguelDAO.perquisarAluguel(modelo, cpf, nome);
+        request.setAttribute("alugueis", listarAlugueis);
+        //request.setAttribute("id", id);
+        request.setAttribute("modelo", modelo);
+        request.setAttribute("cpf", cpf);
+        request.setAttribute("nome", nome);
         processRequest(request, response);
     }
 
