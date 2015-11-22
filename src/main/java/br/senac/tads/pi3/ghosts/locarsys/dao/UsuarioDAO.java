@@ -2,6 +2,7 @@ package br.senac.tads.pi3.ghosts.locarsys.dao;
 
 import br.senac.tads.pi3.ghosts.locarsys.model.Usuario;
 import br.senac.tads.pi3.ghosts.locarsys.controller.Conexoes;
+import br.senac.tads.pi3.ghosts.locarsys.model.VerificacoesUsuario;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UsuarioDAO {
+public class UsuarioDAO implements VerificacoesUsuario {
 
     public static Usuario usuario;
     //public static char tipoUsuario;
@@ -204,4 +205,29 @@ public class UsuarioDAO {
         return false;
     }
 
+    @Override
+    public boolean verificaCPF(String cpf) {
+        Statement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+        
+        String sql = "SELECT CPF_FUNCIONARIO FROM FUNCIONARIO "
+                + "WHERE CPF_FUNCIONARIO = '" + cpf + "'";
+        try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("ID_USUARIO");
+                return false;
+            }
+            conn.close();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        }
+        return false;
+    }
 }

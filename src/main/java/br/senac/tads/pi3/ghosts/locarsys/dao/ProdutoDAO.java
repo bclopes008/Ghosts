@@ -22,9 +22,11 @@ public class ProdutoDAO {
     public static ArrayList<Carro> listarCarrosDisponiveis(char grupo) {
         ArrayList<Carro> carros = new ArrayList<>();
 
-        String sql = "SELECT CL.TIPO_CLASSE, CA.MODELO_CARRO FROM Carro CA "
+        String sql = "SELECT * FROM CARRO CA "
                 + "INNER JOIN CLASSE CL ON CA.ID_CLASSE = CL.ID_CLASSE "
-                + "WHERE DISPONIBILIDADE_CARRO = '1' AND CL.TIPO_CLASSE = '"+grupo+"'";
+                + "INNER JOIN FILIAL FI ON CA.ID_FILIAL = FI.ID_FILIAL "
+                + "WHERE DISPONIBILIDADE_CARRO = '1' AND CL.TIPO_CLASSE = '" + grupo + "' "
+                + "AND FI.NOME_FILIAL = '" + UsuarioDAO.usuario.getFilial() + "'";
 
         try {
             Connection conn = Conexoes.obterConexao();
@@ -35,7 +37,9 @@ public class ProdutoDAO {
 
             while (rs.next()) {
                 Carro cars = new Carro();
+                cars.setId(rs.getInt("ID_CARRO"));
                 cars.setModelo(rs.getString("MODELO_CARRO"));
+                cars.setPlaca(rs.getString("PLACA_CARRO"));
                 cars.setGrupo(rs.getString("TIPO_CLASSE").charAt(0));
                 carros.add(cars);
             }

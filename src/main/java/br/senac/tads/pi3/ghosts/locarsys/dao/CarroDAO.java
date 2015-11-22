@@ -155,7 +155,7 @@ public class CarroDAO {
         Connection conn = null;
         ResultSet rs = null;
 
-        /* Pesquisa Usuário */
+        /* Pesquisa Carro */
         String sql = "SELECT * FROM CARRO CA "
                 + "INNER JOIN CLASSE CL ON CA.ID_CLASSE = CL.ID_CLASSE "
                 + "WHERE CA.MODELO_CARRO LIKE '%" + modelo + "%' AND CL.TIPO_CLASSE LIKE '%" + grupo + "%' "

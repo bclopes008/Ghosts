@@ -140,7 +140,6 @@ public class AluguelDAO {
     }
 
     public static boolean cadastrarAluguel(Aluguel aluguel) throws ClassNotFoundException {
-        String sql = "";
         float valorClasse = 0;
 
         try {
@@ -148,7 +147,7 @@ public class AluguelDAO {
             PreparedStatement stmt = null;
 
             //INSERT do Aluguel
-            sql = "INSERT INTO ALUGUEL "
+            String sql = "INSERT INTO ALUGUEL "
                     + "(ID_FUNCIONARIO, ID_CARRO, ID_CLIENTE, DATA_LOCACAO_ALUGUEL, DATA_DEVOLUCAO_ALUGUEL, PRECO_TOTAL) "
                     + "VALUES (1,(SELECT ID_CARRO FROM CARRO CA INNER JOIN CLASSE CL ON CA.ID_CLASSE = CL.ID_CLASSE "
                     + "WHERE MODELO_CARRO = ? AND CL.TIPO_CLASSE = ? FETCH FIRST 1 ROW ONLY), "
@@ -207,14 +206,15 @@ public class AluguelDAO {
         Statement stmt = null;
         Connection conn = null;
         ResultSet rs = null;
-        
+
         /*Pesquisa Aluguel*/
         String sql = "SELECT * FROM ALUGUEL AL "
                 + "INNER JOIN FUNCIONARIO FU ON AL.ID_FUNCIONARIO = FU.ID_FUNCIONARIO "
                 + "INNER JOIN CARRO CA ON AL.ID_CARRO = CA.ID_CARRO "
                 + "INNER JOIN CLIENTE CL ON AL.ID_CLIENTE = CL.ID_CLIENTE "
+                + "INNER JOIN FILIAL FI ON FU.ID_FILIAL = FI.ID_FILIAL "
                 + "WHERE CA.MODELO_CARRO LIKE '%" + modelo + "%' AND CL.CPF_CLIENTE LIKE '%" + cpf + "%' "
-                + "AND CL.NOME_CLIENTE LIKE '%" + nome + "%'";
+                + "AND CL.NOME_CLIENTE LIKE '%" + nome + "%' AND FI.NOME_FILIAL = '" + UsuarioDAO.usuario.getFilial() + "'";
         try {
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
@@ -223,11 +223,17 @@ public class AluguelDAO {
             while (rs.next()) {
                 Aluguel a = new Aluguel();
                 Cliente c = new Cliente();
+                Carro ca = new Carro();
                 a.setId(rs.getInt("ID_ALUGUEL"));
+                a.setDataInicial(rs.getString("DATA_LOCACAO_ALUGUEL"));
+                a.setDataFinal(rs.getString("DATA_DEVOLUCAO_ALUGUEL"));
                 c.setCpf(rs.getString("CPF_CLIENTE"));
                 c.setCnh(rs.getString("CNH_CLIENTE"));
                 c.setNome(rs.getString("NOME_CLIENTE"));
+                ca.setModelo(rs.getString("MODELO_CARRO"));
+                ca.setPlaca(rs.getString("PLACA_CARRO"));
                 a.setCliente(c);
+                a.setCarro(ca);
                 alugueis.add(a);
             }
             conn.close();

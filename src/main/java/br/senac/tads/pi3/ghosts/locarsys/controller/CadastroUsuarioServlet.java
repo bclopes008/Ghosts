@@ -41,10 +41,11 @@ public class CadastroUsuarioServlet extends HttpServlet {
         filiais = ProdutoDAO.listarFiliais();
         request.setAttribute("filiais", filiais);
         request.setAttribute("tipo", "CadastroUsuarioServlet");
-        
+
         //Para Verifica se o usuário possui acesso a essa página
-        if(UsuarioDAO.usuario != null)
+        if (UsuarioDAO.usuario != null) {
             request.setAttribute("usuario", UsuarioDAO.usuario);
+        }
         RequestDispatcher disp = request.getRequestDispatcher("/Usuario/cadastrarUsuario.jspx");
         disp.forward(request, response);
     }
@@ -75,12 +76,17 @@ public class CadastroUsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        UsuarioDAO dao = new UsuarioDAO();
         Usuario u = adiciocar(request);
-        if (UsuarioDAO.cadastraUsuario(u)) {
-            request.setAttribute("mensagem", "Usuário cadastrado com sucesso!");
-        } else {
-            request.setAttribute("mensagem", "Erro ao cadastradar o Usuário!");
+        if (dao.verificaCPF(u.getCpf())) {
+            if (UsuarioDAO.cadastraUsuario(u)) {
+                request.setAttribute("mensagem", "Usuário cadastrado com sucesso!");
+            } else {
+                request.setAttribute("mensagem", "Erro ao cadastradar o Usuário!");
+            }
         }
+        else
+            request.setAttribute("mensagem", "Já existe esse CPF cadastrado!");
         request.setAttribute("usu", u);
         processRequest(request, response);
     }

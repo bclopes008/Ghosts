@@ -20,6 +20,10 @@ public class Aluguel {
     private Cliente cliente;
     private Funcionario funcionario;
 
+    public void setCarro(Carro carro) {
+        this.carro = carro;
+    }
+
     public Carro getCarro() {
         return carro;
     }

@@ -61,7 +61,6 @@ public class EditarUsuarioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println("id = " + id);
         Usuario usuario = UsuarioDAO.verUsuario(id);
         request.setAttribute("usuario", usuario);
         processRequest(request, response);

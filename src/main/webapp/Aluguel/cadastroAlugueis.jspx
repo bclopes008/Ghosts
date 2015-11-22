@@ -27,61 +27,80 @@
                         <jsp:param value="../Principal/menu.jspx" name="menu"/>  
                     </jsp:include>
                     <div>
-                        <form action="" accept-charset="ISO-8859-1,UTF-8" method="post">
+                        <form action="" accept-charset="ISO-8859-1,UTF-8" method="get">
                             <fieldset>
                                 <legend>Cadastro de Alugueis</legend>
 
                                 Cod. Aluguel
-                                <input type="id" id="codAluguel" name="codAluguel" readonly="readonly" title="Codigo do Aluguel"/>
+                                <input type="id" id="codAluguel" name="codAluguel" readonly="readonly" title="Codigo do Aluguel" value="${aluguel.id}"/>
                                 Cod. Cliente
-                                <input type="id"  id="idCliente" name="idCliente" readonly="readonly" title="Codigo do Cliente"/>
+                                <input type="id"  id="idCliente" name="idCliente" readonly="readonly" title="Codigo do Cliente" value="${aluguel.cliente.id}"/>
 
                                 <button  type="reset" class="novo" name="novo" tabindex="9" title="Limpar"><img src="ImagensLoCarSys/Novo.png"/>Limpar</button>
                                 <button  type="submit" class="salvar" name="salvar"  value="" tabindex="8" title="Salvar"><img src="ImagensLoCarSys/Salvar.png"/>Salvar</button>
                                 <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="10" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
 
                                 Data Inicial<b>&#42;</b>
-                                <input type="date" id="inicial" name="inicial" tabindex="1" required="required" title="Data Inicial"/>
+                                <input type="date" id="inicial" name="inicial" tabindex="1" required="required" title="Data Inicial" value="${aluguel.dataInicial}"/>
                                 Data Final<b>&#42;</b>
-                                <input type="date" id="final" name="final" tabindex="2" required="required" title="Data Final"/>
+                                <input type="date" id="final" name="final" tabindex="2" required="required" title="Data Final" value="${aluguel.final}"/>
 
                                 <label for="cpf">CPF<b>&#42;</b></label>
-                                <input type="text" id="cpf" name="cpf" tabindex="3" maxlength="14" required="required" onkeypress="formatar('###.###.###-##', this)" placeholder="___.___.___-__" title="CPF do Cliente"/>
+                                <input type="text" id="cpf" name="cpf" tabindex="3" maxlength="14" required="required" onkeypress="formatar('###.###.###-##', this)" placeholder="___.___.___-__" title="CPF do Cliente" value="${aluguel.cpf}"/>
 
                                 <label for="cnh">CNH<b>&#42;</b></label>
-                                <input type="text" id="cnh" name="cnh" tabindex="4" maxlength="11" required="required" title="CNH do Cliente"/><br/>
+                                <input type="text" id="cnh" name="cnh" tabindex="4" maxlength="11" required="required" title="CNH do Cliente" value="${aluguel.cnh}"/><br/>
 
                                 <label for="nomeCliente">Nome Cliente<b>&#42;</b></label>
-                                <input type="text" id="nomeCliente" name="nomeCliente" tabindex="5" required="required" title="Nome do Cliente"/>
+                                <input type="text" id="nomeCliente" name="nomeCliente" tabindex="5" required="required" title="Nome do Cliente" value="${aluguel.nome}"/>
 
                                 Grupo<b>&#42;</b>
-                                <select id="grupo" name="grupo" tabindex="6" required="required" title="Grupo" onchange="redireciona('ConsultarModelosPorGrupo')">
+                                <select id="grupo" name="grupo" tabindex="6" required="required" title="Grupo" onchange="redireciona('ConsultarModelosPorGrupoServlet')">
                                     <option selected="selected"></option>
                                     <c:forEach items="${classes}" var="classes">
-                                        <option>${classes.tipoClasse}</option>
-                                    </c:forEach>
-                                </select>
-
-                                Modelo<b>&#42;</b>
-                                <select id="modelo" name="modelo" tabindex="7" required="required" title="Modelo">
-                                    <option selected="selected"></option>
-                                    <c:forEach items="${carros}" var="carros">
-                                        <option>${carros.modelo}</option>
+                                        <c:if test="${grupo == classes.tipoClasse}">
+                                            <option selected="selected">${classes.tipoClasse}</option>
+                                        </c:if>
+                                        <c:if test="${grupo != classes.tipoClasse}">
+                                            <option>${classes.tipoClasse}</option>
+                                        </c:if>
                                     </c:forEach>
                                 </select>
 
                                 Valor Total&#58;
-                                <input type="text" id="valorTotal" name="valorTotal" readonly="readonly" title="Valor Total"/>
+                                <input type="text" id="valorTotal" name="valorTotal" readonly="readonly" title="Valor Total" value="${aluguel.valorTotal}"/>
 
                             </fieldset><br/>
                             <span><b>&#42;</b> Campos Obrigatorios</span>
+
+                            <div id="divTabela">
+                                <table name= "tabela">
+                                    <tr>
+                                        <td id="tdAluguel">Cód. Carro</td>
+                                        <td id="tdNome">Modelo</td>
+                                        <td id="tdCPF">Placa</td>
+                                    </tr>
+                                    <c:forEach items="${carros}" var="car" varStatus="stat">
+                                        <tr>
+                                            <td>${car.id}</td>
+                                            <td>${car.modelo}</td>
+                                            <td>${car.placa}</td>
+                                            <td><input type="radio" name="carro" id="carro" value="${car.id}" required="required" tabindex="5" title="Carro"/></td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+
+                            </div>
                         </form>
                     </div>
                     <script>
                         function redireciona(param) {
                             var grp = document.getElementById("grupo");
                             var optGrupo = grp.options[grp.selectedIndex].text;
-                            location.href = param + "?" + "grupo" + "=" + optGrupo;
+                            if(optGrupo != "")
+                            {
+                                location.href = param + "?" + "grupo" + "=" + optGrupo;
+                            }
                         }
                     </script>
                 </body>

@@ -5,32 +5,25 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
-import br.senac.tads.pi3.ghosts.locarsys.dao.AluguelDAO;
-import br.senac.tads.pi3.ghosts.locarsys.model.Aluguel;
+import br.senac.tads.pi3.ghosts.locarsys.dao.ProdutoDAO;
+import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
+import br.senac.tads.pi3.ghosts.locarsys.model.Carro;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import br.senac.tads.pi3.ghosts.locarsys.dao.*;
-import br.senac.tads.pi3.ghosts.locarsys.model.Carro;
-import br.senac.tads.pi3.ghosts.locarsys.model.ClasseProduto;
-import java.util.ArrayList;
+
 /**
  *
- * @author Prime-PC
+ * @author Bruno
  */
-@WebServlet(name = "CadastroAluguelServlet", urlPatterns = {"/CadastroAluguelServlet"})
-public class CadastroAluguelServlet extends HttpServlet {
+@WebServlet(name = "ConsultarModelosPorGrupoServlet", urlPatterns = {"/ConsultarModelosPorGrupoServlet"})
+public class ConsultarModelosPorGrupoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,22 +36,11 @@ public class CadastroAluguelServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        ArrayList<ClasseProduto> classes = ProdutoDAO.listarClasses();
-        request.setAttribute("classes", classes);
-        
-        //Vinicius arrumar essa parte
-        /*char grp = 'A';
-        
-        ArrayList<Carro> carros = ProdutoDAO.listarCarrosDisponiveis(grp);
-        request.setAttribute("carros", carros);*/
-        
         //Para Verifica se o usuário possui acesso a essa página
         if(UsuarioDAO.usuario != null)
             request.setAttribute("usuario", UsuarioDAO.usuario);
-        RequestDispatcher disp = request.getRequestDispatcher("/Aluguel/cadastroAlugueis.jspx");
+        RequestDispatcher disp = request.getRequestDispatcher("CadastroAluguelServlet");
         disp.forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -73,6 +55,11 @@ public class CadastroAluguelServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        char grp = request.getParameter("grupo").charAt(0);
+        
+        ArrayList<Carro> carros = ProdutoDAO.listarCarrosDisponiveis(grp);
+        request.setAttribute("carros", carros);
+        request.setAttribute("grupo", grp);
         processRequest(request, response);
     }
 
@@ -87,28 +74,7 @@ public class CadastroAluguelServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        Aluguel aluguel = new Aluguel();
-        
-        aluguel.setDataFinal(request.getParameter("final"));
-        aluguel.setDataInicial(request.getParameter("inicial"));
-        aluguel.setCliente(request.getParameter("cpf"), request.getParameter("cnh"), request.getParameter("nomeCliente"));
-        aluguel.setCarro(request.getParameter("grupo").charAt(0), request.getParameter("modelo"));
-        
-        AluguelDAO.calcularValorTotal(aluguel);
-        
-        RequestDispatcher disp = null;
-        try {
-            if(!AluguelDAO.cadastrarAluguel(aluguel)){
-                disp = request.getRequestDispatcher("/Aluguel/cadastroAlugueis.jspx");
-            }
-        } catch (ClassNotFoundException ex) {
-            System.err.println(ex.getMessage());
-        }
-        
-        disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
-        disp.forward(request, response);
-
+        processRequest(request, response);
     }
 
     /**
