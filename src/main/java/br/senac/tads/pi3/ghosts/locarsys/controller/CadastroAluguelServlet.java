@@ -56,9 +56,11 @@ public class CadastroAluguelServlet extends HttpServlet {
         //Para Verifica se o usuário possui acesso a essa página
         if(UsuarioDAO.usuario != null)
             request.setAttribute("usuario", UsuarioDAO.usuario);
+        
+        
+        
         RequestDispatcher disp = request.getRequestDispatcher("/Aluguel/cadastroAlugueis.jspx");
         disp.forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

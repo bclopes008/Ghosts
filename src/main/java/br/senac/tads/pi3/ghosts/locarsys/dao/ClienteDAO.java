@@ -97,6 +97,7 @@ public class ClienteDAO {
                 c.setId(rs.getInt("ID_CLIENTE"));
                 c.setNome(rs.getString("NOME_CLIENTE"));
                 c.setCpf(rs.getString("CPF_CLIENTE"));
+                c.setCnh(rs.getString("CNH_CLIENTE"));
                 clientes.add(c);
             }
             conn.close();

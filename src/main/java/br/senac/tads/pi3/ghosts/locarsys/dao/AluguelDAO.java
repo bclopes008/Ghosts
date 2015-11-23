@@ -10,19 +10,12 @@ import java.util.ArrayList;
 import br.senac.tads.pi3.ghosts.locarsys.controller.Conexoes;
 import br.senac.tads.pi3.ghosts.locarsys.model.Carro;
 import br.senac.tads.pi3.ghosts.locarsys.model.Cliente;
-import br.senac.tads.pi3.ghosts.locarsys.model.Funcionario;
-import br.senac.tads.pi3.ghosts.locarsys.model.Produto;
 import java.sql.*;
-import java.sql.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -149,9 +142,7 @@ public class AluguelDAO {
             //INSERT do Aluguel
             String sql = "INSERT INTO ALUGUEL "
                     + "(ID_FUNCIONARIO, ID_CARRO, ID_CLIENTE, DATA_LOCACAO_ALUGUEL, DATA_DEVOLUCAO_ALUGUEL, PRECO_TOTAL) "
-                    + "VALUES (1,(SELECT ID_CARRO FROM CARRO CA INNER JOIN CLASSE CL ON CA.ID_CLASSE = CL.ID_CLASSE "
-                    + "WHERE MODELO_CARRO = ? AND CL.TIPO_CLASSE = ? FETCH FIRST 1 ROW ONLY), "
-                    + "(SELECT ID_CLIENTE FROM CLIENTE WHERE CNH_CLIENTE = ? FETCH FIRST 1 ROW ONLY), ?, ?, ?)";
+                    + "VALUES (? ,?, ?, ?, ?, ?)";
             stmt = conn.prepareStatement(sql);
 
             AluguelDAO.calcularValorTotal(aluguel);
@@ -159,9 +150,9 @@ public class AluguelDAO {
             System.out.println("Valor total: " + aluguel.getValorTotal());
             String grupo = "" + aluguel.getCarro().getGrupo();
             //Falta implementar o funcionário atualmente está como '1'
-            stmt.setString(1, aluguel.getCarro().getModelo());
-            stmt.setString(2, grupo);
-            stmt.setString(3, aluguel.getCliente().getCnh());
+            stmt.setInt(1, UsuarioDAO.usuario.getId());
+            stmt.setInt(2, aluguel.getCarro().getId());
+            stmt.setInt(3, aluguel.getCliente().getId());
             stmt.setString(4, aluguel.getDataInicial());
             stmt.setString(5, aluguel.getDataFinal());
             stmt.setFloat(6, aluguel.getValorTotal());
@@ -169,14 +160,13 @@ public class AluguelDAO {
 
             //UPDATE Disponibilidade
             stmt.clearBatch();
+            stmt.close();
+            
             sql = "UPDATE CARRO SET DISPONIBILIDADE_CARRO = '0' "
-                    + "WHERE ID_CARRO = (SELECT ID_CARRO FROM Carro WHERE DISPONIBILIDADE_CARRO = '1' "
-                    + "AND MODELO_CARRO = ? AND CL.TIPO_CLASSE = ? FETCH FIRST 1 ROW ONLY)";
+                    + "WHERE ID_CARRO = ?";
             stmt = conn.prepareStatement(sql);
 
-            stmt.setString(1, aluguel.getCarro().getModelo());
-            stmt.setString(2, grupo);
-            System.out.println("Grupo: " + aluguel.getCarro().getGrupo());
+            stmt.setInt(1, aluguel.getCarro().getId());
             stmt.executeUpdate();
             stmt.close();
             conn.close();

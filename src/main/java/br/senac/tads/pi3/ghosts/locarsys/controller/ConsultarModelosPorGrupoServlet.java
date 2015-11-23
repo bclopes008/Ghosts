@@ -5,18 +5,23 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
+import br.senac.tads.pi3.ghosts.locarsys.dao.ClienteDAO;
 import br.senac.tads.pi3.ghosts.locarsys.dao.ProdutoDAO;
 import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
+import br.senac.tads.pi3.ghosts.locarsys.model.Aluguel;
 import br.senac.tads.pi3.ghosts.locarsys.model.Carro;
+import br.senac.tads.pi3.ghosts.locarsys.model.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.ClientEndpoint;
 
 /**
  *
@@ -55,12 +60,29 @@ public class ConsultarModelosPorGrupoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        List<Cliente> clientes = ClienteDAO.pesquisarCliente("", request.getParameter("cpf"));
+        
         char grp = request.getParameter("grupo").charAt(0);
         
         ArrayList<Carro> carros = ProdutoDAO.listarCarrosDisponiveis(grp);
         request.setAttribute("carros", carros);
         request.setAttribute("grupo", grp);
+        
+        Aluguel aluguel = new Aluguel();
+        
+        Cliente c1 = clientes.get(0);
+//        c1.setId(Integer.parseInt(request.getParameter("idCliente")));
+        aluguel.setCliente(c1);
+
+        aluguel.setDataFinal(request.getParameter("final"));
+        aluguel.setDataInicial(request.getParameter("inicial"));
+//        aluguel.setValorTotal(Float.parseFloat(request.getParameter("valorTotal")));
+        
+        request.setAttribute("aluguel", aluguel);
+        
         processRequest(request, response);
+        
     }
 
     /**
