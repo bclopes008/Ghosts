@@ -60,8 +60,17 @@ public class ConsultarModelosPorGrupoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        List<Cliente> clientes = ClienteDAO.pesquisarCliente("", request.getParameter("cpf"));
+        Aluguel aluguel = new Aluguel();
+        String cpf = request.getParameter("cpf");
+        if(cpf != "")
+        {
+            List<Cliente> clientes = ClienteDAO.pesquisarCliente("", cpf);
+            if(clientes.size() > 0)
+            {
+                Cliente c1 = clientes.get(0);
+                aluguel.setCliente(c1);
+            }
+        }
         
         char grp = request.getParameter("grupo").charAt(0);
         
@@ -69,11 +78,8 @@ public class ConsultarModelosPorGrupoServlet extends HttpServlet {
         request.setAttribute("carros", carros);
         request.setAttribute("grupo", grp);
         
-        Aluguel aluguel = new Aluguel();
-        
-        Cliente c1 = clientes.get(0);
 //        c1.setId(Integer.parseInt(request.getParameter("idCliente")));
-        aluguel.setCliente(c1);
+        
 
         aluguel.setDataFinal(request.getParameter("final"));
         aluguel.setDataInicial(request.getParameter("inicial"));

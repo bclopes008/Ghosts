@@ -13,8 +13,9 @@
 
         <head>
             <title>Erro
-             </title>
+            </title>
             <link href="StyleCSSLoCarSys/loginStyle.css" rel="stylesheet"   type="text/css"/>
+            <meta http-equiv="refresh" content="7; url=LogoutServlet"/>
         </head>
         <body>
             <div id="logoSistema">
@@ -23,8 +24,8 @@
 
             <div>
                 <h1>Usuário sem permissão para acessar essa Página</h1>
-                
-                <h2>Retornando para a tela de Login</h2>
+
+                <h2>Retornando para a tela de Login...</h2>
             </div>
         </body>
 

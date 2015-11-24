@@ -135,7 +135,7 @@
             <jsp:include page="../erro.jspx" flush="false">  
                 <jsp:param value="../erro.jspx" name="erro"/>  
             </jsp:include>
-            <meta http-equiv="refresh" content="7; url=LogoutServlet"/>
+            
         </c:otherwise>
     </c:choose>
 </jsp:root>

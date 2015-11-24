@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author vinicius.vsantos
  */
 @WebServlet(name = "ExibirRelatóriosServlet", urlPatterns = {"/ExibirRelat_riosServlet"})
-public class ExibirRelatóriosServlet extends HttpServlet {
+public class ExibirRelatoriosServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -27,7 +27,7 @@
                         <jsp:param value="../Principal/menu.jspx" name="menu"/>  
                     </jsp:include>
                     <div>
-                        <form action="" accept-charset="ISO-8859-1,UTF-8" method="get">
+                        <form action="CadastroAluguelServlet" accept-charset="ISO-8859-1,UTF-8" method="post">
                             <fieldset>
                                 <legend>Cadastro de Alugueis</legend>
 
@@ -126,7 +126,7 @@
             <jsp:include page="../erro.jspx" flush="false">  
                 <jsp:param value="../erro.jspx" name="erro"/>  
             </jsp:include>
-            <meta http-equiv="refresh" content="7; url=LogoutServlet"/>
+
         </c:otherwise>
     </c:choose>
 </jsp:root>
