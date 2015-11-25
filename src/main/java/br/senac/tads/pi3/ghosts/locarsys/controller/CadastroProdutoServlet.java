@@ -49,8 +49,9 @@ public class CadastroProdutoServlet extends HttpServlet {
         //Envia o tipo para saber se é para cadastrar ou alterar
         request.setAttribute("tipo", "CadastroProdutoServlet");
         //Para Verifica se o usuário possui acesso a essa página
-        if(UsuarioDAO.usuario != null)
+        if (UsuarioDAO.usuario != null) {
             request.setAttribute("usuario", UsuarioDAO.usuario);
+        }
         RequestDispatcher disp = request.getRequestDispatcher("/Produto/cadastrarProduto.jspx");
         disp.forward(request, response);
     }
@@ -82,10 +83,15 @@ public class CadastroProdutoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Carro c = adiciocar(request);
-        if (CarroDAO.cadastraCarro(c)) {
-            request.setAttribute("mensagem", "Produto cadastrado com sucesso!");
+        String erro = CarroDAO.verificaoes(c);
+        if (erro == null) {
+            if (CarroDAO.cadastraCarro(c)) {
+                request.setAttribute("mensagem", "Produto cadastrado com sucesso!");
+            } else {
+                request.setAttribute("mensagem", "Erro ao cadastradar o Produto!");
+            }
         } else {
-            request.setAttribute("mensagem", "Erro ao cadastradar o Produto!");
+            request.setAttribute("mensagem", erro);
         }
         request.setAttribute("carro", c);
         processRequest(request, response);

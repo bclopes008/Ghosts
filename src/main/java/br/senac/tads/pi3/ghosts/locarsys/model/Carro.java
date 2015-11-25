@@ -1,5 +1,7 @@
 package br.senac.tads.pi3.ghosts.locarsys.model;
 
+import br.senac.tads.pi3.ghosts.locarsys.dao.CarroDAO;
+
 /**
  *
  * @author Bruno

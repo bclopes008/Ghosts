@@ -54,8 +54,9 @@ public class CadastroClienteServlet extends HttpServlet {
         //Envia o tipo para saber se é para cadastrar ou alterar
         request.setAttribute("tipo", "CadastroClienteServlet");
         //Para Verifica se o usuário possui acesso a essa página
-        if(UsuarioDAO.usuario != null)
+        if (UsuarioDAO.usuario != null) {
             request.setAttribute("usuario", UsuarioDAO.usuario);
+        }
         RequestDispatcher disp = request.getRequestDispatcher("/Cliente/cadastrarCliente.jspx");
         disp.forward(request, response);
 
@@ -70,7 +71,6 @@ public class CadastroClienteServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -89,17 +89,21 @@ public class CadastroClienteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Cliente c = adicionar(request);
-        if (ClienteDAO.cadastroCliente(c)) {
-            request.setAttribute("mensagem", "Cliente cadastrado com sucesso!");
+        String erro = ClienteDAO.verificaoes(c);
+        if (erro == null) {
+            if (ClienteDAO.cadastroCliente(c)) {
+                request.setAttribute("mensagem", "Cliente cadastrado com sucesso!");
+            } else {
+                request.setAttribute("mensagem", "Erro ao cadastradar o Cliente!");
+            }
         } else {
-            request.setAttribute("mensagem","Erro ao cadastradar o Cliente!");
+            request.setAttribute("mensagem", erro);
         }
         request.setAttribute("cliente", c);
         processRequest(request, response);
     }
-    
-    public static Cliente adicionar(HttpServletRequest request)
-    {
+
+    public static Cliente adicionar(HttpServletRequest request) {
         Cliente c = new Cliente();
         c.setNome(request.getParameter("nome"));
         c.setCpf(request.getParameter("cpf"));

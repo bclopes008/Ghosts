@@ -7,11 +7,11 @@ package br.senac.tads.pi3.ghosts.locarsys.model;
 
 /**
  *
- * @author Bruno
+ * @author bruno.clopes
  */
-public interface VerificacoesUsuario {
+public interface VerificacoesCliente {
     
     boolean verificaCPF(String cpf);
-    boolean verificaLogin(String login);
+    boolean verificaCNH(String cnh);
     
 }

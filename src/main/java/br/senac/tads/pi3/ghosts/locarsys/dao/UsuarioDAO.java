@@ -210,9 +210,35 @@ public class UsuarioDAO implements VerificacoesUsuario {
         Statement stmt = null;
         Connection conn = null;
         ResultSet rs = null;
-        
+
         String sql = "SELECT CPF_FUNCIONARIO FROM FUNCIONARIO "
                 + "WHERE CPF_FUNCIONARIO = '" + cpf + "'";
+        try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("ID_FUNCIONARIO");
+                return false;
+            }
+            conn.close();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean verificaLogin(String login) {
+        Statement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT LOGIN_USUARIO FROM USUARIO "
+                + "WHERE LOGIN_USUARIO = '" + login + "'";
         try {
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
@@ -229,5 +255,15 @@ public class UsuarioDAO implements VerificacoesUsuario {
             System.err.println("Erro: " + ex.getMessage());
         }
         return false;
+    }
+
+    public static String verificaoes(Usuario u) {
+        UsuarioDAO dao = new UsuarioDAO();
+        if (dao.verificaCPF(u.getCpf())) {
+            return "Já existe esse Login cadastrado!";
+        } else if (dao.verificaLogin(u.getLogin())) {
+            return "Já existe esse CPF cadastrado!";
+        }
+        return null;
     }
 }

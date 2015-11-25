@@ -2,6 +2,7 @@ package br.senac.tads.pi3.ghosts.locarsys.dao;
 
 import br.senac.tads.pi3.ghosts.locarsys.controller.Conexoes;
 import br.senac.tads.pi3.ghosts.locarsys.model.Carro;
+import br.senac.tads.pi3.ghosts.locarsys.model.VerificacoesCarro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class CarroDAO {
+public class CarroDAO implements VerificacoesCarro {
 
     public static boolean cadastraCarro(Carro c) {
         Statement stmt = null;
@@ -297,4 +298,95 @@ public class CarroDAO {
         }
         return false;
     }
+
+    @Override
+    public boolean verificaChassi(String chassi) {
+        Statement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT CHASSI_CARRO FROM CARRO "
+                + "WHERE CHASSI_CARRO = '" + chassi + "'";
+        try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("ID_CARRO");
+                return false;
+            }
+            conn.close();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean verificaPlaca(String placa) {
+        Statement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT PLACA_CARRO FROM CARRO "
+                + "WHERE PLACA_CARRO = '" + placa + "'";
+        try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("ID_CARRO");
+                return false;
+            }
+            conn.close();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean verificaRenavam(String renavam) {
+        Statement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT RENAVAM_CARRO FROM CARRO "
+                + "WHERE RENAVAM_CARRO = '" + renavam + "'";
+        try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("ID_CARRO");
+                return false;
+            }
+            conn.close();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        }
+        return false;
+    }
+    
+    public static String verificaoes(Carro c) {
+        CarroDAO dao = new CarroDAO();
+        if (dao.verificaChassi(c.getChassi())) {
+            return "Já existe esse Chassi cadastrado!";
+        } else if (dao.verificaPlaca(c.getPlaca())) {
+            return "Já existe essa Placa cadastrada!";
+        } else if (dao.verificaRenavam(c.getRenavam())) {
+            return "Já existe esse Renavam cadastrado!";
+        }
+        return null;
+    }
+
 }

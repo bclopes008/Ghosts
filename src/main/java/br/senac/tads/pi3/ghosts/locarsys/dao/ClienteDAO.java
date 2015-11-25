@@ -8,6 +8,7 @@ package br.senac.tads.pi3.ghosts.locarsys.dao;
 import br.senac.tads.pi3.ghosts.locarsys.controller.Conexoes;
 import br.senac.tads.pi3.ghosts.locarsys.model.Cliente;
 import br.senac.tads.pi3.ghosts.locarsys.model.Endereco;
+import br.senac.tads.pi3.ghosts.locarsys.model.VerificacoesCliente;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ import java.util.List;
  *
  * @author Bruno
  */
-public class ClienteDAO {
+public class ClienteDAO implements VerificacoesCliente {
 
     public static boolean cadastroCliente(Cliente c) {
         Statement stmt = null;
@@ -197,6 +198,68 @@ public class ClienteDAO {
             System.err.println("" + ex.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public boolean verificaCPF(String cpf) {
+        Statement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT CPF_CLIENTE FROM CLIENTE "
+                + "WHERE CPF_CLIENTE = '" + cpf + "'";
+        try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("ID_CLIENTE");
+                return false;
+            }
+            conn.close();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean verificaCNH(String cnh) {
+        Statement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT CNH_CLIENTE FROM CLIENTE "
+                + "WHERE CNH_CLIENTE = '" + cnh + "'";
+        try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("ID_CARRO");
+                return false;
+            }
+            conn.close();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        }
+        return false;
+    }
+
+    public static String verificaoes(Cliente c) {
+        ClienteDAO dao = new ClienteDAO();
+        if (dao.verificaCPF(c.getCpf())) {
+            return "Já existe esse CPF cadastrado!";
+        } else if (dao.verificaCNH(c.getCnh())) {
+            return "Já existe esse CNH cadastrado!";
+        }
+        return null;
     }
 
 }

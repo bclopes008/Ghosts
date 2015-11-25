@@ -76,17 +76,17 @@ public class CadastroUsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UsuarioDAO dao = new UsuarioDAO();
         Usuario u = adiciocar(request);
-        if (dao.verificaCPF(u.getCpf())) {
+        String erro = UsuarioDAO.verificaoes(u);
+        if (erro == null) {
             if (UsuarioDAO.cadastraUsuario(u)) {
                 request.setAttribute("mensagem", "Usuário cadastrado com sucesso!");
             } else {
                 request.setAttribute("mensagem", "Erro ao cadastradar o Usuário!");
             }
+        } else {
+            request.setAttribute("mensagem", erro);
         }
-        else
-            request.setAttribute("mensagem", "Já existe esse CPF cadastrado!");
         request.setAttribute("usu", u);
         processRequest(request, response);
     }
