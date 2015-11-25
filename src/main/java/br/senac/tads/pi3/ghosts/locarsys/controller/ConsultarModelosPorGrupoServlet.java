@@ -5,6 +5,7 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
+import br.senac.tads.pi3.ghosts.locarsys.dao.AluguelDAO;
 import br.senac.tads.pi3.ghosts.locarsys.dao.ClienteDAO;
 import br.senac.tads.pi3.ghosts.locarsys.dao.ProdutoDAO;
 import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
@@ -42,8 +43,9 @@ public class ConsultarModelosPorGrupoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //Para Verifica se o usuário possui acesso a essa página
-        if(UsuarioDAO.usuario != null)
+        if (UsuarioDAO.usuario != null) {
             request.setAttribute("usuario", UsuarioDAO.usuario);
+        }
         RequestDispatcher disp = request.getRequestDispatcher("CadastroAluguelServlet");
         disp.forward(request, response);
     }
@@ -62,33 +64,33 @@ public class ConsultarModelosPorGrupoServlet extends HttpServlet {
             throws ServletException, IOException {
         Aluguel aluguel = new Aluguel();
         String cpf = request.getParameter("cpf");
-        if(cpf != "")
-        {
+        if (cpf != "") {
             List<Cliente> clientes = ClienteDAO.pesquisarCliente("", cpf);
-            if(clientes.size() > 0)
-            {
+            if (clientes.size() > 0) {
                 Cliente c1 = clientes.get(0);
                 aluguel.setCliente(c1);
             }
         }
-        
+
         char grp = request.getParameter("grupo").charAt(0);
-        
+
         ArrayList<Carro> carros = ProdutoDAO.listarCarrosDisponiveis(grp);
         request.setAttribute("carros", carros);
         request.setAttribute("grupo", grp);
-        
-//        c1.setId(Integer.parseInt(request.getParameter("idCliente")));
-        
 
+//        c1.setId(Integer.parseInt(request.getParameter("idCliente")));
+        Carro ca = new Carro();
+        ca.setGrupo(grp);
+        aluguel.setCarro(ca);
+        
         aluguel.setDataFinal(request.getParameter("final"));
         aluguel.setDataInicial(request.getParameter("inicial"));
-//        aluguel.setValorTotal(Float.parseFloat(request.getParameter("valorTotal")));
-        
+        AluguelDAO.calcularValorTotal(aluguel);
+
         request.setAttribute("aluguel", aluguel);
-        
+
         processRequest(request, response);
-        
+
     }
 
     /**

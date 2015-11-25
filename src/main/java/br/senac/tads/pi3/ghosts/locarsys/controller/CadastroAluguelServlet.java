@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.senac.tads.pi3.ghosts.locarsys.dao.*;
 import br.senac.tads.pi3.ghosts.locarsys.model.Carro;
 import br.senac.tads.pi3.ghosts.locarsys.model.ClasseProduto;
+import br.senac.tads.pi3.ghosts.locarsys.model.Cliente;
 import java.util.ArrayList;
 /**
  *
@@ -46,12 +47,6 @@ public class CadastroAluguelServlet extends HttpServlet {
         
         ArrayList<ClasseProduto> classes = ProdutoDAO.listarClasses();
         request.setAttribute("classes", classes);
-        
-        //Vinicius arrumar essa parte
-        /*char grp = 'A';
-        
-        ArrayList<Carro> carros = ProdutoDAO.listarCarrosDisponiveis(grp);
-        request.setAttribute("carros", carros);*/
         
         //Para Verifica se o usuário possui acesso a essa página
         if(UsuarioDAO.usuario != null)
@@ -94,8 +89,19 @@ public class CadastroAluguelServlet extends HttpServlet {
         
         aluguel.setDataFinal(request.getParameter("final"));
         aluguel.setDataInicial(request.getParameter("inicial"));
-        aluguel.setCliente(request.getParameter("cpf"), request.getParameter("cnh"), request.getParameter("nomeCliente"));
-        aluguel.setCarro(request.getParameter("grupo").charAt(0), request.getParameter("modelo"));
+        
+        Cliente c1 = new Cliente();
+        c1.setCpf(request.getParameter("cpf"));
+        c1.setCnh(request.getParameter("cnh"));
+        c1.setNome(request.getParameter("nomeCliente"));
+        c1.setId(Integer.parseInt(request.getParameter("idCliente")));
+        
+        aluguel.setCliente(c1);
+        
+        Carro ca = new Carro();
+        ca.setGrupo(request.getParameter("grupo").charAt(0));
+        ca.setId(Integer.parseInt(request.getParameter("carro")));
+        aluguel.setCarro(ca);
         
         AluguelDAO.calcularValorTotal(aluguel);
         
@@ -108,7 +114,7 @@ public class CadastroAluguelServlet extends HttpServlet {
             System.err.println(ex.getMessage());
         }
         
-        disp = request.getRequestDispatcher("/Principal/telaPrincipal.jspx");
+        disp = request.getRequestDispatcher("Principal");
         disp.forward(request, response);
 
     }

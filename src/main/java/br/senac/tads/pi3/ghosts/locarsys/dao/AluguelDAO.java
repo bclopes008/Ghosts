@@ -11,6 +11,7 @@ import br.senac.tads.pi3.ghosts.locarsys.controller.Conexoes;
 import br.senac.tads.pi3.ghosts.locarsys.model.Carro;
 import br.senac.tads.pi3.ghosts.locarsys.model.Cliente;
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -94,27 +95,18 @@ public class AluguelDAO {
     }
 
     public static void calcularValorTotal(Aluguel aluguel) {
-        Calendar dataAtual = new GregorianCalendar();
-        Calendar dataFinal = new GregorianCalendar();
-        Calendar dataInicial = new GregorianCalendar();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-        try {
-            dataInicial.setTime(sdf.parse(aluguel.getDataInicial()));
-            dataFinal.setTime(sdf.parse(aluguel.getDataFinal()));
-        } catch (ParseException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        dataAtual.get(Calendar.DATE);
+        int diaInicial = Integer.parseInt(aluguel.getDataInicial().substring(8, 10));
+        int mesInicial = Integer.parseInt(aluguel.getDataInicial().substring(5, 7));
+        int diaFinal = Integer.parseInt(aluguel.getDataFinal().substring(8, 10));
+        int mesFinal = Integer.parseInt(aluguel.getDataFinal().substring(5, 7));
 
         float precoClasse = 0;
 
         try {
             Connection conn = Conexoes.obterConexao();
             Statement stmt = conn.createStatement();
-            String sql = "SELECT TARIFA_CLASSE FROM CARRO CA INNER JOIN CLASSE CL "
-                    + "ON CL.ID_CLASSE = CA.ID_CLASSE WHERE ID_CARRO = " + aluguel.getCarro().getChassi() + " FETCH FIRST 1 ROW ONLY";
+            String sql = "SELECT TARIFA_CLASSE FROM CLASSE "
+                    + "WHERE TIPO_CLASSE = '"+aluguel.getCarro().getGrupo()+"'";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -125,11 +117,8 @@ public class AluguelDAO {
             System.err.println(ex.getMessage());
         }
 
-        if (dataFinal.get(Calendar.DATE) <= dataAtual.get(Calendar.DATE)) {
-            aluguel.setValorTotal((dataFinal.get(Calendar.DATE) - dataInicial.get(Calendar.DATE)) * precoClasse);
-        } else {
-            aluguel.setValorTotal((dataFinal.get(Calendar.DATE) - dataInicial.get(Calendar.DATE)) * precoClasse * 1.15f);
-        }
+        aluguel.setValorTotal((diaFinal - diaInicial) * precoClasse);
+
     }
 
     public static boolean cadastrarAluguel(Aluguel aluguel) throws ClassNotFoundException {
@@ -147,9 +136,8 @@ public class AluguelDAO {
 
             AluguelDAO.calcularValorTotal(aluguel);
 
-            System.out.println("Valor total: " + aluguel.getValorTotal());
             String grupo = "" + aluguel.getCarro().getGrupo();
-            //Falta implementar o funcionário atualmente está como '1'
+
             stmt.setInt(1, UsuarioDAO.usuario.getId());
             stmt.setInt(2, aluguel.getCarro().getId());
             stmt.setInt(3, aluguel.getCliente().getId());
@@ -161,7 +149,7 @@ public class AluguelDAO {
             //UPDATE Disponibilidade
             stmt.clearBatch();
             stmt.close();
-            
+
             sql = "UPDATE CARRO SET DISPONIBILIDADE_CARRO = '0' "
                     + "WHERE ID_CARRO = ?";
             stmt = conn.prepareStatement(sql);
@@ -170,6 +158,7 @@ public class AluguelDAO {
             stmt.executeUpdate();
             stmt.close();
             conn.close();
+            System.out.println("depois INSERT ID: " + aluguel.getCarro().getId());
             return true;
         } catch (SQLException ex) {
             System.err.println("" + ex.getMessage());

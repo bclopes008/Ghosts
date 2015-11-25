@@ -23,12 +23,10 @@ import org.jfree.data.jdbc.JDBCCategoryDataset;
 public class Relatorios {
 
     public static void relatoriosDisponibilidade() {
-        String sql = "SELECT * FROM CARRO CA "
-                + "INNER JOIN CLASSE CL ON CL.ID_CLASSE = CA.ID_CLASSE "
-                + "INNER JOIN FABRICANTE FB ON FB.ID_FABRICANTE = CA.ID_FABRICANTE "
-                + "INNER JOIN COMBUSTIVEL CO ON CO.ID_COMBUSTIVEL = CA.ID_COMBUSTIVEL "
+        String sql = "SELECT COUNT(FL.NOME_FILIAL), FL.NOME_FILIAL FROM CARRO CA "
                 + "INNER JOIN FILIAL FL ON FL.ID_FILIAL = CA.ID_FILIAL "
-                + "WHERE DISPONIBILIDADE_CARRO = '1';";
+                + "WHERE CA.DISPONIBILIDADE_CARRO = '1' "
+                + "GROUP BY FL.NOME_FILIAL";
 
         try {
             Connection conn = Conexoes.obterConexao();
