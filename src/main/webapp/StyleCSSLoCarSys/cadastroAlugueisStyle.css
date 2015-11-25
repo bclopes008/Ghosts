@@ -10,12 +10,10 @@ legend{
 form input{
     border-radius:5px;
 }
-body select{
-    border-radius:5px;
-}
 
 div{
-    height: 25px;
+    width: 1000px;
+    height: 400px;
     margin:80px;
 }
 
@@ -24,6 +22,13 @@ fieldset{
     height:180px;
     border-radius:5px;
     background-color:Gainsboro;
+}
+#divTabela{
+    width: 900px;
+    height: 150px;
+    border-radius:5px;
+    margin-top:0;
+    margin-left:0;
 }
 
 #codAluguel{
@@ -87,20 +92,35 @@ fieldset{
 
 #nomeCliente{
     margin-left:10px;
-    margin-right:30px;
+    margin-right:170px;
     margin-bottom:40px;
     width:250px;
 }
 #grupo{
-    margin-right:25px;
+    margin-right:90px;
 }
-#modelo{
-    margin-right:40px;
 
-}
 #valorTotal{
     margin-left:10px;
     width:80px;
+}
+td{
+    border-radius:5px;
+    border-spacing:0;
+    padding:5px;
+    text-align:center;
+    border:1px solid;
+    background-color:Gainsboro;
+}
+
+#tdCarro{
+    width:90px;
+}
+#tdModelo{
+    width:300px;
+}
+#tdPlaca{
+    width:130px;
 }
 
 b{
@@ -110,6 +130,10 @@ b{
 span{
 
     margin-left:830px;
+}
+div>span{
+    font-size:18px;
+    margin-left:15px;
 }
 button{
 

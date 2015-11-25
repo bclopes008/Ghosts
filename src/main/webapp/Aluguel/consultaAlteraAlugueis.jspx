@@ -17,7 +17,7 @@
                     <title>Consulta/Altera Alugueis</title>
                     <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
                     <link href="StyleCSSLoCarSys/consultaAlteraAlugueisStyle.css" rel="stylesheet" type="text/css"/>
-                    <!--MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
+                   <!--<script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
                 </head>
 
                 <body>
@@ -39,7 +39,7 @@
                                 <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="7" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
 
                                 <label for="cpf">CPF</label>
-                                <input type="text" id="cpf" name="cpf" maxlength="14"  onkeypress="formatar('###.###.###-##', this)" placeholder="___.___.___-__" tabindex="3" title="CPF"/>
+                                <input type="text" id="cpf" name="cpf" maxlength="14" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" onkeypress="formatar('###.###.###-##', this)" placeholder="___.___.___-__" tabindex="3" title="CPF"/>
 
                                 <label for="nome">Nome Cliente</label>
                                 <input type="text" id="nome" name="nome" tabindex="4" title="Nome do Cliente"/><br/>

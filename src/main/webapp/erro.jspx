@@ -14,7 +14,9 @@
         <head>
             <title>Erro
             </title>
-            <link href="StyleCSSLoCarSys/loginStyle.css" rel="stylesheet"   type="text/css"/>
+            <!--<link href="StyleCSSLoCarSys/loginStyle.css" rel="stylesheet"   type="text/css"/> -->
+            <link href="StyleCSSLoCarSys/erroStyle.css" rel="stylesheet" type="text/css"/>
+
             <meta http-equiv="refresh" content="7; url=LogoutServlet"/>
         </head>
         <body>
@@ -22,10 +24,12 @@
                 <img src="ImagensLoCarSys/LoCarSys.png"/>
             </div>
 
-            <div>
-                <h1>Usuário sem permissão para acessar essa Página</h1>
+            <div id="divMensagem">
 
-                <h2>Retornando para a tela de Login...</h2>
+                <h1>:) Ops!</h1><br/>
+                <h2>Usuário sem permissão para acessar a página !!!!</h2>
+                <h3>Aguarde retornando a tela de Login ..............</h3>
+
             </div>
         </body>
 

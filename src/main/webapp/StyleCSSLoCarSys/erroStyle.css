@@ -1,0 +1,28 @@
+body{
+    background-color:#EDEDED;
+    font-family: "arial","verdana","sans-serif";
+    font-weight:bold;
+    font-size:18px;
+    color:red;
+}
+img{
+
+    width:320px;
+    margin-left:90px;
+
+}
+#logoSistema{
+
+    width:500px;
+    height:355px;
+    margin-left:400px;	
+    margin-top:0px;
+}
+
+#divMensagem{
+    width:700px;
+    height:355px;
+    margin-left:400px;	
+    margin-top:0px;
+
+}

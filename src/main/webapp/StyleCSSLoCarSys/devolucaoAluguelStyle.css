@@ -71,6 +71,7 @@ fieldset{
 }
 
 td{
+    border-radius:5px;
     border-spacing:0;
     padding:5px;
     text-align:center;
