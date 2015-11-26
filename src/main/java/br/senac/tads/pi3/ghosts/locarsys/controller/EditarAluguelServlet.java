@@ -5,26 +5,20 @@
  */
 package br.senac.tads.pi3.ghosts.locarsys.controller;
 
-import br.senac.tads.pi3.ghosts.locarsys.dao.Relatorios;
 import br.senac.tads.pi3.ghosts.locarsys.dao.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author vinicius.vsantos
+ * @author bruno.clopes
  */
-@WebServlet(name = "ExibirRelatóriosServlet", urlPatterns = {"/ExibirRelat_riosServlet"})
-public class ExibirRelatoriosServlet extends HttpServlet {
+public class EditarAluguelServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,7 +31,12 @@ public class ExibirRelatoriosServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("tipo", "EditarAluguelServlet");
         //Para Verifica se o usuário possui acesso a essa página
+        if(UsuarioDAO.usuario != null)
+            request.setAttribute("usuario", UsuarioDAO.usuario);
+        RequestDispatcher disp = request.getRequestDispatcher("/Aluguel/cadastroAlugueis.jspx");
+        disp.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,29 +51,6 @@ public class ExibirRelatoriosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            Relatorios.relatoriosDisponibilidade();
-            Relatorios.relatoriosVendas();
-        } catch (SQLException ex) {
-            Logger.getLogger(ExibirRelatoriosServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ExibirRelatoriosServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        if (UsuarioDAO.usuario != null) {
-            request.setAttribute("usuario", UsuarioDAO.usuario);
-        }
-        
-        RequestDispatcher disp = null;
-        
-        if(request.getParameter("relatorio").equals(1)){
-            disp = request.getRequestDispatcher("relatorioDisponibilidade.jspx");
-        }else{
-            disp = request.getRequestDispatcher("relatorioVendas.jspx");
-        }
-        
-        disp.forward(request, response);
-
         processRequest(request, response);
     }
 

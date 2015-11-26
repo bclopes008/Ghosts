@@ -5,7 +5,8 @@
     Author     : fabio.ssanto10
 -->
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-          xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 
     <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
     <c:choose>
@@ -17,7 +18,7 @@
                     <title>Consulta/Altera Alugueis</title>
                     <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
                     <link href="StyleCSSLoCarSys/consultaAlteraAlugueisStyle.css" rel="stylesheet" type="text/css"/>
-                  <script src="MascarasLoCarSys/jquery-2.1.4.min.js" type="text/javascript">//bug</script>
+                    <script src="MascarasLoCarSys/jquery-2.1.4.min.js" type="text/javascript">//bug</script>
                     <script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript">//bug</script>    
                 </head>
 
@@ -55,15 +56,23 @@
                                 <table name= "tabela">
                                     <tr>
                                         <td id="tdAluguel">N. Aluguel</td>
-                                        <td id="tdNome">Nome</td>
+                                        <td id="tdNome">Nome Cliente</td>
                                         <td id="tdCPF">CPF</td>
+                                        <td id="tdDataInicial">Data Inicial</td>
+                                        <td id="tdDataFinal">Data Final</td>
+                                        <td id="tdGrupo">Grupo</td>
+                                        <td id="tdModelo">Modelo</td>
                                     </tr>
                                     <c:forEach items="${alugueis}" var="alu" varStatus="stat">
                                         <tr>
                                             <td>${alu.id}</td>
                                             <td>${alu.cliente.nome}</td>
                                             <td>${alu.cliente.cpf}</td>
-                                            <td><a href="EditarUsuarioServlet?id=${alu.id}"><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="ImagensLoCarSys/Consultar.png"/></button></a></td>
+                                            <td>${alu.dataInicial}</td>
+                                            <td>${alu.dataFinal}</td>
+                                            <td>${alu.carro.grupo}</td>
+                                            <td>${alu.carro.modelo}</td>
+                                            <td><a href="EditarAluguelServlet?id=${alu.id}"><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="ImagensLoCarSys/Consultar.png"/></button></a></td>
                                         </tr>
                                     </c:forEach>
                                 </table>
@@ -81,7 +90,7 @@
             <jsp:include page="../erro.jspx" flush="false">  
                 <jsp:param value="../erro.jspx" name="erro"/>  
             </jsp:include>
-            
+
         </c:otherwise>
     </c:choose>
 </jsp:root>

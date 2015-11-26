@@ -42,8 +42,8 @@
             <c:if test="${usuario.tipoUsuario == 'G'}">
                 <li><a href="#">Relatórios</a>
                     <ul class="menuRelatorios">
-                        <li><a href="#">Aluguel</a></li>
-                        <li><a href="#">Produtos</a></li>
+                        <li><a href="ExibirRelatoriosServlet?relatorio=1">Aluguel</a></li>
+                        <li><a href="ExibirRelatoriosServlet/?relatorio=2">Produtos</a></li>
                     </ul><!-- submenu -->
                 </li>
                 </c:if>

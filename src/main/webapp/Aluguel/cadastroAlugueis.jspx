@@ -22,7 +22,7 @@
                     <script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript">//bug</script>
                 </head>
 
-                <body>
+                <body data-erro="${mensagem}">
                     <jsp:include page="../Principal/menu.jspx" flush="false">  
                         <jsp:param value="../Principal/menu.jspx" name="menu"/>  
                     </jsp:include>
@@ -95,8 +95,11 @@
                             </div>
                         </form>
                     </div>
-
-
+                    <script>
+                        if (document.body.getAttribute("data-erro")) {
+                            alert(document.body.getAttribute("data-erro"));
+                        }
+                    </script>
                 </body>
             </html>
         </c:when>

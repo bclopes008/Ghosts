@@ -81,7 +81,19 @@ td{
     width:300px;
 }
 #tdCPF{
-    width:130px;
+    width:140px;
+}
+#tdDataInicial{
+    width:140px;
+}
+#tdDataFinal{
+    width:140px;
+}
+#tdGrupo{
+    width:90px;
+}
+#tdModelo{
+    width:150px;
 }
 
 .alterar{

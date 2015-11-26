@@ -82,10 +82,17 @@ public class ConsultarModelosPorGrupoServlet extends HttpServlet {
         Carro ca = new Carro();
         ca.setGrupo(grp);
         aluguel.setCarro(ca);
-        
+
         aluguel.setDataFinal(request.getParameter("final"));
         aluguel.setDataInicial(request.getParameter("inicial"));
-        AluguelDAO.calcularValorTotal(aluguel);
+        if (aluguel.getDataInicial() != "" && aluguel.getDataFinal() != "") {
+            String erro = AluguelDAO.verificaoes(aluguel);
+            if (erro == null) {
+                AluguelDAO.calcularValorTotal(aluguel);
+            } else {
+                request.setAttribute("mensagem", erro);
+            }
+        }
 
         request.setAttribute("aluguel", aluguel);
 

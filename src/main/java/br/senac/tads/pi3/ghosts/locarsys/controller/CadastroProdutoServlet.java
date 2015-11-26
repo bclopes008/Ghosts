@@ -110,7 +110,7 @@ public class CadastroProdutoServlet extends HttpServlet {
         c.setKilometragem(Float.parseFloat(request.getParameter("km")));
         c.setMarca(request.getParameter("fabricante"));
         c.setModelo(request.getParameter("modelo"));
-        c.setPlaca(request.getParameter("placa"));
+        c.setPlaca(request.getParameter("placa").toUpperCase());
         c.setRenavam(request.getParameter("renavam"));
         c.setFilial(request.getParameter("filial"));
         return c;

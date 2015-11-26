@@ -86,7 +86,7 @@ id_Cliente bigint not null,
 id_Estado bigint not null,
 Cidade_estado varchar(30) not null,
 Logradouro_Endereco varchar(50) not null,
-Numero_Endereco varchar(5) not null,
+Numero_Endereco varchar(8) not null,
 Bairro_Endereco varchar(30) not null,
 Complemento_Endereco varchar(30),
 Cep_Endereco varchar(9) not null,
@@ -131,6 +131,7 @@ id_Cliente bigint not null,
 Data_Locacao_Aluguel date not null,
 Data_Devolucao_Aluguel date not null,
 Preco_Total float not null,
+Devolucao_Aluguel char(1) not null,
 constraint fk_id_Funcionario_Aluguel foreign key (id_Funcionario) references Funcionario,
 constraint fk_id_Carro foreign key (id_Carro) references Carro,
 constraint fk_id_Cliente_Aluguel foreign key (id_Cliente) references Cliente
@@ -254,14 +255,14 @@ INSERT INTO Carro
 (id_Filial,id_Classe,id_Fabricante,id_Combustivel,id_Estado,Ano_Fabricacao_Carro,Chassi_Carro,Cor_Carro,Modelo_Carro,Placa_Carro,Cidade_Carro,
 Disponibilidade_Carro,Ano_Carro,Renavam_Carro,Kilometragem_Carro)
 values
-(1,1,1,1,26,'2000','22.33.55555.1.1.666666','Prata','Celta','FAB-7894','SP','1','2013','1234567890-9',1000);
+(1,1,1,1,26,'2000','22.33.55555.1.1.666666','Prata','Celta','FAB-7894','SP','0','2013','1234567890-9',1000);
 
 SELECT * FROM Carro;
 
 --Inserir Valores na Tabela Aluguel, declarando os @id_Funcionario, @id_Classe, @id_Carro e @id_Cliente como chaves estrangeiras----------------------------
-INSERT INTO Aluguel(id_Funcionario,id_Carro,id_Cliente,Data_Locacao_Aluguel,Data_Devolucao_Aluguel, Preco_Total)
+INSERT INTO Aluguel(id_Funcionario,id_Carro,id_Cliente,Data_Locacao_Aluguel,Data_Devolucao_Aluguel, Preco_Total, Devolucao_Aluguel)
 VALUES
-(1,1,1,'2015-06-01','2015-06-02',39.9);
+(1,1,1,'2015-06-01','2015-06-02',39.9, '0');
 
 
 SELECT * FROM Aluguel;

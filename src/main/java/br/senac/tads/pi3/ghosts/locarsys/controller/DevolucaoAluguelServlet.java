@@ -56,10 +56,24 @@ public class DevolucaoAluguelServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*Aluguel aluguel = new Aluguel();
-        aluguel.setId(Integer.parseInt(request.getParameter("idaluguel")));
 
-        AluguelDAO.devolucaoAluguel(aluguel);*/
+        int idCarro = 0, idAluguel = 0;
+        try {
+            idCarro = Integer.parseInt(request.getParameter("idCarro"));
+            idAluguel = Integer.parseInt(request.getParameter("idAluguel"));
+        } catch (NumberFormatException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        Aluguel aluguel = new Aluguel();
+        aluguel.setId(idAluguel);
+        Carro ca = new Carro();
+        ca.setId(idCarro);
+        aluguel.setCarro(ca);
+
+        if (idCarro > 0 || idAluguel > 0) {
+            AluguelDAO.devolucaoAluguel(aluguel);
+        }
 
         processRequest(request, response);
     }
@@ -75,16 +89,15 @@ public class DevolucaoAluguelServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Aluguel aluguel = new Aluguel();
-        Carro ca = new Carro();
-        ca.setModelo(request.getParameter("modelo"));
-        aluguel.setCarro(ca);
-
-        List<Cliente> clientes = ClienteDAO.pesquisarCliente(request.getParameter("nome"), request.getParameter("cpf"));
-        aluguel.setCliente(clientes.get(0));
-
-        List<Aluguel> alugueis = AluguelDAO.perquisarAluguel(aluguel.getCarro().getModelo(), aluguel.getCliente().getCpf(), aluguel.getCliente().getNome());
-        request.setAttribute("aluguel", alugueis);
+        String modelo = request.getParameter("modelo");
+        String cpf = request.getParameter("cpf");
+        String nome = request.getParameter("nome");
+        List<Aluguel> listarAlugueis = AluguelDAO.perquisarAlugueisNaoDevolvidos(modelo, cpf, nome);
+        request.setAttribute("aluguel", listarAlugueis);
+        //request.setAttribute("id", id);
+        request.setAttribute("modelo", modelo);
+        request.setAttribute("cpf", cpf);
+        request.setAttribute("nome", nome);
         processRequest(request, response);
     }
 

@@ -31,7 +31,7 @@
                                 Cod. Carro
                                 <input type="text" id="codCarro" name="codCarro" readonly="readonly" title="Código do Carro" value="${carro.id}"/>
                                 <label for="modelo">Modelo<b>&#42;</b></label>
-                                <input type="text" id="modelo" name="modelo" required="required" tabindex="1" title="Modelo do Carro" value="${carro.modelo}"/>
+                                <input type="text" id="modelo" name="modelo" maxlength="30" required="required" tabindex="1" title="Modelo do Carro" value="${carro.modelo}"/>
 
                                 <c:if test="${tipo == 'CadastroProdutoServlet'}">
                                     <button  type="reset" class="novo" name="novo" tabindex="16" title="Limpar"><img src="ImagensLoCarSys/Novo.png"/>Limpar</button>
@@ -47,9 +47,9 @@
                                 <label for="chassi">Chassi<b>&#42;</b></label>
                                 <input type="text" id="chassi" name="chassi" maxlength="22" required="required" placeholder="__.__._____._._.______" tabindex="2" title="Chassi" value="${carro.chassi}"/>
                                 <label for="cor">Cor<b>&#42;</b></label>
-                                <input type="text" id="cor" name="cor" required="required" tabindex="3" title="Cor do Carro" value="${carro.cor}"/>
+                                <input type="text" id="cor" name="cor" maxlength="30" required="required" tabindex="3" title="Cor do Carro" value="${carro.cor}"/>
                                 <label for="placa">Placa<b>&#42;</b></label>
-                                <input type="text" id="placa" name="placa" maxlength="8" required="required" placeholder="ABC-1234" tabindex="4" title="Placa do Carro" value="${carro.cor}"/>
+                                <input type="text" id="placa" name="placa" maxlength="8" required="required" placeholder="ABC-1234" tabindex="4" title="Placa do Carro" value="${carro.placa}"/>
 
                                 <label for="renavam">Renavam<b>&#42;</b></label>
                                 <input type="text" id="renavam" name="renavam" maxlength="11" required="required" tabindex="5" title="Renavam" value="${carro.renavam}"/><br/>
@@ -67,7 +67,7 @@
                                     </c:forEach>
                                 </select>
                                 <label for="cidade">Cidade<b>&#42;</b></label>
-                                <input type="text" id="cidade" name="cidade" required="required" tabindex="7" title="Cidade" value="${carro.cidade}"/>
+                                <input type="text" id="cidade" name="cidade" maxlength="40" required="required" tabindex="7" title="Cidade" value="${carro.cidade}"/>
                                 <label for="ano">Ano<b>&#42;</b></label>
                                 <input type="text" id="ano" name="ano" maxlength="4" required="required"  tabindex="8" title="Ano" value="${carro.ano}"/>
                                 Data Fabricação<b>&#42;</b>

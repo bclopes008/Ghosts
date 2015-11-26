@@ -26,6 +26,7 @@ import br.senac.tads.pi3.ghosts.locarsys.model.Carro;
 import br.senac.tads.pi3.ghosts.locarsys.model.ClasseProduto;
 import br.senac.tads.pi3.ghosts.locarsys.model.Cliente;
 import java.util.ArrayList;
+
 /**
  *
  * @author Prime-PC
@@ -44,16 +45,15 @@ public class CadastroAluguelServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         ArrayList<ClasseProduto> classes = ProdutoDAO.listarClasses();
         request.setAttribute("classes", classes);
-        
+
         //Para Verifica se o usuário possui acesso a essa página
-        if(UsuarioDAO.usuario != null)
+        if (UsuarioDAO.usuario != null) {
             request.setAttribute("usuario", UsuarioDAO.usuario);
-        
-        
-        
+        }
+
         RequestDispatcher disp = request.getRequestDispatcher("/Aluguel/cadastroAlugueis.jspx");
         disp.forward(request, response);
     }
@@ -84,38 +84,41 @@ public class CadastroAluguelServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         Aluguel aluguel = new Aluguel();
-        
+
         aluguel.setDataFinal(request.getParameter("final"));
         aluguel.setDataInicial(request.getParameter("inicial"));
-        
+
         Cliente c1 = new Cliente();
         c1.setCpf(request.getParameter("cpf"));
         c1.setCnh(request.getParameter("cnh"));
         c1.setNome(request.getParameter("nomeCliente"));
         c1.setId(Integer.parseInt(request.getParameter("idCliente")));
-        
+
         aluguel.setCliente(c1);
-        
+
         Carro ca = new Carro();
         ca.setGrupo(request.getParameter("grupo").charAt(0));
         ca.setId(Integer.parseInt(request.getParameter("carro")));
         aluguel.setCarro(ca);
-        
-        AluguelDAO.calcularValorTotal(aluguel);
-        
-        RequestDispatcher disp = null;
-        try {
-            if(!AluguelDAO.cadastrarAluguel(aluguel)){
-                disp = request.getRequestDispatcher("/Aluguel/cadastroAlugueis.jspx");
+        String erro = AluguelDAO.verificaoes(aluguel);
+        if (erro == null) {
+            AluguelDAO.calcularValorTotal(aluguel);
+
+            
+            try {
+                if (!AluguelDAO.cadastrarAluguel(aluguel)) {
+                    //disp = request.getRequestDispatcher("/Aluguel/cadastroAlugueis.jspx");
+                }
+            } catch (ClassNotFoundException ex) {
+                //disp = request.getRequestDispatcher("/Aluguel/cadastroAlugueis.jspx");
+                System.err.println(ex.getMessage());
             }
-        } catch (ClassNotFoundException ex) {
-            System.err.println(ex.getMessage());
+        } else {
+            request.setAttribute("mensagem", erro);
         }
-        
-        disp = request.getRequestDispatcher("Principal");
-        disp.forward(request, response);
+        request.setAttribute("aluguel", aluguel);
+        processRequest(request, response);
 
     }
 

@@ -16,7 +16,8 @@
 
                     <title>Devolução Aluguel</title>
                     <link href="StyleCSSLoCarSys/devolucaoAluguelStyle.css" rel="stylesheet" type="text/css"/> 
-                    <!--<script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
+                    <script src="MascarasLoCarSys/jquery-2.1.4.min.js" type="text/javascript">//bug</script>
+                    <script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript">//bugg</script>
                 </head> 
 
                 <body>
@@ -28,7 +29,7 @@
                             <fieldset>
                                 <legend>Aluguel</legend>
                                 <label for="numeroAluguel">N. Aluguel<b>&#42;</b></label> 
-                                <input type="text" id="numeroAluguel" readonly="readonly" name="numeroAluguel" tabindex="1" title="Numero do Aluguel" value="${aluguel.id}"/>
+                                <input type="text" id="numeroAluguel" readonly="readonly" name="numeroAluguel" tabindex="1" title="Numero do Aluguel" value=""/>
 
                                 <label for="modelo">Modelo<b>&#42;</b></label>
                                 <input type="text" id="modelo" name="modelo" tabindex="2" title="Modelo do Carro"/>
@@ -54,13 +55,17 @@
                                     <tr><td id="tdAluguel">N. Aluguel</td>
                                         <td id="tdNome">Nome</td>
                                         <td id="tdCPF">CPF</td>
+                                        <td id="tdidCarro">ID Carro</td>
+                                        <td id="tdModeloCarro">Modelo Carro</td>
                                     </tr>
                                     <c:forEach items="${aluguel}" var="aluguel"> 
                                         <tr>
                                             <td>${aluguel.id}</td>
                                             <td>${aluguel.cliente.nome}</td>
                                             <td>${aluguel.cliente.cpf}</td>
-                                            <td><a href="DevolucaoAluguelServlet?idaluguel=${aluguel.id}"><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="ImagensLoCarSys/Consultar.png"/></button></a></td>
+                                            <td>${aluguel.carro.id}</td>
+                                            <td>${aluguel.carro.modelo}</td>
+                                            <td><a href="DevolucaoAluguelServlet?idAluguel=${aluguel.id}&amp;idCarro=${aluguel.carro.id}"><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="ImagensLoCarSys/Consultar.png"/></button></a></td>
                                         </tr>
                                     </c:forEach>
                                 </table>

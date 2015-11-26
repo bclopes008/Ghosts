@@ -9,28 +9,62 @@ window.addEventListener("load", iniciar);
 
 
 function redireciona(param) {
-        param = this.getAttribute("data-servlet");
-        var idAluguel = document.getElementById("codAluguel").value;
-        var idCliente = document.getElementById("idCliente").value;
-        var dataInicial = document.getElementById("inicial").value;
-        var dataFinal = document.getElementById("final").value;
-        var cpfCliente = document.getElementById("cpf").value;
-        var cnhCliente = document.getElementById("cnh").value;
-        var nomeCliente = document.getElementById("nomeCliente").value;
-        var valorTotal = document.getElementById("valorTotal").value;
-        var grp = document.getElementById("grupo");
-        var optGrupo = grp.options[grp.selectedIndex].text;
+    param = this.getAttribute("data-servlet");
+    var idAluguel = document.getElementById("codAluguel").value;
+    var idCliente = document.getElementById("idCliente").value;
+    var dataInicial = document.getElementById("inicial").value;
+    var dataFinal = document.getElementById("final").value;
+    var cpfCliente = document.getElementById("cpf").value;
+    var cnhCliente = document.getElementById("cnh").value;
+    var nomeCliente = document.getElementById("nomeCliente").value;
+    var valorTotal = document.getElementById("valorTotal").value;
+    var grp = document.getElementById("grupo");
+    var optGrupo = grp.options[grp.selectedIndex].text;
 
-        if (optGrupo !== "")
-        {
-            //location.href = param + "?" + "grupo" + "=" + optGrupo;
-            location.href = param + "?" + "grupo=" + optGrupo +
-                    "&idCliente=" + idCliente + "&inicial=" + dataInicial +
-                    "&final=" + dataFinal + "&cpf=" + cpfCliente + "&cnh=" + cnhCliente +
-                    "&nomeCliente=" + nomeCliente + "&valorTotal=" + valorTotal;
-        }
+    if (optGrupo !== "")
+    {
+        //location.href = param + "?" + "grupo" + "=" + optGrupo;
+        location.href = param + "?" + "grupo=" + optGrupo +
+                "&idCliente=" + idCliente + "&inicial=" + dataInicial +
+                "&final=" + dataFinal + "&cpf=" + cpfCliente + "&cnh=" + cnhCliente +
+                "&nomeCliente=" + nomeCliente + "&valorTotal=" + valorTotal;
     }
-
+}
+jQuery(document).ready(function ()
+{
+    $('#endereco').focus(function () // quando ir para o endereço
+    {
+        $cep = $("input[name='cep']").val(); // pego o cep do campo texto
+        if ($.trim($cep) != '') // verifico se o cep é diferente de vazio
+        {
+            $.ajax({
+                url: 'http://cep.republicavirtual.com.br/web_cep.php?cep=' + $cep + '&formato=javascript' // passo o cep como parâmetro juntamente com o format que quero
+                , dataType: 'script' // digo que o retorno esperado é em script
+                , crossDomain: true // ativo o jquery para crossDomain
+                , success: function () // caso haja sucesso, eu faço o necessário aqui, no caso vou colocar os dados na página
+                {
+                    if (resultadoCEP !== undefined && resultadoCEP.resultado == '1')  // verifico se o webservice conseguiu retornar os dados do cep
+                    {
+                        document.getElementById('bairro').value = unescape(resultadoCEP.bairro); // coloco o bairro
+                        document.getElementById('cidade').value = unescape(resultadoCEP.cidade); // coloco o a cidade
+                        document.getElementById('endereco').value = unescape(resultadoCEP.tipo_logradouro) + ' ' + unescape(resultadoCEP.logradouro); // coloco o endereço
+                        var estado = resultadoCEP.uf,
+                                localizado = null;
+                        // loop que percorre cada uma das opções e verifica se a frase da opção confere com o valor de fase que está sendo procurado
+                        $('#estado option').each(function () {
+                            // se localizar a estado, define o atributo selected
+                            if ($(this).text() == estado) {
+                                $(this).attr('selected', true);
+                            }
+                        });
+                    }
+                    else // caso o webservice não tenha conseguido retornar os dados do cep
+                        alert('CEP inváldo');
+                }
+            });
+        }
+    });
+});
 
 function iniciar() {
     jQuery(function ($)
@@ -39,15 +73,12 @@ function iniciar() {
         $("#cnh").mask("99999999999");
         $("#celular").mask("(99)99999-9999");
         $("#cep").mask("99999-999");
-
         $("#chassi").mask("99.99.99999.9.9.999999");
         $("#placa").mask("aaa-9999");
         $("#renavam").mask("99999999999");
         $("#ano").mask("9999");
         $("#anoFabricacao").mask("9999");
-
     });
-    
     document.getElementById("grupo").addEventListener("change", redireciona);
 }
 

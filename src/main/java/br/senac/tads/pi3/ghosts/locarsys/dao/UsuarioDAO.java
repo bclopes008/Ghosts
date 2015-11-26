@@ -259,10 +259,10 @@ public class UsuarioDAO implements VerificacoesUsuario {
 
     public static String verificaoes(Usuario u) {
         UsuarioDAO dao = new UsuarioDAO();
-        if (dao.verificaCPF(u.getCpf())) {
-            return "Já existe esse Login cadastrado!";
-        } else if (dao.verificaLogin(u.getLogin())) {
-            return "Já existe esse CPF cadastrado!";
+        if (!dao.verificaCPF(u.getCpf())) {
+            return "Login já cadastrado!";
+        } else if (!dao.verificaLogin(u.getLogin())) {
+            return "CPF já cadastrado!";
         }
         return null;
     }

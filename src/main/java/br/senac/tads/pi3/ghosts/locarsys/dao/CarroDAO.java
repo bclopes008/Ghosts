@@ -379,12 +379,12 @@ public class CarroDAO implements VerificacoesCarro {
     
     public static String verificaoes(Carro c) {
         CarroDAO dao = new CarroDAO();
-        if (dao.verificaChassi(c.getChassi())) {
-            return "Já existe esse Chassi cadastrado!";
-        } else if (dao.verificaPlaca(c.getPlaca())) {
-            return "Já existe essa Placa cadastrada!";
-        } else if (dao.verificaRenavam(c.getRenavam())) {
-            return "Já existe esse Renavam cadastrado!";
+        if (!dao.verificaChassi(c.getChassi())) {
+            return "Chassi já cadastrado!";
+        } else if (!dao.verificaPlaca(c.getPlaca())) {
+            return "Placa já cadastrada!";
+        } else if (!dao.verificaRenavam(c.getRenavam())) {
+            return "Renavam já cadastrado!";
         }
         return null;
     }

@@ -92,7 +92,7 @@ public class ClienteDAO implements VerificacoesCliente {
             conn = Conexoes.obterConexao();
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
-            List<Cliente> clientes = new ArrayList<>();
+            ArrayList<Cliente> clientes = new ArrayList<>();
             while (rs.next()) {
                 Cliente c = new Cliente();
                 c.setId(rs.getInt("ID_CLIENTE"));
@@ -254,10 +254,10 @@ public class ClienteDAO implements VerificacoesCliente {
 
     public static String verificaoes(Cliente c) {
         ClienteDAO dao = new ClienteDAO();
-        if (dao.verificaCPF(c.getCpf())) {
-            return "Já existe esse CPF cadastrado!";
-        } else if (dao.verificaCNH(c.getCnh())) {
-            return "Já existe esse CNH cadastrado!";
+        if (!dao.verificaCPF(c.getCpf())) {
+            return "CPF já cadastrado!";
+        } else if (!dao.verificaCNH(c.getCnh())) {
+            return "CNH já cadastrado!";
         }
         return null;
     }
