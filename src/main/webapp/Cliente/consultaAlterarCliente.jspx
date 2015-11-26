@@ -15,7 +15,8 @@
                 <head>
                     <title>Consulta/Alterar Cliente</title>
                     <link href="StyleCSSLoCarSys/consultaAlterarClienteStyle.css" rel="stylesheet" type="text/css"/>
-                    <!--<script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
+                    <script src="MascarasLoCarSys/jquery-2.1.4.min.js" type="text/javascript">//bug</script>
+                    <script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript">//bug</script>    
                 </head>
                 <body>
                     <jsp:include page="../Principal/menu.jspx" flush="false">  
@@ -30,7 +31,7 @@
                                 <input type="text" id="nome" name="nome" tabindex="1" title="Nome do Cliente " value="${nome}"/>
 
                                 <label for="cpf">CPF</label>
-                                <input type="text" id="cpf" name="cpf" maxlength="14" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" onkeypress="formatar('###.###.###-##', this)" placeholder="___.___.___-__" tabindex="2" title="CPF do Cliente" value="${cpf}"/>
+                                <input type="text" id="cpf" name="cpf" maxlength="14" placeholder="___.___.___-__" tabindex="2" title="CPF do Cliente" value="${cpf}"/>
 
                                 <button  type="submit" class="pesquisa" name="pesquisa" value="" tabindex="3" title="Pesquisar" ><img src="ImagensLoCarSys/Pesquisar.png"/>Pesquisar</button>
 

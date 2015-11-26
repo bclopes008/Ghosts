@@ -15,7 +15,8 @@
                 <head>
                     <title>Cadastrar Produto</title>
                     <link href="StyleCSSLoCarSys/cadastrarProdutoStyle.css" rel="stylesheet" type="text/css"/>
-                    <!--<script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
+                    <script src="MascarasLoCarSys/jquery-2.1.4.min.js" type="text/javascript">//bug</script>
+                    <script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript">//bug</script>    
                 </head>
                 <body data-erro="${mensagem}">
                     <jsp:include page="../Principal/menu.jspx" flush="false">  
@@ -44,11 +45,11 @@
                                         </c:if>
 
                                 <label for="chassi">Chassi<b>&#42;</b></label>
-                                <input type="text" id="chassi" name="chassi" maxlength="22" required="required" tabindex="2" title="Chassi" value="${carro.chassi}"/>
+                                <input type="text" id="chassi" name="chassi" maxlength="22" required="required" placeholder="__.__._____._._.______" tabindex="2" title="Chassi" value="${carro.chassi}"/>
                                 <label for="cor">Cor<b>&#42;</b></label>
                                 <input type="text" id="cor" name="cor" required="required" tabindex="3" title="Cor do Carro" value="${carro.cor}"/>
                                 <label for="placa">Placa<b>&#42;</b></label>
-                                <input type="text" id="placa" name="placa" maxlength="8" Pattern="[A-Z]{3}-[0-9]{4}" required="required" onkeypress="formatar('###-####', this)" placeholder="ABC-1234" tabindex="4" title="Placa do Carro" value="${carro.cor}"/>
+                                <input type="text" id="placa" name="placa" maxlength="8" required="required" placeholder="ABC-1234" tabindex="4" title="Placa do Carro" value="${carro.cor}"/>
 
                                 <label for="renavam">Renavam<b>&#42;</b></label>
                                 <input type="text" id="renavam" name="renavam" maxlength="11" required="required" tabindex="5" title="Renavam" value="${carro.renavam}"/><br/>

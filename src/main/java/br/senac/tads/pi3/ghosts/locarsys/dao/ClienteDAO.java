@@ -254,9 +254,9 @@ public class ClienteDAO implements VerificacoesCliente {
 
     public static String verificaoes(Cliente c) {
         ClienteDAO dao = new ClienteDAO();
-        if (dao.verificaCPF(c.getCpf())) {
+        if (!dao.verificaCPF(c.getCpf())) {
             return "Já existe esse CPF cadastrado!";
-        } else if (dao.verificaCNH(c.getCnh())) {
+        } else if (!dao.verificaCNH(c.getCnh())) {
             return "Já existe esse CNH cadastrado!";
         }
         return null;

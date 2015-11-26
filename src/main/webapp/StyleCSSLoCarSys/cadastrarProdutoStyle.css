@@ -20,7 +20,7 @@ div{
 } 
 fieldset{
     background-color:Gainsboro;
-    width: 930px;
+    width: 960px;
     height: 240px;
     border-radius:5px;
 }
@@ -33,29 +33,28 @@ fieldset{
 }
 #modelo{
     margin-left:10px;
-    margin-right:220px;
+    margin-right:240px;
 
 }
 .novo{
-    width:40px;
-    height:35px;
+    width:45px;
+    height:45px;
     margin-right:10px;
     background-repeat:no-repeat;
     background-position:center center;
-    border-radius:50px;
     border:transparent;
 }
 .salvar{
-    width:35px;
-    height:35px;
+    width:45px;
+    height:45px;
     margin-right:10px;
     background-repeat:no-repeat;
     background-position:center center;
     border:transparent;
 }
 .sair{
-    width:35px;
-    height:35px;
+    width:45px;
+    height:45px;
     background-repeat:no-repeat;
     background-position:center center;
     border:transparent;
@@ -75,7 +74,7 @@ fieldset{
 #placa{
     margin-left:10px;
     width:110px;
-    margin-right:40px;
+    margin-right:60px;
 }
 #renavam{
     margin-left:10px;
@@ -92,7 +91,7 @@ fieldset{
 }
 #cidade{
     margin-left:10px;
-    margin-right:40px;
+    margin-right:60px;
     width:110px;
 }
 #ano{
@@ -121,7 +120,7 @@ b{
     font-size:15px;
 }
 span{
-    margin-left:800px;
+    margin-left:830px;
 }
 button{
     font-family: "arial","verdana","sans-serif";

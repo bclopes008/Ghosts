@@ -41,8 +41,8 @@ fieldset{
 }
 
 .pesquisa{
-    width:35px;
-    height:35px;
+    width:65px;
+    height:45px;
     margin-right:30px;
     background-repeat:no-repeat;
     background-position:center center;
@@ -50,8 +50,8 @@ fieldset{
 
 }
 .sair{
-    width:35px;
-    height:35px;
+    width:45px;
+    height:45px;
     background-repeat:no-repeat;
     background-position:center center;
     border:transparent;
@@ -67,6 +67,7 @@ td{
     padding:5px;
     text-align:center;
     border:1px solid;
+    
     background-color:Gainsboro;
 }
 #tdCodigo{

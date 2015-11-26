@@ -19,7 +19,7 @@ div{
 
 fieldset{
     background-color:Gainsboro;
-    width: 900px;
+    width: 940px;
     height: 150px;
     border-radius:5px;
 
@@ -44,16 +44,16 @@ fieldset{
     margin-right:250px;
 }
 .pesquisa{
-    width:35px;
-    height:35px;
+    width:65px;
+    height:45px;
     margin-right:30px;
     background-repeat:no-repeat;
     background-position:center center;
     border:transparent;
 }
 .sair{
-    width:35px;
-    height:35px;
+    width:45px;
+    height:45px;
     background-repeat:no-repeat;
     background-position:center center;
     border:transparent;
@@ -67,7 +67,6 @@ fieldset{
     margin-left:10px;
     margin-top:30px;
     width:400px;
-
 }
 
 td{
@@ -103,7 +102,7 @@ b{
 
 span{
 
-    margin-left:770px;
+    margin-left:810px;
 }
 div>span{
     font-size:18px;
