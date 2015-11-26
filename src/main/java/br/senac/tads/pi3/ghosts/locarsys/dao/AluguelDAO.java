@@ -11,11 +11,6 @@ import br.senac.tads.pi3.ghosts.locarsys.controller.Conexoes;
 import br.senac.tads.pi3.ghosts.locarsys.model.Carro;
 import br.senac.tads.pi3.ghosts.locarsys.model.Cliente;
 import java.sql.*;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -23,76 +18,6 @@ import java.util.List;
  * @author Prime-PC
  */
 public class AluguelDAO {
-
-    public ArrayList<Aluguel> consultaAluguel() throws ClassNotFoundException {
-        ArrayList<Aluguel> alugueis = new ArrayList<>();
-        Aluguel aluguelObj = new Aluguel();
-
-        try {
-            Connection conn = Conexoes.obterConexao();
-            Statement stmt = conn.createStatement();
-            String sql = "SELECT * FROM ALUGUEL AL "
-                    + "INNER JOIN CARRO CA ON CA.ID_CARRO = AL.ID_CARRO "
-                    + "INNER JOIN FILIAL FL ON FL.ID_FILIAL = CA.ID_FILIAL "
-                    + "INNER JOIN FABRICANTE FA ON FA.ID_FABRICANTE = CA.ID_FABRICANTE "
-                    + "INNER JOIN COMBUSTIVEL CO ON CO.ID_COMBUSTIVEL = CA.ID_COMBUSTIVEL "
-                    + "INNER JOIN CLASSE CLA ON CLA.ID_CLASSE = CA.ID_CLASSE";
-            ResultSet rs = stmt.executeQuery(sql);
-
-            while (rs.next()) {
-                //Atributos do Carro
-//                aluguelObj.setCarro(new Carro(
-//                        rs.getString("CHASSI_CARRO"),
-//                        rs.getString("PLACA_CARRO"),
-//                        rs.getString("ESTADO_CARRO"),
-//                        rs.getString("CIDADE_CARRO"),
-//                        rs.getInt("ANO_CARRO"),
-//                        rs.getString("RENAVAM_CARRO"),
-//                        rs.getFloat("KILOMETRAGEM_CARRO"),
-//                        rs.getString("MODELO_CARRO"),
-//                        rs.getString("NOME_FABRICANTE"),
-//                        rs.getString("TIPO_COMBUSTIVEL"),
-//                        rs.getInt("ANO_FABRICACAO_CARRO"),
-//                        rs.getString("COR_CARRO"),
-//                        rs.getString("TIPO_CLASSE").charAt(0),
-//                        rs.getString("NOME_FILIAL")));
-
-                //Atributos do Cliente
-//                aluguelObj.setCliente(new Cliente(
-//                        rs.getString("CNH_CLIENTE"),
-//                        rs.getString("CELULAR_CLIENTE"),
-//                        rs.getString("EMAIL_CLIENTE"),
-//                        rs.getString("LOGRADOURO_ENDERECO"),
-//                        rs.getString("NUMERO_ENDERECO"),
-//                        rs.getString("COMPLEMENTO_ENDERECO"),
-//                        rs.getString("CEP_ENDERECO"),
-//                        rs.getString("BAIRRO_ENDERECO"),
-//                        rs.getString("OBS_ENDERECO"),
-//                        rs.getString("NOME_CLIENTE"),
-//                        rs.getString("SEXO_CLIENTE").charAt(0),
-//                        rs.getDate("DATA_NASC_CLIENTE"),
-//                        rs.getString("CPF_CLIENTE")));
-                //Atributos do Funcionário
-//                aluguelObj.setFuncionario(new Funcionario(
-//                        rs.getString("FUNCAO_FUNCIONARIO"),
-//                        rs.getString("NOME_FILIAL"),
-//                        rs.getString("NOME_FUNCIONARIO"),
-//                        rs.getString("SEXO_FUNCIONARIO").charAt(0),
-//                        rs.getDate("DATA_NASC_FUNCIONARIO"),
-//                        rs.getString("CPF_FUNCIONARIO")));
-                aluguelObj.setDataInicial(rs.getString("DATA_LOCACAO_ALUGUEL"));
-                aluguelObj.setDataFinal(rs.getString("DATA_DEVOLUCAO_ALUGUEL"));
-                aluguelObj.setValorTotal(rs.getFloat("PRECO_TOTAL"));
-
-                alugueis.add(aluguelObj);
-            }
-            conn.close();
-            return alugueis;
-        } catch (SQLException ex) {
-            System.err.println("" + ex.getMessage());
-        }
-        return null;
-    }
 
     public static void calcularValorTotal(Aluguel aluguel) {
         int diaInicial = Integer.parseInt(aluguel.getDataInicial().substring(8, 10));
@@ -106,7 +31,7 @@ public class AluguelDAO {
             Connection conn = Conexoes.obterConexao();
             Statement stmt = conn.createStatement();
             String sql = "SELECT TARIFA_CLASSE FROM CLASSE "
-                    + "WHERE TIPO_CLASSE = '"+aluguel.getCarro().getGrupo()+"'";
+                    + "WHERE TIPO_CLASSE = '" + aluguel.getCarro().getGrupo() + "'";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -163,6 +88,39 @@ public class AluguelDAO {
         } catch (SQLException ex) {
             System.err.println("" + ex.getMessage());
             return false;
+        }
+    }
+
+    public static void devolucaoAluguel(Aluguel aluguel) {
+        String sql = "";
+
+        try {
+            Connection conn = null;
+            PreparedStatement stmt = null;
+            //Realiza update na data de devolução.
+            sql = "UPDATE ALUGUEL SET DATA_DEVOLUCAO_ALUGUEL = CURRENT_DATE"
+                    + "WHERE ID_ALUGUEL = ?";
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1, aluguel.getId());
+
+            stmt.execute();
+            stmt.clearBatch();
+            stmt.close();
+            //Faz com que o carro fique novamente disponivel para locação.
+            sql = "UPDATE CARRO SET DISPONIBILIDADE_CARRO = '0' "
+                    + "WHERE ID_CARRO = ?";
+            conn = Conexoes.obterConexao();
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1, aluguel.getCarro().getId());
+
+            stmt.execute();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println("" + ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            System.err.println("" + ex.getMessage());
         }
     }
 
@@ -224,4 +182,5 @@ public class AluguelDAO {
         }
         return null;
     }
+
 }

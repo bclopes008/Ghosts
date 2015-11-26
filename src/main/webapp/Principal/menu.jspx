@@ -21,7 +21,7 @@
                     <ul class="menuAluguel clearfix">
                         <li><a href="CadastroAluguelServlet">Cadastrar</a></li>
                         <li><a href="ConsultaAlugueisServlet">Consultar/Alterar</a></li>
-                        <li><a href="#">Devolução</a></li>
+                        <li><a href="DevolucaoAluguelServlet">Devolução</a></li>
                     </ul><!-- submenu -->
                 </li>
 
