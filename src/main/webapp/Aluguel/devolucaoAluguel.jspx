@@ -8,68 +8,78 @@
           xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
 
     <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
-    <!-- any content can be specified here, e.g.: -->
-    <html>
-        <head>
+    <c:choose>
+        <c:when test="${usuario.tipoUsuario == 'V' || usuario.tipoUsuario == 'G'}">
+            <!-- any content can be specified here, e.g.: -->
+            <html>
+                <head>
 
-            <title>Devolução Aluguel</title>
-            <link href="StyleCSSLoCarSys/devolucaoAluguelStyle.css" rel="stylesheet" type="text/css"/> 
-            <!--<script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
-        </head> 
+                    <title>Devolução Aluguel</title>
+                    <link href="StyleCSSLoCarSys/devolucaoAluguelStyle.css" rel="stylesheet" type="text/css"/> 
+                    <!--<script src="MascarasLoCarSys/mascarasLoCarSys.js" type="text/javascript"></script>-->
+                </head> 
 
-        <body>
-            <jsp:include page="../Principal/menu.jspx" flush="false">  
-                <jsp:param value="../Principal/menu.jspx" name="menu"/>  
-            </jsp:include>
-            <div>
-                <form action="DevolucaoAluguelServlet" accept-charset="ISO-8859-1,UTF-8" method="POST">
-                    <fieldset>
-                        <legend>Aluguel</legend>
-                        <label for="numeroAluguel">N. Aluguel<b>&#42;</b></label> 
-                        <input type="text" id="numeroAluguel" readonly="readonly" name="numeroAluguel" tabindex="1" title="Numero do Aluguel" value="${aluguel.id}"/>
+                <body>
+                    <jsp:include page="../Principal/menu.jspx" flush="false">  
+                        <jsp:param value="../Principal/menu.jspx" name="menu"/>  
+                    </jsp:include>
+                    <div>
+                        <form action="DevolucaoAluguelServlet" accept-charset="ISO-8859-1,UTF-8" method="POST">
+                            <fieldset>
+                                <legend>Aluguel</legend>
+                                <label for="numeroAluguel">N. Aluguel<b>&#42;</b></label> 
+                                <input type="text" id="numeroAluguel" readonly="readonly" name="numeroAluguel" tabindex="1" title="Numero do Aluguel" value="${aluguel.id}"/>
 
-                        <label for="modelo">Modelo<b>&#42;</b></label>
-                        <input type="text" id="modelo" name="modelo" tabindex="2" title="Modelo do Carro"/>
+                                <label for="modelo">Modelo<b>&#42;</b></label>
+                                <input type="text" id="modelo" name="modelo" tabindex="2" title="Modelo do Carro"/>
 
-                        <button  type="submit" class="pesquisa" name="pesquisa" value="" tabindex="5" title="Pesquisar"><img src="ImagensLoCarSys/Pesquisar.png"/>Pesquisar</button>
+                                <button  type="submit" class="pesquisa" name="pesquisa" value="" tabindex="5" title="Pesquisar"><img src="ImagensLoCarSys/Pesquisar.png"/>Pesquisar</button>
 
-                        <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="7" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
+                                <a href="Principal"><button  type="button" class="sair" name="sair" tabindex="7" title="Sair"><img src="ImagensLoCarSys/Sair.png"/>Sair</button></a><br/>
 
-                        <label for="cpf">CPF<b>&#42;</b></label>
-                        <input type="text" id="cpf" name="cpf" maxlength="14" placeholder="___.___.___-__" tabindex="3" title="CPF"/>
+                                <label for="cpf">CPF<b>&#42;</b></label>
+                                <input type="text" id="cpf" name="cpf" maxlength="14" placeholder="___.___.___-__" tabindex="3" title="CPF"/>
 
-                        <label for="nome">Nome Cliente<b>&#42;</b></label>
-                        <input type="text" id="nome" name="nome" tabindex="4" title="Nome do Cliente"/><br/>
+                                <label for="nome">Nome Cliente<b>&#42;</b></label>
+                                <input type="text" id="nome" name="nome" tabindex="4" title="Nome do Cliente"/><br/>
 
 
 
-                    </fieldset><br/>
+                            </fieldset><br/>
 
-                    <span><b>&#42;</b> Campos Obrigatorios</span>
-                    <div id="divTabela">
-                        <span>Devolução</span>
-                            <table name="tabela">
-                                <tr><td id="tdAluguel">N. Aluguel</td>
-                                    <td id="tdNome">Nome</td>
-                                    <td id="tdCPF">CPF</td>
-                                </tr>
-                                <c:forEach items="${aluguel}" var="aluguel"> 
-                                    <tr>
-                                        <td>${aluguel.id}</td>
-                                        <td>${aluguel.cliente.nome}</td>
-                                        <td>${aluguel.cliente.cpf}</td>
-                                        <td><a href="DevolucaoAluguelServlet?idaluguel=${aluguel.id}"><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="ImagensLoCarSys/Consultar.png"/></button></a></td>
+                            <span><b>&#42;</b> Campos Obrigatorios</span>
+                            <div id="divTabela">
+                                <span>Devolução</span>
+                                <table name="tabela">
+                                    <tr><td id="tdAluguel">N. Aluguel</td>
+                                        <td id="tdNome">Nome</td>
+                                        <td id="tdCPF">CPF</td>
                                     </tr>
-                                </c:forEach>
-                            </table>
+                                    <c:forEach items="${aluguel}" var="aluguel"> 
+                                        <tr>
+                                            <td>${aluguel.id}</td>
+                                            <td>${aluguel.cliente.nome}</td>
+                                            <td>${aluguel.cliente.cpf}</td>
+                                            <td><a href="DevolucaoAluguelServlet?idaluguel=${aluguel.id}"><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="ImagensLoCarSys/Consultar.png"/></button></a></td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
 
-                        </div>
+                            </div>
 
-                    </form>
+                        </form>
 
-                </div>
+                    </div>
 
-            </body>
+                </body>
 
-        </html>
+            </html>
+        </c:when>
+        <c:otherwise>
+            <jsp:include page="../erro.jspx" flush="false">  
+                <jsp:param value="../erro.jspx" name="erro"/>  
+            </jsp:include>
+
+        </c:otherwise>
+    </c:choose>
 </jsp:root>

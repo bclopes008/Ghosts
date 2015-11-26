@@ -64,6 +64,10 @@
         <servlet-name>Principal</servlet-name>
         <servlet-class>br.senac.tads.pi3.ghosts.locarsys.controller.Principal</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DevolucaoAluguelServlet</servlet-name>
+        <servlet-class>br.senac.tads.pi3.ghosts.locarsys.controller.DevolucaoAluguelServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CadastroAluguelServlet</servlet-name>
         <url-pattern>/CadastroAluguelServlet</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>Principal</servlet-name>
         <url-pattern>/Principal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevolucaoAluguelServlet</servlet-name>
+        <url-pattern>/DevolucaoAluguelServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

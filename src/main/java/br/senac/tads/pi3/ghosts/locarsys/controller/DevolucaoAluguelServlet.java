@@ -37,8 +37,9 @@ public class DevolucaoAluguelServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-               
+        if (UsuarioDAO.usuario != null) {
+            request.setAttribute("usuario", UsuarioDAO.usuario);
+        }
         RequestDispatcher disp = request.getRequestDispatcher("/Aluguel/devolucaoAluguel.jspx");
         disp.forward(request, response);
     }
@@ -55,11 +56,11 @@ public class DevolucaoAluguelServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Aluguel aluguel =  new Aluguel();
+        /*Aluguel aluguel = new Aluguel();
         aluguel.setId(Integer.parseInt(request.getParameter("idaluguel")));
-        
-        AluguelDAO.devolucaoAluguel(aluguel);
-        
+
+        AluguelDAO.devolucaoAluguel(aluguel);*/
+
         processRequest(request, response);
     }
 
@@ -81,7 +82,6 @@ public class DevolucaoAluguelServlet extends HttpServlet {
 
         List<Cliente> clientes = ClienteDAO.pesquisarCliente(request.getParameter("nome"), request.getParameter("cpf"));
         aluguel.setCliente(clientes.get(0));
-        
 
         List<Aluguel> alugueis = AluguelDAO.perquisarAluguel(aluguel.getCarro().getModelo(), aluguel.getCliente().getCpf(), aluguel.getCliente().getNome());
         request.setAttribute("aluguel", alugueis);
