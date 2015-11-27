@@ -61,21 +61,20 @@ public class ExibirRelatoriosServlet extends HttpServlet {
             Logger.getLogger(ExibirRelatoriosServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        if (UsuarioDAO.usuario != null) {
-            request.setAttribute("usuario", UsuarioDAO.usuario);
-        }
+        
         
         RequestDispatcher disp = null;
         
         if(request.getParameter("relatorio").equals(1)){
-            disp = request.getRequestDispatcher("relatorioDisponibilidade.jspx");
+            disp = request.getRequestDispatcher("Relatorios/relatorioDisponibilidade.jspx");
         }else{
-            disp = request.getRequestDispatcher("relatorioVendas.jspx");
+            disp = request.getRequestDispatcher("Relatorios/relatorioVendas.jspx");
         }
         
+        if (UsuarioDAO.usuario != null) {
+            request.setAttribute("usuario", UsuarioDAO.usuario);
+        }
         disp.forward(request, response);
-
-        processRequest(request, response);
     }
 
     /**
