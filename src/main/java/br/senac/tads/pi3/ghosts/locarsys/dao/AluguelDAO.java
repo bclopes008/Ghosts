@@ -209,6 +209,7 @@ public class AluguelDAO implements VerificacoesAluguel {
                 + "INNER JOIN CARRO CA ON AL.ID_CARRO = CA.ID_CARRO "
                 + "INNER JOIN CLIENTE CL ON AL.ID_CLIENTE = CL.ID_CLIENTE "
                 + "INNER JOIN FILIAL FI ON FU.ID_FILIAL = FI.ID_FILIAL "
+                + "INNER JOIN CLASSE CS ON CA.ID_CLASSE = CS.ID_CLASSE "
                 + "WHERE CA.MODELO_CARRO LIKE '%" + modelo + "%' AND CL.CPF_CLIENTE LIKE '%" + cpf + "%' "
                 + "AND CL.NOME_CLIENTE LIKE '%" + nome + "%' AND FI.NOME_FILIAL = '" + UsuarioDAO.usuario.getFilial() + "'";
         try {
@@ -229,6 +230,8 @@ public class AluguelDAO implements VerificacoesAluguel {
                 ca.setId(rs.getInt("ID_CARRO"));
                 ca.setModelo(rs.getString("MODELO_CARRO"));
                 ca.setPlaca(rs.getString("PLACA_CARRO"));
+                ca.setGrupo(rs.getString("TIPO_CLASSE").charAt(0));
+                a.setDevolvido(rs.getString("DEVOLUCAO_ALUGUEL").charAt(0));
                 a.setCliente(c);
                 a.setCarro(ca);
                 alugueis.add(a);
@@ -378,5 +381,30 @@ public class AluguelDAO implements VerificacoesAluguel {
             return "Data inválida!";
         }
         return null;
+    }
+    
+    public static int proximoID(){
+        Statement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+
+        /*Pesquisa Aluguel*/
+        String sql = "SELECT ID_ALUGUEL FROM ALUGUEL";
+        try {
+            conn = Conexoes.obterConexao();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            int ID = 0;
+            while (rs.next()) {
+                ID = rs.getInt("ID_ALUGUEL");
+            }
+            conn.close();
+            return ID;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("Erro: " + ex.getMessage());
+        }
+        return 0;
     }
 }

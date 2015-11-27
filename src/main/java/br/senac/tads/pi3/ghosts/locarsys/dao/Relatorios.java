@@ -6,15 +6,19 @@
 package br.senac.tads.pi3.ghosts.locarsys.dao;
 
 import br.senac.tads.pi3.ghosts.locarsys.controller.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -44,10 +48,21 @@ public class Relatorios {
             ds.addValue(rs.getInt("QUANTIDADE"), "Quantidade", rs.getString("NOME_FILIAL"));
         }
 
-        JFreeChart grafico = ChartFactory.createBarChart3D("Relatório de disponibilidade", "Filiais",
+        /*File fg = new File("C:\\Users\\bruno.lopes.KRONMED\\Documents\\NetBeansProjects\\LoCarSys\\src\\main\\webapp\\ImagensLoCarSys\\disponibilidade.png");
+         fg.delete();*/
+        JFreeChart grafico = ChartFactory.createBarChart3D("Relatório de Disponibilidade", "Filiais",
                 "Separados por filiais", ds, PlotOrientation.VERTICAL, true, true, false);
 
-        try (OutputStream arquivo = new FileOutputStream("ImagensLoCarSys/disponibilidade.png")) {
+        //try (OutputStream arquivo = new FileOutputStream("C:\\Users\\bruno.clopes\\Documents\\NetBeansProjects\\LoCarSys\\target\\LoCarSys-1.0-SNAPSHOT\\ImagensLoCarSys\\disponibilidade.png")) {
+        try (OutputStream arquivo = new FileOutputStream("ImagensLoCarSys\\disponibilidade.png")) {
+            ChartUtilities.writeChartAsPNG(arquivo, grafico, 800, 600);
+        } catch (FileNotFoundException ex) {
+            System.out.println("" + ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println("" + ex.getMessage());
+        }
+        
+        try (OutputStream arquivo = new FileOutputStream("C:\\Users\\bruno.clopes\\Documents\\NetBeansProjects\\LoCarSys\\target\\LoCarSys-1.0-SNAPSHOT\\ImagensLoCarSys\\disponibilidade.png")) {
             ChartUtilities.writeChartAsPNG(arquivo, grafico, 800, 600);
         } catch (FileNotFoundException ex) {
             System.out.println("" + ex.getMessage());
@@ -72,10 +87,19 @@ public class Relatorios {
             ds.addValue(rs.getInt("QUANTIDADE"), "Quantidade", rs.getString("NOME_FILIAL"));
         }
 
-        JFreeChart grafico = ChartFactory.createBarChart3D("Relatório de vendas", "Filiais",
+        JFreeChart grafico = ChartFactory.createBarChart3D("Relatório de Aluguéis", "Filiais",
                 "Separadas por filiais", ds, PlotOrientation.VERTICAL, true, true, false);
 
-        try (OutputStream arquivo = new FileOutputStream("ImagensLoCarSys/vendas.png")) {
+        
+        try (OutputStream arquivo = new FileOutputStream("ImagensLoCarSys\\vendas.png")) {
+            ChartUtilities.writeChartAsPNG(arquivo, grafico, 800, 600);
+        } catch (FileNotFoundException ex) {
+            System.out.println("" + ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println("" + ex.getMessage());
+        }
+        
+        try (OutputStream arquivo = new FileOutputStream("C:\\Users\\bruno.clopes\\Documents\\NetBeansProjects\\LoCarSys\\target\\LoCarSys-1.0-SNAPSHOT\\ImagensLoCarSys\\vendas.png")) {
             ChartUtilities.writeChartAsPNG(arquivo, grafico, 800, 600);
         } catch (FileNotFoundException ex) {
             System.out.println("" + ex.getMessage());

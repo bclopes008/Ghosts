@@ -62,6 +62,7 @@
                                         <td id="tdDataFinal">Data Final</td>
                                         <td id="tdGrupo">Grupo</td>
                                         <td id="tdModelo">Modelo</td>
+                                        <td id="tdDevolvido">Devolvido</td>
                                     </tr>
                                     <c:forEach items="${alugueis}" var="alu" varStatus="stat">
                                         <tr>
@@ -72,7 +73,7 @@
                                             <td>${alu.dataFinal}</td>
                                             <td>${alu.carro.grupo}</td>
                                             <td>${alu.carro.modelo}</td>
-                                            <td><a href="EditarAluguelServlet?id=${alu.id}"><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="ImagensLoCarSys/Consultar.png"/></button></a></td>
+                                            <td>${alu.devolvido}</td>
                                         </tr>
                                     </c:forEach>
                                 </table>

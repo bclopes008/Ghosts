@@ -99,24 +99,32 @@ public class CadastroAluguelServlet extends HttpServlet {
 
         Carro ca = new Carro();
         ca.setGrupo(request.getParameter("grupo").charAt(0));
-        ca.setId(Integer.parseInt(request.getParameter("carro")));
-        aluguel.setCarro(ca);
-        String erro = AluguelDAO.verificaoes(aluguel);
-        if (erro == null) {
-            AluguelDAO.calcularValorTotal(aluguel);
+        if (request.getParameter("carro") != null) {
+            ca.setId(Integer.parseInt(request.getParameter("carro")));
+            aluguel.setCarro(ca);
+            String erro = AluguelDAO.verificaoes(aluguel);
+            if (erro == null) {
+                AluguelDAO.calcularValorTotal(aluguel);
 
-            
-            try {
-                if (!AluguelDAO.cadastrarAluguel(aluguel)) {
-                    //disp = request.getRequestDispatcher("/Aluguel/cadastroAlugueis.jspx");
+                try {
+                    if (AluguelDAO.cadastrarAluguel(aluguel)) {
+                        request.setAttribute("mensagem", "Aluguel cadastrado sucesso");
+                        aluguel.setId(AluguelDAO.proximoID());
+                    } else {
+                        request.setAttribute("mensagem", "Erro ao cadastrar o aluguel");
+                    }
+                } catch (ClassNotFoundException ex) {
+                    request.setAttribute("mensagem", "Erro ao cadastrar o aluguel");
+                    System.err.println(ex.getMessage());
                 }
-            } catch (ClassNotFoundException ex) {
-                //disp = request.getRequestDispatcher("/Aluguel/cadastroAlugueis.jspx");
-                System.err.println(ex.getMessage());
+            } else {
+                request.setAttribute("mensagem", erro);
             }
         } else {
-            request.setAttribute("mensagem", erro);
+            //Caso nenhum carro seja selecionado, apresenta a mensagem:
+            request.setAttribute("mensagem", "Escolha um carro!");
         }
+
         request.setAttribute("aluguel", aluguel);
         processRequest(request, response);
 

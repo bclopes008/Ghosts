@@ -16,6 +16,7 @@ public class Carro extends Produto{
     private int ano;
     private String renavam;
     private float kilometragem;
+    private char disp;
 
     public Carro() {
     }
@@ -93,5 +94,13 @@ public class Carro extends Produto{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public char getDisp() {
+        return disp;
+    }
+
+    public void setDisp(char disp) {
+        this.disp = disp;
     }
 }

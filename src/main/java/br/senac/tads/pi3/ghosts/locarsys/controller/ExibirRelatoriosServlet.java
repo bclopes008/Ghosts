@@ -61,11 +61,9 @@ public class ExibirRelatoriosServlet extends HttpServlet {
             Logger.getLogger(ExibirRelatoriosServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
-        
         RequestDispatcher disp = null;
         
-        if(request.getParameter("relatorio").equals("1")){
+        if(request.getParameter("relatorio").equals("2")){
             disp = request.getRequestDispatcher("Relatorios/relatorioDisponibilidade.jspx");
         }else{
             disp = request.getRequestDispatcher("Relatorios/relatorioVendas.jspx");

@@ -20,7 +20,7 @@
                 <li><a href="#">Aluguel</a>
                     <ul class="menuAluguel clearfix">
                         <li><a href="CadastroAluguelServlet">Cadastrar</a></li>
-                        <li><a href="ConsultaAlugueisServlet">Consultar/Alterar</a></li>
+                        <li><a href="ConsultaAlugueisServlet">Consultar</a></li>
                         <li><a href="DevolucaoAluguelServlet">Devolução</a></li>
                     </ul><!-- submenu -->
                 </li>
@@ -43,7 +43,7 @@
                 <li><a href="#">Relatórios</a>
                     <ul class="menuRelatorios">
                         <li><a href="ExibirRelatoriosServlet?relatorio=1">Aluguel</a></li>
-                        <li><a href="ExibirRelatoriosServlet/?relatorio=2">Produtos</a></li>
+                        <li><a href="ExibirRelatoriosServlet?relatorio=2">Produtos</a></li>
                     </ul><!-- submenu -->
                 </li>
                 </c:if>

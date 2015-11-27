@@ -159,6 +159,7 @@ public class CarroDAO implements VerificacoesCarro {
         /* Pesquisa Carro */
         String sql = "SELECT * FROM CARRO CA "
                 + "INNER JOIN CLASSE CL ON CA.ID_CLASSE = CL.ID_CLASSE "
+                + "INNER JOIN FILIAL FI ON CA.ID_FILIAL = FI.ID_FILIAL "
                 + "WHERE CA.MODELO_CARRO LIKE '%" + modelo + "%' AND CL.TIPO_CLASSE LIKE '%" + grupo + "%' "
                 + "ORDER BY MODELO_CARRO";
         try {
@@ -172,6 +173,8 @@ public class CarroDAO implements VerificacoesCarro {
                 c.setModelo(rs.getString("MODELO_CARRO"));
                 c.setGrupo(rs.getString("TIPO_CLASSE").charAt(0));
                 c.setPlaca(rs.getString("PLACA_CARRO"));
+                c.setDisp(rs.getString("DISPONIBILIDADE_CARRO").charAt(0));
+                c.setFilial(rs.getString("NOME_FILIAL"));
                 carros.add(c);
             }
             conn.close();
@@ -376,7 +379,7 @@ public class CarroDAO implements VerificacoesCarro {
         }
         return false;
     }
-    
+
     public static String verificaoes(Carro c) {
         CarroDAO dao = new CarroDAO();
         if (!dao.verificaChassi(c.getChassi())) {

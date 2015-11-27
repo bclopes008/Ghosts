@@ -51,6 +51,8 @@
                                         <td id="tdCodigo">Código</td>
                                         <td id="tdModelo">Modelo</td> <td id="tdGrupo">Grupo</td>
                                         <td id="tdPlaca">Placa</td>
+                                        <td id="tdDisp">Disponibilidade</td>
+                                        <td id="tdFilial">Filial</td>
                                     </tr>
                                     <c:forEach items="${carros}" var="car" varStatus="stat">
                                         <tr>
@@ -58,6 +60,8 @@
                                             <td>${car.modelo}</td>
                                             <td>${car.grupo}</td>
                                             <td>${car.placa}</td>
+                                            <td>${car.disp}</td>
+                                            <td>${car.filial}</td>
                                             <td><a href="EditarProdutoServlet?id=${car.id}"><button type="button" class="alterar" name="alterar" tabindex="4" title="Consulta/Alterar"><img src="ImagensLoCarSys/Consultar.png"/></button></a></td>
                                         </tr>
                                     </c:forEach>

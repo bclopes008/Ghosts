@@ -76,24 +76,35 @@ td{
 
 #tdAluguel{
     width:90px;
+    font-weight:bold;
+    
 }
 #tdNome{
-    width:300px;
+    width:360px;
+    font-weight:bold;
 }
 #tdCPF{
-    width:140px;
+    width:240px;
+    font-weight:bold;
 }
 #tdDataInicial{
-    width:140px;
+    width:260px;
+    font-weight:bold;
 }
 #tdDataFinal{
-    width:140px;
+    width:260px;
+    font-weight:bold;
 }
 #tdGrupo{
     width:90px;
+    font-weight:bold;
 }
 #tdModelo{
-    width:150px;
+    width:350px;
+    font-weight:bold;
+}
+#tdDevolvido{
+    font-weight:bold;
 }
 
 .alterar{

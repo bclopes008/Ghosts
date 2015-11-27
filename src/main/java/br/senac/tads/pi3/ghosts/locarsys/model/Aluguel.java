@@ -19,7 +19,16 @@ public class Aluguel {
     private float valorTotal;
     private Cliente cliente;
     private Funcionario funcionario;
+    private char devolvido;
 
+    public char getDevolvido() {
+        return devolvido;
+    }
+
+    public void setDevolvido(char devolvido) {
+        this.devolvido = devolvido;
+    }
+    
     public void setCarro(Carro carro) {
         this.carro = carro;
     }
