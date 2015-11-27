@@ -47,7 +47,7 @@ public class Relatorios {
         JFreeChart grafico = ChartFactory.createBarChart3D("Relatório de disponibilidade", "Filiais",
                 "Separados por filiais", ds, PlotOrientation.VERTICAL, true, true, false);
 
-        try (OutputStream arquivo = new FileOutputStream("C:\\Users\\bruno.clopes\\Documents\\NetBeansProjects\\LoCarSys\\src\\main\\webapp\\ImagensLoCarSys\\disponibilidade.png")) {
+        try (OutputStream arquivo = new FileOutputStream("ImagensLoCarSys/disponibilidade.png")) {
             ChartUtilities.writeChartAsPNG(arquivo, grafico, 800, 600);
         } catch (FileNotFoundException ex) {
             System.out.println("" + ex.getMessage());
@@ -75,7 +75,7 @@ public class Relatorios {
         JFreeChart grafico = ChartFactory.createBarChart3D("Relatório de vendas", "Filiais",
                 "Separadas por filiais", ds, PlotOrientation.VERTICAL, true, true, false);
 
-        try (OutputStream arquivo = new FileOutputStream("C:\\Users\\bruno.clopes\\Documents\\NetBeansProjects\\LoCarSys\\src\\main\\webapp\\ImagensLoCarSys\\vendas.png")) {
+        try (OutputStream arquivo = new FileOutputStream("ImagensLoCarSys/vendas.png")) {
             ChartUtilities.writeChartAsPNG(arquivo, grafico, 800, 600);
         } catch (FileNotFoundException ex) {
             System.out.println("" + ex.getMessage());

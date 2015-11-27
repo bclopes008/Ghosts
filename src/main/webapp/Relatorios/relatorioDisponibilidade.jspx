@@ -20,7 +20,7 @@
                     <jsp:include page="../Principal/menu.jspx" flush="false">  
                         <jsp:param value="../Principal/menu.jspx" name="menu"/>  
                     </jsp:include>
-                    <img src="C:\\Users\\bruno.clopes\\Documents\\NetBeansProjects\\LoCarSys\\src\\main\\webapp\\ImagensLoCarSys\\disponibilidade.png"/>
+                    <img src="ImagensLoCarSys/disponibilidade.png"/>
                 </body>
             </html>
         </c:when>

@@ -65,7 +65,7 @@ public class ExibirRelatoriosServlet extends HttpServlet {
         
         RequestDispatcher disp = null;
         
-        if(request.getParameter("relatorio").equals(1)){
+        if(request.getParameter("relatorio").equals("1")){
             disp = request.getRequestDispatcher("Relatorios/relatorioDisponibilidade.jspx");
         }else{
             disp = request.getRequestDispatcher("Relatorios/relatorioVendas.jspx");

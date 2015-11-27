@@ -14,13 +14,12 @@
             <html>
                 <head>
                     <title>Relatório</title>
-                    <link href="StyleCSSLoCarSys/cadastrarProdutoStyle.css" rel="stylesheet" type="text/css"/>
                 </head>
                 <body>
                     <jsp:include page="../Principal/menu.jspx" flush="false">  
                         <jsp:param value="../Principal/menu.jspx" name="menu"/>  
                     </jsp:include>
-                    <img src="C:\\Users\\bruno.clopes\\Documents\\NetBeansProjects\\LoCarSys\\src\\main\\webapp\\ImagensLoCarSys\\vendas.png"/>
+                    <img src="ImagensLoCarSys/vendas.png"/>
                 </body>
             </html>
         </c:when>
