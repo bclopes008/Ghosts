@@ -23,7 +23,7 @@ fieldset{
     border-radius:5px;
 }
 #divTabela{
-    width: 900px;
+    width: 1150px;
     height: 150px;
     border-radius:5px;
     margin-top:0;
@@ -80,7 +80,7 @@ td{
     
 }
 #tdNome{
-    width:360px;
+    width:400px;
     font-weight:bold;
 }
 #tdCPF{
@@ -104,6 +104,11 @@ td{
     font-weight:bold;
 }
 #tdDevolvido{
+    font-weight:bold;
+}
+
+#tdTotal{
+    width:250px;
     font-weight:bold;
 }
 

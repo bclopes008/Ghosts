@@ -234,6 +234,7 @@ public class AluguelDAO implements VerificacoesAluguel {
                 a.setDevolvido(rs.getString("DEVOLUCAO_ALUGUEL").charAt(0));
                 a.setCliente(c);
                 a.setCarro(ca);
+                a.setValorTotal(rs.getFloat("PRECO_TOTAL"));
                 alugueis.add(a);
             }
             conn.close();

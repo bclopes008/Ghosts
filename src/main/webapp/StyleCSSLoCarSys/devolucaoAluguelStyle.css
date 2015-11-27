@@ -81,13 +81,24 @@ td{
 }
 #tdAluguel{
     width:90px;
+    font-weight:bold;
 }
 #tdNome{
     width:300px;
+    font-weight:bold;
 }
 #tdCPF{
     width:130px;
+    font-weight:bold;
 }
+#tdidCarro{
+    font-weight:bold;
+}
+
+#tdModeloCarro{
+    font-weight:bold;
+}
+
 .alterar{
     width:35px;
     height:35px;

@@ -63,6 +63,7 @@
                                         <td id="tdGrupo">Grupo</td>
                                         <td id="tdModelo">Modelo</td>
                                         <td id="tdDevolvido">Devolvido</td>
+                                        <td id="tdTotal">Valor</td>
                                     </tr>
                                     <c:forEach items="${alugueis}" var="alu" varStatus="stat">
                                         <tr>
@@ -74,6 +75,7 @@
                                             <td>${alu.carro.grupo}</td>
                                             <td>${alu.carro.modelo}</td>
                                             <td>${alu.devolvido}</td>
+                                            <td>R$ ${alu.valorTotal}</td>
                                         </tr>
                                     </c:forEach>
                                 </table>
