@@ -62,7 +62,8 @@ public class Relatorios {
             System.out.println("" + ex.getMessage());
         }
         
-        try (OutputStream arquivo = new FileOutputStream("C:\\Users\\bruno.clopes\\Documents\\NetBeansProjects\\LoCarSys\\target\\LoCarSys-1.0-SNAPSHOT\\ImagensLoCarSys\\disponibilidade.png")) {
+        //try (OutputStream arquivo = new FileOutputStream("C:\\Users\\bruno.clopes\\Documents\\NetBeansProjects\\LoCarSys\\target\\LoCarSys-1.0-SNAPSHOT\\ImagensLoCarSys\\disponibilidade.png")) {
+        try (OutputStream arquivo = new FileOutputStream("C:\\Users\\temp.cas\\Documents\\NetBeansProjects\\LoCarSys\\target\\LoCarSys-1.0-SNAPSHOT\\ImagensLoCarSys\\disponibilidade.png")) {
             ChartUtilities.writeChartAsPNG(arquivo, grafico, 800, 600);
         } catch (FileNotFoundException ex) {
             System.out.println("" + ex.getMessage());
@@ -99,7 +100,8 @@ public class Relatorios {
             System.out.println("" + ex.getMessage());
         }
         
-        try (OutputStream arquivo = new FileOutputStream("C:\\Users\\bruno.clopes\\Documents\\NetBeansProjects\\LoCarSys\\target\\LoCarSys-1.0-SNAPSHOT\\ImagensLoCarSys\\vendas.png")) {
+        //try (OutputStream arquivo = new FileOutputStream("C:\\Users\\bruno.clopes\\Documents\\NetBeansProjects\\LoCarSys\\target\\LoCarSys-1.0-SNAPSHOT\\ImagensLoCarSys\\vendas.png")) {
+        try (OutputStream arquivo = new FileOutputStream("C:\\Users\\temp.cas\\Documents\\NetBeansProjects\\LoCarSys\\target\\LoCarSys-1.0-SNAPSHOT\\ImagensLoCarSys\\vendas.png")) {
             ChartUtilities.writeChartAsPNG(arquivo, grafico, 800, 600);
         } catch (FileNotFoundException ex) {
             System.out.println("" + ex.getMessage());

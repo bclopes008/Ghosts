@@ -62,7 +62,7 @@
                                         <td id="tdDataFinal">Data Final</td>
                                         <td id="tdGrupo">Grupo</td>
                                         <td id="tdModelo">Modelo</td>
-                                        <td id="tdDevolvido">Devolvido</td>
+                                        <td id="tdDevolvido">Situação</td>
                                         <td id="tdTotal">Valor</td>
                                     </tr>
                                     <c:forEach items="${alugueis}" var="alu" varStatus="stat">
@@ -74,7 +74,12 @@
                                             <td>${alu.dataFinal}</td>
                                             <td>${alu.carro.grupo}</td>
                                             <td>${alu.carro.modelo}</td>
-                                            <td>${alu.devolvido}</td>
+                                            <c:if test="${alu.devolvido == '0'}">
+                                                <td>Devolvido</td>
+                                            </c:if>
+                                            <c:if test="${alu.devolvido== '1'}">
+                                                <td>Alugado</td>
+                                            </c:if>
                                             <td>R$ ${alu.valorTotal}</td>
                                         </tr>
                                     </c:forEach>

@@ -255,7 +255,7 @@ INSERT INTO Carro
 (id_Filial,id_Classe,id_Fabricante,id_Combustivel,id_Estado,Ano_Fabricacao_Carro,Chassi_Carro,Cor_Carro,Modelo_Carro,Placa_Carro,Cidade_Carro,
 Disponibilidade_Carro,Ano_Carro,Renavam_Carro,Kilometragem_Carro)
 values
-(1,1,1,1,26,'2000','22.33.55555.1.1.666666','Prata','Celta','FAB-7894','SP','0','2013','1234567890-9',1000);
+(1,1,1,1,26,'2000','22.33.55555.1.1.666666','Prata','Celta','FAB-7894','SP','1','2013','1234567890-9',1000);
 
 SELECT * FROM Carro;
 

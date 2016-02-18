@@ -34,8 +34,13 @@
 
                 <li><a href="#">Produtos</a>
                     <ul class="menuProdutos">
-                        <li><a href="CadastroProdutoServlet">Cadastrar</a></li>
-                        <li><a href="ConsultaProdutosServlet">Consultar/Alterar</a></li>
+                        <c:if test="${usuario.tipoUsuario == 'G'}">
+                            <li><a href="CadastroProdutoServlet">Cadastrar</a></li>
+                            <li><a href="ConsultaProdutosServlet">Consultar/Alterar</a></li>
+                        </c:if>
+                        <c:if test="${usuario.tipoUsuario == 'V'}">
+                            <li><a href="ConsultaProdutosServlet">Consultar</a></li>
+                        </c:if>
                     </ul><!-- submenu -->
                 </li>
                 </c:if>
